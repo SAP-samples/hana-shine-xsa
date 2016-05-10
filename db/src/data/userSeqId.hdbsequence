@@ -1,0 +1,2 @@
+SEQUENCE "sap.hana.democontent.epm.data::userSeqId" START WITH 1000000225 MAXVALUE 1999999999
+RESET BY SELECT IFNULL(MAX("PERS_NO"), 1000000225) + 1 FROM "sap.hana.democontent.epm.data::User.Details"

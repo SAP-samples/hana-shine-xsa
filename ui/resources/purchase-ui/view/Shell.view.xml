@@ -1,0 +1,59 @@
+<sap.ui.core.mvc:View controllerName="shine.democontent.epm.poworklist.view.Shell"
+    xmlns:sap.ui.ux3="sap.ui.ux3"
+    xmlns:sap.ui.commons.layout="sap.ui.commons.layout"
+    xmlns:sap.ui.core.mvc="sap.ui.core.mvc"
+    xmlns:sap.ui.commons="sap.ui.commons" >
+    <sap.ui.ux3:Shell id="myShell" selectedWorksetItem="wi_home" appTitle="{i18n>console}" appIcon="./images/sap_18.png" appIconTooltip="SAP" logout="logout" showSearchTool="false" showFeederTool="false" designType="Crystal">
+        <sap.ui.ux3:worksetItems>
+            <sap.ui.ux3:NavigationItem id="wi_home" text="{i18n>worklist}" key="wi_home"></sap.ui.ux3:NavigationItem>
+        </sap.ui.ux3:worksetItems>
+        <sap.ui.ux3:content>
+            <sap.ui.commons.layout:MatrixLayout>
+                <sap.ui.commons.layout:rows>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.core.mvc:XMLView id="po_search_view" viewName="shine.democontent.epm.poworklist.view.Search"></sap.ui.core.mvc:XMLView>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.core.mvc:XMLView id="po_table_view" viewName="shine.democontent.epm.poworklist.view.Table"></sap.ui.core.mvc:XMLView>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.core.mvc:XMLView id="po_detail_view" viewName="shine.democontent.epm.poworklist.view.Detail"></sap.ui.core.mvc:XMLView>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                </sap.ui.commons.layout:rows>
+            </sap.ui.commons.layout:MatrixLayout>
+        </sap.ui.ux3:content>
+        <sap.ui.ux3:headerItems>
+            <sap.ui.commons:TextView tooltip="{i18n>welcome}"></sap.ui.commons:TextView>
+            <sap.ui.commons:Button text="{i18n>personalize}" styled="false" tooltip="{i18n>personalize}" press="handlePersonalizeShell"></sap.ui.commons:Button>
+            <sap.ui.commons:MenuButton text="{i18n>help}" styled="false" tooltip="{i18n>helpm}">
+                <sap.ui.commons:menu>
+                    <sap.ui.commons:Menu id="menu1">
+                        <sap.ui.commons:items>
+                            <sap.ui.commons:MenuItem id="menuitem1" text="{i18n>help}"></sap.ui.commons:MenuItem>
+                            <sap.ui.commons:MenuItem id="menuitem2" text="{i18n>incident}"></sap.ui.commons:MenuItem>
+                            <sap.ui.commons:MenuItem id="menuitem3" text="{i18n>about}"></sap.ui.commons:MenuItem>
+                        </sap.ui.commons:items>
+                    </sap.ui.commons:Menu>
+                </sap.ui.commons:menu>
+            </sap.ui.commons:MenuButton>
+        </sap.ui.ux3:headerItems>
+    </sap.ui.ux3:Shell>
+</sap.ui.core.mvc:View>

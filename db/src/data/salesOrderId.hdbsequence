@@ -1,0 +1,2 @@
+SEQUENCE "sap.hana.democontent.epm.data::salesOrderId" START WITH 500001029 MAXVALUE 599999999
+RESET BY SELECT IFNULL(MAX("SALESORDERID"), 500001028) + 1 FROM "sap.hana.democontent.epm.data::SO.Header"

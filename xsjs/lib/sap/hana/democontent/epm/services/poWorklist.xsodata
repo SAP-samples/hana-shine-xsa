@@ -1,0 +1,9 @@
+service namespace "sap.hana.democontent.epm"  { 
+   "sap.hana.democontent.epm.models::PO_HEADER_EN" as "PO_WORKLIST" 
+   keys ("PURCHASEORDERID","PURCHASEORDERITEM");
+   
+   "sap.hana.democontent.epm.models::PO_ITEM" as "PurchaseOrderItem" keys ("PURCHASEORDERID","PURCHASEORDERITEM");
+   
+   "sap.hana.democontent.epm.data::PO.HeaderView" as "PurchaseOrderHeader" keys("PurchaseOrderId");
+}
+

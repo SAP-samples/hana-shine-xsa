@@ -1,0 +1,74 @@
+{
+    "format_version": 1,
+    "imports": [
+        {
+            "target_table": "sap.hana.democontent.epm.data::Util.Attachments",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "sap.hana.democontent.epm.data.loads::attachments.csv",
+                "has_header": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "NOTEID",
+					"LINKID",
+					"TYPE",
+					"TITLE",
+					"CREATEDAT",
+					"DESCRIPTION",
+					"SIZE"
+                ]
+            }
+        },
+		{
+            "target_table": "sap.hana.democontent.epm.data::Util.Constants",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "sap.hana.democontent.epm.data.loads::constants.csv",
+                "has_header": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "DOMAIN",
+					"FIXEDVALUE",
+					"LANGUAGE",
+					"DESCRIPTION"
+                ]
+            }
+        },
+		{
+            "target_table": "sap.hana.democontent.epm.data::Util.Notes",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "sap.hana.democontent.epm.data.loads::notes.csv",
+                "has_header": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "NOTEID",
+					"AUTHOR",
+					"TEXT",
+					"THUMBNAIL",
+					"LINKID",
+					"CREATEDAT"
+                ]
+            }
+        },
+		{
+            "target_table": "sap.hana.democontent.epm.data::Util.Texts",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "sap.hana.democontent.epm.data.loads::texts.csv",
+                "has_header": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "TEXTID",
+					"LANGUAGE",
+					"ISOLANGUAGE",
+					"TEXT"
+                ]
+            }
+        }
+    ]
+}

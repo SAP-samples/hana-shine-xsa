@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Panel expandable="true" expanded="true">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Text text="{i18n>settings}" class="sapMH4FontSize" />
+				<ToolbarSpacer />
+				<Button text="?" press="onHelpOpen" class="helpButton" />
+			</Toolbar>
+		</headerToolbar>
+		<l:VerticalLayout>
+			<l:HorizontalLayout>
+				<RadioButton id="cb1" text="{i18n>cb1}" tooltip="{i18n>cbt1}"
+					selected="{/cb1}" select="toggleDateGenerateFalse" />
+				<RadioButton id="cb2" text="{i18n>cb2}" tooltip="{i18n>cbt2}"
+					selected="{/cb2}" select="toggleDateGenerateFalse" />
+				<RadioButton id="cb2a" text="{i18n>cb2a}" tooltip="{i18n>cbt2}"
+					selected="{/cb2a}" select="toggleDateGenerateFalse" 
+                    enabled="false"/>
+			</l:HorizontalLayout>
+			<l:HorizontalLayout>
+				<RadioButton id="cb3" text="{i18n>cb3}" tooltip="{i18n>cbt3}"
+					selected="{/cb3}" select="toggleDateGenerateFalse" 
+                    enabled="false" />
+				<RadioButton id="cb4" text="{i18n>cb4}" tooltip="{i18n>cbt4}"
+					selected="{/cb4}" select="toggleDateGenerateExt" />
+			</l:HorizontalLayout>
+
+			<List visible="{/listVisible}">
+				<InputListItem label="{i18n>lblPO}">
+					<Input id="POVal" type="Number" description="{/times}"
+					    fieldWidth="25%" valueStateText="{i18n>confirm_validPO}"
+						value="{ path: '/POVal', type: 'sap.ui.model.type.Integer',
+					constraints : {
+        				minimum: 0,
+        				maximum: 1000 } }"
+						editable="true" liveChange="" />
+				</InputListItem>
+				<InputListItem label="{i18n>lblSO}">
+					<Input id="SOVal" type="Number" description="{/times}"
+						fieldWidth="25%" valueStateText="{i18n>confirm_validSO}"
+						value="{ path: '/SOVal', type: 'sap.ui.model.type.Integer',
+					constraints : {
+        				minimum: 0,
+        				maximum: 1000 } }"
+						editable="true" />
+				</InputListItem>
+			</List>
+
+			<List visible="{/listDateVisible}">
+				<InputListItem label="{i18n>lblSD1}">
+					<DateRangeSelection id="DRS1" 
+						dateValue="{path:'/startDate'}" secondDateValue="{path:'/endDate'}"
+						change="handleDateChange" />
+				</InputListItem>
+			</List>
+
+			<Button id="btnExecute" text="{i18n>btnExecute}" press="onExecute" />
+		</l:VerticalLayout>
+	</Panel>
+</core:FragmentDefinition>	
