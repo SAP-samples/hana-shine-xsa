@@ -24,4 +24,3 @@ The application consists of the following packages:
 
 
 - ui - This package contains the user interface for the SHINE Launchpad, Data Generator, and Purchase Order Worklist applications implemented in SAP UI5.
-Detailed documentation can be found [here](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf "here")
