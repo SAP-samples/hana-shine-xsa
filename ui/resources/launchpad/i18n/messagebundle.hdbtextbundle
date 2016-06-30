@@ -46,7 +46,7 @@ TILE_DESC_FIORI=<div>SAP Fiori launchpad is the entry point to Fiori apps on mob
 TILE_DESC_XSDS=<div>XS Data Services (XSDS) are a native JavaScript CDS client and query builder for the XS engine to consume HANA-based records as native JavaScript objects. This UI illustrates how a sales order with multiple items can be created using XSDS query builder. In future versions of SHINE all XSJS scripts will be modified to use XSDS.</div>
 TILE_DESC_XSUNT=<div>XSUnit enables automated testing of HANA XS Application content as well as database content in a convenient and isolated way.The XSUnit test framework is a custom version of the JavaScript Test framework Jasmine adapted to the XS Engine. In XSUnit you can test:<ul><li>Server side JavaScript code</li><li>SQLScript code (Stored Procedures, Views)</li><li>Modelled Calculation Views</li></ul><div>As a prerequisite the delivery unit HANA_TEST_TOOLS have to be imported which can be download from,<a target='_blank' href='https://websmp101.sap-ag.de/patches'>https://websmp101.sap-ag.de/patches</a>: Support Packages and Patches => H => SAP HANA PLATFORM EDITION => SAP HANA PLATFORM EDIT. 1.0 => Entry by component => HANA Test Tools</div></div>
 TILE_DESC_UI5SEARCH=<div>This example demonstrates how to define a search model with Core Data Services (CDS) and how to use SAPUI5 to build a search UI, leveraging the OData interface. In order to run full-text search queries, full-text indexes are defined on tables containing product related data, using CDS</div>
-TILE_DESC_JOBSCHEDULING=<div>This example demonstrates how to use the XS Job Scheduling API's to schedule XS Jobs at runtime. You cannot however create new XS Jobs currently with XS Job API. However you can configure existing XS Jobs via the XS Job API. As a prerequisite<ul><li><font color="red"><b>"Scheduler Enabled" should be set to "YES" in xsjob admin ui</b></font></li></ul></div>
+TILE_DESC_JOBSCHEDULING=<div>This example demonstrates how to use the XSA Job Scheduler to create Job and Schedule. Created Jobs can also be deleted via this UI. And these features were enabled using XSA Job Scheduler Service</div>
 TILE_DESC_ETAGSXSODATA=<div>This example demonstrates how to use ETags in XSOData and Null values for Entity properties in XSOData</div>
 
 TILE_BUSI_SCEN_SD=As the Sales head of a company which deals in buying and selling IT equipments all over the world via e-commerce, I would like to have some Sales Analytics (Graphical representation) by which i can figure out the sales per region after orders have been executed. This  would help me in optimizing my sales strategy and enable me to make better sales decisions.
@@ -66,7 +66,7 @@ TILE_DB_VIEWS_FIORI=<div>No specific DB Views or Tables are used</div>
 TILE_DB_VIEWS_XSDS=<ul><li>EPM.Sales.Header</li><li>EPM.Sales.Item</li><li>EPM.MasterData.BusinessPartner</li></ul>
 TILE_DB_VIEWS_XSUNT=<div>All Views and Tables are used</div>
 TILE_DB_VIEWS_UI5SEARCH=<ul><li>MD.Products CDS Table</li><li>UTIL.Texts CDS Table</li><li>MD.productTexts CDS View</li><ul>
-TILE_DB_VIEWS_JOBSCHEDULING=<ul><li>JobsDemo.Details CDS Table</li><li>JobsDemo.RuntimeSchedules CDS Table</li><ul>
+TILE_DB_VIEWS_JOBSCHEDULING=<ul><li>Jobs.Details CDS Table</li><li>Jobs.ScheduleDetails CDS Table</li><ul>
 TILE_DB_VIEWS_ETAGSXSODATA=<ul><li>User.Details CDS Table</li><ul>
 
 TILE_UI_FOLDER_DG=/admin-ui/
@@ -83,7 +83,7 @@ TILE_UI_FOLDER_FIORI=/sap/hana/democontent/epm/ui/uis/FioriLaunchPad
 TILE_UI_FOLDER_XSDS=/sap/hana/democontent/epm/xsds/ui
 TILE_UI_FOLDER_XSUNT=/sap/hana/democontent/epm/test
 TILE_UI_FOLDER_UI5SEARCH=/sap/hana/democontent/epm/ui5search/ui
-TILE_UI_FOLDER_JOBSCHEDULING=/sap/hana/democontent/epm/jobscheduling/ui/
+TILE_UI_FOLDER_JOBSCHEDULING=/job-ui/
 TILE_UI_FOLDER_ETAGSXSODATA=/sap/hana/democontent/epm/etagsxsodata/ui/
 
 TILE_PERMS_DG=<div><font color="red">To access the Data Generator <ul><li>User should create Role Collection SHINE_ADMIN </li><li>Assign Admin role to Role Collection SHINE_ADMIN</li><li>Assign SHINE_ADMIN Role Collection to User</li></ul> Refer to SHINE for XSA documentation for steps</font>.</div>
@@ -105,7 +105,7 @@ TILE_PERMS_XSUNT_ASSERTION_USER = Enable SAP Assertion Ticket for the User
 TILE_PERMS_XSUNT_ASSERTION_PACKAGE = Enable SAP Logon/Assertion Ticket for sap.hana.democontent.epm package
 TILE_PERMS_XSUNT_ASSERTION_DESTINATION = Extend the destination localhost.xshttpdest under the package sap.hana.testtools.unit.jasminexs.lib using XS Admin tool.In the extended destination edit the hostname, port and in the Authenticate Details tab enable SAP Assertion Ticket with corresponding SAP SID & client
 TILE_PERMS_UI5SEARCH=<div>User should have User.hdbrole.</div>
-TILE_PERMS_JOBSCHEDULING=<div>User should have User.hdbrole.</div>
+TILE_PERMS_JOBSCHEDULING=<div>None</div>
 TILE_PERMS_ETAGSXSODATA=<div>User should have User.hdbrole.</div>
 
 CHECKING_PRE=Checking Prerequisites

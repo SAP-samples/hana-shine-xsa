@@ -71,6 +71,10 @@
         "txt": {
             "plugin_name": "com.sap.hana.di.copyonly",
             "plugin_version": "11.1.0"
-        }
+        },
+		"hdbfunction" : {
+			"plugin_name" : "com.sap.hana.di.function",
+			"plugin_version": "11.1.0"
+		}
     }
 }

@@ -1,41 +1,39 @@
 {
-  "welcomeFile": "launchpad/index.html",
-  "logout":  {
-      "logoutEndpoint":  "/logout"
-  },
-  "routes": [
-	{
-      "source": "/sap/ui5/1(.*)",
-      "target": "$1",
-      "localDir": "sapui5"
-    },
-    {
-      "source": "/sap/hana/democontent/epm/services/",
-      "destination": "xsjs-backend"
-    },
-    {
-      "source": "/get",
-      "destination": "admin-backend",
-      "scope": "shine-admin.DataGenerator"
-    },
-    {
-      "source": "/reset",
-      "destination": "admin-backend",
-      "scope": "shine-admin.DataGenerator"
-    },
-    {
-      "source": "/replicate",
-      "destination": "admin-backend",
-      "scope": "shine-admin.DataGenerator"
-    },
-    {
-      "source": "^/admin-ui/(.*)",
-      "localDir": "resources",
-      "scope": "shine-admin.DataGenerator"
-    },
-    {
-      "source": "^/(.*)",
-      "localDir": "resources"
-    }
-  ]
+	"welcomeFile": "launchpad/index.html",
+	"logout": {
+		"logoutEndpoint": "/logout"
+	},
+	"routes": [{
+		"source": "/sap/hana/democontent/epm/services/",
+		"destination": "xsjs-backend"
+	}, {
+		"source": "/get/(.*)",
+		"destination": "admin-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/reset/(.*)",
+		"destination": "admin-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/replicate/(.*)",
+		"destination": "admin-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/jobs/(.*)",
+		"destination": "jobs-backend"
+	}, {
+		"source": "/schedules/(.*)",
+		"destination": "jobs-backend"
+	}, {
+		"source": "/jobactivity/(.*)",
+		"destination": "jobs-backend",
+		"authenticationType": "basic"
+	}, {
+		"source": "^/admin-ui/(.*)",
+		"localDir": "resources",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "^/(.*)",
+		"localDir": "resources"
+	}]
 }

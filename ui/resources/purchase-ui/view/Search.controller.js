@@ -32,7 +32,7 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Search", {
     //   }
 
     setFilter: function(oEvent){
-        
+        //filterTerms = terms;
         var terms = oEvent.getParameter("query"); 
         var attribute = "COMPANY";
         var mySplitResults = terms.split(' | ' + oBundle.getText("attribute") + ' ');

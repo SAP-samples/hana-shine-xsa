@@ -1,0 +1,10 @@
+service namespace "sap.hana.democontent.epm.services"{
+ "sap.hana.democontent.epm.data::PO.Header" as "POHeaders" navigates (
+ "poh_to_poi" as "to_poi" from principal);
+ "sap.hana.democontent.epm.data::PO.Item" as "POItems" 
+ create events(before "sap.hana.democontent.epm.procedures::poiExit");
+ 
+   association "poh_to_poi"
+        principal "POHeaders"("PURCHASEORDERID") multiplicity "1"
+        dependent "POItems"("PURCHASEORDERID") multiplicity "*";
+} 

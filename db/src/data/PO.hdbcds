@@ -90,5 +90,19 @@ context PO {
 	  QUANTITY as "Quantity",
 	  QUANTITYUNIT as "QuantityUnit",
 	  DELIVERYDATE as "DeliveryDate"
-   };    
+   };   
+   
+  define view POView as SELECT FROM Header INNER JOIN Item ON  Header.PURCHASEORDERID = Item.PURCHASEORDERID {
+	Header.PURCHASEORDERID , 
+	Item.PURCHASEORDERITEM,
+	Header.PARTNER.PARTNERID, 
+	Item.PRODUCT.PRODUCTID,
+	Header.CURRENCY,
+    Item.GROSSAMOUNT,
+    Item.NETAMOUNT,
+    Item.TAXAMOUNT,
+	Item.QUANTITY,
+	Item.QUANTITYUNIT,
+	Item.DELIVERYDATE
+  };
 };

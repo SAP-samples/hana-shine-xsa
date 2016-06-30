@@ -26,7 +26,7 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Detail", {
             });
         
             sap.ui.getCore().byId("myPie").setModel(oPieModel,"piemodel");
-            sap.ui.getCore().byId("lblPie").setText(oBundle.getText("sum_gross", ["USD "]));
+            sap.ui.getCore().byId("lblPie").setText(oBundle.getText("sum_gross", ["EUR "]));
         
             var oGroupBy = sap.ui.getCore().byId("DDLBGroupBy");
             oGroupBy.fireChange({

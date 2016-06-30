@@ -1,0 +1,36 @@
+<sap.ui.core:FragmentDefinition xmlns:l="sap.ui.commons.layout" xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.viz.ui5.data="sap.viz.ui5.data" xmlns:sap.viz.ui5.types.controller="sap.viz.ui5.types.controller" xmlns:sap.viz.ui5.types.legend="sap.viz.ui5.types.legend" xmlns:sap.viz.ui5.types="sap.viz.ui5.types" xmlns:sap.viz.ui5="sap.viz.ui5">
+	<l:HorizontalLayout>
+		<sap.ui.commons:Button enabled="true" id="btnDeleteLogs" press="onButtonPress" text="{i18n&gt;deleteLogs}"/>
+		<sap.ui.commons:Button enabled="true" id="btnRefreshJobActivity" press="onButtonPress" text="{i18n&gt;refresActivityTable}"/>
+	</l:HorizontalLayout>
+	<l:VerticalLayout>
+		 <sap.ui.table:Table id="jobActionsTable" visibleRowCount="10" selectionMode="Single" selectionBehavior="Row" navigationMode="Paginator" rows="{/JOBACTIONLOGS}" rowSelectionChange="onRowSelectionChange" width="50%">
+        <sap.ui.table:columns>
+            <sap.ui.table:Column sortProperty="Id" filterProperty="Id" filterOperator="EQ">
+                <sap.ui.table:label>
+                    <sap.ui.commons:Label text="{i18n&gt;triggerId}" requiredAtBegin="false"/>
+                </sap.ui.table:label>
+                <sap.ui.table:template>
+                    <sap.ui.commons:TextView text="{Id}"/>
+                </sap.ui.table:template>
+            </sap.ui.table:Column>
+            <sap.ui.table:Column width="125px" sortProperty="Name" filterProperty="Name">
+                <sap.ui.table:label>
+                    <sap.ui.commons:Label text="{i18n&gt;jobname}" requiredAtBegin="false"/>
+                </sap.ui.table:label>
+                <sap.ui.table:template>
+                    <sap.ui.commons:TextView text="{Name}"/>
+                </sap.ui.table:template>
+            </sap.ui.table:Column>
+            <sap.ui.table:Column>
+            	 <sap.ui.table:label>
+                    <sap.ui.commons:Label text="{i18n&gt;timestamp}" requiredAtBegin="false"/>
+                </sap.ui.table:label>
+                 <sap.ui.table:template>
+                    <sap.ui.commons:TextView  text="{path:'TimeStamp' , formatter:'UTIL.formatTimeStamp'}"/>
+                </sap.ui.table:template>
+            </sap.ui.table:Column>
+        </sap.ui.table:columns>
+    </sap.ui.table:Table>
+	</l:VerticalLayout>
+</sap.ui.core:FragmentDefinition>

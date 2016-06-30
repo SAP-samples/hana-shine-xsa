@@ -1,5 +1,8 @@
 function escape(v1) {
     var v2 = v1.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    console.log("v1 "+v1);
+    var v2 = encodeURI(v1);
+    console.log("v2 "+v2);
     return v2;
 }
 

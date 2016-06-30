@@ -1,0 +1,15 @@
+PROCEDURE "sap.hana.democontent.epm.procedures::get_products_by_filter" (
+            IN im_filter_string VARCHAR(5000), 
+            out ex_products "sap.hana.democontent.epm.data::MD.Products")
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	READS SQL DATA AS
+BEGIN
+
+/*This Procedure leverages the concept of dynamic filters.It reads data from the “Products” table 
+and applies a filter which is passed as an input parameter to the procedure.
+The result set then shows the filtered dataset using the APPLY_FILTER statement*/
+
+ ex_products = APPLY_FILTER("sap.hana.democontent.epm.data::MD.Products", :im_filter_string) ; 
+   
+END;

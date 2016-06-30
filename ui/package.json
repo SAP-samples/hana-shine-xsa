@@ -1,9 +1,9 @@
 {
-  "name": "launchpad-ui-approuter",
-  "dependencies": {
-    "approuter": "1.2.1"
-  },
-  "scripts": {
-    "start": "node node_modules/approuter/approuter.js"
-  }
+	"name": "launchpad-ui-approuter",
+	"dependencies": {
+		"approuter": "1.6.3"
+	},
+	"scripts": {
+		"start": "node node_modules/approuter/approuter.js"
+	}
 }

@@ -6,7 +6,7 @@ sap.account.WelcomeDialog = function(oFrameController) {
 
 sap.account.WelcomeDialog.prototype.open = function() {
 
-    
+    //	var showWelcomeDialog = sap.app.localStorage.getPreference(sap.app.localStorage.PREF_DISPLAY_WELCOME_DIALOG);
 
     var oNotShowAgainChkBox = new sap.ui.commons.CheckBox({
         text: sap.app.i18n.getText("DO_NOT_SHOW"),

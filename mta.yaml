@@ -1,0 +1,91 @@
+_schema-version: "2.0.0"
+ID: com.sap.refapps.shine
+version: 1.1.6
+
+modules:
+  - name: shine-ui
+    type: html5
+    path: ui
+    provides: 
+      - name: ui
+        properties:
+          ui-url: "${default-url}"
+    requires:
+      - name: uaa-refapps
+      - name: admin-js
+        group: destinations
+        properties:
+          name: admin-backend
+          url: ~{url}
+          forwardAuthToken: true 
+      - name: purchase-xsjs
+        group: destinations
+        properties:
+          name: xsjs-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: jobs
+        group: destinations
+        properties:
+          name: jobs-backend
+          url: ~{url}
+          forwardAuthToken: true
+        
+  - name: shine-admin-js
+    type: nodejs
+    path: admin-js
+    provides: 
+      - name: admin-js
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: uaa-refapps
+      - name: shine-hdi-container
+      - name: shine-db
+      
+  - name: shine-xsjs
+    type: nodejs
+    path: xsjs
+    properties: 
+      HANA_SERVICE_NAME: shine-hdi-container
+      UAA_SERVICE_NAME: uaa-refapps
+    provides: 
+      - name: purchase-xsjs
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: uaa-refapps
+      - name: shine-hdi-container
+      - name: shine-db
+
+  - name: shine-jobs-js
+    type: nodejs
+    path: jobs-js
+    provides: 
+      - name: jobs
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-hdi-container
+      - name: uaa-refapps
+      - name: scheduler-refapps
+      - name: shine-db
+      
+
+  - name: shine-db
+    type: hdb
+    path: db
+    requires:
+      - name: shine-hdi-container
+
+resources:
+  - name: shine-hdi-container
+    type: com.sap.xs.hdi-container
+
+  - name: scheduler-refapps
+    type: com.sap.xs.job-scheduler
+
+  - name: uaa-refapps
+    type: com.sap.xs.uaa
+    parameters:
+     config-path: xs-security.json

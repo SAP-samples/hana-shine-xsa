@@ -316,7 +316,7 @@ sap.account.CheckDialog.prototype.open = function() {
     }
 
     function createHeaderRow() {
-        var oRow = new sap.ui.commons.layout.MatrixLayoutRow(); 
+        var oRow = new sap.ui.commons.layout.MatrixLayoutRow(); // {height : '25px'});
         var oCell = new sap.ui.commons.layout.MatrixLayoutCell({
             colSpan: 2,
             hAlign: sap.ui.commons.layout.HAlign.Center

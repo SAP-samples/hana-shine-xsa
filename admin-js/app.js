@@ -1,16 +1,17 @@
 'use strict';
-var http = require('http');
+var https = require('https');
 var xssec = require('sap-xssec');
 var express = require('express');
 var passport = require('passport');
-var sap_hdb_conn = require('sap-hdb-connection');
+//var sap_hdb_conn = require('sap-hdb-connection');
+var hdbext = require('sap-hdbext'); 
 var routes = require('./routes/index');
 var winston = require('winston');
 var xsenv = require('sap-xsenv');
 
 var PORT = process.env.PORT || 3000;
 var app = express();
-
+https.globalAgent.options.ca= xsenv.loadCertificates(); 
 //log level
 winston.level = process.env.winston_level || 'error';
 
@@ -34,7 +35,7 @@ app.use(passport.initialize());
  */
 app.use('/',
     passport.authenticate('JWT', {session: false}),
-    sap_hdb_conn.middleware(),
+    hdbext.middleware(),
     routes.datagen,
     routes.get,
     routes.reset);

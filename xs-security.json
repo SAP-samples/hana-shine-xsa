@@ -1,33 +1,21 @@
 {
-    "xsappname": "shine-admin",
-    "scopes": [
-        {
-            "name": "$XSAPPNAME.Display",
-            "description": "display"
-        },
-        {
-            "name": "$XSAPPNAME.Edit",
-            "description": "edit"
-        },
-        {
-            "name": "$XSAPPNAME.Delete",
-            "description": "delete"
-        },
-        {
-            "name": "$XSAPPNAME.DataGenerator",
-            "description": "data generator"
-        }
-    ],
-    "role-templates": [
-        {
-            "name": "Admin",
-            "description": "refapps administrator",
-            "scope-references": [
-                "$XSAPPNAME.Display",
-                "$XSAPPNAME.Edit",
-                "$XSAPPNAME.Delete",
-                "$XSAPPNAME.DataGenerator"
-            ]
-        }
-    ]
+	"xsappname": "shine-admin",
+	"scopes": [{
+		"name": "$XSAPPNAME.Display",
+		"description": "display"
+	}, {
+		"name": "$XSAPPNAME.Edit",
+		"description": "edit"
+	}, {
+		"name": "$XSAPPNAME.Delete",
+		"description": "delete"
+	}, {
+		"name": "$XSAPPNAME.DataGenerator",
+		"description": "data generator"
+	}],
+	"role-templates": [{
+		"name": "Admin",
+		"description": "refapps administrator",
+		"scope-references": ["$XSAPPNAME.Display", "$XSAPPNAME.Edit", "$XSAPPNAME.Delete", "$XSAPPNAME.DataGenerator"]
+	}]
 }

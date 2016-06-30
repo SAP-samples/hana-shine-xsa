@@ -1,0 +1,23 @@
+PROCEDURE "sap.hana.democontent.epm.procedures::get_bp_addresses_by_role" (
+	IN im_partnerrole NVARCHAR(3), 
+	OUT ex_bp_addresses "sap.hana.democontent.epm.data::Procedures.tt_bp_addresses") 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	READS SQL DATA AS
+BEGIN
+
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+ ex_bp_addresses =   
+                         
+             select a."PARTNERID", a."PARTNERROLE", a."EMAILADDRESS", a."COMPANYNAME", 
+         a."ADDRESSES.ADDRESSID" as "ADDRESSID" , b."CITY", b."POSTALCODE", b."STREET"
+          from "sap.hana.democontent.epm.data::MD.BusinessPartner" as a 
+           inner join "sap.hana.democontent.epm.data::MD.Addresses" as b
+                   on a."ADDRESSES.ADDRESSID" = b."ADDRESSID"
+                         where a."PARTNERROLE" = :im_partnerrole;   
+                         
+END;

@@ -61,10 +61,28 @@ sap.ui.jsview("view.main", {
         poTile.addStyleClass('templateTileClass');
         poTile.addStyleClass('poClass');
 
+        var jobTile = new sap.m.StandardTile({
+            icon: "sap-icon://time-entry-request",
+            info: sap.app.i18n.getText("JOBSCHEDULING"),
+            infoState: "None",
+            removable: false,
+            press: function(oEvent) {
+                view.handlePress(oController, 3);
+            }
+        });
+        jobTile.addStyleClass('templateTileClass');
+        jobTile.addStyleClass('jobschedulingClass');
+        
+        var oLink1 = new sap.ui.commons.Link({
+	    text: "Source code",
+	    tooltip: "Click to download Source code",
+	    
+		});
+	    oLink1.setHref("/epm.zip");
+       
         var items = [
-            adminTile, poTile
+            adminTile, poTile, jobTile 
         ];
-
         // create tile container
         var tileContainer = new sap.m.TileContainer({
             tileDelete: function(evt) {
@@ -73,6 +91,11 @@ sap.ui.jsview("view.main", {
             },
             tiles: items
         });
+        
+        //var sourcezip = "Click to download the source code";
+        //var result = str.link("/epm.zip");
+        
+        
 
         var titleLabel = new sap.m.Label({
             design: sap.m.LabelDesign.Bold,
@@ -80,18 +103,30 @@ sap.ui.jsview("view.main", {
         });
 
         var page = new sap.m.Page("home", {
-            
+            // title: "Home",
             icon: 'images/SAPLogo.gif',
             customHeader: new sap.m.Bar({
-                
+                // enableFlexBox: true,
                 contentMiddle: [new sap.m.Image({
                         height: '26px',
                         src: 'images/SAPLogo.gif',
                     }),
                     // label
-                    titleLabel
+		
+                 titleLabel
+                ],
+ contentRight: [ 
+		 new sap.m.Button({
+      			icon : "sap-icon://attachment-zip-file",
+			tooltip: "Click to download the source code",
+     			press : function (evt){
+  					   sap.m.URLHelper.redirect("../source/sap-xsac-shine-src-code.zip", true); 
+     					      }
+     				     })
                 ]
-            }),
+
+            }),             
+          
             content: [tileContainer],
             enableScrolling: false
         });

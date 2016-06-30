@@ -21,3 +21,15 @@
 .dialogTextColor{
     color: #007CC0 !important;
 }
+
+.createNewPurchaseOrderLabelSpacing{
+	margin: 0 10px;
+}
+.sapUiLbl.sapUiLblReqEnd:after {
+    content: '*';
+    color: red !important;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+

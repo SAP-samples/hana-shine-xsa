@@ -6,7 +6,7 @@ using sap.hana.democontent.epm.data::MD;
 
 context Procedures {
    
-    type tt_bp_addresses {
+    table type tt_bp_addresses {
       PARTNERID: String(10);
       PARTNERROLE: String(3);
       EMAILADDRESS: String(255);
@@ -17,7 +17,7 @@ context Procedures {
       STREET: String(60); 
 	};
 
-    type tt_bp_addresses_ext {
+    table type tt_bp_addresses_ext {
       PARTNERID: String(10);
       PARTNERROLE: String(3);
       EMAILADDRESS: String(255);
@@ -30,18 +30,18 @@ context Procedures {
       DISCOUNT: Decimal(15,2);
 	};
 	
-    type tt_product_sale_price {
+    table type tt_product_sale_price {
       PRODUCTID: String(10);
       CATEGORY: String(40);
       PRICE: Decimal(15,2);
       SALEPRICE: Decimal(15,2);
     };
    
-    type tt_product_ids {
+   table type tt_product_ids {
         PRODUCTID: EPM.BusinessKey;
     };
     
-     type tt_product_detail {
+    table type tt_product_detail {
         PRODUCTID: EPM.BusinessKey;
 		TYPECODE: String(2);
 		CATEGORY: EPM.SString;
@@ -64,7 +64,7 @@ context Procedures {
         DIMENSIONUNIT: EPM.UnitT;	
       };
           
-    type tt_customer_discount_calculation{
+    table type tt_customer_discount_calculation{
       COMPANY_NAME: String(50);
       REGION: String(50);
       SALES: Decimal(15,2);
@@ -73,13 +73,13 @@ context Procedures {
       ORDER_RANK: Integer;
     };
     
-     type tt_tax_calculation {
+    table type tt_tax_calculation {
       PARTNERID: String(10);
       COMPANYNAME: String(80);
       PRODUCTID: String(10);      	
       };
     
-    type tt_variable{
+    table type tt_variable{
         SESSIONID: String(32);
         NAME: String(30);
         APPLICATION: String(128);
@@ -87,13 +87,13 @@ context Procedures {
         DATA: LargeString; 
     };
     
- 	Type tt_errors {
+ 	table Type tt_errors {
         HTTP_STATUS_CODE : Integer;
         ERROR_MESSAGE : String(100);
         DETAIL : String(100);
       };
           
-    type tt_scookie{
+    table type tt_scookie{
         SESSIONID: String(32);
         NAME: String(30);
         APPLICATION: String(128);

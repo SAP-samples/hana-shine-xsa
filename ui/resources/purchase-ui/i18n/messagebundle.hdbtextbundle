@@ -107,3 +107,11 @@ ACTIONS_EXPORT_DESC=<div>This table displays all the PurchaseOrders records. You
 ACTIONS_EXPORT_UI=<div><ul><li>Table.view.xml</li><li>Table.controller.js</li></ul>
 ACTIONS_EXPORT_MODEL=poWorklist.xsodata
 ACTIONS_EXPORT_MODEL_PATH=xsjs/lib/sap/hana/democontent/epm/services/poWorklist.xsodata
+
+# Create New Purchase Orders
+bpToolTip=Select business Partners
+productIdToolTip=Select a Product
+quantityToolTip=Enter the required number of quantities
+uiKeyMapper=PARTNERID:createNewPurchaseOrderDialog--businessPartnerDropDown:Y,PRODUCTID:createNewPurchaseOrderDialog--productDropDown,QUANTITY:createNewPurchaseOrderDialog--quantityTextField
+uiFields=createNewPurchaseOrderDialog--businessPartnerDropDown,createNewPurchaseOrderDialog--productDropDown,createNewPurchaseOrderDialog--quantityTextField
+dummyValues=PURCHASEORDERID:300000000,PURCHASEORDERITEM:10,CURRENCY:EUR,GROSSAMOUNT:1000,NETAMOUNT:1000,TAXAMOUNT:100,QUANTITYUNIT:EA,DELIVERYDATE:2015-01-01

@@ -1,12 +1,18 @@
-﻿var express = require('express');
+var express = require('express');
 var async = require('async');
 var cds = require('sap-cds');
 var router = express.Router();
 var winston = require('winston');
 var util = require('./util');
+var logging = require('sap-logging');
+var appContext = logging.createAppContext();
+var logger;
 
 winston.level = process.env.winston_level || 'error'
 router.get('/get/tablesize', function (req, res) {
+    var reqContext = appContext.createRequestContext(req);
+    logger = reqContext.getLogger("/get/tablesize");
+    	
     var client = req.db;
     var tableDict = [{
 		"tableName": "MD.Addresses",
@@ -112,7 +118,8 @@ router.get('/get/tablesize', function (req, res) {
         function(error, result) {
             if (error) {
                 res.writeHead(500, {'Content-Type' : 'text/plain'});
-                console.log(error);
+                //console.log(error);
+                logger.info(error);
                 res.end(error.message);
             } else {
                 var combinedArray = [];

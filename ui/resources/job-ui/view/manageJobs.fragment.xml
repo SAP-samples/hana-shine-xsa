@@ -1,0 +1,120 @@
+<sap.ui.core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.commons.layout" xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.viz.ui5.data="sap.viz.ui5.data" xmlns:sap.viz.ui5.types.controller="sap.viz.ui5.types.controller" xmlns:sap.viz.ui5.types.legend="sap.viz.ui5.types.legend" xmlns:sap.viz.ui5.types="sap.viz.ui5.types" xmlns:sap.viz.ui5="sap.viz.ui5">
+	<l:MatrixLayout height="90%" id="createJobLayout" width="90%" backgroundDesign="Fill1">
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<Toolbar height="3rem" class="sapMH4FontSize">
+					<Text text="Job - Creation and Schedule" class="sapMH4FontSize"/>
+				</Toolbar>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:TextView design="H5" text="Job Details "/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell>
+				<sap.ui.commons:Label labelFor="jobNameTextField" text="{i18n&gt;jobname}" width="30%"/>
+				<sap.ui.commons:TextField design="Bold" id="jobNameTextField" required="true" tooltip="{i18n&gt;jobnametooltip}"/>
+			</l:MatrixLayoutCell>
+			<l:MatrixLayoutCell>
+				<sap.ui.commons:Label labelFor="jobDescriptionTextField" text="{i18n&gt;jobdescription}" width="30%"/>
+					<sap.ui.commons:TextArea rows="3" cols="20" design="Bold" id="jobDescriptionTextField" required="true" tooltip="{i18n&gt;jobdescriptiontooltip}"/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell>
+				<sap.ui.commons:Label labelFor="userName" text="{i18n&gt;username}" width="30%"/>
+				<sap.ui.commons:TextField design="Bold" id="userName" required="true" tooltip="{i18n&gt;usernametooltip}"/>
+		</l:MatrixLayoutCell>
+		<l:MatrixLayoutCell>
+				<sap.ui.commons:Label labelFor="password" text="{i18n&gt;password}" width="30%"/>
+				<sap.ui.commons:PasswordField design="Bold" id="password" required="true" tooltip="{i18n&gt;passwordtooltip}"/>
+		</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+			<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:TextView design="H5" text="Schedule Details"/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell>
+				<sap.ui.commons:Label text="{i18n&gt;startdate}" width="30%"/>
+				<DatePicker design="Bold" id="startDateField" tooltip="{i18n&gt;startdatetooltip}" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" width="30%" change="checkValue"/>
+				<TimePicker id="startTimeField" tooltip="{i18n&gt;starttimetooltip}" displayFormat="HH:mm:ss" valueFormat="HH:mm:ss" width="24%" change="checkValue"/>
+			</l:MatrixLayoutCell>
+			<l:MatrixLayoutCell>
+				<sap.ui.commons:Label text="{i18n&gt;enddate}" width="30%"/>
+				<DatePicker design="Bold" id="endDateField" tooltip="{i18n&gt;enddatetooltip}" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" width="30%" change="checkValue"/>
+				<TimePicker id="endTimeField" tooltip="{i18n&gt;endtimetooltip}" displayFormat="HH:mm:ss" valueFormat="HH:mm:ss" width="24%" change="checkValue"/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+			<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell>
+				<sap.ui.commons:Label labelFor="xsCronInput" text="{i18n&gt;XSCRONSCHEDULE}" width="30%"/>
+				<sap.ui.commons:TextField id="xsCronInput" value="* * * * * * */40" required="true" tooltip="{i18n&gt;crontooltip}"/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:TextView text=""/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3" width="90%">
+				<sap.ui.commons:Button enabled="true" id="btnNew" press="onButtonPress" text="{i18n&gt;new}" tooltip="{i18n&gt;createToolTip}"/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:TextView text=""/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:TextView text=""/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:TextView text=""/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<Toolbar height="3rem">
+					<Text text="Jobs" class="sapMH4FontSize"/>
+				</Toolbar>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="3">
+				<sap.ui.commons:Button enabled="true" id="btnDeleteJob" press="onButtonPress" text="{i18n&gt;deleteJob}" tooltip="Delete Job Schedule"/>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+		<l:MatrixLayoutRow>
+			<l:MatrixLayoutCell colSpan="2">
+				<sap.ui.table:Table height="80%" id="manageJobsTable" navigationMode="Paginator" rowSelectionChange="onRowSelectionChange" rows="{/JOBS}" selectionBehavior="Row" selectionMode="Single" visibleRowCount="6" width="100%">
+					<sap.ui.table:columns>
+						<sap.ui.table:Column filterProperty="JOBID" sortProperty="JOBID" width="125px">
+							<sap.ui.table:label>
+								<sap.ui.commons:Label requiredAtBegin="false" text="{i18n&gt;jobid}"/>
+							</sap.ui.table:label>
+							<sap.ui.table:template>
+								<sap.ui.commons:TextView text="{JobId}"/>
+							</sap.ui.table:template>
+						</sap.ui.table:Column>
+						<sap.ui.table:Column width="125px">
+							<sap.ui.table:label>
+								<sap.ui.commons:Label requiredAtBegin="false" text="{i18n&gt;jobname}"/>
+							</sap.ui.table:label>
+							<sap.ui.table:template>
+								<sap.ui.commons:TextView text="{JobName}"/>
+							</sap.ui.table:template>
+						</sap.ui.table:Column>
+					</sap.ui.table:columns>
+				</sap.ui.table:Table>
+			</l:MatrixLayoutCell>
+		</l:MatrixLayoutRow>
+	</l:MatrixLayout>
+</sap.ui.core:FragmentDefinition>
