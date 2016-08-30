@@ -6,9 +6,9 @@ SHINE for HANA extended application services advanced model (SHINE for XSA) is a
 
 
 
-## Clone to SAP Web IDE for SAP HANA
+## How to import code to SAP Web IDE for SAP HANA?
 
-The code can be cloned directly to SAP Web IDE for SAP HANA version SP12 and up. 
+The code can be imported to SAP Web IDE for SAP HANA version SP12 and up. 
 
 - Launch SAP Web IDE for SAP HANA
 
@@ -19,12 +19,12 @@ The code can be cloned directly to SAP Web IDE for SAP HANA version SP12 and up.
 - Enter the URL of the repository [https://github.com/SAP/hana-shine-xsa.git](https://github.com/SAP/hana-shine-xsa.git "https://github.com/SAP/hana-shine-xsa.git") 
 - Click Ok button
 
-*Note: The code will not work if imported into SAP Web IDE for SAP HANA version SP11 *
+*Note: The code will not work if imported into SAP Web IDE for SAP HANA version SP11*
 
-## Where to find Software Component Archive(SCA)?
+## Where to find Software Component Archive (SCA)?
 This repository is intended to be used as a reference for code of SHINE for XSA. The SHINE for XSA SCA can be found in [SAP Support Portal](https://support.sap.com/patches "SAP Support Portal"). 
 
-For detailed steps on where to find the MTA and how to install the application please refer to the SHINE for XSA detailed documentation found [here.](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
+For detailed steps on where to find the SCA and how to install the application please refer to the SHINE for XSA detailed documentation found [here.](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
 
 ## What is in the repository?
 
