@@ -1,0 +1,3 @@
+---
+tomcat/webapps/ROOT/META-INF/context.xml:
+  service_name_for_DefaultDB: java-hdi-container

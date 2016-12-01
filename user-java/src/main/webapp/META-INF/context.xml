@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><Context>
+  <Resource name="jdbc/java-hdi-container" auth="Container" type="javax.sql.DataSource" factory="com.sap.xs.jdbc.datasource.tomcat.TomcatDataSourceFactory" service="${service_name_for_DefaultDB}"/>
+</Context>

@@ -1,2 +1,0 @@
-SEQUENCE "sap.hana.democontent.epm.data::purchaseOrderSeqId" START WITH 300001000 MAXVALUE 399999999
-RESET BY SELECT IFNULL(MAX("PURCHASEORDERID"), 300000999) + 1 FROM "sap.hana.democontent.epm.data::PO.Header"

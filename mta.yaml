@@ -1,0 +1,169 @@
+_schema-version: "2.0.0"
+ID: com.sap.refapps.shine
+version: 1.2.2
+
+modules:
+  - name: shine-web
+    type: html5
+    path: web
+    provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-backend
+          url: ~{url}
+          forwardAuthToken: true 
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: user-java
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: uaa 
+        group: destinations 
+        properties: 
+           name: uaa 
+           url: ~{url} 
+           forwardAuthToken: true 
+
+    parameters: 
+       host: web 
+       register-service-url: true 
+       service-name: web 
+       service-url: "${default-url}"
+        
+  - name: shine-core-js
+    type: nodejs
+    path: core-js
+    provides: 
+      - name: core-js
+        properties:
+          url: "${default-url}"
+    properties: 
+      
+      UAA_SERVICE_NAME: shine-uaa
+    requires:
+      - name: shine-uaa
+      - name: shine-container
+      - name: shine-core-db
+
+  - name: shine-user-js
+    type: nodejs
+    path: user-js
+    provides: 
+      - name: user-js
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: shine-scheduler
+      - name: shine-user-db
+      - name: shine-user-container
+      
+  - name: shine-user-java
+    type: java
+    path: user-java
+    provides: 
+      - name: user-java
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: shine-scheduler
+      - name: shine-user-db
+      - name: shine-user-container
+        properties:
+         JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
+               {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
+      
+  - name: shine-core-db
+    type: hdb
+    path: core-db
+    requires:
+      - name: shine-container
+        properties:
+          TARGET_CONTAINER: ~{container-name}
+          
+      - name: CrossSchemaSys
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-service
+          service: ~{sys-service-name}
+         
+      - name: CrossSchemaSysBi
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-bi-service
+          service: ~{sys-bi-service-name}
+      
+      - name: shine-user-container
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-user-service
+          service: ~{user-container-name} 
+      
+  - name: shine-user-db
+    type: hdb
+    path: user-db
+    requires:
+     - name: shine-user-container
+       properties:
+        TARGET_CONTAINER: ~{user-container-name}
+
+
+
+  - name: test
+    type: nodejs
+    path: test
+
+resources:
+  - name: shine-container
+    type: com.sap.xs.hdi-container
+    properties:
+      container-name: ${service-name}
+         
+  - name: shine-user-container
+    type: com.sap.xs.hdi-container
+    properties:
+      user-container-name: ${service-name}
+    parameters: 
+     service-name: DEVX_TECH_USER-0vvns8k56zk4w2re-shine-1-shine-user-container
+     config:
+       schema: SHINE_USER
+       
+  - name: CrossSchemaSysBi
+    type: org.cloudfoundry.existing-service
+    parameters:
+     service-name: CROSS_SCHEMA_SYS_BI
+    properties:
+     sys-bi-service-name: ${service-name} 
+     
+  - name: CrossSchemaSys
+    type: org.cloudfoundry.existing-service
+    parameters:
+     service-name: CROSS_SCHEMA_SYS
+    properties:
+     sys-service-name: ${service-name} 
+
+  - name: shine-scheduler
+    type: com.sap.xs.job-scheduler
+
+  - name: shine-uaa
+    type: com.sap.xs.uaa
+    parameters:
+     config-path: xs-security.json
+   
+  - name: uaa 
+    properties: 
+      url: "https://mo-86228094a.mo.sap.corp:30032/uaa-security"

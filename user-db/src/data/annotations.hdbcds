@@ -1,0 +1,10 @@
+
+
+context annotations
+{
+	annotation OData 
+	{
+		publish: Boolean;
+	}
+	
+};

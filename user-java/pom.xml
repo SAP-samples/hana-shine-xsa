@@ -1,0 +1,150 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sap.refapps</groupId>
+		<artifactId>sap-xsac-shine-parent</artifactId>
+		<version>1.2.2</version>
+	</parent>
+	<artifactId>sap-xsac-shine-user-java</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<javax.version>3.0.1</javax.version>
+		<odata.version>4.3.0-sap-01</odata.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<json.version>2.0</json.version>
+		<xs2.gw.v4.version>1.0.2</xs2.gw.v4.version>
+		<eclipselink.version>2.5.0</eclipselink.version>
+		<java-container-security.version>0.20.8</java-container-security.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-server-api</artifactId>
+			<version>${odata.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-server-core</artifactId>
+			<version>${odata.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-commons-api</artifactId>
+			<version>${odata.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-commons-core</artifactId>
+			<version>${odata.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.xs2.security</groupId>
+			<artifactId>java-container-security</artifactId>
+			<version>${java-container-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>${eclipselink.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sap.gateway.v4.rt</groupId>
+			<artifactId>com.sap.gateway.v4.rt.api</artifactId>
+			<version>${xs2.gw.v4.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.gateway.v4.rt</groupId>
+			<artifactId>com.sap.gateway.v4.rt.core</artifactId>
+			<version>${xs2.gw.v4.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.gateway.v4.rt</groupId>
+			<artifactId>com.sap.gateway.v4.rt.jdbc</artifactId>
+			<version>${xs2.gw.v4.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.gateway.v4.rt</groupId>
+			<artifactId>com.sap.gateway.v4.rt.cds</artifactId>
+			<version>${xs2.gw.v4.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.gateway.v4.rt</groupId>
+			<artifactId>com.sap.gateway.v4.rt.core.web</artifactId>
+			<version>${xs2.gw.v4.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sap.gateway.v4.rt</groupId>
+			<artifactId>com.sap.gateway.v4.rt.xsa</artifactId>
+			<version>${xs2.gw.v4.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<version>2.3.7</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<projectNameTemplate>[artifactId]</projectNameTemplate>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<!--Un-comment this section if the WebIDE is not able to fetch the jars from the Maven Central repository -->
+	<repositories>
+		<repository>
+			<id>SAP repository</id>
+			<url>http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.milestones</url>
+		</repository>
+	</repositories>
+</project>

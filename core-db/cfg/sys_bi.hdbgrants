@@ -1,0 +1,22 @@
+{  
+  "hdi-sys-bi-service": {
+    "object_owner": {
+      "object_privileges":[  
+        {  "schema":"_SYS_BI",
+          "name":"M_TIME_DIMENSION",
+          "privileges":["SELECT"],
+            "privileges_with_grant_option":["SELECT"]
+          }
+      ]
+    },
+    "application_user": {
+      "object_privileges":[  
+        { "schema":"_SYS_BI",
+          "name":"M_TIME_DIMENSION",
+          "privileges":["SELECT"],
+          "privileges_with_grant_option":["SELECT"]
+        }
+      ]
+    }
+  }	
+}

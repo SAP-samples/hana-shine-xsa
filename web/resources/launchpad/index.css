@@ -1,0 +1,94 @@
+.sapMStdTileInfo{
+	color: #007cc0;
+}
+#__view0{
+    width: 85%;
+}
+#__tile11-info{
+	white-space: normal !important;
+	margin-top: 1rem !important;
+}
+#__tile12-info{
+	white-space: normal !important;
+	margin-top: 1rem !important;
+}
+#__tile13-info{
+	white-space: normal !important;
+	margin-top: 1rem !important;
+}
+#__tile9-info{
+	white-space: normal !important;
+	margin-top: 1rem !important;
+}
+#__tile10-info{
+	white-space: normal !important;
+	margin-top: 1rem !important;
+}
+.templateTileClass{
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;		
+}
+.dgClass{
+	background-image: url('thumbnails/dg.png');
+}
+.poClass{
+	background-image: url('thumbnails/poworklist.png');
+}
+.soClass{
+	background-image: url('thumbnails/sales.png');
+}
+.sowClass{
+	background-image: url('thumbnails/salesWorklist.png');
+}		
+.ucClass{
+	background-image: url('thumbnails/userCRUD.png');
+}
+.spatialClass{
+	background-image: url('thumbnails/spatial.jpg');
+}
+.inatoolkitClass{
+	background-image: url('thumbnails/inatoolkit.png');
+}
+.salesMobileClass{
+	background-image: url('thumbnails/salesMobile.jpg');
+}
+.fioriLaunchpadClass{
+	background-image: url('thumbnails/fioriLaunchpad.JPG');
+}
+.xsdsClass{
+	background-image: url('thumbnails/xsds.JPG');
+}
+
+.ui5searchClass{
+	background-image: url('thumbnails/ui5search.JPG');
+}
+.etagsXSODataTileClass{
+	background-image: url('thumbnails/etagsdemo.JPG');
+}
+
+.jobschedulingClass{
+	background-image: url('thumbnails/JobScheduler.PNG');
+}
+
+.xsuntClass{
+	background-image: url('thumbnails/xsunit.JPG');
+}
+/* welcome dialog */
+.welcomeDlg {
+	background-color: #FFFFFF !important;
+}
+.welcomeDlg .sapUiDlgHdr {
+	border-bottom: 0px solid #FFFFFF !important;
+}
+.welcomeDlg .sapUiDlgCont {
+	background-color: #FFFFFF !important;
+	padding: 10px 25px 12px;
+}
+.welcomeHeaderTextAlign {
+	font-size: 22px !important;
+	padding-left: 5px;
+}		
+.dialogTextColor{
+	color: #007CC0 !important;
+}

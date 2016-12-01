@@ -1,2 +1,0 @@
-SEQUENCE "sap.hana.democontent.epm.data::employeeSeqId" START WITH 1000000225 MAXVALUE 1999999999
-RESET BY SELECT IFNULL(MAX("EMPLOYEEID"), 1000000225) + 1 FROM "sap.hana.democontent.epm.data::MD.Employees"

@@ -1,0 +1,22 @@
+<Dialog xmlns:sap.ui.core="sap.ui.core" xmlns="sap.ui.commons" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" id="dlgpocrn" showHeader="true" title="Create New Purchase Orders" width="59%" height="22%" modal="true">
+		<sap.ui.commons.layout:HorizontalLayout width="50%">
+			<Label design="Bold" id="businessPartner" text="Business Partner:" class="createNewPurchaseOrderLabelSpacing" labelFor="businessPartnerDropDown"/>
+			<ComboBox design="Bold" id="businessPartnerDropDown" required="true" tooltip="{i18n&gt;bpToolTip}" items="{path:'bspartners&gt;/BusinessPartners',sorter:{path:'bspartners&gt;COMPANYNAME'}}" displaySecondaryValues="true" change="liveChangeNewPO">
+				<items> 
+					<sap.ui.core:ListItem key="{bspartners&gt;PARTNERID}" additionalText="{bspartners&gt;PARTNERID}" text="{bspartners&gt;COMPANYNAME}"/> 
+				</items>
+			</ComboBox>
+			<Label design="Bold" id="product" text="Product:" class="createNewPurchaseOrderLabelSpacing" labelFor="productDropDown"/>
+			<ComboBox design="Bold" id="productDropDown" tooltip="{i18n&gt;productIdToolTip}" required="true" items="{path:'productDetails&gt;/ProductDetails', sorter:{path:'productDetails&gt;PRODUCTID'}}" displaySecondaryValues="true" change="liveChangeNewPO">
+				<items> 
+					<sap.ui.core:ListItem key="{productDetails&gt;PRODUCTID}" text="{productDetails&gt;PRODUCTID}" additionalText="{parts: [{path: 'productDetails&gt;PRICE'},{path:'productDetails&gt;CURRENCY'}]}"/> 
+				</items>
+			</ComboBox>
+			<Label design="Bold" id="quantity" text="Quantity:" class="createNewPurchaseOrderLabelSpacing" labelFor="quantityTextField"/>
+			<TextField design="Bold" id="quantityTextField" required="true" width="30%" tooltip="{i18n&gt;quantityToolTip}" change="liveChangeNewPO"/>
+		</sap.ui.commons.layout:HorizontalLayout>
+<buttons>
+	<Button id="submit" press="submit" text="Submit"/>
+	<Button id="close" press="close" text="Close"/>
+</buttons>
+</Dialog>
