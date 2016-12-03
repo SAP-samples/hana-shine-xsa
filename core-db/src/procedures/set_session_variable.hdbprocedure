@@ -1,0 +1,22 @@
+PROCEDURE "set_session_variable" ( 
+	IN im_sessionid NVARCHAR(32), 
+	IN im_name NVARCHAR(30), 
+	IN im_application NVARCHAR(128), 
+	IN im_expiry TIMESTAMP, 
+	IN im_data NCLOB) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY DEFINER AS
+
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ UPSERT "Util.SSCOOKIE"
+	  VALUES(:im_sessionid, :IM_NAME, :im_application, :im_expiry, :im_data)
+	   WHERE SESSIONID   = :im_sessionid
+	     AND NAME        = :im_name
+	     AND APPLICATION = :im_application; 
+	     
+	DELETE FROM "Util.SSCOOKIE"
+	 WHERE EXPIRY <= now();  
+END;

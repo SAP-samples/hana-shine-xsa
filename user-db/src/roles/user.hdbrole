@@ -1,0 +1,9 @@
+{
+	"role":{
+		"name": "user",
+		"schema_privileges": [{
+			
+		   "privileges": ["SELECT METADATA", "SELECT CDS METADATA", "SELECT", "INSERT", "UPDATE", "EXECUTE", "DELETE", "CREATE TEMPORARY TABLE" ]
+		}]
+	}
+}

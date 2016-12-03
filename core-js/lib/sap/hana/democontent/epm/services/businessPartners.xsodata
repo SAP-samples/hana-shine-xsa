@@ -1,0 +1,7 @@
+service namespace "sap.hana.democontent.epm.services" {
+	"MD.BusinessPartner" as "BusinessPartners"; 
+}
+
+settings {
+	    metadata cache-control "max-age= 604800";
+}

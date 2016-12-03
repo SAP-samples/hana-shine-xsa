@@ -1,1 +1,0 @@
-{"type":"sap.hdb","builders":{"default":"hdi-builder","configs":{}},"runners":{"configs":{}},"attributes":{"mta_module_parent":["/shine-xsa-external-2"]},"mixinTypes":["mtamodule"]}

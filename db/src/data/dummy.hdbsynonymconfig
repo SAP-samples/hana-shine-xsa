@@ -1,8 +1,0 @@
-{
-	"sap.hana.democontent.epm.data::DUMMY" : {
-		"target" : {
-			"schema" : "SYS",
-			"object" : "DUMMY"
-		}
-	}
-}

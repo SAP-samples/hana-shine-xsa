@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::TIME_DIM" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="crossClient" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="TIME_DIM"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="M_TIME_DIMENSION" partitionedExecution="false">
+    <resourceUri>M_TIME_DIMENSION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="M_TIME_DIMENSION">
+  <attributes>
+    <attribute id="CALMONTH" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CALMONTH"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="CALMONTH"/>
+    </attribute>
+    <attribute id="CALQUARTER" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CALQUARTER"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="CALQUARTER"/>
+    </attribute>
+    <attribute id="CALWEEK" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CALWEEK"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="CALWEEK"/>
+    </attribute>
+    <attribute id="DATETIMESTAMP" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATETIMESTAMP"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATETIMESTAMP"/>
+    </attribute>
+    <attribute id="DATETIME_SAP" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATETIME_SAP"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATETIME_SAP"/>
+    </attribute>
+    <attribute id="DATE_SAP" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE_SAP"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATE_SAP"/>
+    </attribute>
+    <attribute id="DATE_SQL" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE_SQL"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATE_SQL"/>
+    </attribute>
+    <attribute id="DAY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DAY"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY"/>
+    </attribute>
+    <attribute id="DAY_INT" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DAY_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY_INT"/>
+    </attribute>
+    <attribute id="DAY_OF_WEEK" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DAY_OF_WEEK"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY_OF_WEEK"/>
+    </attribute>
+    <attribute id="DAY_OF_WEEK_INT" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DAY_OF_WEEK_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY_OF_WEEK_INT"/>
+    </attribute>
+    <attribute id="HOUR" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HOUR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="HOUR"/>
+    </attribute>
+    <attribute id="HOUR_INT" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HOUR_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="HOUR_INT"/>
+    </attribute>
+    <attribute id="MINUTE" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MINUTE"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MINUTE"/>
+    </attribute>
+    <attribute id="MINUTE_INT" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MINUTE_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MINUTE_INT"/>
+    </attribute>
+    <attribute id="MONTH" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MONTH"/>
+    </attribute>
+    <attribute id="MONTH_INT" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MONTH_INT"/>
+    </attribute>
+    <attribute id="MONTH_LAST_DAY" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH_LAST_DAY"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MONTH_LAST_DAY"/>
+    </attribute>
+    <attribute id="QUARTER" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUARTER"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="QUARTER"/>
+    </attribute>
+    <attribute id="QUARTER_INT" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUARTER_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="QUARTER_INT"/>
+    </attribute>
+    <attribute id="SECOND" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SECOND"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="SECOND"/>
+    </attribute>
+    <attribute id="SECOND_INT" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SECOND_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="SECOND_INT"/>
+    </attribute>
+    <attribute id="TZNTSTMPL" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TZNTSTMPL"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="TZNTSTMPL"/>
+    </attribute>
+    <attribute id="TZNTSTMPS" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TZNTSTMPS"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="TZNTSTMPS"/>
+    </attribute>
+    <attribute id="WEEK" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WEEK"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK"/>
+    </attribute>
+    <attribute id="WEEK_INT" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WEEK_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK_INT"/>
+    </attribute>
+    <attribute id="WEEK_YEAR" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WEEK_YEAR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK_YEAR"/>
+    </attribute>
+    <attribute id="WEEK_YEAR_INT" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WEEK_YEAR_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK_YEAR_INT"/>
+    </attribute>
+    <attribute id="YEAR" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="YEAR"/>
+    </attribute>
+    <attribute id="YEAR_INT" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="YEAR_INT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

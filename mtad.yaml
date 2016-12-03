@@ -1,0 +1,186 @@
+_schema-version: "3.1.0"
+ID: XSAC_SHINE
+version: 1.2.2
+
+modules:
+  - name: shine-user-db
+    type: com.sap.xs.hdi
+    path: user-db
+    requires:
+      - name: shine-user-container
+        properties:
+         TARGET_CONTAINER: ~{user-container-name}
+    parameters:
+        dependency-type: hard
+
+  - name: shine-core-db
+    type: com.sap.xs.hdi
+    path: core-db
+    requires:
+      - name: shine-container
+        properties:
+          TARGET_CONTAINER: ~{container-name}
+
+      - name: CrossSchemaSys
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-service
+          service: ~{sys-service-name}
+ 
+      - name: CrossSchemaSysBi
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-bi-service
+          service: ~{sys-bi-service-name}
+
+      - name: shine-user-container
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-user-service
+          service: ~{user-container-name} 
+
+  - name: shine-core-js
+    type: javascript.nodejs
+    path: core-js/
+    provides: 
+      - name: core-js
+        properties:
+          url: "${default-url}"
+    properties: 
+      HANA_SERVICE_NAME: shine-container
+      UAA_SERVICE_NAME: shine-uaa
+    requires:
+      - name: shine-uaa
+      - name: shine-container
+      - name: shine-core-db
+      
+  - name: shine-user-js
+    type: javascript.nodejs
+    path: user-js/
+    provides: 
+      - name: user-js
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: shine-scheduler
+      - name: shine-user-db
+      - name: shine-user-container
+      
+  - name: shine-user-java
+    type: java.tomee
+    path: sap-xsac-shine-user-java.war
+    provides: 
+      - name: user-java
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: shine-user-db
+      - name: shine-user-container
+ 
+  - name: shine-web
+    type: javascript.nodejs
+    path: web/
+    provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-backend
+          url: ~{url}
+          forwardAuthToken: true 
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: user-java
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: uaa 
+        group: destinations 
+        properties: 
+           name: uaa 
+           url: ~{url} 
+           forwardAuthToken: true 
+    parameters: 
+       host: web 
+       register-service-url: true 
+       service-name: web 
+       service-url: "${default-url}"
+        
+resources:
+  - name: shine-container
+    type: com.sap.xs.hdi-container
+    properties:
+      container-name: ${service-name}
+    
+  - name: shine-user-container
+    type: com.sap.xs.hdi-container
+    properties:
+      user-container-name: ${service-name}
+    parameters: 
+     service-name: shine-user-container
+     config:
+       schema: #to be specified in extension descriptor
+    parameters-metadata:
+      config:
+        overwritable: true
+
+    
+  - name: shine-scheduler
+    type: com.sap.xs.job-scheduler
+
+  - name: CrossSchemaSys
+    type: org.cloudfoundry.user-provided-service
+    parameters: 
+      service-name: CROSS_SCHEMA_SYS
+      config: 
+        host: # to be specified in extension descriptor
+        port: # to be specified in extension descriptor
+        user: # to be specified in extension descriptor
+        password: # to be specified in extension descriptor
+        driver: # to be specified in extension descriptor
+        tags: # to be specified in extension descriptor
+        schema: # to be specified in extension descriptor
+    properties:
+     sys-service-name: ${service-name}
+    parameters-metadata:
+      config:
+        overwritable: true
+
+  - name: CrossSchemaSysBi
+    type: org.cloudfoundry.user-provided-service
+    parameters: 
+      service-name: CROSS_SCHEMA_SYS_BI
+      config: 
+        host: # to be specified in extension descriptor
+        port: # to be specified in extension descriptor
+        user: # to be specified in extension descriptor
+        password: # to be specified in extension descriptor
+        driver: # to be specified in extension descriptor
+        tags: # to be specified in extension descriptor
+        schema: # to be specified in extension descriptor
+    properties:
+     sys-bi-service-name: ${service-name}
+    parameters-metadata:
+      config:
+        overwritable: true
+
+  - name: shine-uaa
+    type: com.sap.xs.uaa-space
+    parameters:
+     config-path: xs-security.json
+  
+  - name: uaa 
+    properties: 
+      url: "${xs-auth-url}"

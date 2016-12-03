@@ -1,0 +1,174 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.ux3="sap.ui.ux3" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.viz.ui5="sap.viz.ui5" xmlns:sap.viz.ui5.data="sap.viz.ui5.data" xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:sap.viz.ui5.types="sap.viz.ui5.types" xmlns:sap.ui.commons="sap.ui.commons" controllerName="sap.hana.democontent.epm.salesdashboard.view.details">
+        <sap.ui.commons.layout:MatrixLayout>
+            <sap.ui.commons.layout:rows>
+                
+                <sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:cells>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.table:Table id="soHeader" visibleRowCount="10" selectionMode="Single" selectionBehavior="Row"  rowSelectionChange="onRowSelect">
+                                    <sap.ui.table:toolbar>
+                                        <sap.ui.commons:Toolbar id="tb1" design="Standard" standalone="false">
+                                            <sap.ui.commons:items>
+                                                <sap.ui.commons:Button id="btnNew" text="{i18n&gt;NEW}" tooltip="{i18n&gt;CREATE_LONG}" press="onNewPress"/>
+                                                <sap.ui.commons:Button id="btnRefresh" text="{i18n&gt;REFRESH}" tooltip="{i18n&gt;REFRESH}" press="onRefresh"/>
+                                                <sap.ui.commons:Button id="btnDelete" text="{i18n&gt;DELETE}" tooltip="{i18n&gt;DELETE_LONG}" press="onDeletePress"/>
+                                                <sap.ui.commons:Button id="btnSend" text="{i18n&gt;SEND}" tooltip="{i18n&gt;SEND_LONG}" press="onSend" enabled="false"/>
+                                                <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="8" press="openTileDialog"/>
+                                            </sap.ui.commons:items>
+                                        </sap.ui.commons:Toolbar>
+                                    </sap.ui.table:toolbar>
+                                    <sap.ui.table:columns>
+                                        <sap.ui.table:Column sortProperty="SALESORDERID" filterProperty="SALESORDERID" filterOperator="EQ">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;SALES_ORDER_ID}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{SALESORDERID}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="PARTNER_PARTNERID" filterProperty="PARTNER_PARTNERID">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;PARTNER_ID}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{PARTNER_PARTNERID}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="COMPANYNAME" filterProperty="COMPANYNAME">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;COMPANY}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{COMPANYNAME}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="CITY" filterProperty="CITY">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;CITY}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{CITY}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column hAlign="End" sortProperty="GROSSAMOUNT">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;GROSS_AMOUNT}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{GROSSAMOUNT}" textAlign="End"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column hAlign="End" sortProperty="TAXAMOUNT">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;TAX_AMOUNT}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{TAXAMOUNT}" textAlign="End"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="CURRENCY" filterProperty="CURRENCY">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;CURRENCY}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{CURRENCY}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                    </sap.ui.table:columns>
+	                                     <sap.ui.table:footer>
+					        <sap.ui.commons:Toolbar id="tb2" design="Standard" standalone="false" width="100%">
+										        	
+					            <sap.ui.commons:Paginator
+					            	id="tablePaginator"  
+					            	page="onPageChange" 
+					            	class="centerAllign"/>
+										            
+					        </sap.ui.commons:Toolbar>
+					    </sap.ui.table:footer>
+                                </sap.ui.table:Table>
+                                
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                    </sap.ui.commons.layout:cells>
+                </sap.ui.commons.layout:MatrixLayoutRow>
+                <sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:cells>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.table:Table id="soItemTable" visibleRowCount="8" selectionMode="None"  title="{i18n&gt;SALES_ORDER_ITEMS}">
+                                    <sap.ui.table:columns>
+                                        <sap.ui.table:Column sortProperty="SALESORDERITEM" filterProperty="SALESORDERITEM" filterOperator="EQ">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;SALES_ORDER_ITEM_ID}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{SALESORDERITEM}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="PRODUCTID" filterProperty="PRODUCTID">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;PRODUCT}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{PRODUCTID}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="PRODUCT_NAME" filterProperty="PRODUCT_NAME">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;PRODUCT_NAME}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{PRODUCT_NAME}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column hAlign="End" sortProperty="QUANTITY">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;QUANTITY}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{QUANTITY}" textAlign="End"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="QUANTITYUNIT" filterProperty="QUANTITYUNIT">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;QUANTITY_UNIT}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{QUANTITYUNIT}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column hAlign="End" sortProperty="NETAMOUNT">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;NET_AMOUNT}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{NETAMOUNT}" textAlign="End"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column hAlign="End" sortProperty="TAXAMOUNT">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;TAX_AMOUNT}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{TAXAMOUNT}" textAlign="End"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                        <sap.ui.table:Column sortProperty="CURRENCY" filterProperty="CURRENCY">
+                                            <sap.ui.table:label>
+                                                <sap.ui.commons:Label text="{i18n&gt;CURRENCY}" requiredAtBegin="false"/>
+                                            </sap.ui.table:label>
+                                            <sap.ui.table:template>
+                                                <sap.ui.commons:TextView text="{CURRENCY}"/>
+                                            </sap.ui.table:template>
+                                        </sap.ui.table:Column>
+                                    </sap.ui.table:columns>
+                                </sap.ui.table:Table>
+                                
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                    </sap.ui.commons.layout:cells>
+                </sap.ui.commons.layout:MatrixLayoutRow>
+            </sap.ui.commons.layout:rows>
+        </sap.ui.commons.layout:MatrixLayout>
+</sap.ui.core.mvc:View>
