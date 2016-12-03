@@ -74,25 +74,6 @@ SHINE for XSA (XSACSHINE02_x)can be found in the folder XSA_CONT of HANA Media a
      `xs install XSACSHINE02_XX.ZIP -e <path to mta extension descriptor>/sap-xsac-shine-1.2.xx.mtaext`
 
 
-
-###Install from nexus
-- Download the latest SHINE SCA from one of the following two nexus repositories:
-  1. [Milestone nexus](http://nexus.wdf.sap.corp:8081/nexus/content/repositories/deploy.milestones.xmake/com/sap/refapps/sap-xsac-shine/)
-  2. [Release nexus](http://nexus.wdf.sap.corp:8081/nexus/content/repositories/deploy.releases.xmake/com/sap/refapps/sap-xsac-shine/)
-
-- Open **sap-xsac-shine-1.1.x.mtaext** file.
-
-- Change the Username and Password to the < USERNAME > and < PASSWORD > of the user created in the previous step.(Create a user for Custom User Provided Services creation)
--  Login with a user who has the `XS_AUTHORIZATION_ADMIN` and `XS_CONTROLLER_USER` role collections and also has the spacedeveloper role into the customer space.For more details on how to assign roles to a user, please refer Chapter 3 of [SHINE documentation](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
-
-    `xs login -u <USERNAME> -p <PASSWORD>`   
-
-     `xs target –o <orgname> -s <customer spacename>`
-     
-- Navigate to the folder which contains the SCA and run the following command to install SHINE
-
-     `xs install XSACSHINE01_XX.ZIP -e sap-xsac-shine-1.2.xx.mtaext `
-
 ##Importing SHINE from GitHub to SAP WebIDE
 
 - Launch SAP Web IDE for SAP HANA.
@@ -126,37 +107,3 @@ SHINE for XSA (XSACSHINE02_x)can be found in the folder XSA_CONT of HANA Media a
 
 - After all these services are created, build all packages like core-db, user-db, user-js etc.
 For more information, see Web IDE for SAP HANA - Installation and Upgrade Guide.
-
-##Deploying SHINE on CF
-
-
-
-###Create a Custom User Provided Services(CUPS) for SYS and SYS_BI schemas
-
-
-    cf cups CROSS_SCHEMA_SYS -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"SYSTEM\",\"password\":\"<Password>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"SYS\" }"
-
-
-##
-
-     
-    cf cups CROSS_SCHEMA_SYS_BI -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"SYSTEM\",\"password\":\"<Password>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"_SYS_BI\" }"
-
-
-##Create a service for the HDI container 
-
-This step is optional and required only if you want to deploy app via cf push 
- 
-
-
-    cf create-service hana hdi-shared shine-container
-
-#
-    cf create-service hana hdi-shared shine-user-container
-
-##Create a service for the UAA
-This step is optional and required only if you want to deploy app via cf push
-
-```
-cf create-service xsuaa default shine-uaa -c xs-security.json
-```
