@@ -56,7 +56,7 @@ After user creation login once with this user to the HANA system to change the i
 
 - Choose OK.
 
-- Create a Custom User Provided Services(CUPS) for SYS and SYS_BI schemas where USERNAME and PASSWORD is for the USER created in the above step "  Create a user for Custom User Provided Services creation". The hostname name is host name of HANA system. 
+- Create a Custom User Provided Services(CUPS) for SYS and SYS_BI schemas where USERNAME and PASSWORD is for the USER created in the above step "  Create a user for Custom User Provided Services creation". The hostname is host name of HANA system. 
 
 ##
     xs cups CROSS_SCHEMA_SYS -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"<USERNAME>\",\"password\":\"<PASSWORD>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"SYS\" }"
