@@ -28,11 +28,7 @@ The application consists of the following packages:
 The following components should be installed before SHINE installation on XSA:
 
 - XSAC_MONITORING   
-If not installed,please download the latest version from milestone [here](http://nexus.wdf.sap.corp:8081/nexus/content/repositories/build.releases/com/sap/xsa/admin/sap-xsac-admin) or release [here](http://nexus.wdf.sap.corp:8081/nexus/content/repositories/build.milestones/com/sap/xsa/admin/sap-xsac-admin/).
-
-
 - XSAC_SERVICES   
-If not installed,please download the latest version to be installed from milestone[here](http://nexus.wdf.sap.corp:8081/nexus/content/repositories/deploy.milestones.xmake/com/sap/xs/jobscheduler/jobscheduler-assembly/ "here") or release[here](http://nexus.wdf.sap.corp:8081/nexus/content/repositories/build.releases.xmake/com/sap/xs/jobscheduler/jobscheduler-assembly/).
 
 ##Installation via Product Installer 
 ###Create a user for Custom User Provided Services creation
@@ -54,15 +50,15 @@ After user creation login once with this user to the HANA system to change the i
 Below are different ways to install SHINE:
 
 ###Install from HANA Media
-SHINE for XSA (XSACSHINE02_x)can be found in the folder XSA_CONT of HANA Media and SHINE for XSA needs an MTA extension descriptor this can be found in the folder XSA_CONT/extension_descriptors/sap-xsac-shine-1.2.0-XSACSHINE02_0.mtaext
+SHINE for XSA (XSACSHINE02_x)can be found in the folder XSA_CONT of HANA Media and SHINE for XSA needs an MTA extension descriptor this can be found in the folder XSA_CONT/extension_descriptors/sap-xsac-shine-1.2.x-XSACSHINE02_x.mtaext
 
 - Open **sap-xsac-shine-1.2.xx.mtaext** file.
 
 - Change the Username and Password to the < USERNAME > and < PASSWORD > of the user created in the previous step.(Create a user for Custom User Provided Services creation)
 
-- Also change the < SCHEMA_NAME > to any schema name like SHINE__USER. 
+- Also change the < SCHEMA_NAME > to any schema name like SHINE. 
 
--  Login with a user who has the `XS_AUTHORIZATION_ADMIN` and `XS_CONTROLLER_USER` role collections and also has the spacedeveloper role into the customer space.For more details on how to assign roles to a user, please refer Chapter 3 of [SHINE documentation](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
+-  Login with a user who has the `XS_AUTHORIZATION_ADMIN` and `XS_CONTROLLER_USER` role collections and also has the spacedeveloper role into the customer space.For more details on how to assign roles to a user, please refer Chapter 2.4 of [SHINE documentation](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
 
     `xs login -u <USERNAME> -p <PASSWORD>`   
 
