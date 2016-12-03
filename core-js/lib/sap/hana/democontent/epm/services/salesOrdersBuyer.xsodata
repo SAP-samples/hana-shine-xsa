@@ -1,0 +1,24 @@
+service namespace "sap.hana.democontent.epm.services"  { 
+    "sap.hana.democontent.epm.models::SALES_ORDER_HEADER_W_BUYER" 
+   as "SalesOrderHeader" 
+   keys ("SALESORDERID")
+   navigates ("SO_Item" as "SalesOrderItem");
+ 
+   "sap.hana.democontent.epm.models::BUYER" 
+   as "Buyer" 
+   keys ("PARTNERID");
+   
+   "sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT_WRAPPER" 
+   as "SalesOrderItem"  keys generate local "ID"
+   aggregates always;
+
+   association "SO_Item" principal "SalesOrderHeader"("SALESORDERID") 
+     multiplicity "1" dependent "SalesOrderItem"("SALESORDERID") multiplicity "*"; 
+     
+    "sap.hana.democontent.epm.models::PROD" as "ProductDetails" 
+    keys ("PRODUCTID");
+  }
+  
+settings {
+    metadata cache-control "max-age= 604800";
+}

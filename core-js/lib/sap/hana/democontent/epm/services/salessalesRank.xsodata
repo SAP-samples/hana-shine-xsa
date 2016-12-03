@@ -1,0 +1,10 @@
+service namespace "sap.hana.democontent.epm"  { 
+   "sap.hana.democontent.epm.models::SALESORDER_RANKING" 
+    as "salesRank" 
+    keys generate local "ID"
+    aggregates always;	 
+}
+
+settings {
+	    metadata cache-control "max-age= 604800";
+}

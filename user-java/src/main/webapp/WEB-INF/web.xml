@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<servlet>
+		<servlet-name>ODataServlet</servlet-name>
+		<servlet-class>com.sap.gateway.v4.rt.core.web.ODataServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<resource-ref>
+		<res-ref-name>jdbc/java-hdi-container</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+	</resource-ref>
+	<servlet-mapping>
+		<servlet-name>ODataServlet</servlet-name>
+		<url-pattern>/user/odata/v4/*</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>DPC</param-name>
+		<param-value>com.sap.gateway.v4.rt.cds.CDSDataProvider</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MPC</param-name>
+		<param-value>com.sap.refapps.ShineEdmProvider</param-value>
+	</context-param>
+	<context-param>
+		<param-name>RPF</param-name>
+		<param-value>com.sap.gateway.v4.rt.cds.util.CDSRuntimeProviderFactory</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.sap.gateway.v4.rt.core.web.ODataApplicationInitializer</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring-security.xml</param-value>
+	</context-param>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>
