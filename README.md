@@ -33,7 +33,7 @@ The following components should be installed before SHINE installation on XSA:
 ##Installation via Product Installer 
 ###Create a user for Custom User Provided Services creation
 
-Open SQL console of the HANA system in the SAP web development workbench for SAP HANA (old WebIDE for XS Classic) or the HANA studio and execute the following SQL statements:
+Open SQL console of the HANA system in SAP HANA studio and execute the following SQL statements:
 
     CREATE USER <USERNAME> PASSWORD <PASSWORD>;  
     Grant SELECT on "SYS"."M_TABLES" to <USERNAME>;
@@ -47,29 +47,6 @@ After user creation login once with this user to the HANA system to change the i
 
 
 
-Below are different ways to install SHINE:
-
-###Install from HANA Media
-SHINE for XSA (XSACSHINE02_x)can be found in the folder XSA_CONT of HANA Media and SHINE for XSA needs an MTA extension descriptor this can be found in the folder XSA_CONT/extension_descriptors/sap-xsac-shine-1.2.x-XSACSHINE02_x.mtaext
-
-- Open **sap-xsac-shine-1.2.xx.mtaext** file.
-
-- Change the Username and Password to the < USERNAME > and < PASSWORD > of the user created in the previous step.(Create a user for Custom User Provided Services creation)
-
-- Also change the < SCHEMA_NAME > to any schema name like SHINE. 
-
--  Login with a user who has the `XS_AUTHORIZATION_ADMIN` and `XS_CONTROLLER_USER` role collections and also has the spacedeveloper role into the customer space.For more details on how to assign roles to a user, please refer Chapter 2.4 of [SHINE documentation](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
-
-    `xs login -u <USERNAME> -p <PASSWORD>`   
-
-     `xs target –o <orgname> -s <customer spacename>`
-     
-- Install shine by running the following command 
-
-
-     `xs install XSACSHINE02_XX.ZIP -e <path to mta extension descriptor>/sap-xsac-shine-1.2.xx.mtaext`
-
-
 ##Importing SHINE from GitHub to SAP WebIDE
 
 - Launch SAP Web IDE for SAP HANA.
@@ -79,17 +56,19 @@ SHINE for XSA (XSACSHINE02_x)can be found in the folder XSA_CONT of HANA Media a
 
 - Choose OK.
 
-- Create a Custom User Provided Services(CUPS) for SYS and SYS_BI schemas
+- Create a Custom User Provided Services(CUPS) for SYS and SYS_BI schemas where <USERNAME>, <PASSWORD> is for the USER created in the above step Create a user for Custom User Provided Services creation. The <hostname> name is host name of HANA system. 
 
 ##
-    xs cups CROSS_SCHEMA_SYS -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"SYSTEM\",\"password\":\"<Password>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"SYS\" }"
+    xs cups CROSS_SCHEMA_SYS -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"<USERNAME>\",\"password\":\"<PASSWORD>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"SYS\" }"
+    
+
 
    
 
 ##
 
      
-    xs cups CROSS_SCHEMA_SYS_BI -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"SYSTEM\",\"password\":\"<Password>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"_SYS_BI\" }"
+    xs cups CROSS_SCHEMA_SYS_BI -p "{\"host\":\"<hostname>\",\"port\":\"3##<15|13>\",\"user\":\"<USERNAME>\",\"password\":\"<PASSWORD>\",\"driver\":\"com.sap.db.jdbc.Driver\",\"tags\":[\"hana\"] , \"schema\" : \"_SYS_BI\" }"
 
 ‘##’ corresponds to instance number.
 
