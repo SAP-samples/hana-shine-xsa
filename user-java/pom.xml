@@ -139,7 +139,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
 	<!--Un-comment this section if the WebIDE is not able to fetch the jars from the Maven Central repository -->
 	<repositories>
 		<repository>
