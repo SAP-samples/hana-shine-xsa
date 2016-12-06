@@ -136,10 +136,5 @@
 	</build>
 	
 	<!--Un-comment this section if the WebIDE is not able to fetch the jars from the Maven Central repository -->
-	<repositories>
-		<repository>
-			<id>SAP repository</id>
-			<url>http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.milestones</url>
-		</repository>
-	</repositories>
+	
 </project>
