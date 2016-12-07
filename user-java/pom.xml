@@ -1,18 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>sap-xsac-shine-user-java</artifactId>
 	<groupId>com.sap.refapps</groupId>
+	<artifactId>sap-xsac-shine-user-java</artifactId>
 	<version>1.2.2</version>
 	<packaging>war</packaging>
 
 	<properties>
-		<javax.version>3.0.1</javax.version>
-		<odata.version>4.3.0-sap-01</odata.version>
-		<slf4j.version>1.7.7</slf4j.version>
-		<json.version>2.0</json.version>
-		<xs2.gw.v4.version>1.0.5</xs2.gw.v4.version>
-		<eclipselink.version>2.5.0</eclipselink.version>
-	</properties>
+	<javax.version>3.0.1</javax.version>
+    <sap.gateway.version>1.0.5</sap.gateway.version>
+    <slf4j.version>1.7.7</slf4j.version>
+  </properties>
 
 	<dependencies>
 		<dependency>
@@ -22,77 +20,44 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.olingo</groupId>
-			<artifactId>odata-server-api</artifactId>
-			<version>${odata.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.olingo</groupId>
-			<artifactId>odata-server-core</artifactId>
-			<version>${odata.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.olingo</groupId>
-			<artifactId>odata-commons-api</artifactId>
-			<version>${odata.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.olingo</groupId>
-			<artifactId>odata-commons-core</artifactId>
-			<version>${odata.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>eclipselink</artifactId>
-			<version>${eclipselink.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sap.gateway.v4.rt</groupId>
-			<artifactId>com.sap.gateway.v4.rt.api</artifactId>
-			<version>${xs2.gw.v4.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sap.gateway.v4.rt</groupId>
-			<artifactId>com.sap.gateway.v4.rt.core</artifactId>
-			<version>${xs2.gw.v4.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sap.gateway.v4.rt</groupId>
-			<artifactId>com.sap.gateway.v4.rt.jdbc</artifactId>
-			<version>${xs2.gw.v4.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sap.gateway.v4.rt</groupId>
-			<artifactId>com.sap.gateway.v4.rt.cds</artifactId>
-			<version>${xs2.gw.v4.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sap.gateway.v4.rt</groupId>
-			<artifactId>com.sap.gateway.v4.rt.core.web</artifactId>
-			<version>${xs2.gw.v4.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sap.gateway.v4.rt</groupId>
-			<artifactId>com.sap.gateway.v4.rt.xsa</artifactId>
-			<version>${xs2.gw.v4.version}</version>
-		</dependency>
+		<!-- SAP Gateway Runtime, provides OData services -->
+    <dependency>
+      <groupId>com.sap.gateway.v4.rt</groupId>
+      <artifactId>com.sap.gateway.v4.rt.api</artifactId>
+      <version>${sap.gateway.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.gateway.v4.rt</groupId>
+      <artifactId>com.sap.gateway.v4.rt.core</artifactId>
+      <version>${sap.gateway.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.gateway.v4.rt</groupId>
+      <artifactId>com.sap.gateway.v4.rt.jdbc</artifactId>
+      <version>${sap.gateway.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.gateway.v4.rt</groupId>
+      <artifactId>com.sap.gateway.v4.rt.cds</artifactId>
+      <version>${sap.gateway.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.gateway.v4.rt</groupId>
+      <artifactId>com.sap.gateway.v4.rt.core.web</artifactId>
+      <version>${sap.gateway.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.gateway.v4.rt</groupId>
+      <artifactId>com.sap.gateway.v4.rt.xsa</artifactId>
+      <version>${sap.gateway.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>provided</scope>
+    </dependency>
 
 	</dependencies>
 
@@ -129,5 +94,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	
 </project>
