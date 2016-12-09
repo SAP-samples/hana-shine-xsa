@@ -3,11 +3,11 @@
     "node": "~4.x || ~6.x"
   },
   "dependencies": {
-    "sap-xssec": "0.8.0",
+    "sap-xssec": "0.9.1",
     "sap-xsenv": "1.2.3",
-    "sap-xsjs": "1.11.2",
+    "sap-xsjs": "1.11.3",
     "sap-hdbext": "4.1.3",
-    "sap-cds": "1.13.2",
+    "sap-cds": "1.13.4",
     "sap-logging": "1.4.0",
     "sap-jobs-client": "1.0.10",
     "express": "4.12.3",
