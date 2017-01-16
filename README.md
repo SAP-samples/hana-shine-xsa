@@ -99,20 +99,17 @@ b)	Uaa Endpoint
 	
    a)	**User container name**: To find out the user container name, please do a dummy build of the user-db module, without any changes. After the build fails, please execute the following command:
 
-     xs s          
+       `xs s`          
                                                                                                
 	
 
-Please copy the respective user container name which will look like:
+   Please copy the respective user container name which will look like:
 
-  < GUID ><project-name>-shine-user-conatiner
+  `<guid><project-name>-shine-user-conatiner` and paste it in line 115 of mta.yaml.
 
- and paste it in line 115 of mta.yaml.
+   b)	**UAA Endpoint**: Please replace the UAA end point URL in line 129 of mta.yaml to your respective UAA end point URL which will    be of the format :`http(s)://< host-name >:3<instance-number>32/ uaa-security`
 
-b)	**UAA Endpoint**: Please replace the UAA end point URL in line 129 of mta.yaml to your respective UAA end point URL which will be of the format :
-http(s)://<host-name> :3<instance-number>32/ uaa-security
+   For example in HANA express the UAA endpoint can be https://hxehost:39032/uaa-security
 
-For example in HANA express the UAA endpoint can be https://hxehost:39032/uaa-security
-
-For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and Upgrade Guide. ](http://help.sap.com/hana/SAP_Web_IDE_for_SAP_HANA_Installation_Guide_en.pdf )
+   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](http://help.sap.com/hana/SAP_Web_IDE_for_SAP_HANA_Installation_Guide_en.pdf )
 
