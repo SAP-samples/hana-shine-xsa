@@ -138,7 +138,7 @@ resources:
     properties:
       user-container-name: ${service-name}
     parameters: 
-     service-name: DEVX_TECH_USER-0vvns8k56zk4w2re-shine-1-shine-user-container
+     service-name: <USER CONTAINER NAME>
      config:
        schema: SHINE_USER
        
@@ -166,4 +166,4 @@ resources:
    
   - name: uaa 
     properties: 
-      url: "https://mo-86228094a.mo.sap.corp:30032/uaa-security"
+      url: "https://<xsa hostname>:3<instance number>32/uaa-security"
