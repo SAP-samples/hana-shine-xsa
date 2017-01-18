@@ -40,7 +40,7 @@ To do this, proceed as follows:
 4.   If stopped, start it via the command xs start jobscheduler-broker.  
  
 
-##Installation via Product Installer 
+##Deploy SHINE via SAP Web IDE for SAP HANA 
 ###Create a user for Custom User Provided Services creation
 
 Open SQL console of the HANA system in SAP HANA studio and execute the following SQL statements:
@@ -101,7 +101,6 @@ b)	Uaa Endpoint
 
        `xs s`          
                                                                                                
-	
 
    Please copy the respective user container name which will look like:
 
