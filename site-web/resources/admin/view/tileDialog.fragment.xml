@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>settings}" class="welcomeDlg">
+		<content>
+			<List width="400px">
+				<CustomListItem>
+					<l:VerticalLayout>
+					<Text text="{i18n>cb1}" class="dialogTextColor" />
+					<Text text="{i18n>cbt1}" />
+				</l:VerticalLayout>
+				</CustomListItem>
+				<CustomListItem>
+					<l:VerticalLayout>
+					<Text text="{i18n>cb2}" class="dialogTextColor" />
+					<Text text="{i18n>cbt2}" />
+				</l:VerticalLayout>
+				</CustomListItem>		
+				<CustomListItem>
+					<l:VerticalLayout>
+					<Text text="{i18n>cb4}" class="dialogTextColor" />
+					<Text text="{i18n>cbt4}" />
+				</l:VerticalLayout>
+				</CustomListItem>		
+			</List>
+		</content>
+		<endButton>
+			<Button text="{i18n>OK}" press="onDialogCloseButton" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

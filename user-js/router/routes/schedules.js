@@ -8,7 +8,7 @@ module.exports = function() {
 
 	var winston = require('winston');
 	var util = require(global.__base + "utils/util");
-	var jobsc = require('sap-jobs-client');
+	var jobsc = require('@sap/jobs-client');
 	var jsonParser = bodyParser.json();
 	
 	var logger;
@@ -30,11 +30,11 @@ module.exports = function() {
 			util.callback(new Error("Invalid Job Description"), res, "Invalid Job Description");
 			return;
 		}
-		var juser = req.body.user;
-		if (juser == null || juser === undefined || juser === "") {
-			util.callback(new Error("Invalid User"), res, "Invalid User");
-			return;
-		}
+		//var juser = req.body.user;
+		//if (juser == null || juser === undefined || juser === "") {
+		//	util.callback(new Error("Invalid User"), res, "Invalid User");
+		//	return;
+		//}
 		var startTime = req.body.starttime;
 		if (!(util.isValidDate(startTime))) {
 			util.callback(new Error("Invalid Start Time"), res, "Invalid Start Time");
@@ -56,13 +56,13 @@ module.exports = function() {
 		var appUrl = req.body.appurl;
 		var client = req.db;
 		var scheduleId;
-		var dePwd = new Buffer(req.body.password, 'base64');
-		var jpwd = dePwd.toString();
+		//var dePwd = new Buffer(req.body.password, 'base64');
+		//var jpwd = dePwd.toString();
 		var myJob = {
 			"name": jname,
 			"description": description,
 			"action": appUrl,
-			"active": false,
+			"active": true,
 			"httpMethod": "POST",
 			"schedules": [{
 				"cron": cron,
@@ -100,16 +100,16 @@ module.exports = function() {
 				var upJob = {
 					"jobId": jobid,
 					"job": {
-						"active": true,
-						"user": juser,
-						"password": jpwd
+						"active": true
+						//"user": juser,
+						//"password": jpwd
 					}
 				};
-				scheduler.updateJob(upJob, function(error, body) {
-					if (error) {
-						util.callback(error, res, "Error registering new job ");
-						logger.error('Error occured' + error);
-					} else {
+				//scheduler.updateJob(upJob, function(error, body) {
+				//	if (error) {
+				//		util.callback(error, res, "Error registering new job ");
+				//		logger.error('Error occured' + error);
+				//	} else {
 						var sql = "INSERT INTO \"Jobs.ScheduleDetails\" VALUES(?,?,?,?,?,?)";
 						client.prepare(sql, function(error, stmt) {
 							if (error) {
@@ -137,9 +137,9 @@ module.exports = function() {
 						});
 					}
 
-				});
+				//});
 
-			}
+			//}
 
 		});
 

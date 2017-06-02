@@ -9,8 +9,25 @@ module.exports = function() {
 	var bodyParser = require('body-parser');
 	var jsonParser = bodyParser.json();
 	var logger;
-
+        var xssec = require('@sap/xssec');
+	var xsenv = require('@sap/xsenv');
+        var uaaService = xsenv.getServices({
+			uaa: {
+				tag: "xsuaa"
+			}
+		});
 	winston.level = process.env.winston_level || 'error';
+	var xsuaaCredentials = uaaService.uaa;
+        if (!xsuaaCredentials) {
+           logger.error('uaa service not found');
+           res.status(401).json({
+                				message: "uaa service not found"
+            					});
+	   //util.callback(new Error("uaa service not found"), res, "uaa service not found");
+	   return;        
+        }
+	var SCOPE = xsuaaCredentials.xsappname + '.JOBSCHEDULER';
+
 	// method will insert Job Data into Job table
 	app.post('/create',jsonParser,function(req, res) {
 		logger = req.loggingContext.getLogger("/jobactivity/create");
@@ -19,9 +36,31 @@ module.exports = function() {
 		var jname = req.body.jobname;
 		var jobid;
 		var timestamp;
-		client.exec(query, function(error, rows) {
+                var access_token;
+	        if (req.headers.authorization) {
+        	access_token = req.headers.authorization.split(' ')[1];
+    	} else {
+        	logger.error('Authorization header not found');
+                res.status(401).json({
+                				message: "Authorization header not found"
+            					});
+		//util.callback(new Error("Authorization header not found"), res, "Authorization header not found");
+		return;
+    	}
+    	xssec.createSecurityContextCC(access_token, xsuaaCredentials, function(error, securityContext) {
+        if (error) {
+            logger.error('Invalid access token');
+	    res.status(401).json({
+                				message: "Invalid access token"
+            					});
+		//util.callback(new Error("Invalid access token"), res, "Invalid access token");
+		return;    
+        }
+
+        if (securityContext.checkScope(SCOPE)) {
+                       client.exec(query, function(error, rows) {
 			if (error) {
-				util.callback(error, res, "");
+				//util.callback(error, res, "");
 				logger.error('Error occured' + error);
 			} else {
 				jobid = rows[0].NJOBID;
@@ -31,22 +70,28 @@ module.exports = function() {
 				client.exec(query, function(error, status) {
 					if (error) {
 						logger.error('Error occured' + error);
-						util.callback(error, res, "Job Creation Failed");
+						//util.callback(error, res, "Job Creation Failed");
+						res.status(401).json({
+                				message: "couldnt insert recorf to SHINE"
+            					});
 
 					} else {
-						res.writeHead(200, {
-							"Content-Type": "application/json"
-						});
-						res.end(JSON.stringify({
-							"message": "One record inserted to Job Data table for Job " + jname
-						}));
-
+						res.status(200).json({
+                				status: 'record inserted into shine'
+            					});
 					}
 				});
 
 			}
 		});
-
+        } else {
+            logger.error('Unauthorized, Scope required is missing');
+	    res.status(401).json({
+                				message: "Unauthorized, Scope required is missing"
+            					});
+		//util.callback(new Error("Unauthorized, Scope required is missing"), res, "Unauthorized, Scope required is missing");
+		return;        }
+    });
 	});
 	return app;
 };

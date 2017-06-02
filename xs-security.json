@@ -1,6 +1,11 @@
 {
   "xsappname": "shine-admin",
   "scopes": [
+  	{
+        "name": "$XSAPPNAME.JOBSCHEDULER",
+        "description": "Job Scheduler Scope",
+        "grant-as-authority-to-apps": ["jobscheduler"]
+    },
     {
       "name": "$XSAPPNAME.Display",
       "description": "display"
@@ -36,7 +41,9 @@
         "$XSAPPNAME.Delete",
         "$XSAPPNAME.DataGenerator",
         "xs_authorization.read",
-        "xs_authorization.write"
+        "xs_authorization.write",
+        "$XSAPPNAME.JOBSCHEDULER",
+        "xs_controller.read"
       ]
     }
   ]

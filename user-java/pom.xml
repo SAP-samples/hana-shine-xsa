@@ -3,13 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sap.refapps</groupId>
 	<artifactId>sap-xsac-shine-user-java</artifactId>
-	<version>1.2.2</version>
+	<version>1.3.3</version>
 	<packaging>war</packaging>
 
 	<properties>
 	<javax.version>3.0.1</javax.version>
-    <sap.gateway.version>1.0.5</sap.gateway.version>
-    <slf4j.version>1.7.7</slf4j.version>
+	<sap.gateway.version>1.2.2</sap.gateway.version>
+	<slf4j.version>1.7.7</slf4j.version>
+    <java-container-security.version>0.21.18</java-container-security.version>
   </properties>
 
 	<dependencies>
@@ -51,12 +52,11 @@
       <artifactId>com.sap.gateway.v4.rt.xsa</artifactId>
       <version>${sap.gateway.version}</version>
     </dependency>
-    
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4j.version}</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
 
 	</dependencies>

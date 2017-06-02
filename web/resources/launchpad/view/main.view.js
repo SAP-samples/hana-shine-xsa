@@ -97,15 +97,27 @@ sap.ui.jsview("view.main", {
         userTile.addStyleClass('templateTileClass');
         userTile.addStyleClass('ucClass');
         
+        var spatialTile = new sap.m.StandardTile({
+            icon: "sap-icon://map",
+            info: sap.app.i18n.getText("SPATIAL"),
+            infoState: "None",
+            removable: false,
+            press: function(oEvent) {
+                view.handlePress(oController, 8);
+            }
+        });
+        spatialTile.addStyleClass('templateTileClass');
+        spatialTile.addStyleClass('spatialClass');
+        
         var oLink1 = new sap.ui.commons.Link({
 	    text: "Source code",
-	    tooltip: "Click to download Source code",
+	    tooltip: "Click to download Source code"
 	    
 		});
 	    oLink1.setHref("/epm.zip");
        
         var items = [
-            adminTile, poTile, jobTile, soTile, userTile
+            adminTile, poTile, jobTile, soTile, userTile, spatialTile
         ];
         // create tile container
         var tileContainer = new sap.m.TileContainer({

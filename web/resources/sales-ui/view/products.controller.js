@@ -28,10 +28,10 @@ sap.ui.controller("sap.hana.democontent.epm.salesdashboard.view.products", {
         });
         dataset.setModel(oModel);
 
-        var bindString = "/InputParams(IP_YEAR_1='" + previousYear
-                + "',IP_YEAR_2='" + currentYear + "')/Results";
+        var bindString = "/InputParams(IP_YEAR_1=" + previousYear
+                + ",IP_YEAR_2=" + currentYear + ")/Results";
 
-        dataset.bindData("/salesYear", sort1);
+        dataset.bindData(bindString, sort1);
 
         var oYearsCompareBarChart = sap.ui.getCore().byId("products--salesCompareColumn");
         oYearsCompareBarChart.setDataset(dataset);

@@ -1,36 +1,32 @@
-PROCEDURE "calculate_cumulative_sum_of_delivered_products" (IN IM_PRODUCTS TABLE ( PRODUCTID NVARCHAR(10),  
+PROCEDURE "calculate_cumulative_sum_of_delivered_products" 
+   ( 
+    IN IM_PRODUCTS TABLE ( PRODUCTID NVARCHAR(10),  
                            DELIVERYDATE DAYDATE,
                           NUM_DELIVERED_PRODUCTS BIGINT ),
     OUT EX_PRODUCTS TABLE ( PRODUCTID NVARCHAR(10), 
                             DELIVERYDATE DAYDATE,
                             NUM_DELIVERED_PRODUCTS BIGINT,
-                           CUMULATIVE_SUM BIGINT ) DEFAULT EMPTY  )
+                          CUMULATIVE_SUM BIGINT )  )
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER 
    READS SQL DATA AS
 BEGIN 
+    DECLARE tmp_productid NVARCHAR(10) = '';
+    DECLARE tmp_cumulated BIGINT       = 0;
+    DECLARE i             INTEGER      = 1;
 
-   DECLARE i  INTEGER  = 1;
+    ex_products = select products.*, NULL AS CUMULATIVE_SUM FROM :im_products as products;
 
-    FOR i IN 1..CARDINALITY(ARRAY_AGG(:IM_PRODUCTS.PRODUCTID)) DO 
-      
-       EX_PRODUCTS.PRODUCTID[:i]   = :IM_PRODUCTS.PRODUCTID[:i];
-       EX_PRODUCTS.DELIVERYDATE[:i]  =  :IM_PRODUCTS.DELIVERYDATE[:i] ;
-       EX_PRODUCTS.NUM_DELIVERED_PRODUCTS[:i] = :IM_PRODUCTS.NUM_DELIVERED_PRODUCTS[:i];     
+    FOR i IN 1..CARDINALITY(ARRAY_AGG(:IM_PRODUCTS.PRODUCTID))DO 
        
-       if :i = 1 then
-         EX_PRODUCTS.CUMULATIVE_SUM[:i] = :IM_PRODUCTS.NUM_DELIVERED_PRODUCTS[:i];
-         continue;
-       end if;
-
-       IF :IM_PRODUCTS.PRODUCTID[:i-1] <> :IM_PRODUCTS.PRODUCTID[:i]  THEN
-         EX_PRODUCTS.CUMULATIVE_SUM[:i] = :IM_PRODUCTS.NUM_DELIVERED_PRODUCTS[:i];
+       IF :tmp_productid <> :ex_products.PRODUCTID[:i] THEN
+         tmp_productid  = :ex_products.PRODUCTID[:i];
+         ex_products.CUMULATIVE_SUM[:i] = :ex_products.NUM_DELIVERED_PRODUCTS[:i];
        ELSE
-         EX_PRODUCTS.CUMULATIVE_SUM[:i] = :EX_PRODUCTS.CUMULATIVE_SUM[:i-1]
-                    + :IM_PRODUCTS.NUM_DELIVERED_PRODUCTS[:i];
+         ex_products.CUMULATIVE_SUM[:i] = :ex_products.CUMULATIVE_SUM[:i-1]
+                    + :ex_products.NUM_DELIVERED_PRODUCTS[:i];
        END IF;
 
     END FOR;
-
 
 END

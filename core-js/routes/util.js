@@ -1,6 +1,6 @@
 // util.js
 // ========
-var xsenv = require('sap-xsenv');
+var xsenv = require('@sap/xsenv');
 module.exports = {
   resetTable: function (req, res, origTable, shadowTable, callback) {
     var client = req.db;
@@ -20,6 +20,63 @@ module.exports = {
             }
     });
   },
+  
+   getMaxId: function(idType, client, callback) {
+ //  	console.log("inside getMaxId function util" + client + " idType" + idType);
+	// var query, rs, maxId = -1;
+	// switch (idType) {
+	// 	case "SalesOrderId":
+	// 		query = 'SELECT "SALESORDERID" FROM "PO.Header" ORDER BY "SALESORDERID" DESC';
+	// 		break;
+	// 	case "PurchaseOrderId":
+	// 		query = 'SELECT "PURCHASEORDERID" FROM "PO.Header" ORDER BY "PURCHASEORDERID" DESC';
+	// 		break;
+	// }
+	// 	console.log( "query for purchase order max id" + query);
+	// 	client.exec(query, function(error, response) {
+	// 		console.log("inside getMaxId function client execution util");
+	// 		if(response){
+	// 			console.log("success in util" + response.length);
+	// 			response = response[0].PURCHASEORDERID;
+	// 			console.log("result in util" + response);
+	// 			// maxId = response;
+	// 		}
+	// 		console.log("outside if in util");
+	// 		callback(error, response);
+	// 	});
+	// 	console.log("maxPOid------------>" + maxId);
+		console.log("inside getMaxId function idType util function" + idType);
+	var query, rs, maxId;
+	switch (idType) {
+		case "SalesOrderId":
+			query = 'SELECT "SALESORDERID" FROM "PO.Header" ORDER BY "SALESORDERID" DESC';
+			break;
+		case "PurchaseOrderId":
+			query = 'SELECT "PURCHASEORDERID" FROM "PO.Header" ORDER BY "PURCHASEORDERID" DESC';
+			break;
+	}
+	try {
+			console.log("client object" + Object.keys(client) + "query for purchase order max id" + query);
+			console.log("After query");
+			client.exec(query, function(error, result) {
+			
+					console.log("inside else----------->");
+					console.log("success" + result.length);
+					rs = result[0].PURCHASEORDERID;
+					maxId=rs;
+					console.log("result" + rs);
+
+				
+			});
+			console.log("After query execution");
+
+		} catch (e) {
+			console.log("inside getMaxId function error " + e.message);
+		}
+		maxId = rs;
+		return maxId;
+  },
+  
   getTableInfo: function(client, tableName, tableSynonym, callback) {
     var queryPrefix = 'SELECT "RECORD_COUNT","TABLE_SIZE" FROM "SYS"."M_TABLES" where "TABLE_NAME"=\'';
     client.exec(queryPrefix + tableName + "'", 
@@ -76,6 +133,26 @@ module.exports = {
 		// 	return false;
 		// }
 		return true;
-	}
+	},
+	getBuinessPartners: function(client, callback1) {
+        console.log("inside bpDict");
+    	var query = "SELECT \"PARTNERID\" FROM \"MD.BusinessPartner\"";
+		client.exec(query,function(error,response){
+    		console.log("bpDict in utils");
+    		callback1(error, response);
+    	});
+	},
+
+ getProducts: function(client, callback2) {
+     //console.log("inside prodDict");
+    // Select ProductId and the corresponding Price
+    var query = "SELECT \"PRODUCTID\", \"PRICE\" FROM \"MD.Products\"";
+    client.exec(query, function(error, response){
+    		// console.log("prodDict in utils");
+    		callback2(error, response);
+    });
+}
+	
+	
 
 };

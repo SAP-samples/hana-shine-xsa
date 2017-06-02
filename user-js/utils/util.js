@@ -1,6 +1,6 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
 "use strict";
-var xsenv = require("sap-xsenv");
+var xsenv = require("@sap/xsenv");
 
 module.exports = {
 	callback: function(error, res, message) {

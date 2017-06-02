@@ -62,8 +62,8 @@
                                     </sap.ui.commons.layout:MatrixLayoutCell>
                                     <sap.ui.commons.layout:MatrixLayoutCell>
                                         <sap.ui.commons.layout:content>
-                                            <sap.ui.commons:TextView text="{path:'NetAmount',formatter:'.numericFormatter'}" textAlign="End" width="100px"/>
-                                            <sap.ui.commons:TextView text="{Currency}" textAlign="End" width="30px"/>
+                                            <sap.ui.commons:TextView text="{path:'NetAmount',formatter:'.numericFormatter'} {Currency}" textAlign="End" width="100px"/>
+                                           
                                         </sap.ui.commons.layout:content>
                                     </sap.ui.commons.layout:MatrixLayoutCell>
                                 </sap.ui.commons.layout:cells>
@@ -77,8 +77,8 @@
                                     </sap.ui.commons.layout:MatrixLayoutCell>
                                     <sap.ui.commons.layout:MatrixLayoutCell>
                                         <sap.ui.commons.layout:content>
-                                            <sap.ui.commons:TextView text="{path:'TaxAmount',formatter:'.numericFormatter'}" textAlign="End" width="100px"/>
-                                            <sap.ui.commons:TextView text="{Currency}" textAlign="End" width="30px"/>
+                                            <sap.ui.commons:TextView text="{path:'TaxAmount',formatter:'.numericFormatter'} {Currency}" textAlign="End" width="100px"/>
+                                            
                                         </sap.ui.commons.layout:content>
                                     </sap.ui.commons.layout:MatrixLayoutCell>
                                 </sap.ui.commons.layout:cells>
@@ -92,8 +92,8 @@
                                     </sap.ui.commons.layout:MatrixLayoutCell>
                                     <sap.ui.commons.layout:MatrixLayoutCell>
                                         <sap.ui.commons.layout:content>
-                                            <sap.ui.commons:TextView text="{path:'GrossAmount',formatter:'.numericFormatter'}" textAlign="End" width="100px"/>
-                                            <sap.ui.commons:TextView text="{Currency}" textAlign="End" width="30px"/>
+                                            <sap.ui.commons:TextView text="{path:'GrossAmount',formatter:'.numericFormatter'} {Currency}" textAlign="End" width="100px"/>
+                                            
                                         </sap.ui.commons.layout:content>
                                     </sap.ui.commons.layout:MatrixLayoutCell>
                                 </sap.ui.commons.layout:cells>
@@ -209,7 +209,7 @@
                     </sap.ui.commons.layout:MatrixLayout>
                 </sap.ui.commons:content>
             </sap.ui.commons:Tab>
-            <sap.ui.commons:Tab id="tabStripDetail-3" text="reports" enabled="true">
+            <sap.ui.commons:Tab id="tabStripDetail-3" text="Reports" enabled="true">
                 <sap.ui.commons:content>
                 </sap.ui.commons:content>
             </sap.ui.commons:Tab>

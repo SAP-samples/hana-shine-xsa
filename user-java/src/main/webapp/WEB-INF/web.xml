@@ -33,4 +33,3 @@
 		<listener-class>com.sap.gateway.v4.rt.core.web.ODataApplicationInitializer</listener-class>
 	</listener>
 </web-app>
-

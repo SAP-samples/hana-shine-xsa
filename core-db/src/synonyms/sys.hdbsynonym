@@ -28,11 +28,5 @@
       "object": "SERIES_GENERATE_TIMESTAMP",
       "schema": "SYS"
     }
-  },
-  "USERS": {
-    "target": {
-      "object": "USERS",
-      "schema": "SYS"
-    }
   }
 }

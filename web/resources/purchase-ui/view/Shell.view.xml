@@ -39,17 +39,7 @@
         <sap.ui.ux3:headerItems>
             <sap.ui.commons:TextView tooltip="{i18n&gt;welcome}"/>
             <sap.ui.commons:Button text="{i18n&gt;personalize}" styled="false" tooltip="{i18n&gt;personalize}" press="handlePersonalizeShell"/>
-            <sap.ui.commons:MenuButton text="{i18n&gt;help}" styled="false" tooltip="{i18n&gt;helpm}">
-                <sap.ui.commons:menu>
-                    <sap.ui.commons:Menu id="menu1">
-                        <sap.ui.commons:items>
-                            <sap.ui.commons:MenuItem id="menuitem1" text="{i18n&gt;help}"/>
-                            <sap.ui.commons:MenuItem id="menuitem2" text="{i18n&gt;incident}"/>
-                            <sap.ui.commons:MenuItem id="menuitem3" text="{i18n&gt;about}"/>
-                        </sap.ui.commons:items>
-                    </sap.ui.commons:Menu>
-                </sap.ui.commons:menu>
-            </sap.ui.commons:MenuButton>
+            
         </sap.ui.ux3:headerItems>
     </sap.ui.ux3:Shell>
 </sap.ui.core.mvc:View>

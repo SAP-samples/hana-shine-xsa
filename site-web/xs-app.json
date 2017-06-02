@@ -1,0 +1,54 @@
+{
+  "routes": [
+    {
+      "source": "^/resources/(.*)",
+      "target": "$1",
+      "localDir": "resources/",
+      "cacheControl": "public, max-age=31536000,must-revalidate"
+    },{
+    "source": "/sap/rest/(.*)",
+    "destination": "uaa"
+    }, {
+      "source": "/sap/hana/democontent/epm/services/",
+      "destination": "core-backend"
+    }, {
+      "source": "/sap/hana/democontent/epm/spatial/services/",
+      "destination": "core-backend"
+    }, {
+      "source": "/get/(.*)",
+      "destination": "core-backend",
+      "scope": "$XSAPPNAME.DataGenerator"
+    }, {
+      "source": "/reset/(.*)",
+      "destination": "core-backend",
+      "scope": "$XSAPPNAME.DataGenerator"
+    }, {
+      "source": "/replicate/(.*)",
+      "destination": "core-backend",
+      "scope": "$XSAPPNAME.DataGenerator"
+    }, {
+      "source": "/jobs/(.*)",
+      "destination": "user-backend"
+    }, {
+      "source": "/schedules/(.*)",
+      "destination": "user-backend"
+    }, {
+      "source": "/jobactivity/(.*)",
+      "destination": "user-backend",
+      "authenticationType": "none"
+    },{
+      "source": "/user/xsodata/(.*)",
+      "destination": "user-backend"
+    }, {
+      "source": "^/admin-ui/(.*)",
+      "localDir": "resources",
+      "scope": "$XSAPPNAME.DataGenerator"
+    }, {
+      "source": "^/user/odata/v4/(.*)",
+      "destination": "user-java-backend"
+    },{
+        "source":"/v2/.*",
+        "destination":"controller"
+      }
+  ]
+}

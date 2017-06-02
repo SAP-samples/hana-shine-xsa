@@ -1,0 +1,15 @@
+{
+                "d": {
+                               "icon": "sap-icon://person-placeholder",
+                               "info": "User CRUD",
+                               "infoState": "Positive",
+                               "number": 4,
+                               "numberDigits": 1,
+                               "numberFactor": "k",
+                               "numberState": "Positive",
+                               "numberUnit": "EUR",
+                               "stateArrow": "Up",
+                               "subtitle": "User CRUD",
+                               "title": "User CRUD"
+                     }
+}

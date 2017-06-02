@@ -79,6 +79,7 @@ public class Extensions {
 				dpCtx.setResultEntity(result);
 				LOGGER.debug("Data Successfully inserted");
 			}
+			conn.close();
 			
 			
 		} catch (SQLException sqlException) {
@@ -124,6 +125,7 @@ public class Extensions {
 				Entity result = rs.next() ? createEntityFromResultSet(rs) : null;
 				dpCtx.setResultEntity(result);
 			}
+			conn.close();
 		}
 
 		catch (SQLException sqlException) {
@@ -148,6 +150,7 @@ public class Extensions {
 			PreparedStatement pstmt = conn.prepareStatement(DELETE);
 			pstmt.setString(1, kp.get(0).getText());
 			pstmt.execute();
+			conn.close();
 			LOGGER.debug("Deleted record for Id > " + kp.get(0).getText());
 			
 		}

@@ -1,0 +1,148 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.ux3="sap.ui.ux3" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.viz.ui5="sap.viz.ui5" xmlns:sap.viz.ui5.data="sap.viz.ui5.data" xmlns:sap.viz.ui5.types="sap.viz.ui5.types" xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:sap.ui.commons="sap.ui.commons" controllerName="sap.hana.democontent.epm.salesdashboard.view.overview">
+        <sap.ui.commons.layout:MatrixLayout>
+            <sap.ui.commons.layout:rows>
+                <sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:cells>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.commons:Panel text="{i18n&gt;SALES_BY_REGION}">
+                                    <sap.ui.commons:content>
+                                         <sap.ui.commons.layout:MatrixLayout>
+                                            <sap.ui.commons.layout:rows>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.viz.ui5:Pie id="saleRegionPie" width="100%" height="320px">
+                                                                    <sap.viz.ui5:toolTip>
+                                                                        <sap.viz.ui5.types:Tooltip formatString="#,###,###,###.00">
+                                                                        </sap.viz.ui5.types:Tooltip>
+                                                                    </sap.viz.ui5:toolTip>
+                                                                </sap.viz.ui5:Pie>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                            </sap.ui.commons.layout:rows>
+                                        </sap.ui.commons.layout:MatrixLayout>
+                                    </sap.ui.commons:content>
+                                    <sap.ui.commons:buttons>
+                                        <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="1" press="openTileDialog"/>
+                                    </sap.ui.commons:buttons>
+                                </sap.ui.commons:Panel>
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.commons:Panel text="{i18n&gt;SALES_BY_COUNTRY}">
+                                    <sap.ui.commons:content>
+                                         <sap.ui.commons.layout:MatrixLayout>
+                                            <sap.ui.commons.layout:rows>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.viz.ui5:Column id="salesCountryBar" width="100%" height="320px">
+                                                                    
+                                                                </sap.viz.ui5:Column>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                            </sap.ui.commons.layout:rows>
+                                        </sap.ui.commons.layout:MatrixLayout>
+                                    </sap.ui.commons:content>
+                                    <sap.ui.commons:buttons>
+                                        <sap.ui.commons:Button id="btnRefresh" text="{i18n&gt;REFRESH}" press="onChartRefresh"/>
+                                        <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="2" press="openTileDialog"/>
+                                    </sap.ui.commons:buttons>
+                                </sap.ui.commons:Panel>
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                    </sap.ui.commons.layout:cells>
+                </sap.ui.commons.layout:MatrixLayoutRow>
+                <sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:cells>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.commons:Panel text="{i18n&gt;DISCOUNT_PER_REGION_TITLE}">
+                                    <sap.ui.commons:content>
+                                         <sap.ui.commons.layout:MatrixLayout>
+                                            <sap.ui.commons.layout:rows>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.ui.commons.layout:VerticalLayout>
+                                                                    <sap.ui.commons.layout:content>
+                                                                        <sap.ui.commons.layout:HorizontalLayout>
+                                                                            <sap.ui.commons.layout:content>
+                                                                                <sap.ui.commons:TextView text="{i18n&gt;SELECT_REGION}" design="Bold" width="100px"/>
+                                                                                <sap.ui.commons:DropdownBox id="discountDropDown" change="onFilterChangeWrapper">
+                                                                                    <sap.ui.core:ListItem text="EMEA" key="EMEA"/>
+                                                                                    <sap.ui.core:ListItem text="AMER" key="AMER"/>
+                                                                                    <sap.ui.core:ListItem text="APJ" key="APJ"/>
+                                                                                    <sap.ui.core:ListItem text="AFR" key="AFR"/>
+                                                                                </sap.ui.commons:DropdownBox>
+                                                                            </sap.ui.commons.layout:content>
+                                                                        </sap.ui.commons.layout:HorizontalLayout>
+                                                                    </sap.ui.commons.layout:content>
+                                                                </sap.ui.commons.layout:VerticalLayout>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.viz.ui5:Pie id="salesDiscountPie" width="100%" height="420px">
+                                                                    <sap.viz.ui5:toolTip>
+                                                                        <sap.viz.ui5.types:Tooltip formatString="#,###,###,###.00">
+                                                                        </sap.viz.ui5.types:Tooltip>
+                                                                    </sap.viz.ui5:toolTip>
+                                                                </sap.viz.ui5:Pie>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                            </sap.ui.commons.layout:rows>
+                                        </sap.ui.commons.layout:MatrixLayout>
+                                    </sap.ui.commons:content>
+                                    <sap.ui.commons:buttons>
+                                        <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="4" press="openTileDialog"/>
+                                    </sap.ui.commons:buttons>
+                                </sap.ui.commons:Panel>
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.commons:Panel text="{i18n&gt;SALES_RANK}">
+                                    <sap.ui.commons:content>
+                                         <sap.ui.commons.layout:MatrixLayout>
+                                            <sap.ui.commons.layout:rows>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.viz.ui5:Bubble id="salesRankBubble" width="100%" height="420px">
+                                                                    
+                                                                </sap.viz.ui5:Bubble>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                            </sap.ui.commons.layout:rows>
+                                        </sap.ui.commons.layout:MatrixLayout>
+                                    </sap.ui.commons:content>
+                                    <sap.ui.commons:buttons>
+                                        <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="3" press="openTileDialog"/>
+                                    </sap.ui.commons:buttons>
+                                </sap.ui.commons:Panel>
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                    </sap.ui.commons.layout:cells>
+                </sap.ui.commons.layout:MatrixLayoutRow>
+            </sap.ui.commons.layout:rows>
+        </sap.ui.commons.layout:MatrixLayout>
+</sap.ui.core.mvc:View>

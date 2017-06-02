@@ -88,7 +88,7 @@ sap.ui.controller("sap.hana.democontent.epm.job.view.app", {
 				}
 				item[id] = value;
 			}
-            item.password= window.btoa(item.password);
+            // item.password= window.btoa(item.password);
              item.appurl = "https://"+window.location.hostname+":"+window.location.port+"/jobactivity/create";
 			var xsrf_token;
 			$.ajax({
@@ -281,7 +281,7 @@ sap.ui.controller("sap.hana.democontent.epm.job.view.app", {
 				oTable.bindRows("/modelData");
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				sap.ui.commons.MessageBox.show("Error in fetching XSRF Token",
+				sap.ui.commons.MessageBox.show("Loading jobs table failed",
 					"ERROR",
 					"Error");
 				return;

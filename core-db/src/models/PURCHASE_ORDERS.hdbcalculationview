@@ -6,7 +6,7 @@
     <descriptions defaultDescription="Target Currency for Currency Conversion"/>
     <variableProperties datatype="NVARCHAR" length="3" mandatory="true">
       <valueDomain type="empty"/>
-      <selection/>
+      <selection multiLine="false"/>
       <defaultRange lowValue="USD"/>
     </variableProperties>
   </variable>
@@ -26,22 +26,22 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner" cardinality="C1_N">
     <viewAttributes>
-      <viewAttribute id="HISTORY_CREATEDAT">
+      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="PURCHASEORDERID">
+      <viewAttribute id="PURCHASEORDERID"><descriptions/>
         <descriptions defaultDescription="PURCHASEORDERID"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY">
+      <viewAttribute id="CURRENCY"><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="PURCHASEORDERITEM">
+      <viewAttribute id="PURCHASEORDERITEM"><descriptions/>
         <descriptions defaultDescription="PURCHASEORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_PRODUCTID">
+      <viewAttribute id="PRODUCT_PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="GROSSAMOUNT">
+      <viewAttribute id="GROSSAMOUNT"><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
       <viewAttribute id="JOIN$PURCHASEORDERID$PURCHASEORDERID" hidden="true"/>
@@ -63,76 +63,76 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="HISTORY_CREATEDAT">
+      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="PURCHASEORDERID">
+      <viewAttribute id="PURCHASEORDERID"><descriptions/>
         <descriptions defaultDescription="PURCHASEORDERID"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY">
+      <viewAttribute id="CURRENCY"><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="PURCHASEORDERITEM">
+      <viewAttribute id="PURCHASEORDERITEM"><descriptions/>
         <descriptions defaultDescription="PURCHASEORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_PRODUCTID">
+      <viewAttribute id="PRODUCT_PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="GROSSAMOUNT">
+      <viewAttribute id="GROSSAMOUNT"><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="Product_Category">
+      <viewAttribute id="Product_Category"><descriptions/>
         <descriptions defaultDescription="Product_Category"/>
       </viewAttribute>
-      <viewAttribute id="Product_Currency">
+      <viewAttribute id="Product_Currency"><descriptions/>
         <descriptions defaultDescription="Product_Currency"/>
       </viewAttribute>
-      <viewAttribute id="Product_Desciption">
+      <viewAttribute id="Product_Desciption"><descriptions/>
         <descriptions defaultDescription="Product_Desciption"/>
       </viewAttribute>
-      <viewAttribute id="Product_Id">
+      <viewAttribute id="Product_Id"><descriptions/>
         <descriptions defaultDescription="Product_Id"/>
       </viewAttribute>
-      <viewAttribute id="Product_Name">
+      <viewAttribute id="Product_Name"><descriptions/>
         <descriptions defaultDescription="Product_Name"/>
       </viewAttribute>
-      <viewAttribute id="Product_Picture_URL">
+      <viewAttribute id="Product_Picture_URL"><descriptions/>
         <descriptions defaultDescription="Product_Picture_URL"/>
       </viewAttribute>
-      <viewAttribute id="Product_Price">
+      <viewAttribute id="Product_Price"><descriptions/>
         <descriptions defaultDescription="Product_Price"/>
       </viewAttribute>
-      <viewAttribute id="Product_TypeCode">
+      <viewAttribute id="Product_TypeCode"><descriptions/>
         <descriptions defaultDescription="Product_TypeCode"/>
       </viewAttribute>
-      <viewAttribute id="Product_WeightMeasure">
+      <viewAttribute id="Product_WeightMeasure"><descriptions/>
         <descriptions defaultDescription="Product_WeightMeasure"/>
       </viewAttribute>
-      <viewAttribute id="Product_WeightUnit">
+      <viewAttribute id="Product_WeightUnit"><descriptions/>
         <descriptions defaultDescription="Product_WeightUnit"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_Building">
+      <viewAttribute id="Supplier_Building"><descriptions/>
         <descriptions defaultDescription="Supplier_Building"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_City">
+      <viewAttribute id="Supplier_City"><descriptions/>
         <descriptions defaultDescription="Supplier_City"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_CompanyName">
+      <viewAttribute id="Supplier_CompanyName"><descriptions/>
         <descriptions defaultDescription="Supplier_CompanyName"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_Country">
+      <viewAttribute id="Supplier_Country"><descriptions/>
         <descriptions defaultDescription="Supplier_Country"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_Id">
+      <viewAttribute id="Supplier_Id"><descriptions/>
         <descriptions defaultDescription="Supplier_Id"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_PostalCode">
+      <viewAttribute id="Supplier_PostalCode"><descriptions/>
         <descriptions defaultDescription="Supplier_PostalCode"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_Region">
+      <viewAttribute id="Supplier_Region"><descriptions/>
         <descriptions defaultDescription="Supplier_Region"/>
       </viewAttribute>
-      <viewAttribute id="Supplier_Street">
+      <viewAttribute id="Supplier_Street"><descriptions/>
         <descriptions defaultDescription="Supplier_Street"/>
       </viewAttribute>
     </viewAttributes>
@@ -262,8 +262,26 @@
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="GROSSAMOUNT" order="6" aggregationType="sum" measureType="simple">
+    <measure id="GROSSAMOUNT" order="6" aggregationType="sum" measureType="amount" semanticType="amount">
       <descriptions defaultDescription="GROSSAMOUNT"/>
+      <fixedCurrency>USD</fixedCurrency>
+      <currencyConversion errorHandling="keepUnconverted" generateOutputUnitCurrencyAttribute="true" outputUnitCurrencyAttributeName="GROSSAMOUNT_CURRENCY" convert="true">
+        <client>
+          <value>001</value>
+        </client>
+        <currencyConversionTables rates="Conversions.TCURR" configuration="Conversions.TCURV" prefactors="Conversions.TCURF" notations="Conversions.TCURN" precisions="Conversions.TCURX"/>
+        <sourceCurrency>
+          <attribute attributeName="CURRENCY"/>
+        </sourceCurrency>
+        <erpDecimalShift>true</erpDecimalShift>
+        <targetCurrency>
+          <value>USD</value>
+        </targetCurrency>
+        <referenceDate>
+          <value>20120101</value>
+        </referenceDate>
+        <exchangeRateType>1001</exchangeRateType>
+      </currencyConversion>
       <measureMapping columnObjectName="Join_2" columnName="GROSSAMOUNT"/>
     </measure>
     <measure id="Product_Price" order="13" aggregationType="sum" measureType="simple">

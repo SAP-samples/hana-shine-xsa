@@ -22,16 +22,6 @@
 					<sap.ui.commons:TextArea rows="3" cols="20" design="Bold" id="jobDescriptionTextField" required="true" tooltip="{i18n&gt;jobdescriptiontooltip}"/>
 			</l:MatrixLayoutCell>
 		</l:MatrixLayoutRow>
-		<l:MatrixLayoutRow>
-			<l:MatrixLayoutCell>
-				<sap.ui.commons:Label labelFor="userName" text="{i18n&gt;username}" width="30%"/>
-				<sap.ui.commons:TextField design="Bold" id="userName" required="true" tooltip="{i18n&gt;usernametooltip}"/>
-		</l:MatrixLayoutCell>
-		<l:MatrixLayoutCell>
-				<sap.ui.commons:Label labelFor="password" text="{i18n&gt;password}" width="30%"/>
-				<sap.ui.commons:PasswordField design="Bold" id="password" required="true" tooltip="{i18n&gt;passwordtooltip}"/>
-		</l:MatrixLayoutCell>
-		</l:MatrixLayoutRow>
 			<l:MatrixLayoutRow>
 			<l:MatrixLayoutCell colSpan="3">
 				<sap.ui.commons:TextView design="H5" text="Schedule Details"/>
@@ -96,7 +86,7 @@
 			<l:MatrixLayoutCell colSpan="2">
 				<sap.ui.table:Table height="80%" id="manageJobsTable" rowSelectionChange="onRowSelectionChange" rows="{/JOBS}" selectionBehavior="Row" selectionMode="Single" visibleRowCount="6" width="100%">
 					<sap.ui.table:columns>
-						<sap.ui.table:Column filterProperty="JOBID" sortProperty="JOBID" width="125px">
+						<sap.ui.table:Column filterProperty="JOBID" sortProperty="JOBID" width="40%">
 							<sap.ui.table:label>
 								<sap.ui.commons:Label requiredAtBegin="false" text="{i18n&gt;jobid}"/>
 							</sap.ui.table:label>
@@ -104,7 +94,7 @@
 								<sap.ui.commons:TextView text="{JobId}"/>
 							</sap.ui.table:template>
 						</sap.ui.table:Column>
-						<sap.ui.table:Column width="125px">
+						<sap.ui.table:Column width="60%">
 							<sap.ui.table:label>
 								<sap.ui.commons:Label requiredAtBegin="false" text="{i18n&gt;jobname}"/>
 							</sap.ui.table:label>

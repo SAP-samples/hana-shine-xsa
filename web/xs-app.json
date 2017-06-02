@@ -5,13 +5,16 @@
     "logoutPage": "/"
   },
   "routes": [
-   
     {
       "source": "/sap/rest/(.*)",
       "destination": "uaa"
     },
     {
       "source": "/sap/hana/democontent/epm/services/",
+      "destination": "core-backend"
+    },
+    {
+      "source": "/sap/hana/democontent/epm/spatial/services/",
       "destination": "core-backend"
     },
     {
@@ -40,7 +43,7 @@
     {
       "source": "/jobactivity/(.*)",
       "destination": "user-backend",
-      "authenticationType": "basic"
+      "authenticationType": "none"
     },
     {
       "source": "/user/xsodata/(.*)",
@@ -49,7 +52,15 @@
     {
       "source": "^/admin-ui/(.*)",
       "localDir": "resources",
-      "scope": "$XSAPPNAME.DataGenerator"
+      "scope": "$XSAPPNAME.DataGenerator",
+      "replace": {
+        "pathSuffixes": [
+          "index.html"
+        ],
+        "vars": [
+          "sapui5url"
+        ]
+      }
     },
     {
       "source": "^/user/odata/v4/(.*)",
@@ -58,7 +69,15 @@
     {
       "source": "^/(.*)",
       "localDir": "resources",
-      "cacheControl": "public, max-age=1000,must-revalidate"
+      "cacheControl": "public, max-age=1000,must-revalidate",
+      "replace": {
+        "pathSuffixes": [
+          "index.html"
+        ],
+        "vars": [
+          "sapui5url"
+        ]
+      }
     }
   ]
 }

@@ -1,6 +1,6 @@
 var express = require('express');
 var async = require('async');
-var cds = require('sap-cds');
+var cds = require('@sap/cds');
 var router = express.Router();
 var winston = require('winston');
 var util = require('./util');

@@ -59,6 +59,12 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Search", {
         //Set the Number of Rows in table header and clear the table lead selection
         var iNumberOfRows = oTable.getBinding("rows").iLength;
         oTable.setTitle(oBundle.getText("pos", [numericSimpleFormatter(iNumberOfRows)]));
+        var oPaginator=this.getOwnerComponent().getAggregation("rootControl").byId("po_table_view").byId("tablePaginator");
+   		
+   		var visibleRows = oTable.getVisibleRowCount();             
+   		oPaginator.setNumberOfPages(Math.ceil( parseInt(oTable.getBinding("rows").iLength)/parseInt(visibleRows)));
+   		oPaginator.setCurrentPage(1);
+           
         oTable.clearSelection();
 
 

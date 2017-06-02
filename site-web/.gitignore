@@ -1,0 +1,8 @@
+.settings
+.project
+.hdi
+node_modules
+node
+target
+etc
+sapui5

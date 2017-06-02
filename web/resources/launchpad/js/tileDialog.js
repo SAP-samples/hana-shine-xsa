@@ -22,6 +22,9 @@ sap.account.TileDialog.prototype.getHrefLocation = function(tileID) {
         case 5:
             url = "../user-ui/index.html";
             break;
+        case 8:
+            url = '/spatial-ui/index.html';
+            break;
    }
    return url;
 };
@@ -309,7 +312,7 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 3:
                 return sap.app.i18n.getText("JOBSCHEDULING"); 
             case 4:
-                return sap.app.i18n.getText("SOWLIST");
+                return sap.app.i18n.getText("SALES_DASH");
             case 5:
                 return sap.app.i18n.getText("USER");
             case 6:
@@ -348,7 +351,7 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 3:
                 return sap.app.i18n.getText("TILE_DESC_JOBSCHEDULING");
             case 4:
-                return sap.app.i18n.getText("TILE_DESC_SO");
+                return sap.app.i18n.getText("TILE_DESC_SD");
             case 5:
                 return sap.app.i18n.getText("TILE_DESC_US");
             case 6:
@@ -386,6 +389,7 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 1:
             case 2:
             case 4:
+            	return true;
             case 5:
             case 6:
             case 7:
@@ -399,8 +403,8 @@ sap.account.TileDialog.prototype.open = function(tileID) {
 
     function getBusinessScenario(tileID) {
         switch (tileID) {
-            // case 3:
-            //     return sap.app.i18n.getText("TILE_BUSI_SCEN_SD");
+            case 4:
+                 return sap.app.i18n.getText("TILE_BUSI_SCEN_SD");
             case 8:
                 return sap.app.i18n.getText("TILE_BUSI_SCEN_SP");
         }
@@ -417,7 +421,7 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 3:
                 return sap.app.i18n.getText("TILE_DB_VIEWS_JOBSCHEDULING"); 
             case 4:
-                return sap.app.i18n.getText("TILE_DB_VIEWS_SO");
+                return sap.app.i18n.getText("TILE_DB_VIEWS_SD");
             case 5:
                 return sap.app.i18n.getText("TILE_DB_VIEWS_US");
             case 6:
@@ -456,7 +460,7 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 3:
                 return sap.app.i18n.getText("TILE_UI_FOLDER_JOBSCHEDULING");
             case 4:
-                return sap.app.i18n.getText("TILE_UI_FOLDER_SO");
+                return sap.app.i18n.getText("TILE_UI_FOLDER_SD");
             case 5:
                 return sap.app.i18n.getText("TILE_UI_FOLDER_US");
             case 6:
@@ -495,7 +499,7 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 3:
                 return sap.app.i18n.getText("TILE_PERMS_JOBSCHEDULING");  
             case 4:
-                return sap.app.i18n.getText("TILE_PERMS_SO");
+                return sap.app.i18n.getText("TILE_PERMS_SD");
             case 5:
                 return sap.app.i18n.getText("TILE_PERMS_US");
             case 6:
@@ -503,7 +507,8 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 7:
                 return sap.app.i18n.getText("TILE_PERMS_UIS_GOLD");
             case 8:
-                return sap.app.i18n.getText("TILE_PERMS_SPATIAL");
+                var permission = getInternetConnectivity();
+            	return permission;
             case 9:
                 return sap.app.i18n.getText("TILE_PERMS_INATOOLKIT");
             case 10:
@@ -561,6 +566,17 @@ sap.account.TileDialog.prototype.open = function(tileID) {
                 }
                 return responseBody;
         }
+    }
+    
+     function getInternetConnectivity(){
+    	var status = navigator.onLine;
+    	var responseBody="";
+		if(status){
+			responseBody += " <li><font color='green'> You are connected to the internet. Good to go!!</font> </li>"; 
+		}else{
+			responseBody += "<li><font color='red'> Please connect to the internet to access this tile</font> </li>";
+		}
+    	return responseBody;
     }
 
     function createWelcomeHeaderRow(tileID) {
