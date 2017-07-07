@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<title>SHINE</title>
+		
+ 		<script src="{{{sapui5url}}}/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m,sap.me,sap.ui.commons"
+				data-sap-ui-preload=""
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+
+		<script>
+		
+			sap.app = {};
+		
+			jQuery.sap.registerModulePath('app', 'js');
+			
+			jQuery.sap.require("app.welcome");
+			jQuery.sap.require("app.tileDialog");
+			jQuery.sap.require("app.checkDialog");
+			jQuery.sap.require("app.localstorage");
+			
+			// Internationalization:
+			// create global i18n resource bundle for texts in application UI
+			sap.app.i18n = jQuery.sap.resources({
+				url : "i18n/messagebundle.hdbtextbundle",
+				locale : sap.ui.getCore().getConfiguration().getLanguage()
+			});
+			sap.ui.getCore().setModel(sap.app.i18n, "i18n");
+		
+			// instantiate initial view with a shell
+			sap.ui.localResources("view");
+			var oMainView = sap.ui.view({
+				id : "main-shell",
+				viewName : "view.main",
+				type : sap.ui.core.mvc.ViewType.JS
+			});
+			
+			oMainView.placeAt("content");
+				
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

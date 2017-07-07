@@ -1,0 +1,38 @@
+{
+  "sap.app": {
+    "_version": "1.3.0",
+    "id": "7bf8aaa2-737e-22e6-8c66-77c30ca894f4",
+    "title": "{{app3.title}}",
+    "i18n": "i18n/app.properties",
+    "tags": {
+      "keywords": []
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "app2Show": {
+          "semanticObject": "app2",
+          "action": "show",
+          "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+          }
+        }
+      },
+      "outbounds": {}
+    }
+  },
+  "sap.ui": {
+    "_version": "1.3.0",
+    "technology": "UI5"
+  },
+  "sap.ui5": {
+    "componentName": "sap.demo.sample",
+    "_version": "1.2.0"
+  },
+  "sap.platform.runtime": {
+    "componentProperties": {
+      "url": "/resources/sap/demo/sample"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.helpButton{
+    font-weight: bold;
+    float: right;
+}
+/* help dialog */
+.welcomeDlg {
+    background-color: #FFFFFF !important;
+}
+.welcomeDlg .sapUiDlgHdr {
+    border-bottom: 0px solid #FFFFFF !important;
+}
+.welcomeDlg .sapUiDlgCont {
+    background-color: #FFFFFF !important;
+    padding: 10px 25px 12px;
+}
+.welcomeHeaderTextAlign {
+    font-size: 22px !important;
+    padding-left: 5px;
+}        
+.dialogTextColor{
+    color: #007CC0 !important;
+}
+.buttonMarginLeft{
+    margin-left:50px !important;   
+}
+.addPadding{
+	margin-left:10px !important;
+	margin-bottom:10px;
+}

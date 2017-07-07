@@ -1,0 +1,4 @@
+service namespace "sap.hana.democontent.epm.services"  { 
+   "UserData.User" as "Users"
+    create events(before "user.xsjs:userBefore.xsjslib::create_before_exit");
+} 

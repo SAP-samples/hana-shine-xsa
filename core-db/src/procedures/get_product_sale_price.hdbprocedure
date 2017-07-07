@@ -1,0 +1,39 @@
+PROCEDURE "get_product_sale_price" ( 
+ 	IN im_productid NVARCHAR(10), 
+    OUT ex_product_sale_price "Procedures.tt_product_sale_price" )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+declare lv_category nvarchar(40) := null;
+declare lv_discount decimal(15,2) := 0; 
+ 
+lt_product = select PRODUCTID, CATEGORY, PRICE 
+                 from "MD.Products"
+                   	     where PRODUCTID = :im_productid;  
+
+select CATEGORY into lv_category from :lt_product; 
+ 
+if :lv_category = 'Notebooks' then
+  	 lv_discount := .20;
+elseif :lv_category = 'Handhelds' then
+   	 lv_discount := .25;
+elseif :lv_category = 'Flat screens' then
+   	 lv_discount := .30;
+elseif :lv_category like '%printers%' then
+     lv_discount := .30;
+else
+     lv_discount := 0.00;  -- No discount
+end if;
+
+ex_product_sale_price = 
+        select PRODUCTID, CATEGORY, PRICE,
+           	 PRICE - (PRICE * :lv_discount) as "SALEPRICE"
+                         from :lt_product;  
+
+   
+END

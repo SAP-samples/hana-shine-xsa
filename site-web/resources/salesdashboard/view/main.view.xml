@@ -1,0 +1,10 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.ux3="sap.ui.ux3" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.commons="sap.ui.commons" controllerName="sap.hana.democontent.epm.salesdashboard.view.main">
+    <sap.ui.ux3:Shell id="myShell" appTitle="{i18n&gt;SHELL_HEADER_TITLE}" appIcon="/resources/salesdashboard/images/SAPLogo.gif" appIconTooltip="SAP" showLogoutButton="true" logout="logout" showSearchTool="false" showFeederTool="false" designType="Crystal" fullHeightContent="true">
+        <sap.ui.ux3:worksetItems>
+           
+        </sap.ui.ux3:worksetItems>
+        <sap.ui.ux3:content>
+
+        </sap.ui.ux3:content>
+    </sap.ui.ux3:Shell>
+</sap.ui.core.mvc:View>

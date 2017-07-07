@@ -1,0 +1,16 @@
+---
+applications:
+- name: site-web
+  memory: 768M
+  env:
+    destinations: >
+      [
+        {"name":"core-backend", "url":"https://refapps-clouddevint-shine-core-js.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true},
+        {"name":"user-backend", "url":"https://refapps-clouddevint-shine-user-js.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true},
+        {"name":"user-java-backend", "url":"https://refapps-clouddevint-shine-user-java.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true}
+      ]
+    sapui5url: "https://sapui5.hana.ondemand.com/1.44.8"
+  services:
+    - sap-portal-services-host
+    - shine-uaa
+    

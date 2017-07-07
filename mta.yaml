@@ -1,0 +1,182 @@
+_schema-version: "2.0.0"
+ID: com.sap.refapps.shine
+version: 1.3.10
+
+modules:
+  - name: shine-web
+    type: javascript.nodejs
+    path: web
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: sapui5-provider
+        properties:
+          sapui5url: ~{url}
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-backend
+          url: ~{url}
+          forwardAuthToken: true 
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true
+      
+    parameters: 
+        memory: 64M
+        
+  - name: shine-core-js
+    type: javascript.nodejs
+    path: core-js
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    properties: 
+      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
+    parameters:
+        memory: 152M
+    provides: 
+      - name: core-js
+        properties:
+          url: "${default-url}"
+    
+    requires:
+      - name: shine-uaa
+      - name: shine-container
+      - name: shine-core-db
+
+  - name: shine-user-js
+    type: javascript.nodejs
+    path: user-js
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    properties: 
+      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
+    parameters:
+        memory: 128M
+    provides: 
+      - name: user-js
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: shine-scheduler
+      - name: shine-core-db
+      - name: shine-container
+      
+  
+  - name: shine-core-db
+    type: com.sap.xs.hdi
+    path: core-db
+    build-parameters:
+      builder: hdb
+      timeout: 60m
+    parameters:
+        memory: 308M
+        health-check-type: none
+    requires:
+      - name: shine-container
+        properties:
+          TARGET_CONTAINER: ~{container-name}
+
+  - name: site-web
+    type: javascript.nodejs
+    path: site-web
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    parameters:
+       memory: 64M
+    requires:
+      - name: shine-uaa
+      - name: sap-portal-services-host
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: '~{url}'
+          forwardAuthToken: true
+      - name: controller
+        group: destinations
+        properties:
+          name: controller
+          url: ~{url}
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-backend
+          url: '~{url}'
+          forwardAuthToken: true
+      - name: sapui5-provider
+        properties:
+          sapui5url: '~{url}'
+
+  - name: site-content
+    type: com.sap.portal.site-content
+    path: site-content
+    build-parameters:
+     builder: sitecontent
+     timeout: 60m
+    parameters:
+       memory: 308M
+       health-check-type: none
+    requires:
+       - name: sap-portal-services-client
+       - name: shine-uaa
+
+resources:
+  - name: shine-container
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hanatrial
+      service-plan: hdi-shared
+    properties:
+      container-name: ${service-name}
+
+  - name: shine-scheduler
+    type: com.sap.xs.job-scheduler
+    parameters:
+     service: jobscheduler
+     service-plan: lite
+     
+   
+  - name: shine-uaa
+    type: com.sap.xs.uaa
+    parameters:
+     service: xsuaa
+     service-plan: application
+     path: xs-security.json
+        
+  - name: sap-portal-services-host
+    type: com.sap.portal.site-host
+    parameters:
+      service: portal-services
+      service-plan: site-host
+      config:
+        siteId : XSAC_SHINE
+        
+  - name: sap-portal-services-client
+    type: com.sap.portal.site-content
+    parameters:
+      service: portal-services
+      service-plan: site-content 
+      config:
+        siteId : XSAC_SHINE
+        
+  - name: controller
+    properties:
+      url: "https://api.cf.eu10.hana.ondemand.com"
+     
+  - name: sapui5-provider
+    properties:
+      url: "https://sapui5.hana.ondemand.com/1.44.8"

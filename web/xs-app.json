@@ -1,0 +1,69 @@
+{
+  "welcomeFile": "launchpad/index.html",
+  "logout": {
+    "logoutEndpoint": "/logout",
+    "logoutPage": "/"
+  },
+  "routes": [
+    {
+      "source": "/sap/hana/democontent/epm/(.*)",
+      "destination": "core-backend"
+    },
+    {
+      "source": "/get/(.*)",
+      "destination": "core-backend"
+    },
+    {
+      "source": "/reset/(.*)",
+      "destination": "core-backend"
+    },
+    {
+      "source": "/replicate/(.*)",
+      "destination": "core-backend"
+    },
+    {
+      "source": "/jobs/(.*)",
+      "destination": "user-backend"
+    },
+    {
+      "source": "/schedules/(.*)",
+      "destination": "user-backend"
+    },
+    {
+      "source": "/jobactivity/(.*)",
+      "destination": "user-backend",
+      "authenticationType": "none"
+    },
+    {
+      "source": "/user/xsodata/(.*)",
+      "destination": "user-backend"
+    },
+    {
+      "source": "^/admin-ui/(.*)",
+      "localDir": "resources",
+      "replace": {
+        "pathSuffixes": [
+          "index.html"
+        ],
+        "vars": [
+          "sapui5url"
+        ]
+      }
+    },
+    
+    {
+      "source": "^/(.*)",
+      "localDir": "resources",
+      "authenticationType": "xsuaa",
+      "cacheControl": "public, max-age=1000,must-revalidate",
+      "replace": {
+        "pathSuffixes": [
+          "index.html"
+        ],
+        "vars": [
+          "sapui5url"
+        ]
+      }
+    }
+  ]
+}

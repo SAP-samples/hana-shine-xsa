@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="UTF-8">
+	
+	<title>Data Generator</title>
+             
+              <style>
+                    .helpButton{
+                        font-weight: bold;
+                        float: right;
+                    }
+                    /* help dialog */
+                    .welcomeDlg {
+                        background-color: #FFFFFF !important;
+                    }
+                    .welcomeDlg .sapUiDlgHdr {
+                        border-bottom: 0px solid #FFFFFF !important;
+                    }
+                    .welcomeDlg .sapUiDlgCont {
+                        background-color: #FFFFFF !important;
+                        padding: 10px 25px 12px;
+                    }
+                    .welcomeHeaderTextAlign {
+                        font-size: 22px !important;
+                        padding-left: 5px;
+                    }        
+                    .dialogTextColor{
+                        color: #007CC0 !important;
+                    }
+                    .content {
+  						margin: 0.5em 0 0.5em 0.5em;
+  					}
+  					/* log area */
+  					.logArea {
+  					    min-height: 150px;
+  					}
+              </style>	
+   		<link type="image/x-icon" href="images/favicon.ico" rel="shortcut icon">
+        <link type="image/x-icon" href="images/favicon.ico" rel="icon"> 
+	
+	<script id="sap-ui-bootstrap" 
+		src="{{{sapui5url}}}/resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_bluecrystal"
+		data-sap-ui-xx-bindingSyntax="complex"
+		data-sap-ui-preload=""
+		data-sap-ui-libs="sap.m, sap.me, sap.ui.unified, sap.viz, sap.ui.layout"
+		data-sap-ui-resourceroots='{"sap.hana.democontent.epm.admin" : "./"}'>
+	</script>
+	<script type="text/javascript" src="./global.js" ></script> 
+	<script>
+	
+		// Tell UI5 where to find app content
+		sap.ui.localResources("./");
+		 sap.ui.getCore().attachInit(function(){
+                   new sap.ui.core.ComponentContainer({
+                       height : "100%",
+                       name : "sap.hana.democontent.epm.admin"
+                   }).placeAt('content'); 
+                });
+
+	</script>
+</head>
+<body class="sapUiBody" id="content">
+</body>
+</html>

@@ -1,0 +1,56 @@
+<sap.ui.commons:Dialog xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" id="idBatchDialog" title="{i18n&gt;CREATE_BATCH}" modal="true" closed="onBatchDialogClose">
+        <sap.ui.commons:buttons>
+            <sap.ui.commons:Button text="{i18n&gt;SUBMIT}" style="Accept" press="onSubmitBatch"/>
+        </sap.ui.commons:buttons>
+        <sap.ui.commons:content>
+            <sap.ui.commons.layout:MatrixLayout width="100%" layoutFixed="false" columns="0">
+                <sap.ui.commons.layout:rows>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.commons.layout:MatrixLayout width="100%" layoutFixed="false" rows="{batch&gt;/}">
+                                        <sap.ui.commons.layout:rows>
+                                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                                <sap.ui.commons.layout:cells>
+                                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                                        <sap.ui.commons.layout:content>
+                                                            <sap.ui.commons:TextField width="200px" placeholder="{i18n&gt;FIRST_NAME}" value="{batch&gt;FirstName}"/>
+                                                        </sap.ui.commons.layout:content>
+                                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                                        <sap.ui.commons.layout:content>
+                                                            <sap.ui.commons:TextField width="200px" placeholder="{i18n&gt;LAST_NAME}" value="{batch&gt;LastName}"/>
+                                                        </sap.ui.commons.layout:content>
+                                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                                        <sap.ui.commons.layout:content>
+                                                            <sap.ui.commons:TextField width="200px" placeholder="{i18n&gt;EMAIL}" value="{batch&gt;Email}"/>
+                                                        </sap.ui.commons.layout:content>
+                                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                                        <sap.ui.commons.layout:content>
+                                                            <sap.ui.commons:Button width="30px" icon="/resources/usercrud/images/DeleteLineItem.gif" iconHovered="/resources/usercrud/images/DeleteLineItemHover.gif" iconSelected="/resources/usercrud/images/DeleteLineItemHover.gif" tooltip="{i18n&gt;REMOVE_ROW}" visible="{path:'batch&gt;',formatter:'.isDeleteIconVisible'}" press="onRemoveRow"/>
+                                                        </sap.ui.commons.layout:content>
+                                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                                </sap.ui.commons.layout:cells>
+                                            </sap.ui.commons.layout:MatrixLayoutRow>
+                                        </sap.ui.commons.layout:rows>
+                                    </sap.ui.commons.layout:MatrixLayout>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell hAlign="Center">
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.commons:Button text="{i18n&gt;ADD_NEW_RECORD}" icon="/resources/usercrud/images/AddLineItem.gif" press="addNewLineItem"/>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                </sap.ui.commons.layout:rows>
+            </sap.ui.commons.layout:MatrixLayout>
+        </sap.ui.commons:content>
+    </sap.ui.commons:Dialog>

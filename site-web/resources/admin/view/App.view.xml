@@ -1,0 +1,10 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.unified="sap.ui.unified" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.ux3="sap.ui.ux3" controllerName="sap.hana.democontent.epm.admin.view.App">
+    <sap.ui.ux3:Shell id="myShell" appTitle="Data Generator" appIcon="/resources/admin/images/SAPLogo.gif" appIconTooltip="SAP" showLogoutButton="true" logout="logout" showSearchTool="false" showFeederTool="false" designType="Crystal" fullHeightContent="true">
+        <sap.ui.ux3:worksetItems>
+           
+        </sap.ui.ux3:worksetItems>
+        <sap.ui.ux3:content>
+                <sap.ui.core.mvc:XMLView id="default" viewName="sap.hana.democontent.epm.admin.view.default"/>
+        </sap.ui.ux3:content>
+    </sap.ui.ux3:Shell>
+</sap.ui.core.mvc:View>

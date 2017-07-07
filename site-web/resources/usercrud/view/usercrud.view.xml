@@ -1,0 +1,199 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" controllerName="shine.democontent.epm.usercrud.view.usercrud" fullHeightContent="true">
+	<u:Shell id="myShell" showCurtainPane="true">
+		<u:headItems>
+			<!--u:ShellHeadItem tooltip="Home" icon="sap-icon://home" visible="true" press="handlePressHome"/-->
+		</u:headItems>
+		<u:paneContent>
+			<List id="langlist" headerText="Languages" items="{                     path: 'lang&gt;/languages'                 }" itemPress="onListItemPress">
+				<StandardListItem title="{lang&gt;name}" type="Active" press="onListItemPress"/>
+			</List>
+		</u:paneContent>
+		<u:content>
+			<Toolbar>
+                        <ToolbarSpacer/>
+                        <SegmentedButton id="serviceUrlMode" selectedKey="nodejs">
+                              <items>
+                                                                                                          
+                              </items>
+                        </SegmentedButton>
+                        <ToolbarSpacer/>
+                  </Toolbar>
+
+			<sap.ui.commons.layout:MatrixLayout columns="0" class="addPadding" width="99%">
+				<sap.ui.commons.layout:rows>
+					<sap.ui.commons.layout:MatrixLayoutRow>
+						<sap.ui.commons.layout:cells>
+							<sap.ui.commons.layout:MatrixLayoutCell>
+								<sap.ui.commons.layout:content>
+									<sap.ui.commons:Panel id="updPanel" text="{i18n&gt;NEW_USER_TITLE}">
+										<sap.ui.commons:content>
+											<sap.ui.commons.layout:MatrixLayout width="auto" columns="0">
+												<sap.ui.commons.layout:rows>
+													<sap.ui.commons.layout:MatrixLayoutRow>
+														<sap.ui.commons.layout:cells>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:Label width="70px" text="{i18n&gt;FIRST_NAME}" requiredAtBegin="false"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:TextField id="fName" value="{user&gt;/FirstName}" width="200px" tooltip="{i18n&gt;FIRST_NAME}"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+														</sap.ui.commons.layout:cells>
+													</sap.ui.commons.layout:MatrixLayoutRow>
+													<sap.ui.commons.layout:MatrixLayoutRow>
+														<sap.ui.commons.layout:cells>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:Label width="70px" text="{i18n&gt;LAST_NAME}" requiredAtBegin="false"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:TextField id="lName" width="200px" value="{user&gt;/LastName}" tooltip="{i18n&gt;LAST_NAME}"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+														</sap.ui.commons.layout:cells>
+													</sap.ui.commons.layout:MatrixLayoutRow>
+													<sap.ui.commons.layout:MatrixLayoutRow>
+														<sap.ui.commons.layout:cells>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:Label width="70px" text="{i18n&gt;EMAIL}" requiredAtBegin="false"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:TextField id="email" width="200px" value="{user&gt;/Email}" tooltip="{i18n&gt;EMAIL}"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+															<sap.ui.commons.layout:MatrixLayoutCell>
+																<sap.ui.commons.layout:content>
+																	<sap.ui.commons:Button text="{i18n&gt;CREATE_RECORD}" press="callUserService"/>
+																</sap.ui.commons.layout:content>
+															</sap.ui.commons.layout:MatrixLayoutCell>
+														</sap.ui.commons.layout:cells>
+													</sap.ui.commons.layout:MatrixLayoutRow>
+												</sap.ui.commons.layout:rows>
+											</sap.ui.commons.layout:MatrixLayout>
+										</sap.ui.commons:content>
+										<sap.ui.commons:title>
+											<sap.ui.core:Title id="updPanel-tit" text="New User Record Details"/>
+										</sap.ui.commons:title>
+										<sap.ui.commons:buttons>
+											<sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="1" press="openTileDialog"/>
+										</sap.ui.commons:buttons>
+									</sap.ui.commons:Panel>
+								</sap.ui.commons.layout:content>
+							</sap.ui.commons.layout:MatrixLayoutCell>
+						</sap.ui.commons.layout:cells>
+					</sap.ui.commons.layout:MatrixLayoutRow>
+					<sap.ui.commons.layout:MatrixLayoutRow>
+						<sap.ui.commons.layout:cells>
+							<sap.ui.commons.layout:MatrixLayoutCell>
+								<sap.ui.commons.layout:content>
+									<sap.ui.commons:HorizontalDivider/>
+								</sap.ui.commons.layout:content>
+							</sap.ui.commons.layout:MatrixLayoutCell>
+						</sap.ui.commons.layout:cells>
+					</sap.ui.commons.layout:MatrixLayoutRow>
+					<sap.ui.commons.layout:MatrixLayoutRow>
+						<sap.ui.commons.layout:cells>
+							<sap.ui.commons.layout:MatrixLayoutCell>
+								<sap.ui.commons.layout:content>
+									<sap.ui.layout:HorizontalLayout>
+										<sap.ui.layout:content>
+											<sap.ui.commons:Button id="batchButton" text="{i18n&gt;CREATE_BATCH}" press="openBatchDialog"/>
+											<sap.ui.commons:Button id="batchHelpButton" class="helpButton" text="?" data:tileDialog="2" press="openTileDialog"/> 
+											<!-- <sap.ui.commons:Button class="buttonMarginLeft" text="{i18n>CREATE_XML}" press="onUsrCreateXmlBtnPress"></sap.ui.commons:Button> 
+											<sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="4" press="openTileDialog"></sap.ui.commons:Button> -->
+										</sap.ui.layout:content>
+									</sap.ui.layout:HorizontalLayout>
+								</sap.ui.commons.layout:content>
+							</sap.ui.commons.layout:MatrixLayoutCell>
+						</sap.ui.commons.layout:cells>
+					</sap.ui.commons.layout:MatrixLayoutRow>
+					<sap.ui.commons.layout:MatrixLayoutRow>
+						<sap.ui.commons.layout:cells>
+							<sap.ui.commons.layout:MatrixLayoutCell>
+								<sap.ui.commons.layout:content>
+									<sap.ui.commons:HorizontalDivider/>
+								</sap.ui.commons.layout:content>
+							</sap.ui.commons.layout:MatrixLayoutCell>
+						</sap.ui.commons.layout:cells>
+					</sap.ui.commons.layout:MatrixLayoutRow>
+					<sap.ui.commons.layout:MatrixLayoutRow>
+						<sap.ui.commons.layout:cells>
+							<sap.ui.commons.layout:MatrixLayoutCell>
+								<sap.ui.commons.layout:content>
+									<sap.ui.table:Table id="userTbl" selectionMode="Single" title="{i18n&gt;USERS}" rows="{path:'/User'}">
+										<sap.ui.table:toolbar>
+											<sap.ui.commons:Toolbar id="tb1" design="Standard" standalone="false">
+												<sap.ui.commons:items>
+													<sap.ui.commons:Button id="btnDelete" text="{i18n&gt;DELETE}" press="onDeletePress"/>
+													<!-- <sap.ui.commons:Button id="btnAddCC" text="{i18n>ADD_CREDIT_CARD}" press="onAddCC"></sap.ui.commons:Button>
+													<sap.ui.commons:Button id="btnViewCC" text="{i18n>VIEW_CREDIT_CARD}" press="onViewCC"></sap.ui.commons:Button>
+													<sap.ui.commons:Button id="btnDeleteCC" text="{i18n>DELETE_CC_NUMBER}" press="onDeleteCC"></sap.ui.commons:Button> -->
+												
+													<sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="3" press="openTileDialog"/>
+												</sap.ui.commons:items>
+											</sap.ui.commons:Toolbar>
+										</sap.ui.table:toolbar>
+										<sap.ui.table:columns>
+											<sap.ui.table:Column filterProperty="UserId" filterOperator="EQ">
+												<sap.ui.table:label>
+													<sap.ui.commons:Label text="UserId" requiredAtBegin="false"/>
+												</sap.ui.table:label>
+												<sap.ui.table:template>
+													<sap.ui.commons:TextField value="{UserId}" editable="false"/>
+												</sap.ui.table:template>
+												<sap.ui.table:menu>
+													<sap.ui.table:ColumnMenu/>
+												</sap.ui.table:menu>
+											</sap.ui.table:Column>
+											<sap.ui.table:Column filterProperty="FirstName" filterOperator="EQ">
+												<sap.ui.table:label>
+													<sap.ui.commons:Label text="FirstName" requiredAtBegin="false"/>
+												</sap.ui.table:label>
+												<sap.ui.table:template>
+													<sap.ui.commons:TextField value="{FirstName}" change="updateService"/>
+												</sap.ui.table:template>
+												<sap.ui.table:menu>
+													<sap.ui.table:ColumnMenu/>
+												</sap.ui.table:menu>
+											</sap.ui.table:Column>
+											<sap.ui.table:Column filterProperty="LastName" filterOperator="EQ">
+												<sap.ui.table:label>
+													<sap.ui.commons:Label text="LastName" requiredAtBegin="false"/>
+												</sap.ui.table:label>
+												<sap.ui.table:template>
+													<sap.ui.commons:TextField value="{LastName}" change="updateService"/>
+												</sap.ui.table:template>
+												<sap.ui.table:menu>
+													<sap.ui.table:ColumnMenu/>
+												</sap.ui.table:menu>
+											</sap.ui.table:Column>
+											<sap.ui.table:Column filterProperty="Email" filterOperator="EQ">
+												<sap.ui.table:label>
+													<sap.ui.commons:Label text="Email" requiredAtBegin="false"/>
+												</sap.ui.table:label>
+												<sap.ui.table:template>
+													<sap.ui.commons:TextField value="{Email}" change="updateService"/>
+												</sap.ui.table:template>
+												<sap.ui.table:menu>
+													<sap.ui.table:ColumnMenu/>
+												</sap.ui.table:menu>
+											</sap.ui.table:Column>
+										</sap.ui.table:columns>
+									</sap.ui.table:Table>
+								</sap.ui.commons.layout:content>
+							</sap.ui.commons.layout:MatrixLayoutCell>
+						</sap.ui.commons.layout:cells>
+					</sap.ui.commons.layout:MatrixLayoutRow>
+				</sap.ui.commons.layout:rows>
+			</sap.ui.commons.layout:MatrixLayout>
+		</u:content>
+	</u:Shell>
+</sap.ui.core.mvc:View>

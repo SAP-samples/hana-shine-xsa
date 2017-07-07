@@ -1,0 +1,14 @@
+service namespace "sap.hana.democontent.epm"  { 
+   "sap.hana.democontent.epm.models::SALES_YEAR_COMPARISON" 
+    as "salesYear"  
+	keys generate local "ID"
+	 aggregates always
+	parameters via entity "InputParams"; 
+   
+    
+}
+
+
+settings {
+    metadata cache-control "max-age= 604800";
+}

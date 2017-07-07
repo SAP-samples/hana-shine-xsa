@@ -1,0 +1,409 @@
+{
+	"_version": "1.0.0",
+	"site": {
+		"_version": "1.0",
+		"identification": {
+			"id": "499c36e2-687e-11e6-8b77-86f30ca893d3",
+			"namespace": "",
+			"entityType": "site",
+			"description": "",
+			"i18n": "i18n/bundle.properties",
+			"title": "{{site.title}}"
+		},
+		"payload": {
+			"groupsOrder": ["5acadc20-687e-11e6-8b77-86f30ca893d3"],
+			"config": {
+
+			},
+			"sap.cloud.portal": {
+				"_version": "1.2.0",
+				"config": {
+					"runtimeEnv": "cf",
+					"isOnline": "true",
+					"fioriVersion": "FIORI2",
+					"skipVariantResolving": true,
+					"siteHashVersion": "-2038943003"
+				}
+			}
+		}
+	},
+	"catalogs": {
+
+	},
+	"roles": {
+		"Everyone": {
+			"catalogs": [],
+			"groups": [{
+				"id": "5acadc20-687e-11e6-8b77-86f30ca893d3"
+			}]
+		}
+	},
+	"applications": {
+		"job-scheduler": {
+			"sap.app": {
+				"_version": "1.3.0",
+				"id": "job-scheduler",
+				"title": "{{jobscheduler.title}}",
+				"i18n": "i18n/bundle.properties",
+				"tags": {
+					"keywords": []
+				},
+				"crossNavigation": {
+					"inbounds": {
+						"siteShow": {
+							"semanticObject": "jobscheduler",
+							"action": "show",
+							"deviceTypes": {
+								"desktop": true,
+								"tablet": true,
+								"phone": true
+							}
+						}
+					},
+					"outbounds": {
+
+					}
+				}
+			},
+			"sap.ui": {
+				"_version": "1.3.0",
+				"technology": "UI5"
+			},
+			"sap.ui5": {
+				"componentName": "shine.democontent.epm.job",
+				"_version": "1.2.0"
+			},
+			"sap.platform.hcp": {
+				"componentProperties": {
+					"url": "/resources/job"
+				}
+			},
+			"sap.platform.runtime": {
+				"componentProperties": {
+					"url": "/resources/job"
+				},
+				"hasValidManifest": false
+			}
+		},
+		"user-crud": {
+			"sap.app": {
+				"_version": "1.3.0",
+				"id": "user-crud",
+				"title": "{{usercrud.title}}",
+				"i18n": "i18n/bundle.properties",
+				"tags": {
+					"keywords": []
+				},
+				"crossNavigation": {
+					"inbounds": {
+						"siteShow": {
+							"semanticObject": "usercrud",
+							"action": "show",
+							"deviceTypes": {
+								"desktop": true,
+								"tablet": true,
+								"phone": true
+							}
+						},
+						"indicatorDataSource": {
+							"path": "/resources/shine/democontent/epm/usercrud/user-dynamic.json",
+							"refresh": "6000",
+							"displayNumberUnit": "%"
+						}
+					},
+					"outbounds": {
+
+					}
+				}
+			},
+			"sap.ui": {
+				"_version": "1.3.0",
+				"technology": "UI5"
+			},
+			"sap.ui5": {
+				"componentName": "shine.democontent.epm.usercrud",
+				"_version": "1.2.0"
+			},
+			"sap.platform.hcp": {
+				"componentProperties": {
+					"url": "/resources/usercrud"
+				}
+			},
+			"sap.platform.runtime": {
+				"componentProperties": {
+					"url": "/resources/usercrud"
+				},
+				"hasValidManifest": false
+			}
+		},
+		"data-generator": {
+			"sap.app": {
+				"_version": "1.3.0",
+				"id": "data-generator",
+				"title": "{{datagenerator.title}}",
+				"i18n": "i18n/bundle.properties",
+				"tags": {
+					"keywords": []
+				},
+				"crossNavigation": {
+					"inbounds": {
+						"siteShow": {
+							"semanticObject": "datagenerator",
+							"action": "show",
+							"deviceTypes": {
+								"desktop": true,
+								"tablet": true,
+								"phone": true
+							}
+						}
+					},
+					"outbounds": {
+
+					}
+				}
+			},
+			"sap.ui": {
+				"_version": "1.3.0",
+				"technology": "UI5"
+			},
+			"sap.ui5": {
+				"componentName": "sap.hana.democontent.epm.admin",
+				"_version": "1.2.0"
+			},
+			"sap.platform.hcp": {
+				"componentProperties": {
+					"url": "/resources/admin"
+				}
+			},
+			
+				"sap.platform.runtime": {
+				"componentProperties": {
+					"url": "/resources/admin"
+				},
+				"hasValidManifest": false
+			}
+		},
+		"sales-dashboard": {
+			"sap.app": {
+				"_version": "1.3.0",
+				"id": "sales-dashboard",
+				"title": "{{salesdashboard.title}}",
+				"i18n": "i18n/bundle.properties",
+				"tags": {
+					"keywords": []
+				},
+				"crossNavigation": {
+					"inbounds": {
+						"siteShow": {
+							"semanticObject": "salesdashboard",
+							"action": "show",
+							"deviceTypes": {
+								"desktop": true,
+								"tablet": true,
+								"phone": true
+							}
+						}
+					},
+					"outbounds": {
+
+					}
+				}
+			},
+			"sap.ui": {
+				"_version": "1.3.0",
+				"technology": "UI5"
+			},
+			"sap.ui5": {
+				"componentName": "sap.hana.democontent.epm.salesdashboard",
+				"_version": "1.2.0"
+			},
+			"sap.platform.hcp": {
+				"componentProperties": {
+					"url": "/resources/salesdashboard"
+				}
+			},
+				"sap.platform.runtime": {
+				"componentProperties": {
+					"url": "/resources/salesdashboard"
+				},
+				"hasValidManifest": false
+			}
+		},
+		"spatial": {
+			"sap.app": {
+				"_version": "1.3.0",
+				"id": "spatial",
+				"title": "{{spatial.title}}",
+				"i18n": "i18n/bundle.properties",
+				"tags": {
+					"keywords": []
+				},
+				"crossNavigation": {
+					"inbounds": {
+						"siteShow": {
+							"semanticObject": "spatial",
+							"action": "show",
+							"deviceTypes": {
+								"desktop": true,
+								"tablet": true,
+								"phone": true
+							}
+						}
+					},
+					"outbounds": {
+
+					}
+				}
+			},
+			"sap.ui": {
+				"_version": "1.3.0",
+				"technology": "UI5"
+			},
+			"sap.ui5": {
+				"componentName": "shine.democontent.epm.spatial",
+				"_version": "1.2.0"
+			},
+			"sap.platform.hcp": {
+				"componentProperties": {
+					"url": "/resources/spatial"
+				}
+			},
+				"sap.platform.runtime": {
+				"componentProperties": {
+					"url": "/resources/spatial"
+				},
+				"hasValidManifest": false
+			}
+		},
+		"po-worklist": {
+			"sap.app": {
+				"_version": "1.3.0",
+				"id": "po-worklist",
+				"title": "{{poworklist.title}}",
+				"i18n": "i18n/bundle.properties",
+				"tags": {
+					"keywords": []
+				},
+				"crossNavigation": {
+					"inbounds": {
+						"siteShow": {
+							"semanticObject": "poworklist",
+							"action": "show",
+							"deviceTypes": {
+								"desktop": true,
+								"tablet": true,
+								"phone": true
+							}
+						}
+					},
+					"outbounds": {
+
+					}
+				}
+			},
+			"sap.ui": {
+				"_version": "1.3.0",
+				"technology": "UI5"
+			},
+			"sap.ui5": {
+				"componentName": "shine.democontent.epm.poworklist",
+				"_version": "1.2.0"
+			},
+			"sap.platform.hcp": {
+				"componentProperties": {
+					"url": "/resources/poworklist"
+				}
+			},
+				"sap.platform.runtime": {
+				"componentProperties": {
+					"url": "/resources/poworklist"
+				},
+				"hasValidManifest": false
+			}
+		}
+	},
+	"groups": {
+		"5acadc20-687e-11e6-8b77-86f30ca893d3": {
+			"identification": {
+				"id": "5acadc20-687e-11e6-8b77-86f30ca893d3",
+				"namespace": "",
+				"title": "{{group1.title}}",
+				"i18n": "i18n/bundle.properties"
+			},
+			"payload": {
+				"tiles": [{
+						"id": "dataGenerator",
+						"title": "{{group1.datagenerator.title}}",
+						"description": "{{group1.datagenerator.desc}}",
+						"subTitle": "{{group1.datagenerator.sTitle}}",
+						"icon": "sap-icon://database",
+						"target": {
+							"semanticObject": "datagenerator",
+							"action": "show",
+							"parameters": []
+						}
+					},
+					{
+						"id": "poWorklist",
+						"title": "{{group1.poworklist.title}}",
+						"description": "{{group1.poworklist.desc}}",
+						"subTitle": "{{group1.poworklist.sTitle}}",
+						"icon": "sap-icon://my-sales-order",
+						"target": {
+							"semanticObject": "poworklist",
+							"action": "show",
+							"parameters": []
+						}
+					},
+					{
+						"id": "salesDashboard",
+						"title": "{{group1.salesdashboard.title}}",
+						"description": "{{group1.salesdashboard.desc}}",
+						"subTitle": "{{group1.salesdashboard.sTitle}}",
+						"icon": "sap-icon://sales-order",
+						"target": {
+							"semanticObject": "salesdashboard",
+							"action": "show",
+							"parameters": []
+						}
+					},
+					{
+						"id": "jobScheduler",
+						"title": "{{group1.jobscheduler.title}}",
+						"description": "{{group1.jobscheduler.desc}}",
+						"subTitle": "{{group1.jobscheduler.sTitle}}",
+						"icon": "sap-icon://time-entry-request",
+						"target": {
+							"semanticObject": "jobscheduler",
+							"action": "show",
+							"parameters": []
+						}
+					},
+					{
+						"id": "usercrud",
+						"title": "{{group1.usercrud.title}}",
+						"description": "{{group1.usercrud.desc}}",
+						"subTitle": "{{group1.usercrud.sTitle}}",
+						"icon": "sap-icon://account",
+						"target": {
+							"semanticObject": "usercrud",
+							"action": "show",
+							"parameters": []
+						}
+					}, {
+						"id": "spatial",
+						"title": "{{group1.spatial.title}}",
+						"description": "{{group1.spatial.desc}}",
+						"subTitle": "{{group1.spatial.sTitle}}",
+						"icon": "sap-icon://map",
+						"target": {
+							"semanticObject": "spatial",
+							"action": "show",
+							"parameters": []
+						}
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+
+
+context Jobs {
+ 
+     Entity Data {
+     	key ID: String(10);
+     	NAME: hana.VARCHAR(40);
+     	TIMESTAMP: UTCTimestamp;
+     };	
+     
+     Entity ScheduleDetails {
+     	key JOBID: String(10);
+     	NAME: hana.VARCHAR(40);
+     	STARTTIME: UTCTimestamp;
+     	ENDTIME: UTCTimestamp;
+     	CRON:hana.VARCHAR(40);
+     	SCHEDULE: hana.VARCHAR(40);
+     };	
+};

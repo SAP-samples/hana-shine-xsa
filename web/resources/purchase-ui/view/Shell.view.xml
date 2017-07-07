@@ -1,0 +1,45 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.ux3="sap.ui.ux3" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.commons="sap.ui.commons" controllerName="shine.democontent.epm.poworklist.view.Shell">
+    <sap.ui.ux3:Shell id="myShell" selectedWorksetItem="wi_home" appTitle="{i18n&gt;console}" appIcon="./images/sap_18.png" appIconTooltip="SAP" logout="logout" showLogoutButton="false" showSearchTool="false" showFeederTool="false" designType="Crystal">
+        <sap.ui.ux3:worksetItems>
+            <sap.ui.ux3:NavigationItem id="wi_home" text="{i18n&gt;worklist}" key="wi_home"/>
+        </sap.ui.ux3:worksetItems>
+        <sap.ui.ux3:content>
+            <sap.ui.commons.layout:MatrixLayout>
+                <sap.ui.commons.layout:rows>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.core.mvc:XMLView id="po_search_view" viewName="shine.democontent.epm.poworklist.view.Search"/>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.core.mvc:XMLView id="po_table_view" viewName="shine.democontent.epm.poworklist.view.Table"/>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:MatrixLayoutRow>
+                        <sap.ui.commons.layout:cells>
+                            <sap.ui.commons.layout:MatrixLayoutCell>
+                                <sap.ui.commons.layout:content>
+                                    <sap.ui.core.mvc:XMLView id="po_detail_view" viewName="shine.democontent.epm.poworklist.view.Detail"/>
+                                </sap.ui.commons.layout:content>
+                            </sap.ui.commons.layout:MatrixLayoutCell>
+                        </sap.ui.commons.layout:cells>
+                    </sap.ui.commons.layout:MatrixLayoutRow>
+                </sap.ui.commons.layout:rows>
+            </sap.ui.commons.layout:MatrixLayout>
+        </sap.ui.ux3:content>
+        <sap.ui.ux3:headerItems>
+            <sap.ui.commons:TextView tooltip="{i18n&gt;welcome}"/>
+            <sap.ui.commons:Button text="{i18n&gt;personalize}" styled="false" tooltip="{i18n&gt;personalize}" press="handlePersonalizeShell"/>
+            
+        </sap.ui.ux3:headerItems>
+    </sap.ui.ux3:Shell>
+</sap.ui.core.mvc:View>

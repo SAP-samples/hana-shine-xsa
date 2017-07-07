@@ -1,0 +1,47 @@
+{
+  "routes": [
+    {
+      "source": "/resources/(.*)",
+      "target": "$1",
+      "localDir": "resources/",
+      "replace": {
+        "pathSuffixes": [
+          "index.html"
+        ],
+        "vars": [
+          "sapui5url"
+        ]
+      }
+    },{
+      "source": "/sap/hana/democontent/epm/services/",
+      "destination": "core-backend"
+    }, {
+      "source": "/sap/hana/democontent/epm/spatial/services/",
+      "destination": "core-backend"
+    }, {
+      "source": "/get/(.*)",
+      "destination": "core-backend"
+    }, {
+      "source": "/reset/(.*)",
+      "destination": "core-backend"
+    }, {
+      "source": "/replicate/(.*)",
+      "destination": "core-backend"
+    }, {
+      "source": "/jobs/(.*)",
+      "destination": "user-backend"
+    }, {
+      "source": "/schedules/(.*)",
+      "destination": "user-backend"
+    }, {
+      "source": "/jobactivity/(.*)",
+      "destination": "user-backend",
+      "authenticationType": "none"
+    },{
+      "source": "/user/xsodata/(.*)",
+      "destination": "user-backend"
+    }, {
+      "source": "^/admin-ui/(.*)",
+      "localDir": "resources"
+    }  ]
+}

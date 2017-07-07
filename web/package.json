@@ -1,0 +1,9 @@
+{
+  "name": "shine-web",
+  "dependencies": {
+    "@sap/approuter": "2.7.1"
+  },
+  "scripts": {
+    "start": "node node_modules/@sap/approuter/approuter.js"
+  }
+}

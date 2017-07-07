@@ -1,0 +1,83 @@
+{
+    "format_version": 1,
+    "imports": [
+        {
+            "target_table": "Core.SHINE_TIME_DIM",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "SHINE_TIMDIM.csv",
+                "has_header": true,
+                "dialect": "HANA",
+				"type_config": {
+				"delimiter": ","
+			}
+            },
+            "import_settings": {
+                "import_columns": [
+                				"DATETIMESTAMP",
+								"DATE_SQL",
+								"DATETIME_SAP",
+								"DATE_SAP",
+								"YEAR",
+								"QUARTER",
+								"MONTH",
+								"WEEK",
+								"WEEK_YEAR",
+								"DAY_OF_WEEK",
+								"DAY",
+								"HOUR",
+								"MINUTE",
+								"SECOND",
+								"CALQUARTER",
+								"CALMONTH",
+								"CALWEEK",
+								"YEAR_INT",
+								"QUARTER_INT",
+								"MONTH_INT",
+								"WEEK_INT",
+								"WEEK_YEAR_INT",
+								"DAY_OF_WEEK_INT",
+								"DAY_INT",
+								"HOUR_INT",
+								"MINUTE_INT",
+								"SECOND_INT",
+								"MONTH_LAST_DAY",
+								"TZNTSTMPS",
+								"TZNTSTMPL"
+                ]
+            },
+            	"column_mappings": {
+								"DATETIMESTAMP":1,
+								"DATE_SQL":2,
+								"DATETIME_SAP":3,
+								"DATE_SAP":4,
+								"YEAR":5,
+								"QUARTER":6,
+								"MONTH":7,
+								"WEEK":8,
+								"WEEK_YEAR":9,
+								"DAY_OF_WEEK":10,
+								"DAY":11,
+								"HOUR":12,
+								"MINUTE":13,
+								"SECOND":14,
+								"CALQUARTER":15,
+								"CALMONTH":16,
+								"CALWEEK":17,
+								"YEAR_INT":18,
+								"QUARTER_INT":19,
+								"MONTH_INT":20,
+								"WEEK_INT":21,
+								"WEEK_YEAR_INT":22,
+								"DAY_OF_WEEK_INT":23,
+								"DAY_INT":24,
+								"HOUR_INT":25,
+								"MINUTE_INT":26,
+								"SECOND_INT":27,
+								"MONTH_LAST_DAY":28,
+								"TZNTSTMPS":29,
+								"TZNTSTMPL":30
+		}
+        }
+    ]
+}

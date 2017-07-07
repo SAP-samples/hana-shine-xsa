@@ -1,0 +1,7 @@
+.sapUiLbl.sapUiLblReqEnd:after {
+    content: '*';
+    color: red !important;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+}

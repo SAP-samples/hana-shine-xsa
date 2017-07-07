@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<title>User CRUD</title>
+		
+		<script src="{{{sapui5url}}}/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.ui.commons, sap.ui.table,sap.ui.unified,sap.m"
+				data-sap-ui-theme="sap_bluecrystal"
+				data-sap-ui-preload=""
+				data-sap-ui-xx-bindingSyntax="complex"
+				data-sap-ui-resourceroots='{"shine.democontent.epm.usercrud" : "./"}'>
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+
+		<script>
+                sap.ui.getCore().attachInit(function(){
+                   new sap.ui.core.ComponentContainer({
+                       height : "100%",
+                       name : "shine.democontent.epm.usercrud"
+                   }).placeAt('content'); 
+                });
+		</script>
+		<script>
+		  jQuery.sap.require("jquery.sap.resources");
+          var sLocale = 
+            sap.ui.getCore().getConfiguration().getLanguage();
+          var oBundle = 
+            jQuery.sap.resources({url : "./i18n/messagebundle.hdbtextbundle", locale: sLocale});
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

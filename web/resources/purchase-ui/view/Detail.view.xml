@@ -1,0 +1,218 @@
+<sap.ui.core.mvc:View xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.viz.ui5="sap.viz.ui5" xmlns:sap.viz.ui5.data="sap.viz.ui5.data" xmlns:sap.viz.ui5.types="sap.viz.ui5.types" xmlns:sap.viz.ui5.types.legend="sap.viz.ui5.types.legend" xmlns:sap.viz.ui5.types.controller="sap.viz.ui5.types.controller" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" controllerName="shine.democontent.epm.poworklist.view.Detail">
+    <sap.ui.commons:TabStrip id="tabStripDetail" width="100%">
+        <sap.ui.commons:tabs>
+            <sap.ui.commons:Tab id="tabStripDetail-0" text="{i18n&gt;general}">
+                <sap.ui.commons:content>
+                    <sap.ui.commons.layout:MatrixLayout id="mLayout1">
+                        <sap.ui.commons.layout:rows>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblPurchaseOrderId" labelFor="txtPurchaseOrderId" text="{i18n&gt;spoid}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView id="txtPurchaseOrderId" text="{PurchaseOrderId}" tooltip="{i18n&gt;poid}"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblPartnerId" labelFor="txtPartnerId" text="{i18n&gt;bpart}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView id="txtPartnerId" text="{PartnerId}" tooltip="{i18n&gt;bpart}"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblPLoginName_1" labelFor="LoginName_1" text="{i18n&gt;employee}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView id="LoginName_1" text="{CreatedByLoginName}" tooltip="{i18n&gt;changeby}"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblCompanyName" labelFor="txtCompanyName" text="{i18n&gt;company}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView id="txtCompanyName" text="{CompanyName}" tooltip="{i18n&gt;company}"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblNetAmount" labelFor="__view14" text="{i18n&gt;net}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView text="{path:'NetAmount',formatter:'.numericFormatter'} {Currency}" textAlign="End" width="100px"/>
+                                           
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblTaxAmount" labelFor="__view16" text="{i18n&gt;tax}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView text="{path:'TaxAmount',formatter:'.numericFormatter'} {Currency}" textAlign="End" width="100px"/>
+                                            
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblGrossAmount" labelFor="__view18" text="{i18n&gt;gross}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView text="{path:'GrossAmount',formatter:'.numericFormatter'} {Currency}" textAlign="End" width="100px"/>
+                                            
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                        </sap.ui.commons.layout:rows>
+                    </sap.ui.commons.layout:MatrixLayout>
+                </sap.ui.commons:content>
+            </sap.ui.commons:Tab>
+            <sap.ui.commons:Tab id="tabStripDetail-1" text="{i18n&gt;items}">
+                <sap.ui.commons:content>
+                    <sap.ui.table:Table id="poItemTable" visibleRowCount="6" selectionMode="None" title="{i18n&gt;po_item}">
+                        <sap.ui.table:columns>
+                            <sap.ui.table:Column sortProperty="PURCHASEORDERITEM" filterProperty="PURCHASEORDERITEM">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;item}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{PURCHASEORDERITEM}"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column sortProperty="PRODUCT_PRODUCTID" filterProperty="PRODUCT_PRODUCTID">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;product}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{PRODUCT_PRODUCTID}"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column sortProperty="ProductName" filterProperty="ProductName">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;product_name}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{ProductName}"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column sortProperty="CATEGORY" filterProperty="CATEGORY">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;product_cat}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{CATEGORY}"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column hAlign="End" sortProperty="QUANTITY">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;quantity}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{QUANTITY}" textAlign="End"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column sortProperty="QUANTITYUNIT" filterProperty="QUANTITYUNIT">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;quantity_unit}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{QUANTITYUNIT}"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column hAlign="End" sortProperty="GROSSAMOUNT">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;gross}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{GROSSAMOUNT}" textAlign="End"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                            <sap.ui.table:Column sortProperty="CURRENCY" filterProperty="CURRENCY">
+                                <sap.ui.table:label>
+                                    <sap.ui.commons:Label text="{i18n&gt;currency}" requiredAtBegin="false"/>
+                                </sap.ui.table:label>
+                                <sap.ui.table:template>
+                                    <sap.ui.commons:TextView text="{CURRENCY}"/>
+                                </sap.ui.table:template>
+                            </sap.ui.table:Column>
+                        </sap.ui.table:columns>
+                    </sap.ui.table:Table>
+                </sap.ui.commons:content>
+            </sap.ui.commons:Tab>
+            <sap.ui.commons:Tab id="tabStripDetail-2" text="{i18n&gt;notes}" enabled="false">
+                <sap.ui.commons:content>
+                    <sap.ui.commons.layout:MatrixLayout id="mLayout2">
+                        <sap.ui.commons.layout:rows>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblNotes" design="Bold" text="{i18n&gt;supplier_note}" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:HorizontalDivider/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:TextView text="{SupplierCompanyName}"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                        </sap.ui.commons.layout:rows>
+                    </sap.ui.commons.layout:MatrixLayout>
+                </sap.ui.commons:content>
+            </sap.ui.commons:Tab>
+            <sap.ui.commons:Tab id="tabStripDetail-3" text="Reports" enabled="true">
+                <sap.ui.commons:content>
+                </sap.ui.commons:content>
+            </sap.ui.commons:Tab>
+        </sap.ui.commons:tabs>
+    </sap.ui.commons:TabStrip>
+</sap.ui.core.mvc:View>

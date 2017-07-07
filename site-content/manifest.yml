@@ -1,0 +1,9 @@
+applications:
+
+- name: site-content
+  no-route: true
+  health-check-type: none
+  memory: 256M
+  services:
+     - sap-portal-services-client
+     - shine-uaa
