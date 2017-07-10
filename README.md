@@ -86,11 +86,16 @@ You can read more about the SAP NPM Registry in "[SAP NPM Registry launched: Mak
 10. An MTAR with the name shine-cf.mtar was generated.
 
 ## Deploy the MTAR
-1. SHINE needs Cloud Foundry resources as described below. Therefore, this amount of resources should be free before SHINE deployment:
-    1. 1 GB instance memory
-    2. 5 routes
-    3. 5 service instances
-2. Navigate to your Cloud Foundry org and space where you want to deploy SHINE and where you have the above-mentioned resources free
+1. SHINE needs Cloud Foundry resources as described below. Therefore, this amount of resources should be assigned in Quota Management (on Global Account level) and free (overview on Subaccount level) before SHINE deployment (e.g. what you get with the Cloud Foundry Trail is sufficient):
+    1.	Quota Management
+        1.	Application Runtime: MEMORY 1
+        2.	HANA: hdi-shared 1
+        3.	Job Scheduler: lite 1
+    2.	Resources overview
+        1.	5 routes
+        2.	5 services
+        3.	1 GB instance memory
+2. Navigate to your Cloud Foundry org and space where you want to deploy SHINE and where you have the above-mentioned resources assigned and free
 3. Run the command: `cf deploy shine-cf.mtar`
 
 ## Launch the SHINE Application
