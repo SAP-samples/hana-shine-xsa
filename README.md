@@ -109,11 +109,8 @@ SHINE has two entry points: SHINE Launchpad and Fiori Launchpad for SHINE. The s
 ### Site Web  
 ![Alt text](./images/shine-site-web.jpg "Site Web")  
 
-## Undeploy SHINE
-To undeploy SHINE and delete all the service run the below command from CLI
-
-`cf undeploy com.sap.refapps.shine -f --delete-services`
-
+## Undeploy the SHINE Application
+To undeploy SHINE and delete all its services run the command: `cf undeploy com.sap.refapps.shine -f --delete-services`
 
 ## Support
 For any question/clarification or report an issue in SHINE for CF Environment please [create an issue](https://github.com/sap/hana-shine-xsa/issues/new/). Please mention `[shine-cf]` in the title to differentiate issue between SHINE for XS Advanced and SHINE for CF Environment
