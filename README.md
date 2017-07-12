@@ -1,16 +1,5 @@
-SHINE for HANA extended application services advanced model (SHINE for XSA) SP11
+SHINE for HANA Extended Application Services, Advanced Model (SHINE for XS Advanced) HANA 1.0 SPS 11
 ================
-SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build applications on SAP HANA extended application services advanced model. This demo application is delivered as a package that contains sample data and design-time developer objects for the applications database tables, views, OData and user interface. 
-
-SHINE for HANA extended application services advanced model (SHINE for XSA) is a successor of [SHINE for XS Classic](https://github.com/SAP/hana-shine/ "SHINE for XS Classic"). It is based on micro service architecture. It showcases how multiple runtimes(Nodejs and XSJS) can be used in a single application and is packaged as a Multi Target Application
-
-## How do I use it?
-This repository is intended to be used as a reference for code of SHINE for XSA. The SHINE for XSA MTA can be found in SAP Support Portal. 
-
-[For detailed steps on where to find the MTA and how to install the application please refer to the SHINE for XSA detailed documentation found here.](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf)
-
-## What is in the repository?
-
 The application consists of the following packages:
 
 
@@ -24,3 +13,9 @@ The application consists of the following packages:
 
 
 - ui - This package contains the user interface for the SHINE Launchpad, Data Generator, and Purchase Order Worklist applications implemented in SAP UI5.
+
+## How do I use it?
+This repository is intended to be used as a reference for code of SHINE for XSA. The SHINE for XSA MTA can be found in SAP Support Portal. 
+
+[For detailed steps on where to find the MTA and how to install the application please refer to the SHINE for XSA detailed documentation found here.](https://help.sap.com/doc/9fba444cef1e418e835a4321db5d4984/1.0.12/en-US/SAP_HANA_Interactive_Education_(SHINE)_for_SAP_HANA_XS_Advanced_en.pdf)
+
