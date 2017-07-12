@@ -1,7 +1,6 @@
-SHINEfor XSA SAP HANA 2.0 SPS00
+SHINE for SAP HANA Extended Application Services, Advanced Model (SHINE for XS Advanced ) SAP HANA 2.0 SPS00
 ===============
-SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build applications on SAP HANA extended application services advanced model. This demo application is delivered as a package that contains sample data and design-time developer objects for the applications database tables, views, OData and user interface.
-The application consists of the following packages:
+This release of the application consists of the following packages:
 
 
 
@@ -24,7 +23,7 @@ The application consists of the following packages:
 
 - site-content - This package contains the JSON configurations for the Fiori as a Service module.
 
-For more information, please refer to [SHINE for XSA guide](http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_Model_en.pdf).
+For more information, please refer to [SHINE for XSA guide](https://help.sap.com/doc/21bd6e2efc784ef19661c6302a0e83ae/2.0.00/en-US/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_en.pdf).
 ## Prerequisites
 The following components should be installed before SHINE installation on XSA:
 
@@ -110,5 +109,5 @@ b)	Uaa Endpoint
 
    For example in HANA express the UAA endpoint can be https://hxehost:39032/uaa-security
 
-   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](http://help.sap.com/hana/SAP_Web_IDE_for_SAP_HANA_Installation_Guide_en.pdf )
+   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/viewer/1a8e7ab05a2e4119b02b702f211422f5/2.0.01/en-US)
 
