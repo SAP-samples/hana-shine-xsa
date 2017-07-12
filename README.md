@@ -1,6 +1,6 @@
 SHINE for the Cloud Foundry Environment within SAP Cloud Platform
 ===============
-SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build SAP HANA native applications. This demo application is delivered as a package that contains sample data and design-time developer objects for the application database tables, views, OData services and user interface. SHINE is a Muti-Target Application (MTA) and follows the XS Advanced Programming Model. It consists of the following  packages:
+SHINE is a Muti-Target Application (MTA) and follows the XS Advanced Programming Model. It consists of the following  packages:
 
 - core-db - This package contains core data model artifacts required to create the tables and other database artifacts (e.g. .hdbcds, .hdbsequence, ...).
 
@@ -71,19 +71,20 @@ You can read more about the SAP NPM Registry in "[SAP NPM Registry launched: Mak
 
 ## Build the Source Code
 1. Clone the SHINE code from this repository to your local drive via Git or GitHub Desktop
-2. Copy the downloaded mta.jar into the root folder of the SHINE project
-3. Logon to your Cloud Foundry environment instance by following the steps explained [here](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/7a37d66c2e7d401db4980db0cd74aa6b.html)  
+2. Switch to branch shine-cf
+3. Copy the downloaded mta.jar into the root folder of the SHINE project
+4. Logon to your Cloud Foundry environment instance by following the steps explained [here](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/7a37d66c2e7d401db4980db0cd74aa6b.html)  
 *Please note: The Cloud Foundry API endpoints are listed [here](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/350356d1dc314d3199dca15bd2ab9b0e.html), for the Cloud Foundry environment in Frankfurt it's https://api.cf.eu10.hana.ondemand.com and for the Cloud Foundry environment in Virginia it's https://api.cf.us10.hana.ondemand.com.*
 > The Job Scheduler service is used by SHINE, therefore this needs to be available. Currently, the Job Scheduler service is only available in the Cloud Foundry environments in Frankfurt and Virginia, not in the beta in California. Therefore, the installation of SHINE into the Cloud Foundry environment in California would fail. Please install SHINE only in the Cloud Foundry environments in Frankfurt and Virginia.
-4. Run the command `cf marketplace` and check for the service name for hana in your account (it could be hanatrial or hana, it depends if you are using a trail or enterprise account)
-5. In line no. 141 of mta.yaml update the service name to hanatrial or hana based on your account
-6. In line no. 178 of mta.yaml update the url property of the controller to the Cloud Foundry API endpoint of the region you are using (see above).
-7. Check the Cloud Foundry org and space names to which you are planning to deploy.
+5. Run the command `cf marketplace` and check for the service name for hana in your account (it could be hanatrial or hana, it depends if you are using a trail or enterprise account)
+6. In line no. 141 of mta.yaml update the service name to hanatrial or hana based on your account
+7. In line no. 178 of mta.yaml update the url property of the controller to the Cloud Foundry API endpoint of the region you are using (see above).
+8. Check the Cloud Foundry org and space names to which you are planning to deploy.
 > The Multi-target Application Archive (MTAR), which is obtained after following the build steps described here, cannot be deployed into Cloud Foundry orgs or spaces with white spaces in the name (e.g. "My Space") due to a limitation from the deploy service. Therefore, the installation of the SHINE MTAR into Cloud Foundry orgs or spaces with white spaces in the name (e.g. "My Space") would fail. Please install the SHINE MTAR only into Cloud Foundry orgs or spaces without white spaces in the name  (e.g. "MySpace" or "My_Space").
-8. If the Cloud Foundry org or space, to which you are planning to deploy, has any special characters in the name other than the permissible 'a'-'z', 'A'-'Z', '0'-'9', '_', '-', '\', and '/', open the file xs-security.json under the shine-cf project root folder and edit line no. 2 `${org}-${space}-shine-admin`. Change the value to `"your-org-name-without-special-characters"-"your-space-name-without-special-characters"-shine-admin`, e.g. `p1726482trial_trial-dev_cf-shine-admin` althrough my org name is "p1726482trial_trial" and space name is "dev@cf".
-9. In your CLI in the SHINE project root folder run the command: `java -jar mta.jar --build-target=CF --mtar=shine-cf.mtar build`  
+9. If the Cloud Foundry org or space, to which you are planning to deploy, has any special characters in the name other than the permissible 'a'-'z', 'A'-'Z', '0'-'9', '_', '-', '\', and '/', open the file xs-security.json under the shine-cf project root folder and edit line no. 2 `${org}-${space}-shine-admin`. Change the value to `"your-org-name-without-special-characters"-"your-space-name-without-special-characters"-shine-admin`, e.g. `p1726482trial_trial-dev_cf-shine-admin` althrough my org name is "p1726482trial_trial" and space name is "dev@cf".
+10. In your CLI in the SHINE project root folder run the command: `java -jar mta.jar --build-target=CF --mtar=shine-cf.mtar build`  
 > You might notice that the build is too slow. This is because of an issue with [npm](https://github.com/npm/npm/issues/11028) when behind a proxy server. In such cases please run the build from an environment without a proxy.
-10. An MTAR with the name shine-cf.mtar was generated.
+11. An MTAR with the name shine-cf.mtar was generated.
 
 ## Deploy the MTAR
 1. SHINE needs Cloud Foundry resources as described below. Therefore, this amount of resources should be assigned in Quota Management (on Global Account level) and free (overview on Subaccount level) before SHINE deployment (e.g. what you get with the Cloud Foundry Trail is sufficient):
