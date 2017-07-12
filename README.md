@@ -1,4 +1,4 @@
-SHINE 
+SHINE for SAP HANA Extended Application Services, Advanced Model
 ===============
 ## What is it
 SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build applications on SAP HANA extended application services advanced model. This demo application is delivered as a package that contains sample data and design-time developer objects for the applications database tables, views, OData and user interface.
@@ -20,7 +20,7 @@ For detailed description on each release follow the below links
 - [SHINE for XSA Advanced SAP HANA 1.0 SPS11](https://github.com/SAP/hana-shine-xsa/blob/SPS11/README.md)
 
 ### SAP Cloud Platform Cloud Foundry Environment
-- [SHINE for CF Environment] (https://github.com/SAP/hana-shine-xsa/blob/shine-cf/README.md)
+- [SHINE for CF Environment](https://github.com/SAP/hana-shine-xsa/blob/shine-cf/README.md)
 
 ## Support
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)
