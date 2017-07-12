@@ -25,8 +25,13 @@ UTIL.formatUTCDateTime = function(dateTime) {
 UTIL.formatTimeStamp = function(value) {
 	var strDateTime = value;
     var myDate = new Date(strDateTime);
-    var offset = myDate.getTimezoneOffset();
-	var localTime = myDate.getTime() - (offset  * 60000);
-    var localDate = new Date(localTime).toString();
+    if (value!=null)
+    {
+    var localD = strDateTime.replace("T"," ");
+
+    var formatD = localD + " UTC";
+    var localDate = new Date(formatD);
+    }
     return localDate;
+
 };
