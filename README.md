@@ -23,7 +23,7 @@ For detailed description on each release follow the below links
 - [SHINE for CF Environment](https://github.com/SAP/hana-shine-xsa/blob/shine-cf/README.md)
 
 ## Support
-For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)
+For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/). For any question/clarification or report an issue in SHINE for CF Environment please mention [shine-cf] in the title to differentiate issue between SHINE for XS Advanced and SHINE for CF Environment
 
 ## License
 [Apache License 2.0](LICENSE)
