@@ -20,19 +20,19 @@ Architecture:
 
 This repository contains a version of SHINE which is configured to run on the Cloud Foundry environment within SAP Cloud Platform. You can read more about the "[General Availability of the XS Advanced Programming Model with Cloud Foundry on SAP Cloud Platform](https://blogs.sap.com/2017/05/16/general-availability-of-the-xs-advanced-programming-model-with-cloud-foundry-on-sap-cloud-platform/)". The code base of SHINE that is used is version SHINE for XSA SAP HANA 2.0 SPS01.
 
-## Setup MTA Builder
-First, a Multi-Target Application Archive (MTAR) needs to be built from the SHINE code, for this the MTA Builder is used. Then, in a second step, this MTAR needs to be deployed to the Cloud Foundry environment instance, for this the Cloud Foundry CLI with the MTA Plugin is used.
+## Setup MTAR Builder
+First, a Multi-Target Application Archive (MTAR) needs to be built from the SHINE code, for this the MTAR Builder is used. Then, in a second step, this MTAR needs to be deployed to the Cloud Foundry environment instance, for this the Cloud Foundry CLI with the MTA Plugin is used.
 
-### Download MTA Builder
+### Download MTAR Builder
 1. Go to [SAP Support Portal](https://launchpad.support.sap.com/#/softwarecenter/support/index)  
 2. Click on Support Package and Patches
 3. Expand By Alphabetical Index (A-Z)
 4. Click on Alphabet M
 5. Select MULTITRG APP ARCHIVE BUILDER-> MULTITRG APP ARCHIVE BUILDER 1 ->MTA ARCHIVE BUILDER 1.0
-6. Download the latest version of MTA Builder and rename it to `mta.jar`
+6. Download the latest version of MTAR Builder and rename it to `mta.jar`
 
-### MTA Builder Pre-requisites
-The MTA Builder needs Java, Git, Apache Maven, and Node.js including npm as pre-requisites. If you have one of the tools already installed you can skip the respective steps but make sure that you do not skip the npm configuration with the SAP NPM Registry.
+### MTAR Builder Pre-requisites
+The MTAR Builder needs Java, Git, Apache Maven, and Node.js including npm as pre-requisites. If you have one of the tools already installed you can skip the respective steps but make sure that you do not skip the npm configuration with the SAP NPM Registry.
 
 #### Setup Java
 1. Download and install the latest Java SE Development Kit (JDK) from [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
