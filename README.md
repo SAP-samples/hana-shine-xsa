@@ -17,7 +17,7 @@ For detailed description on each release follow the below links
 - [SHINE for XS Advanced SAP HANA 2.0 SPS01](SHINE-XSA.md) 
 - [SHINE for XS Advanced SAP HANA 2.0 SPS00](https://github.com/SAP/hana-shine-xsa/blob/HANA2.0-SPS00/README.md)
 - [SHINE for XS Advanced SAP HANA 1.0 SPS12](https://github.com/SAP/hana-shine-xsa/blob/SPS12/README.md)
-- [SHINE for XSA Advanced SAP HANA 1.0 SPS11](https://github.com/SAP/hana-shine-xsa/blob/SPS11/README.md)
+- [SHINE for XS Advanced SAP HANA 1.0 SPS11](https://github.com/SAP/hana-shine-xsa/blob/SPS11/README.md)
 
 ### SAP Cloud Platform Cloud Foundry Environment
 - [SHINE for CF Environment](https://github.com/SAP/hana-shine-xsa/blob/shine-cf/README.md)
