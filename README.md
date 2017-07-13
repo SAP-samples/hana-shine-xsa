@@ -18,7 +18,7 @@ Architecture:
 
 ![Alt text](./images/SHINE-CF.jpg "Architecture")
 
-This repository contains a version of SHINE which is configured to run on the Cloud Foundry environment within SAP Cloud Platform. You can read more about the "[General Availability of the XS Advanced Programming Model with Cloud Foundry on SAP Cloud Platform](https://blogs.sap.com/2017/05/16/general-availability-of-the-xs-advanced-programming-model-with-cloud-foundry-on-sap-cloud-platform/)". The code base of SHINE that is used is version SHINE for XSA SAP HANA 2.0 SPS01.
+This repository contains a version of SHINE which is configured to run on the Cloud Foundry environment within SAP Cloud Platform. You can read more about the "[General Availability of the XS Advanced Programming Model with Cloud Foundry on SAP Cloud Platform](https://blogs.sap.com/2017/05/16/general-availability-of-the-xs-advanced-programming-model-with-cloud-foundry-on-sap-cloud-platform/)". The code base of SHINE that is used is version SHINE for XSA SAP HANA 2.0 SPS01. A blog post with the same instructions as in this readme can be found [here](https://blogs.sap.com/2017/07/10/deploying-shine-on-the-cloud-foundry-environment-within-sap-cloud-platform/).
 
 ## Setup MTAR Builder
 First, a Multi-Target Application Archive (MTAR) needs to be built from the SHINE code, for this the MTAR Builder is used. Then, in a second step, this MTAR needs to be deployed to the Cloud Foundry environment instance, for this the Cloud Foundry CLI with the MTA Plugin is used.
