@@ -82,7 +82,7 @@ modules:
       builder: hdb
       timeout: 60m
     parameters:
-        memory: 308M
+        memory: 244M
         health-check-type: none
     requires:
       - name: shine-container
@@ -96,7 +96,7 @@ modules:
      builder: npm
      timeout: 60m
     parameters:
-       memory: 64M
+       memory: 128M
     requires:
       - name: shine-uaa
       - name: sap-portal-services-host
