@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="sap.hana.democontent.epm.models::PO_ITEM" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="PO_ITEM"/>
+  <metadata changedAt="2015-04-23 17:30:44.77"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="PO.Item" type="DATA_BASE_TABLE">
+      <resourceUri>PO.Item</resourceUri>
+    </DataSource>
+    <DataSource id="MD.Products" type="DATA_BASE_TABLE">
+      <resourceUri>MD.Products</resourceUri>
+    </DataSource>
+    <DataSource id="Util.Texts" type="DATA_BASE_TABLE">
+      <resourceUri>Util.Texts</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="PURCHASEORDERID"/>
+        <viewAttribute id="PURCHASEORDERITEM"/>
+        <viewAttribute id="PRODUCT_PRODUCTID"/>
+        <viewAttribute id="CURRENCY"/>
+        <viewAttribute id="GROSSAMOUNT"/>
+        <viewAttribute id="NETAMOUNT"/>
+        <viewAttribute id="TAXAMOUNT"/>
+        <viewAttribute id="QUANTITY"/>
+        <viewAttribute id="QUANTITYUNIT"/>
+        <viewAttribute id="DELIVERYDATE"/>
+        <viewAttribute id="NAMEID"/>
+        <viewAttribute id="CATEGORY"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#PO.Item">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERITEM" source="PURCHASEORDERITEM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRODUCTID" source="PRODUCT.PRODUCTID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYDATE" source="DELIVERYDATE"/>
+      </input>
+      <input node="#MD.Products">
+        <mapping xsi:type="Calculation:AttributeMapping" target="NAMEID" source="NAMEID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRODUCTID" source="PRODUCTID"/>
+      </input>
+      <joinAttribute name="PRODUCT_PRODUCTID"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="DELIVERYDATE"/>
+        <viewAttribute id="QUANTITYUNIT"/>
+        <viewAttribute id="QUANTITY"/>
+        <viewAttribute id="NETAMOUNT"/>
+        <viewAttribute id="GROSSAMOUNT"/>
+        <viewAttribute id="CURRENCY"/>
+        <viewAttribute id="PRODUCT_PRODUCTID"/>
+        <viewAttribute id="PURCHASEORDERITEM"/>
+        <viewAttribute id="PURCHASEORDERID"/>
+        <viewAttribute id="TAXAMOUNT"/>
+        <viewAttribute id="ProductName"/>
+        <viewAttribute id="CATEGORY"/>
+        <viewAttribute hidden="true" id="JOIN$NAMEID$TEXTID"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYDATE" source="DELIVERYDATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRODUCTID" source="PRODUCT_PRODUCTID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERITEM" source="PURCHASEORDERITEM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NAMEID$TEXTID" source="NAMEID"/>
+      </input>
+      <input node="#Util.Texts">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductName" source="TEXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NAMEID$TEXTID" source="TEXTID"/>
+      </input>
+      <joinAttribute name="JOIN$NAMEID$TEXTID"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_2">
+    <attributes>
+      <attribute id="ProductName" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TEXT"/>
+        <keyMapping columnObjectName="Join_2" columnName="ProductName"/>
+      </attribute>
+      <attribute id="PURCHASEORDERID" key="true" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PURCHASEORDERID"/>
+        <keyMapping columnObjectName="Join_2" columnName="PURCHASEORDERID"/>
+      </attribute>
+      <attribute id="TAXAMOUNT" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TAXAMOUNT"/>
+        <keyMapping columnObjectName="Join_2" columnName="TAXAMOUNT"/>
+      </attribute>
+      <attribute id="PURCHASEORDERITEM" key="true" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PURCHASEORDERITEM"/>
+        <keyMapping columnObjectName="Join_2" columnName="PURCHASEORDERITEM"/>
+      </attribute>
+      <attribute id="PRODUCT_PRODUCTID" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
+        <keyMapping columnObjectName="Join_2" columnName="PRODUCT_PRODUCTID"/>
+      </attribute>
+      <attribute id="CURRENCY" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CURRENCY"/>
+        <keyMapping columnObjectName="Join_2" columnName="CURRENCY"/>
+      </attribute>
+      <attribute id="GROSSAMOUNT" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GROSSAMOUNT"/>
+        <keyMapping columnObjectName="Join_2" columnName="GROSSAMOUNT"/>
+      </attribute>
+      <attribute id="NETAMOUNT" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <keyMapping columnObjectName="Join_2" columnName="NETAMOUNT"/>
+      </attribute>
+      <attribute id="QUANTITY" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="QUANTITY"/>
+        <keyMapping columnObjectName="Join_2" columnName="QUANTITY"/>
+      </attribute>
+      <attribute id="QUANTITYUNIT" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="QUANTITYUNIT"/>
+        <keyMapping columnObjectName="Join_2" columnName="QUANTITYUNIT"/>
+      </attribute>
+      <attribute id="DELIVERYDATE" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DELIVERYDATE"/>
+        <keyMapping columnObjectName="Join_2" columnName="DELIVERYDATE"/>
+      </attribute>
+      <attribute id="CATEGORY" order="12" displayAttribute="false" attributeHierarchyActive="false">
+        <descriptions defaultDescription="CATEGORY"/>
+        <keyMapping columnObjectName="Join_2" columnName="CATEGORY"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="360"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="230"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

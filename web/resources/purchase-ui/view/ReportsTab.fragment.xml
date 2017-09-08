@@ -1,0 +1,70 @@
+<sap.ui.core:FragmentDefinition xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.viz.ui5="sap.viz.ui5" xmlns:sap.viz.ui5.data="sap.viz.ui5.data" xmlns:sap.viz.ui5.types="sap.viz.ui5.types" xmlns:sap.viz.ui5.types.legend="sap.viz.ui5.types.legend" xmlns:sap.viz.ui5.types.controller="sap.viz.ui5.types.controller" xmlns:sap.ui.core.mvc="sap.ui.core.mvc">
+<sap.ui.commons.layout:MatrixLayout width="auto">
+                        <sap.ui.commons.layout:rows>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label id="lblPie" design="Bold" requiredAtBegin="false"/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell colSpan="2">
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:HorizontalDivider/>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                            <sap.ui.commons:Label width="10%" id="lblGroupBy1" text="{i18n&gt;s_group_by}" requiredAtBegin="false"/>
+                                            <sap.ui.commons:DropdownBox id="DDLBGroupBy" value="{i18n&gt;company}" width="22%" selectedItemId="PARTNERCOMPANYNAME" change="setGroupBy" accessibleRole="Combobox" tooltip="{i18n&gt;group_by}">
+                                                <sap.ui.commons:items>
+                                                    <sap.ui.core:ListItem id="COMPANYNAME" text="{i18n&gt;company}"/>
+                                                    <sap.ui.core:ListItem id="CATEGORY" text="{i18n&gt;product_cat}"/>
+                                                    <sap.ui.core:ListItem id="CITY" text="{i18n&gt;city}"/>
+                                                    <sap.ui.core:ListItem id="POSTALCODE" text="{i18n&gt;postal}"/>
+                                                    <sap.ui.core:ListItem id="PRODUCTID" text="{i18n&gt;product}"/>
+                                                </sap.ui.commons:items>
+                                            </sap.ui.commons:DropdownBox>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                            <sap.ui.commons.layout:MatrixLayoutRow>
+                                <sap.ui.commons.layout:cells>
+                                    <sap.ui.commons.layout:MatrixLayoutCell>
+                                        <sap.ui.commons.layout:content>
+                                           <sap.viz.ui5:Pie id="myPie" width="600px" height="550px">
+                                                <sap.viz.ui5:dataset>
+                                                    <sap.viz.ui5.data:FlattenedDataset data="{piemodel&gt;/modelData}">
+                                                        <sap.viz.ui5.data:dimensions>
+                                                            <sap.viz.ui5.data:DimensionDefinition axis="1" value="{piemodel&gt;label}" name="Group By"/>
+                                                        </sap.viz.ui5.data:dimensions>
+                                                        <sap.viz.ui5.data:measures>
+                                                            <sap.viz.ui5.data:MeasureDefinition value="{piemodel&gt;data}" name="Gross Amount"/>
+                                                        </sap.viz.ui5.data:measures>
+                                                    </sap.viz.ui5.data:FlattenedDataset>
+                                                </sap.viz.ui5:dataset>
+                                                <sap.viz.ui5:plotArea>
+                                                    <sap.viz.ui5.types:Pie colorPalette="#748CB2,#9CC677,#EACF5E,#F9AD79,#D16A7C,#8873A2,#3A95B3,#B6D949,#FDD36C,#F47958,#A65084,#0063B1,#0DA841,#FCB71D,#F05620,#B22D6E,#3C368E,#8FB2CF,#95D4AB,#EAE98F,#F9BE92,#EC9A99,#BC98BD,#1EB7B2,#73C03C,#F48323,#EB271B,#D9B5CA,#AED1DA,#DFECB2,#FCDAB0,#F5BCB4">
+                                                    </sap.viz.ui5.types:Pie>
+                                                </sap.viz.ui5:plotArea>
+                                                <sap.viz.ui5:toolTip>
+                                                    <sap.viz.ui5.types:Tooltip formatString="#,###,###,###.00">
+                                                    </sap.viz.ui5.types:Tooltip>
+                                                </sap.viz.ui5:toolTip>
+                                            </sap.viz.ui5:Pie>
+                                        </sap.ui.commons.layout:content>
+                                    </sap.ui.commons.layout:MatrixLayoutCell>
+                                </sap.ui.commons.layout:cells>
+                            </sap.ui.commons.layout:MatrixLayoutRow>
+                        </sap.ui.commons.layout:rows>
+                    </sap.ui.commons.layout:MatrixLayout>
+</sap.ui.core:FragmentDefinition>

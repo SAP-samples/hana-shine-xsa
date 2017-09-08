@@ -1,0 +1,1 @@
+{"type":"sap.hdb","builders":{"default":"hdi-builder","configs":{}},"runners":{"configs":{}},"attributes":{"mta_module_parent":["/shine-cf"]},"mixinTypes":["mtamodule"]}

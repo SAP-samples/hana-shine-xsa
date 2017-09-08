@@ -1,0 +1,4 @@
+service namespace "sap.hana.democontent.epm.services" {
+   "UserData.User" as "Users"
+      create using "user.xsjs:usersCreateMethod.xsjslib::usersCreate";
+}

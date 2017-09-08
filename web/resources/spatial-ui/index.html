@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <title>SHINE Spatial Demo</title>
+	    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" 
+                            type="text/javascript" charset="utf-8"></script>
+        <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" 
+                            type="text/javascript" charset="utf-8"></script>
+		<script src="https://js.api.here.com/v3/3.0/mapsjs-ui.js" 
+            type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="UTF-8"
+            src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+        <script type="text/javascript" charset="UTF-8"
+            src="https://js.api.here.com/v3/3.0/mapsjs-data.js"></script>
+        <script type="text/javascript" charset="UTF-8"
+            src="https://js.api.here.com/v3/3.0/mapsjs-clustering.js"></script>
+        <link rel="stylesheet" type="text/css" 
+            href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+
+		<script src="{{{sapui5url}}}/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-language="en"
+                data-sap-ui-xx-bindingSyntax="complex"
+				data-sap-ui-libs="sap.ui.commons, sap.ui.ux3, sap.m, sap.makit"
+				data-sap-ui-resourceroots='{"shine.democontent.epm.spatial" : "./"}'
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+
+		 <script>
+   			    jQuery.sap.viewName =  "shine.democontent.epm.spatial.view.main";
+   			    sap.app = {}
+   			    sap.isSingle = false;
+   			    sap.ui.getCore().attachInit(function(){
+                    new sap.ui.core.ComponentContainer({
+                       height : "100%",
+                       name : "shine.democontent.epm.spatial"
+                   }).placeAt('content'); 
+                });
+   			  </script>
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

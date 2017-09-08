@@ -1,0 +1,14 @@
+---
+applications:
+- name: shine-web
+  host: web1
+  memory: 768M
+  env:
+    destinations: >
+      [
+        {"name":"core-backend", "url":"https://trial-i321572-shine-core-js.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true},
+        {"name":"user-backend", "url":"https://trial-i321572-shine-user-js.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true},
+        {"name":"user-java-backend", "url":"https://trial-i321572-shine-user-java.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true}
+      ]
+  services:
+    - shine-uaa

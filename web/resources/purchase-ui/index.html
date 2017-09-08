@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+       <head>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+              <link rel="stylesheet" type="text/css" href="css/style.css">
+			  <title>Purchase Order Worklist</title>
+			  
+   			  <script src="{{{sapui5url}}}/resources/sap-ui-core.js"
+                      id="sap-ui-bootstrap"
+                      data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.ui.table"
+                      data-sap-ui-theme="sap_bluecrystal"
+                      data-sap-ui-language="en"
+                      data-sap-ui-preload=""
+                      data-sap-ui-xx-bindingSyntax="complex"
+				      data-sap-ui-resourceroots='{"shine.democontent.epm.poworklist" : "./"}'>
+              </script>
+              <!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+   			  <script>
+   			    
+   			    jQuery.sap.viewName =  "shine.democontent.epm.poworklist.view.Shell";
+   			    
+   			    sap.ui.getCore().attachInit(function(){
+                    new sap.ui.core.ComponentContainer({
+                       height : "100%",
+                       name : "shine.democontent.epm.poworklist"
+                   }).placeAt('content'); 
+                });
+   			  </script>
+
+       </head>
+       <body class="sapUiBody" role="application">
+              <div id="content"></div>
+       </body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "DUMMY": {
+    "target": {
+      "object": "DUMMY",
+      "schema": "SYS"
+    }
+  },
+  "VIEWS": {
+    "target": {
+      "object": "VIEWS",
+      "schema": "SYS"
+    }
+  },
+  "TABLES": {
+    "target": {
+      "object": "TABLES",
+      "schema": "SYS"
+    }
+  },
+  "M_TABLES": {
+    "target": {
+      "object": "M_TABLES",
+      "schema": "SYS"
+    }
+  },
+  "SERIES_GENERATE_TIMESTAMP": {
+    "target": {
+      "object": "SERIES_GENERATE_TIMESTAMP",
+      "schema": "SYS"
+    }
+  }
+}

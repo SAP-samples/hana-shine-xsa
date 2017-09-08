@@ -1,0 +1,78 @@
+<sap.ui.core.mvc:View controllerName="sap.hana.democontent.epm.salesdashboard.view.products"
+    xmlns:sap.ui.ux3="sap.ui.ux3"
+    xmlns:sap.ui.commons.layout="sap.ui.commons.layout"
+    xmlns:sap.ui.core="sap.ui.core"
+    xmlns:sap.ui.core.mvc="sap.ui.core.mvc"
+    xmlns:sap.viz.ui5="sap.viz.ui5"
+    xmlns:sap.viz.ui5.data="sap.viz.ui5.data"
+    xmlns:sap.viz.ui5.types="sap.viz.ui5.types"
+    xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:sap.ui.commons="sap.ui.commons" >
+        <sap.ui.commons.layout:MatrixLayout>
+            <sap.ui.commons.layout:rows>
+                <sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:cells>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.commons:Panel text="{i18n>COMPARE_PRODUCT_CATEGORY_YEAR}">
+                                    <sap.ui.commons:content>
+                                         <sap.ui.commons.layout:MatrixLayout>
+                                            <sap.ui.commons.layout:rows>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.viz.ui5:Column id="salesCompareColumn" width="100%" height="380px">
+                                                                    <sap.viz.ui5:toolTip>
+                                                                        <sap.viz.ui5.types:Tooltip formatString="#,###,###,###.00">
+                                                                        </sap.viz.ui5.types:Tooltip>
+                                                                    </sap.viz.ui5:toolTip>
+                                                                </sap.viz.ui5:Column>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                            </sap.ui.commons.layout:rows>
+                                        </sap.ui.commons.layout:MatrixLayout>
+                                    </sap.ui.commons:content>
+                                    <sap.ui.commons:buttons>
+                                        <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="5" press="openTileDialog"></sap.ui.commons:Button>
+                                    </sap.ui.commons:buttons>
+                                </sap.ui.commons:Panel>
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                    </sap.ui.commons.layout:cells>
+                </sap.ui.commons.layout:MatrixLayoutRow>
+                <sap.ui.commons.layout:MatrixLayoutRow>
+                    <sap.ui.commons.layout:cells>
+                        <sap.ui.commons.layout:MatrixLayoutCell>
+                            <sap.ui.commons.layout:content>
+                                <sap.ui.commons:Panel text="{i18n>PRODUCT_SALES}">
+                                    <sap.ui.commons:content>
+                                         <sap.ui.commons.layout:MatrixLayout>
+                                            <sap.ui.commons.layout:rows>
+                                                <sap.ui.commons.layout:MatrixLayoutRow>
+                                                    <sap.ui.commons.layout:cells>
+                                                        <sap.ui.commons.layout:MatrixLayoutCell>
+                                                            <sap.ui.commons.layout:content>
+                                                                <sap.viz.ui5:Scatter id="productSalesScatter" width="100%" height="420px">
+                                                                    
+                                                                </sap.viz.ui5:Scatter>
+                                                            </sap.ui.commons.layout:content>
+                                                        </sap.ui.commons.layout:MatrixLayoutCell>
+                                                    </sap.ui.commons.layout:cells>
+                                                </sap.ui.commons.layout:MatrixLayoutRow>
+                                            </sap.ui.commons.layout:rows>
+                                        </sap.ui.commons.layout:MatrixLayout>
+                                    </sap.ui.commons:content>
+                                    <sap.ui.commons:buttons>
+                                        <sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="6" press="openTileDialog"></sap.ui.commons:Button>
+                                    </sap.ui.commons:buttons>
+                                </sap.ui.commons:Panel>
+                            </sap.ui.commons.layout:content>
+                        </sap.ui.commons.layout:MatrixLayoutCell>
+                    </sap.ui.commons.layout:cells>
+                </sap.ui.commons.layout:MatrixLayoutRow>
+            </sap.ui.commons.layout:rows>
+        </sap.ui.commons.layout:MatrixLayout>
+</sap.ui.core.mvc:View>

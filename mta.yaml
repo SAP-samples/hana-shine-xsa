@@ -1,0 +1,117 @@
+_schema-version: "2.0.0"
+ID: com.sap.refapps.shine
+version: 1.3.10
+modules:
+  - name: shine-web
+    type: nodejs
+    path: web
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: sapui5-provider
+        properties:
+          sapui5url: ~{url}
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-backend
+          url: ~{url}
+          forwardAuthToken: true 
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true
+      
+    parameters: 
+        memory: 128M
+        
+  - name: shine-core-js
+    type: nodejs
+    path: core-js
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    properties: 
+      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
+    parameters:
+        memory: 256M
+    provides: 
+      - name: core-js
+        properties:
+          url: "${default-url}"
+    
+    requires:
+      - name: shine-uaa
+      - name: shine-container
+      - name: shine-core-db
+
+  - name: shine-user-js
+    type: nodejs
+    path: user-js
+    build-parameters:
+     builder: npm
+     timeout: 60m
+    properties: 
+      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
+    parameters:
+        memory: 128M
+    provides: 
+      - name: user-js
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: shine-uaa
+      - name: shine-scheduler
+      - name: shine-core-db
+      - name: shine-container
+      
+  
+  - name: shine-core-db
+    type: hdb
+    path: core-db
+    build-parameters:
+      builder: hdb
+      timeout: 60m
+    parameters:
+        memory: 256M
+        health-check-type: none
+    requires:
+      - name: shine-container
+        properties:
+          TARGET_CONTAINER: ~{container-name}
+
+resources:
+  - name: shine-container
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hanatrial
+      service-plan: hdi-shared
+    properties:
+      container-name: ${service-name}
+
+  - name: shine-scheduler
+    type: com.sap.xs.job-scheduler
+    parameters:
+     service: jobscheduler
+     service-plan: lite
+     
+   
+  - name: shine-uaa
+    type: com.sap.xs.uaa
+    parameters:
+     service: xsuaa
+     service-plan: application
+     path: xs-security.json
+        
+    
+  - name: sapui5-provider
+    properties:
+      url: "https://sapui5.hana.ondemand.com/1.44.8"

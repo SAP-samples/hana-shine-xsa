@@ -1,0 +1,65 @@
+<sap.ui.core.mvc:View xmlns:sap.m="sap.m" xmlns:sap.makit="sap.makit" xmlns:sap.ui.ux3="sap.ui.ux3" xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.commons="sap.ui.commons" controllerName="shine.democontent.epm.spatial.view.sales-analysis">
+	<sap.ui.commons:Splitter id="splitter1" splitterPosition="60%" minSizeFirstPane="50%" minSizeSecondPane="20%" width="100%" height="100%">
+		<sap.ui.commons:firstPaneContent>
+		</sap.ui.commons:firstPaneContent>
+		<sap.ui.commons:secondPaneContent>
+			<sap.m:List width="100%">
+				<sap.m:items>
+					<sap.m:ActionListItem text="{i18n&gt;REMOVE_POLYGON}" press="removePolygon">
+					</sap.m:ActionListItem>
+					<sap.m:GroupHeaderListItem title="{i18n&gt;SALES_REGION_DATA}">
+					</sap.m:GroupHeaderListItem>
+					<sap.m:ObjectListItem id="bpHeader" title="{i18n&gt;TOTAL_SALES}" number="" numberUnit="EUR">
+					</sap.m:ObjectListItem>
+					<sap.m:GroupHeaderListItem title="{i18n&gt;SALES_CHART_TITLE}">
+					</sap.m:GroupHeaderListItem>
+					<sap.m:CustomListItem>
+						<sap.makit:Chart id="oSalesChart" type="Column" width="100%" height="175px" showRangeSelector="false" showTableValue="true">
+							<sap.makit:columns>
+								<sap.makit:Column name="YEAR" value="{year}">
+								</sap.makit:Column>
+								<sap.makit:Column name="AMOUNT" value="{salesamount}">
+								</sap.makit:Column>
+							</sap.makit:columns>
+							<sap.makit:values>
+								<sap.makit:Value expression="AMOUNT" format="rounded2" displayName="{i18n&gt;AMOUNT}">
+								</sap.makit:Value>
+							</sap.makit:values>
+							<sap.makit:category>
+								<sap.makit:Category column="YEAR" displayName="{i18n&gt;YEAR}">
+								</sap.makit:Category>
+							</sap.makit:category>
+						</sap.makit:Chart>
+					</sap.m:CustomListItem>
+					<sap.m:GroupHeaderListItem title="{i18n&gt;TOP_5_BP}">
+					</sap.m:GroupHeaderListItem>
+					<sap.m:ObjectListItem id="oCustomerItems0" title="" number="" numberUnit="EUR">
+						<sap.m:attributes>
+							<sap.m:ObjectAttribute id="attr0"/>
+						</sap.m:attributes>	
+					</sap.m:ObjectListItem>
+					<sap.m:ObjectListItem id="oCustomerItems1" title="" number="" numberUnit="EUR">
+						<sap.m:attributes>
+							<sap.m:ObjectAttribute id="attr1"/>
+						</sap.m:attributes>
+					</sap.m:ObjectListItem>
+					<sap.m:ObjectListItem id="oCustomerItems2" title="" number="" numberUnit="EUR">
+						<sap.m:attributes>
+							<sap.m:ObjectAttribute id="attr2"/>
+						</sap.m:attributes>
+					</sap.m:ObjectListItem>
+					<sap.m:ObjectListItem id="oCustomerItems3" title="" number="" numberUnit="EUR">
+						<sap.m:attributes>
+							<sap.m:ObjectAttribute id="attr3"/>
+						</sap.m:attributes>
+					</sap.m:ObjectListItem>
+					<sap.m:ObjectListItem id="oCustomerItems4" title="" number="" numberUnit="EUR">
+						<sap.m:attributes>
+							<sap.m:ObjectAttribute id="attr4"/>
+						</sap.m:attributes>
+					</sap.m:ObjectListItem>
+				</sap.m:items>
+			</sap.m:List>
+		</sap.ui.commons:secondPaneContent>	
+	</sap.ui.commons:Splitter>
+</sap.ui.core.mvc:View>

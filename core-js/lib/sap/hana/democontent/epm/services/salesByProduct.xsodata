@@ -1,0 +1,11 @@
+service namespace "sap.hana.democontent.epm"  { 
+   "sap.hana.democontent.epm.models::SALESORDER_DYNAMIC_JOIN"
+    as "SalesByProduct"
+   	keys generate local "ID"
+    aggregates always;	 
+}
+
+
+settings {
+    metadata cache-control "max-age= 604800";
+}

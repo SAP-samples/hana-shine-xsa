@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT_WRAPPER" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="SALES_OVERVIEW_WO_CURR_CONV_OPT_WRAPPER"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT">
+    <resourceUri>sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="BILLINGSTATUS">
+        <descriptions defaultDescription="BILLINGSTATUS"/>
+      </viewAttribute>
+      <viewAttribute id="COMPANYNAME">
+        <descriptions defaultDescription="COMPANYNAME"/>
+      </viewAttribute>
+      <viewAttribute id="CURRENCY">
+        <descriptions defaultDescription="CURRENCY"/>
+      </viewAttribute>
+      <viewAttribute id="DELIVERYSTATUS">
+        <descriptions defaultDescription="DELIVERYSTATUS"/>
+      </viewAttribute>
+      <viewAttribute id="HISTORY_CREATEDBY">
+        <descriptions defaultDescription="HISTORY_CREATEDBY"/>
+      </viewAttribute>
+      <viewAttribute id="LIFECYCLESTATUS">
+        <descriptions defaultDescription="LIFECYCLESTATUS"/>
+      </viewAttribute>
+      <viewAttribute id="NETAMOUNT" aggregationType="sum">
+        <descriptions defaultDescription="NETAMOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="PARTNERID">
+        <descriptions defaultDescription="PARTNERID"/>
+      </viewAttribute>
+      <viewAttribute id="POSTING_DATE" aggregationType="min">
+        <descriptions defaultDescription="POSTING_DATE"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCTID">
+        <descriptions defaultDescription="PRODUCTID"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCTID_1">
+        <descriptions defaultDescription="PRODUCTID_1"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCTPICURL">
+        <descriptions defaultDescription="PRODUCTPICURL"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_CATEGORY">
+        <descriptions defaultDescription="PRODUCT_CATEGORY"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_CURRENCY">
+        <descriptions defaultDescription="PRODUCT_CURRENCY"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_DESCRIPTION">
+        <descriptions defaultDescription="PRODUCT_DESCRIPTION"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_NAME">
+        <descriptions defaultDescription="PRODUCT_NAME"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_PRICE">
+        <descriptions defaultDescription="PRODUCT_PRICE"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_TYPECODE">
+        <descriptions defaultDescription="PRODUCT_TYPECODE"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_WEIGHTMEASURE">
+        <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_WEIGHTUNIT">
+        <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
+      </viewAttribute>
+      <viewAttribute id="QUANTITY" aggregationType="sum">
+        <descriptions defaultDescription="QUANTITY"/>
+      </viewAttribute>
+      <viewAttribute id="QUANTITYUNIT">
+        <descriptions defaultDescription="QUANTITYUNIT"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_COMPLETED" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_COMPLETED"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_DELIVERED" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_DELIVERED"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_INPROCESS" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_INPROCESS"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_NEW" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_NEW"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_PAID" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_PAID"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_UNDELIVERED" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_UNDELIVERED"/>
+      </viewAttribute>
+      <viewAttribute id="RM_AMOUNT_UNPAID" aggregationType="sum">
+        <descriptions defaultDescription="RM_AMOUNT_UNPAID"/>
+      </viewAttribute>
+      <viewAttribute id="SALESORDERID">
+        <descriptions defaultDescription="SALESORDERID"/>
+      </viewAttribute>
+      <viewAttribute id="SALESORDERITEM">
+        <descriptions defaultDescription="SALESORDERITEM"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_BUILDING">
+        <descriptions defaultDescription="SUPPLIER_BUILDING"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_CITY">
+        <descriptions defaultDescription="SUPPLIER_CITY"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_COUNTRY">
+        <descriptions defaultDescription="SUPPLIER_COUNTRY"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_ID">
+        <descriptions defaultDescription="SUPPLIER_ID"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_POSTALCODE">
+        <descriptions defaultDescription="SUPPLIER_POSTALCODE"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_REGION">
+        <descriptions defaultDescription="SUPPLIER_REGION"/>
+      </viewAttribute>
+      <viewAttribute id="SUPPLIER_STREET">
+        <descriptions defaultDescription="SUPPLIER_STREET"/>
+      </viewAttribute>
+      <viewAttribute id="TAXAMOUNT" aggregationType="sum">
+        <descriptions defaultDescription="TAXAMOUNT"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="BILLINGSTATUS" source="BILLINGSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYSTATUS" source="DELIVERYSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HISTORY_CREATEDBY" source="HISTORY_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LIFECYCLESTATUS" source="LIFECYCLESTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTING_DATE" source="POSTING_DATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID_1" source="PRODUCTID_1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTPICURL" source="PRODUCTPICURL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CURRENCY" source="PRODUCT_CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_DESCRIPTION" source="PRODUCT_DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_NAME" source="PRODUCT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRICE" source="PRODUCT_PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_TYPECODE" source="PRODUCT_TYPECODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_WEIGHTMEASURE" source="PRODUCT_WEIGHTMEASURE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_WEIGHTUNIT" source="PRODUCT_WEIGHTUNIT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_COMPLETED" source="RM_AMOUNT_COMPLETED"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_DELIVERED" source="RM_AMOUNT_DELIVERED"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_INPROCESS" source="RM_AMOUNT_INPROCESS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_NEW" source="RM_AMOUNT_NEW"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_PAID" source="RM_AMOUNT_PAID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_UNDELIVERED" source="RM_AMOUNT_UNDELIVERED"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RM_AMOUNT_UNPAID" source="RM_AMOUNT_UNPAID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_BUILDING" source="SUPPLIER_BUILDING"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_CITY" source="SUPPLIER_CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_COUNTRY" source="SUPPLIER_COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_ID" source="SUPPLIER_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_POSTALCODE" source="SUPPLIER_POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_REGION" source="SUPPLIER_REGION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPLIER_STREET" source="SUPPLIER_STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="BILLINGSTATUS" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BILLINGSTATUS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="BILLINGSTATUS"/>
+    </attribute>
+    <attribute id="COMPANYNAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COMPANYNAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="COMPANYNAME"/>
+    </attribute>
+    <attribute id="CURRENCY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="DELIVERYSTATUS" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DELIVERYSTATUS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DELIVERYSTATUS"/>
+    </attribute>
+    <attribute id="HISTORY_CREATEDBY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HISTORY_CREATEDBY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="HISTORY_CREATEDBY"/>
+    </attribute>
+    <attribute id="LIFECYCLESTATUS" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LIFECYCLESTATUS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="LIFECYCLESTATUS"/>
+    </attribute>
+    <attribute id="PARTNERID" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARTNERID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PARTNERID"/>
+    </attribute>
+    <attribute id="PRODUCTID" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCTID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCTID"/>
+    </attribute>
+    <attribute id="PRODUCTID_1" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCTID_1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCTID_1"/>
+    </attribute>
+    <attribute id="PRODUCTPICURL" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCTPICURL"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCTPICURL"/>
+    </attribute>
+    <attribute id="PRODUCT_CATEGORY" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_CATEGORY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT_CATEGORY"/>
+    </attribute>
+    <attribute id="PRODUCT_CURRENCY" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_CURRENCY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT_CURRENCY"/>
+    </attribute>
+    <attribute id="PRODUCT_DESCRIPTION" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_DESCRIPTION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT_DESCRIPTION"/>
+    </attribute>
+    <attribute id="PRODUCT_NAME" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT_NAME"/>
+    </attribute>
+    <attribute id="PRODUCT_TYPECODE" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_TYPECODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT_TYPECODE"/>
+    </attribute>
+    <attribute id="PRODUCT_WEIGHTUNIT" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT_WEIGHTUNIT"/>
+    </attribute>
+    <attribute id="QUANTITYUNIT" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUANTITYUNIT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="QUANTITYUNIT"/>
+    </attribute>
+    <attribute id="SALESORDERID" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALESORDERID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SALESORDERID"/>
+    </attribute>
+    <attribute id="SALESORDERITEM" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALESORDERITEM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SALESORDERITEM"/>
+    </attribute>
+    <attribute id="SUPPLIER_BUILDING" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_BUILDING"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_BUILDING"/>
+    </attribute>
+    <attribute id="SUPPLIER_CITY" order="33" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_CITY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_CITY"/>
+    </attribute>
+    <attribute id="SUPPLIER_COUNTRY" order="34" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_COUNTRY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_COUNTRY"/>
+    </attribute>
+    <attribute id="SUPPLIER_ID" order="35" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_ID"/>
+    </attribute>
+    <attribute id="SUPPLIER_POSTALCODE" order="36" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_POSTALCODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_POSTALCODE"/>
+    </attribute>
+    <attribute id="SUPPLIER_REGION" order="37" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_REGION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_REGION"/>
+    </attribute>
+    <attribute id="SUPPLIER_STREET" order="38" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPLIER_STREET"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUPPLIER_STREET"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="NETAMOUNT" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="NETAMOUNT"/>
+      <measureMapping columnObjectName="Projection_1" columnName="NETAMOUNT"/>
+    </measure>
+    <measure id="POSTING_DATE" order="9" aggregationType="min" measureType="simple">
+      <descriptions defaultDescription="POSTING_DATE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="POSTING_DATE"/>
+    </measure>
+    <measure id="PRODUCT_PRICE" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PRODUCT_PRICE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="PRODUCT_PRICE"/>
+    </measure>
+    <measure id="PRODUCT_WEIGHTMEASURE" order="19" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="PRODUCT_WEIGHTMEASURE"/>
+    </measure>
+    <measure id="QUANTITY" order="21" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="QUANTITY"/>
+      <measureMapping columnObjectName="Projection_1" columnName="QUANTITY"/>
+    </measure>
+    <measure id="RM_AMOUNT_COMPLETED" order="23" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_COMPLETED"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_COMPLETED"/>
+    </measure>
+    <measure id="RM_AMOUNT_DELIVERED" order="24" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_DELIVERED"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_DELIVERED"/>
+    </measure>
+    <measure id="RM_AMOUNT_INPROCESS" order="25" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_INPROCESS"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_INPROCESS"/>
+    </measure>
+    <measure id="RM_AMOUNT_NEW" order="26" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_NEW"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_NEW"/>
+    </measure>
+    <measure id="RM_AMOUNT_PAID" order="27" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_PAID"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_PAID"/>
+    </measure>
+    <measure id="RM_AMOUNT_UNDELIVERED" order="28" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_UNDELIVERED"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_UNDELIVERED"/>
+    </measure>
+    <measure id="RM_AMOUNT_UNPAID" order="29" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RM_AMOUNT_UNPAID"/>
+      <measureMapping columnObjectName="Projection_1" columnName="RM_AMOUNT_UNPAID"/>
+    </measure>
+    <measure id="TAXAMOUNT" order="39" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TAXAMOUNT"/>
+      <measureMapping columnObjectName="Projection_1" columnName="TAXAMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="221"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

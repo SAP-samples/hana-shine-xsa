@@ -1,0 +1,61 @@
+15 2 0 41 sap.hana.democontent.epm.ui.userCRUD.i18n13 messagebundle13 hdbtextbundle0 4405 # TRANSLATE
+NEW_USER_TITLE=New User Record Details
+FIRST_NAME=First Name
+LAST_NAME=Last Name
+EMAIL=Email
+PERSON_NO=Person Number
+CREATE_RECORD=Create Record
+CREATE_BATCH=Create users with batch request
+CREATE_XML=Create users with XML
+USERS=Users
+DELETE=Delete User
+SUBMIT=Submit
+ADD_NEW_RECORD=Add a new record
+REMOVE_ROW=Remove this row
+USER_CREATED=User created
+SELECT_ROW=Select a row first.
+USER_VALIDATION=Enter a First Name, Last Name and Email Address.
+USER_DELETED_SUCCESS=User deleted successfully.
+USER_DELETE_FAILURE=Could not delete the user.
+TAB_NOT_UPDATED=Error while loading data in the table.
+UPDATE_DELETE=Update and Delete records
+OK=OK
+ADD_CREDIT_CARD=Add Credit Card number
+CC_NUMBER_ADDED=Credit Card information added successfully
+CC_NUMBER_NOT_PRESENT=Credit Card details are not present
+VIEW_CREDIT_CARD=View Credit Card number
+CC_NUMBER_DISPLAY=Credit card number: {0}
+DELETE_CC_NUMBER=Delete Credit Card number
+CC_NUMBER_DELETED=Credit Card information deleted successfully
+ERROR=Error occured
+USR_CRT_ERROR=Error occurred during user creation
+USR_UPD_ERROR=Error occurred during user update
+NO_USR_FOUND=No user found.Check the xml structure
+NO_FILE_CHOSEN=Choose a File to Submit
+CHOOSE_FILE=Choose XML file
+
+HELP_DESC_1=Create a new User record by providing First name, Last name and Email and then press "Create Record". This will send a HTTP POST request to the OData service to create a new record. The request will trigger "usersCreateMethod" procedure which performs a validation.
+HELP_DESC_2=Create multiple User records using $batch request provided in OData. Check this link http://www.odata.org/documentation/odata-version-2-0/batch-processing/ 
+HELP_DESC_3=This table is used to display all the User records. You can update any record by clicking any entry and then type the changes and then selecting any other object to trigger the update. You can also select a row and press Delete button to remove a record from the database.         
+HELP_DESC_4=Create multiple User records by uploading single or multiple XML files. The XML will be parsed using xsjs SAX XML Parser. On valid XML, it's saved into USR_XML_DATA table by using the asynchronous request completion feature.
+
+HELP_HEADER_1=OData service
+HELP_HEADER_2=Procedure
+HELP_HEADER_3=Controller method
+
+HELP_ODATA_1=<div>Node.js : /user/xsodata/user.xsodata .<br/> java : /user/odata/v4/UserData </div>
+HELP_ODATA_2=<div>/user/xsodata/user.xsodata/</div>
+HELP_ODATA_3=<div>Node.js : /user/xsodata/user.xsodata .<br/> java : /user/odata/v4/UserData </div>
+HELP_ODATA_4=<div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/services/xmlParser.xsjs' target='_blank'>xmlParser.xsjs</a></div>
+
+HELP_PROCEDURE_1=<div>user-db/procedures/usersCreateMethod.procedure</div>
+HELP_PROCEDURE_2=<div>user-db/procedures/usersCreateMethod.procedure</div>
+
+HELP_CONTROLLER_1=<div>/user-ui/view/usercrud.controller.js -> callUserService()</div>
+HELP_CONTROLLER_2=<div>/user-ui/view/usercrud.controller.js -> onSubmitBatch()</div>
+HELP_CONTROLLER_3=<div>/user-ui/view/usercrud.controller.js -> updateService() and onDeletePress()</div>
+HELP_CONTROLLER_4=<div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/ui/userCRUD/view/usercrud.controller.js' target='_blank'>onUsrCreateXmlBtnPress() and onDeletePress()</a></div>
+
+TRANSLATE_TO_LANG0=Translation Tool
+TRANSLATE_TO_LANG0_LINK=<div>Please import the Translation.xlf file from the location sap.hana.democontent.epm.loads using the translation tool <br /> <a href='/sap/hana/xs/translationTool' target='_blank'>/sap/hana/xs/translationTool</a>
+0 0 1 0 1 50 15 ADD_CREDIT_CARD4 XMSG0 22 Add Credit Card number14 ADD_NEW_RECORD4 XMSG0 16 Add a new record15 CC_NUMBER_ADDED4 XMSG0 42 Credit Card information added successfully17 CC_NUMBER_DELETED4 XMSG0 44 Credit Card information deleted successfully17 CC_NUMBER_DISPLAY4 XMSG0 23 Credit card number: {0}21 CC_NUMBER_NOT_PRESENT4 XMSG0 35 Credit Card details are not present11 CHOOSE_FILE4 XMSG0 15 Choose XML file12 CREATE_BATCH4 XMSG0 31 Create users with batch request13 CREATE_RECORD4 XMSG0 13 Create Record10 CREATE_XML4 XMSG0 21 Create users with XML6 DELETE4 XMSG0 11 Delete User16 DELETE_CC_NUMBER4 XMSG0 25 Delete Credit Card number5 EMAIL4 XMSG0 5 Email5 ERROR4 XMSG0 13 Error occured10 FIRST_NAME4 XMSG0 10 First Name17 HELP_CONTROLLER_14 XMSG0 164 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/ui/userCRUD/view/usercrud.controller.js' target='_blank'>callUserService()</a></div>17 HELP_CONTROLLER_24 XMSG0 162 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/ui/userCRUD/view/usercrud.controller.js' target='_blank'>onSubmitBatch()</a></div>17 HELP_CONTROLLER_34 XMSG0 180 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/ui/userCRUD/view/usercrud.controller.js' target='_blank'>updateService() and onXmlUpload()</a></div>17 HELP_CONTROLLER_44 XMSG0 191 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/ui/userCRUD/view/usercrud.controller.js' target='_blank'>onUsrCreateXmlBtnPress() and onDeletePress()</a></div>11 HELP_DESC_14 XMSG0 265 Create a new User record by providing First name, Last name and Email and then press "Create Record". This will send a HTTP POST request to the OData service to create a new record. The request will trigger "usersCreateMethod" procedure which performs a validation.11 HELP_DESC_24 XMSG0 156 Create multiple User records using $batch request provided in OData. Check this link http://www.odata.org/documentation/odata-version-2-0/batch-processing/ 11 HELP_DESC_34 XMSG0 483 This table is used to display all the User records. You can update any record by clicking any entry and then type the changes and then selecting any other object to trigger the update. You can also select a row and press Delete button to remove a record from the database. \n\n Here you can also add Credit card information by selecting a user, this is acheived using the XS Secure Store API. Check /sap/hana/democontent/epm/services/secureStore.xsjs for the implementation.         11 HELP_DESC_44 XMSG0 224 Create multiple User records by uploading single or multiple XML files. The XML will be parsed using xsjs SAX XML Parser. On valid XML, it's saved into USR_XML_DATA table by using the asynchronous request completion feature.13 HELP_HEADER_14 XMSG0 13 OData service13 HELP_HEADER_24 XMSG0 9 Procedure13 HELP_HEADER_34 XMSG0 17 Controller method12 HELP_ODATA_14 XMSG0 141 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/services/user.xsodata' target='_blank'>user.xsodata</a></div>12 HELP_ODATA_24 XMSG0 161 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/services/userBeforeExit.xsodata' target='_blank'>userBeforeExit.xsodata</a></div>12 HELP_ODATA_34 XMSG0 141 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/services/user.xsodata' target='_blank'>user.xsodata</a></div>12 HELP_ODATA_44 XMSG0 145 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/services/xmlParser.xsjs' target='_blank'>xmlParser.xsjs</a></div>16 HELP_PROCEDURE_14 XMSG0 179 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/procedures/usersCreateMethod.hdbprocedure' target='_blank'>usersCreateMethod.hdbprocedure</a></div>16 HELP_PROCEDURE_24 XMSG0 153 <div><a href='/sap/hana/ide/editor/index.html?startURI=sap/hana/democontent/epm/services/userBefore.xsjslib' target='_blank'>userBefore.xsjslib</a></div>9 LAST_NAME4 XMSG0 9 Last Name14 NEW_USER_TITLE4 XMSG0 23 New User Record Details14 NO_FILE_CHOSEN4 XMSG0 23 Choose a File to Submit12 NO_USR_FOUND4 XMSG0 37 No user found.Check the xml structure2 OK4 XMSG0 2 OK9 PERSON_NO4 XMSG0 13 Person Number10 REMOVE_ROW4 XMSG0 15 Remove this row10 SELECT_ROW4 XMSG0 19 Select a row first.6 SUBMIT4 XMSG0 6 Submit18 TRANSLATE_TO_LANG04 XMSG0 16 Translation Tool23 TRANSLATE_TO_LANG0_LINK4 XMSG0 214 <div>Please import the Translation.xlf file from the location sap.hana.democontent.epm.loads using the translation tool <br /> <a href='/sap/hana/xs/translationTool' target='_blank'>/sap/hana/xs/translationTool</a>13 UPDATE_DELETE4 XMSG0 25 Update and Delete records5 USERS4 XMSG0 5 Users12 USER_CREATED4 XMSG0 17 {0} Users created20 USER_DELETED_SUCCESS4 XMSG0 26 User deleted successfully.19 USER_DELETE_FAILURE4 XMSG0 26 Could not delete the user.13 USR_CRT_ERROR4 XMSG0 35 Error occurred during user creation16 VIEW_CREDIT_CARD4 XMSG0 23 View Credit Card number1 2 0 41 sap.hana.democontent.epm.ui.userCRUD.i18n13 messagebundle13 hdbtextbundle0 

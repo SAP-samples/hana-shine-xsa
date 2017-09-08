@@ -1,0 +1,67 @@
+context PurchaseOrder {
+    type BusinessKey : String(10);
+	type SDate : LocalDate;
+	type CurrencyT : String(5);
+	type AmountT : Decimal(15,2);
+	type QuantityT : Decimal(13,3);
+	type UnitT: String(3);
+	type StatusT: String(1);
+	
+ 	Type HistoryT {
+          CREATEDBY : BusinessKey;
+          CREATEDAT : SDate;
+          CHANGEDBY : BusinessKey;
+          CHANGEDAT : SDate; 
+        };
+
+    Entity Header {
+        key  PURCHASEORDERID: BusinessKey;
+        ITEMS: Association[*] to Item on ITEMS.PURCHASEORDERID = PURCHASEORDERID;        
+        HISTORY: HistoryT;
+        NOTEID: BusinessKey null;
+        PARTNER: BusinessKey;
+        CURRENCY: CurrencyT;
+        GROSSAMOUNT: AmountT;
+        NETAMOUNT: AmountT;
+        TAXAMOUNT: AmountT;
+        LIFECYCLESTATUS: StatusT;
+        APPROVALSTATUS: StatusT;
+        CONFIRMSTATUS: StatusT;
+        ORDERINGSTATUS: StatusT;
+        INVOICINGSTATUS: StatusT;
+      } technical configuration {
+          column store;
+      };
+
+    Entity Item {
+        key  PURCHASEORDERID: BusinessKey;
+        key  PURCHASEORDERITEM: BusinessKey;
+      	HEADER: Association[1] to Header on HEADER.PURCHASEORDERID = PURCHASEORDERID; 
+        PRODUCT:  BusinessKey;
+        NOTEID: BusinessKey null;
+        CURRENCY: CurrencyT;
+        GROSSAMOUNT: AmountT;
+        NETAMOUNT: AmountT;
+        TAXAMOUNT: AmountT;
+	    QUANTITY: QuantityT;
+		QUANTITYUNIT: UnitT;
+		DELIVERYDATE: SDate;
+      } technical configuration {
+          column store;
+      };
+
+   define view ItemView as SELECT from Item {
+      PURCHASEORDERID as "PurchaseOrderItemId", 
+      PURCHASEORDERITEM as "ItemPos",
+      HEADER.PARTNER as "PartnerId",
+  	  PRODUCT as "ProductID",
+  	  CURRENCY as "CurrencyCode",
+      GROSSAMOUNT as "Amount",
+      NETAMOUNT as "NetAmount",
+      TAXAMOUNT as "TaxAmount",
+  	  QUANTITY as "Quantity",
+  	  QUANTITYUNIT as "QuantityUnit",
+  	  DELIVERYDATE as "DeliveryDate1"
+   } with structured privilege check;
+   
+};
