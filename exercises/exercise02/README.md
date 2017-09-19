@@ -16,7 +16,7 @@ In Chapter you will understand the SHINE application have a look at the differen
 4. Right click on shine-cf folder and click on Build
 5. Project would be build an mtar would be generated under folder workspace->mta_archives->com.sap.refapps.shine->com.sap.refapps.shine_1.3.10.mtar
 ![Alt text](./images/Build_Extract.jpg "Build Extract")
-6. Right click on com.sap.refapps.shine_1.3.10.mtar and click on export and download it to folder `D:\Files\Session\CPL165` of your machine
+6. Right click on com.sap.refapps.shine_1.3.10.mtar and click on export and download it to your machines Desktop.  
 (Note: Download might take sometime so proceed to next step to understand SHINE application code and return back to this step once download is complete)
 
 ### 2.  Understand SHINE application code
