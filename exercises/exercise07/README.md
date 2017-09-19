@@ -18,7 +18,7 @@ In this exercise you will build SHINE application after extending it and re depl
 4. Right click on shine-cf folder and click on Build
 5. Project would be build an mtar would be generated under folder workspace->mta_archives->com.sap.refapps.shine->com.sap.refapps.shine_1.3.11.mtar.  
 ![Alt text](./images/Build.jpg "Build")
-6.Right click on com.sap.refapps.shine_1.3.11.mtar and click on export and download it to your machines Desktop.
+6. Right click on com.sap.refapps.shine_1.3.11.mtar and click on export and download it to your machines Desktop.
 
 ### 2. Deploy SHINE 
 1. Open Command Line Interface.

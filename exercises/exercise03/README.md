@@ -26,7 +26,7 @@ In Chapter you will deploy the SHINE mtar to Cloud Foundry environment
 ![Alt text](./images/CF_login.jpg "CF Login")
 8. Run the command `cf deploy com.sap.refapps.shine_1.3.10.mtar`
 9. The deployment starts.
-10. Follow the deploy process and you can notice that first the services like uaa, hana etc getting created. 
+10. Follow the deploy process and you can notice that first the backing services like uaa, hana etc getting created. 
 11. Followed by the service creation one by one the modules starts getting deployed starting with the db module (shine-core-db) and ending with web module (shine-web) 
 12. Within a few minutes the complete application get deployed.
 13. After deployment run the command `cf apps` to see all the deployed apps.
