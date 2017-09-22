@@ -30,7 +30,7 @@ In Chapter you will deploy the SHINE mtar to Cloud Foundry environment
 11. Followed by the service creation one by one the modules starts getting deployed starting with the db module (shine-core-db) and ending with web module (shine-web) 
 12. Within a few minutes the complete application get deployed.
 13. After deployment run the command `cf apps` to see all the deployed apps.
-14. Run command `cf services` to see all the backing service instances created.
+14. Run command `cf apps` to see all the application instances.
 15. Copy the url for the app `shine-web` and paste it in browser.  
 ![Alt text](./images/CF_Apps.jpg "CF Apps")
 16. In a browser login to this url with the SAP Cloud Platform User ID and password.
