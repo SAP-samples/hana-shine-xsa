@@ -21,10 +21,10 @@ In this exercise you will develop a user interface to fire the search.
 ```
 ![Alt text](./images/Update_XSapp.jpg "xs-app.json")
 
-> This file xs-app.json is used by Approuter to route the request to correct backend. Since we have added a new search service, this needs to be added to xs-app.json so that Approuter knows where to route the calls to search service implemented in exercise 5
-4. Navigate to resources->sales-ui->view
-5. Right click on view
-6. Click New -> File
+> This file xs-app.json is used by Approuter to route the request to correct backend. Since we have added a new search service, this needs to be added to xs-app.json so that Approuter knows where to route the calls to search service implemented in exercise 5.
+4. Navigate to resources->sales-ui->view.
+5. Right click on view.
+6. Click New -> File.
 7. In New File pop up provide file name as search.controller.js. Copy below code to the file
 
 ```js
@@ -164,7 +164,7 @@ or copy from file [search.controller.js](./code/search.controller.js)
 
 ```
 or copy code from file [search.view.xml](./code/search.view.xml)
-> This file contains the xml view for the Search Tab 
+> This file contains the xml view for the Search Tab. 
 
 ![Alt text](./images/Search_Tab_Code.jpg "Search Tab Code")
 
@@ -178,7 +178,7 @@ oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
                                 }));
 ```
 ![Alt text](./images/Update_Main_Controller.jpg "main-controller")
-> This code is to attach the Search Tab to the main view
+> This code is to attach the Search Tab to the main view.
 15. Click on Save.
 
 ## Summary
