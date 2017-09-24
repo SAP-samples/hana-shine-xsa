@@ -5,7 +5,7 @@ Exercise 03 : Deploy application to SAP Cloud Platform Cloud Foundry Environment
 15 min
 
 ## Objective
-In Chapter you will deploy the SHINE mtar to Cloud Foundry environment
+In this chapter you will deploy the SHINE mtar to the Cloud Foundry environment.
 
 
 ## Exercise Description
@@ -19,7 +19,7 @@ In Chapter you will deploy the SHINE mtar to Cloud Foundry environment
  run command ` cf api https://api.cf.us10.hana.ondemand.com` 
 4. If you face any connectivity error set proxy by running command
 ` set http_proxy=proxy:8080`
-5. Login to Cloud Foundry by running below command.
+5. Login to Cloud Foundry by running below command
 ` cf login`
 6. On being prompted for Email enter email which was used for registering for SAP Cloud Platform Trial account and enter the password.
 7. You will be logged into your Cloud Foundry org P*******trial_trial and space dev.  
@@ -33,7 +33,7 @@ In Chapter you will deploy the SHINE mtar to Cloud Foundry environment
 14. Run command `cf apps` to see all the application instances.
 15. Copy the url for the app `shine-web` and paste it in browser.  
 ![Alt text](./images/CF_Apps.jpg "CF Apps")
-16. In a browser login to this url with the SAP Cloud Platform User ID and password.
+16. In a browser log in to this url with the SAP Cloud Platform User ID and password.
 
 ### 2. Explore SHINE application
 1.  Click on Ok to close the Welcome popup.  
