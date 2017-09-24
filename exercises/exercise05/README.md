@@ -5,15 +5,15 @@ Exercise 05 : Expose REST API for Fuzzy Search
 10 mins
 
 ## Objective
-In this exercise you will expose the Fuzzy Search as REST API using node.js
+In this exercise you will expose the Fuzzy Search as REST API using node.js.
 
 ## Exercise Description
 1. In Web IDE click on module core-js.  
 ![Alt text](./images/core-js.jpg "core-js")
-2. Navigate to routes folder
-3. Right click on routes folder and click on New -> File
-4. In New File popup provide File Name as search.js
-5. Copy paste the beloe  content into this search.js
+2. Navigate to routes folder.
+3. Right click on routes folder and click on New -> File.
+4. In New File popup provide File Name as search.js.
+5. Copy paste the below content into this search.js.
 
 ```js
 var express = require('express');
@@ -22,7 +22,7 @@ var router = express.Router();
 var winston = require('winston');
 var logging = require('@sap/logging');
 var appContext = logging.createAppContext();
-var logger;
+.var logger;
 winston.level = process.env.winston_level || 'error'
 
 router.get('/search/fulltextsearch', function (req, res) {
@@ -59,11 +59,11 @@ router.get('/search/fulltextsearch', function (req, res) {
 module.exports = router;
 
 ```
-or copy code from file [search.js](./code/search.js)
+or copy code from file [search.js](./code/search.js).
 ![Alt text](./images/Search_Service.jpg "Search Service") 
-> This code implements a route in Node.js and contains a call to fuzzy search Table Function
+> This code implements a route in Node.js and contains a call to fuzzy search Table Function.
 6. Click on Save button.
-7. Open file index.js
+7. Open file index.js.
 8. In the last line add code as below
 ```js
 
@@ -71,7 +71,7 @@ module.exports.search = require('./search')
 
 ```
 ![Alt text](./images/Update-Indexjs.jpg "Update Index JS") 
-> The index.js is used to define all the routes
+> The index.js is used to define all the routes.
 9. Click on Save.    
 10. Navigate to folder util.
 11. Open file initialize.js.
@@ -87,7 +87,7 @@ module.exports.search = require('./search')
 		    routes.search);
 ```
 ![Alt text](./images/Update-Initializejs.jpg "Update Initialize JS") 
-> This is done to mount path of search REST API as middleware functions
+> This is done to mount path of search REST API as middleware functions.
 13. Click on Save.
 
 ## Summary
