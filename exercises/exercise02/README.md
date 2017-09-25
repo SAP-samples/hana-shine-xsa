@@ -44,3 +44,5 @@ SHINE consists of below modules
 
 ## Summary
 In this exercise you have understood about SHINE code and build SHINE code and generated mtar
+<br>
+Continue with [Exercise3](../exercise03/README.md)
