@@ -47,3 +47,5 @@ In this chapter you will deploy the SHINE mtar to the Cloud Foundry environment.
 
 ## Summary
 In this exercise you have deployed SHINE mtar to Cloud Foundry Environment and explored it.
+<br>
+Continue with [Exercise4](../exercise04/README.md)
