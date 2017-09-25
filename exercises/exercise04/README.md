@@ -37,4 +37,6 @@ or copy code from file [sales_fuzzy_search.hdbfunction](./code/sales_fuzzy_searc
 6. Save the file. 
 
 ## Sumary
-In this exercise you have created a Table User Defined function in the db module for implementing a fuzzy search
+In this exercise you have created a Table User Defined function in the db module for implementing a fuzzy search.
+<br>
+Continue with [Exercise5](../exercise05/README.md)
