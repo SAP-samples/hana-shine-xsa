@@ -63,3 +63,5 @@ This step is optional and required only if Chapter 2 (Clone SHINE code from Gith
 
 ## Summary
 In this exercise you have signed up for SAP Cloud Platform account, to access to Cloud Foundry environment and downloaded/cloned the SHINE code.
+<br>
+Continue with [Exercise2](../exercise02/README.md)
