@@ -183,4 +183,5 @@ oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
 
 ## Summary
 In this exercise you have created a Search Tab in the Sales Dashboard tile of SHINE and embedded a search field which can be used for firing fuzzy search.
-
+<br>
+Continue with [Exercise7](../exercise07/README.md)
