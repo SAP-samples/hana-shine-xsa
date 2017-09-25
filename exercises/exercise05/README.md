@@ -92,3 +92,5 @@ module.exports.search = require('./search')
 
 ## Summary
 In this exercise you have created a REST API using node.js to expose the Fuzzy Search as a web service.
+<br>
+Continue with [Exercise6](../exercise06/README.md)
