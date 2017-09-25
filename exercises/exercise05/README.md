@@ -22,7 +22,7 @@ var router = express.Router();
 var winston = require('winston');
 var logging = require('@sap/logging');
 var appContext = logging.createAppContext();
-.var logger;
+var logger;
 winston.level = process.env.winston_level || 'error'
 
 router.get('/search/fulltextsearch', function (req, res) {
