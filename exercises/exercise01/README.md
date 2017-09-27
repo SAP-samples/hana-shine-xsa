@@ -9,26 +9,15 @@ In this chapter you will create an account in SAP Cloud Platform and obtain an i
 
 
 ## Exercise Description
-### 1. Sign up for a trial account of the Cloud Foundry environment (optional, only if you do not yet have a trial account)
-1. If you do not yet have a trial or enterprise account of the Cloud Foundry environment, sign up for such an account by following the documentation ["Get a Trial Space on the Cloud Foundry Instance"](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/76e79d62fa0149d5aa7b0698c9a33687.html).
-When you are prompted to select a region select 'Europe(Frankfurt) AWS' or 'US East(VA) AWS'. 
-*Do not select US West(CA) Beta Azure or US Central(IA) GCP as jobscheduler service required by SHINE application is not yet available in those regions.*
-![Alt text](./images/Region.jpg "Region")
-
-2. Once you created a trial account of the Cloud Foundry environment navigate to the subaccount 'trial'. 
-3. Click on Spaces in the left navigation pane.
-4. Click on space 'dev'. 
-5. Once applications are deployed they will be visible here.
-
-### 2. Log on to your trail account of the Cloud Foundry environment
-1. Log on to the SAP Cloud Platform cockpit using any cockpit URL, such as [https://account.hanatrial.ondemand.com](https://account.hanatrial.ondemand.com).
-2. Navigate to the region where your trial account of the Cloud Foundry environment is, it should be either 'Europe(Frankfurt) AWS' or 'US East(VA) AWS'
+### 1. Log on to your trial account of the Cloud Foundry environment
+1. Log on to the SAP Cloud Platform cockpit using the cockpit URL [https://account.hanatrial.ondemand.com](https://account.hanatrial.ondemand.com).
+2. Navigate to the region 'US East(VA) AWS' where your trial account of the Cloud Foundry environment is located.
 3. Navigate to the subaccount 'trial'. 
 4. Click on Spaces in the left navigation pane.
 5. Click on space 'dev'. 
 6. Once applications are deployed they will be visible here.
 
-### 3. Clone SHINE code from GitHub
+### 2. Clone SHINE code from GitHub
 1.  Launch SAP Web IDE by launching URL [https://wdflbmt0749.wdf.sap.corp:53075/]( https://wdflbmt0749.wdf.sap.corp:53075/) in Google Chrome.
 2. Login with User: `CPL165` and Password: `Sap12345`.
 ![Alt text](./images/WebIDE_Login.jpg "Web IDE Login Page")
@@ -57,17 +46,6 @@ When you are prompted to select a region select 'Europe(Frankfurt) AWS' or 'US E
 20. The checkout branch changes to shine-cf
 ![Alt text](./images/Change_Branch.jpg "Change Branch")
 
-### 4. Import SHINE Code from zip (optional, only if you were not able to clone SHINE code from GitHub)
-This step is optional and required only if Chapter 2 (Clone SHINE code from Github) fails.
-1. In SAP Web IDE navigate to File ->Import -> From File System.
-2. In the import popup click on Browse button.
-3. Set the folder path as \\students.fair.sap.corp\Studentshare\CPL165 .
-4. Select file shine-cf.zip.
-![Alt text](./images/Import_Zip_File.jpg "Import Zip File")
-5. Click on Open button.
-6. Click on Ok button in the Import popup.
-7. The shine-cf zip file gets imported.
-![Alt text](./images/Imported_Zip.jpg "Imported Zip")
 
 ## Summary
 In this exercise you have signed up for SAP Cloud Platform account, to access to Cloud Foundry environment and downloaded/cloned the SHINE code.
