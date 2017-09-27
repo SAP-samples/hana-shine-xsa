@@ -14,11 +14,8 @@ In this chapter you will deploy the SHINE mtar to the Cloud Foundry environment.
 2. Navigate to the folder where you have copied SHINE mtar, if its desktop then `C:\Users\student\Desktop`.
 3. Set the proxy by running the command
 `set http_proxy=proxy:8080`
-4. Set Cloud Foundry API via CLI by running below command
-* if you have chosen Region for your Cloud Foundry instance as Europe (Frankfurt) AWS
- run command ` cf api https://api.cf.eu10.hana.ondemand.com` 
-* if you have chosen Region for your Cloud Foundry instance as US East (VA) AWS
- run command ` cf api https://api.cf.us10.hana.ondemand.com` 
+4. Set Cloud Foundry API via CLI by running the command
+` cf api https://api.cf.us10.hana.ondemand.com` 
 5. Login to Cloud Foundry by running below command
 ` cf login`
 6. On being prompted for Email enter email which was used for registering for SAP Cloud Platform Trial account and enter the password.
