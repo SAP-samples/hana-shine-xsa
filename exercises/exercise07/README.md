@@ -11,11 +11,11 @@ In this exercise you will build the SHINE application after extending it and red
 ## Exercise Description
 
 ### 1. Build SHINE application
-1. In Web IDE click on shine-cf folder.
+1. In Web IDE click on the hana-shine-xsa folder.
 2. Open mta.yaml and change version from 1.3.10 to 1.3.11.  
 ![Alt text](./images/Update_MTA.jpg "Update MTA")
 3. Click on Save button.
-4. Right click on shine-cf folder and click on Build.
+4. Right click on the hana-shine-xsa folder and click on Build.
 5. When the project is built an mtar is in the folder workspace->mta_archives->com.sap.refapps.shine->com.sap.refapps.shine_1.3.11.mtar.  
 ![Alt text](./images/Build.jpg "Build")
 6. Right click on com.sap.refapps.shine_1.3.11.mtar and click on export and download it to your machines Desktop.
