@@ -31,7 +31,7 @@ SHINE consists of below modules
 3. The core-db folder contains all the data base artifacts.
 4. Expand folder core-db->src and explore the database artifacts under folders data, functions, models etc.
 ![Alt text](./images/core-db.jpg "core-db")
-5 Click on folder core-js. This folder contains the server side implementation of major features in SHINE like Data Generator, Purchase Order Worklist, Sales Dashboard etc.
+5. Click on folder core-js. This folder contains the server side implementation of major features in SHINE like Data Generator, Purchase Order Worklist, Sales Dashboard etc.
 6. Expand core-js -> routes and you can see all the different REST API handler implementations here.
 ![Alt text](./images/core-js.jpg "core-js")
 7. Click on web folder. This folder contains all the user interface artifacts.
