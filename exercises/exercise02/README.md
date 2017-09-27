@@ -13,7 +13,7 @@ In this chapter you will understand the SHINE application, have a look at the di
 2. Click on Space and select  DEV space.
 ![Alt text](./images/Set_Space.jpg "Set Space")
 3. Click on Save.
-4. Right click on shine-cf folder and click on Build.
+4. Right click on hana-shine-xsa folder and click on Build.
 5. When the project is built you find an mtar in the folder workspace->mta_archives->com.sap.refapps.shine->com.sap.refapps.shine_1.3.10.mtar.
 ![Alt text](./images/Build_Extract.jpg "Build Extract")
 6. Right click on com.sap.refapps.shine_1.3.10.mtar and click on export and download it to your machines Desktop.  
