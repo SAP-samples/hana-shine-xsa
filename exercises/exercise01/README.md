@@ -12,7 +12,7 @@ In this chapter you will create an account in SAP Cloud Platform and obtain an i
 ### 1. Signup for Cloud Foundry Instance
 1. If you do not yet have a Cloud Foundry environment trial or enterprise account, sign up for a Cloud Foundry environment trial account by following the documentation ["Get a Trial Space on the Cloud Foundry Instance"](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/76e79d62fa0149d5aa7b0698c9a33687.html).
 When you are prompted to select a region select Europe(Frankfurt) AWS or US East(VA) AWS. 
-*Do not select US West(CA) Beta Azure as jobscheduler service required by SHINE application is not yet available in this region.*
+*Do not select US West(CA) Beta Azure or US Central(IA) GCP as jobscheduler service required by SHINE application is not yet available in those regions.*
 ![Alt text](./images/Region.jpg "Region")
 
 2. Once you created a Cloud Foundry instance navigate to sub account trial. 
