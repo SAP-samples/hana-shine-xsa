@@ -18,19 +18,17 @@ In this chapter you will deploy the SHINE mtar to the Cloud Foundry environment.
 ` cf api https://api.cf.us10.hana.ondemand.com` 
 5. Login to Cloud Foundry by running below command
 ` cf login`
-6. On being prompted for Email enter email which was used for registering for SAP Cloud Platform Trial account and enter the password.
+6. On being prompted for Email, enter the mail address for SAP Cloud Platform Trial which has been given to you. Also enter the password.
 7. You will be logged into your Cloud Foundry org P*******trial_trial and space dev.  
 ![Alt text](./images/CF_login.jpg "CF Login")
 8. Run the command `cf deploy com.sap.refapps.shine_1.3.10.mtar`
 9. The deployment starts.
-10. Follow the deploy process and you can notice that first the backing services like uaa, hana etc getting created. 
-11. Followed by the service creation one by one the modules starts getting deployed starting with the db module (shine-core-db) and ending with web module (shine-web) 
-12. Within a few minutes the complete application get deployed.
-13. After deployment run the command `cf apps` to see all the deployed apps.
-14. Run command `cf apps` to see all the application instances.
-15. Copy the url for the app `shine-web` and paste it in browser.  
+10. Follow the deploy process and you can notice that first the backing services like uaa, hana etc getting created. Followed by the service creation one by one the modules starts getting deployed starting with the db module (shine-core-db) and ending with web module (shine-web). Within a few minutes the complete application gets deployed.
+11. After deployment run the command `cf apps` to see all the deployed apps.
+12. Run command `cf apps` to see all the application instances.
+13. Copy the url for the app `shine-web` and paste it in browser.  
 ![Alt text](./images/CF_Apps.jpg "CF Apps")
-16. In a browser log in to this url with the SAP Cloud Platform User ID and password.
+14. In a browser log in to this url with the SAP Cloud Platform User ID and password.
 
 ### 2. Explore SHINE application
 1.  Click on Ok to close the Welcome popup.  
