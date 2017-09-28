@@ -12,7 +12,7 @@ In Chapter you will implement a Table User Defined function
 ![Alt text](./images/core-db.jpg "core-db")
 
 2. Navigate to src -> functions.
-3. Right click on function and click on New -> Function.
+3. Right click on functions and click on New -> Function.
 4. In the New Function popup provide the name of Table User Defined function as `sales_fuzzy_search.hdbfunction`
 5. Copy the below code to the sales_fuzzy_search.hdbfunction.
 
