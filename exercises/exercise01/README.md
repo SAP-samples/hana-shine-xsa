@@ -48,6 +48,6 @@ In this chapter you will create an account in SAP Cloud Platform and obtain an i
 
 
 ## Summary
-In this exercise you have signed up for SAP Cloud Platform account, to access to Cloud Foundry environment and downloaded/cloned the SHINE code.
+In this exercise you have logged-in into a SAP Cloud Platform account in Cloud Cockpit and cloned the SHINE code from GIT.
 <br>
 Continue with [Exercise2](../exercise02/README.md)
