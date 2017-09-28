@@ -25,15 +25,14 @@ In this exercise you will build the SHINE application after extending it and red
 2. Navigate to the folder where you have copied SHINE mtar, if its desktop, then `C:\Users\student\Desktop`.
 3. Undeploy older version of SHINE, this can be done by running below command
 ` cf undeploy com.sap.refapps.shine -f --delete-services`
-4. Wait for the undeploy to complete.
-5  You will notice one by one the modules being undeployed and finally the backing services being deleted.
-6. Run the command `cf deploy com.sap.refapps.shine_1.3.11.mtar` to deploy the updated version of SHINE application.
-7. The deployment starts and within a few minutes the complete application gets deployed.
-8. After deployment run the command `cf apps` to see all the deployed apps.
-9. Run command `cf apps` to see all the backing service instances created.
-10. Copy the url for the app shine-web and paste it in browser.  
+4. Wait for the undeploy to complete. You will notice one by one the modules being undeployed and finally the backing services being deleted. Remark: Undeployment is usually not necessary and included for showcasing. Delta deployment of a new version is also possible.
+5. Run the command `cf deploy com.sap.refapps.shine_1.3.11.mtar` to deploy the updated version of SHINE application.
+6. The deployment starts and within a few minutes the complete application gets deployed.
+7. After deployment run the command `cf apps` to see all the deployed apps.
+8. Run command `cf apps` to see all the backing service instances created.
+9. Copy the url for the app shine-web and paste it in browser.  
 ![Alt text](./images/CF_Apps.jpg "CF Apps")
-11. Login to this url with the SAP Cloud Platform User ID and Password.
+10. Login to this url with the SAP Cloud Platform User ID and Password.
 
 ### 3. Explore extended parts of application
 1. Click on Ok to close the Welcome popup.
