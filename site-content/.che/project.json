@@ -1,1 +1,1 @@
-{"type":"sitecontent","builders":{"default":"sitecontent","configs":{}},"runners":{"default":"system:/sap.site.content.deployer/default","configs":{}},"attributes":{"mta_module_parent":["/shine"]},"description":"","mixinTypes":["mtamodule"]}
+{"type":"sitecontent","builders":{"default":"sitecontent","configs":{}},"runners":{"default":"system:/sap.site.content.deployer/default","configs":{}},"attributes":{"mta_module_parent":["/shine-1"]},"description":"","mixinTypes":["mtamodule"]}

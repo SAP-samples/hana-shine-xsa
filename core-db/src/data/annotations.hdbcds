@@ -1,0 +1,183 @@
+context annotations {
+   annotation OData {
+      publish : Boolean;
+   }
+   annotation EndUserText {
+      label :       array of {
+         language : String(2);
+         text :     String(60);
+      };
+      quickInfo :   array of {
+         language : String(2);
+         text :     String(60);
+      };
+   }
+   annotation valueList {
+      collectionPath :       String(255);
+      searchSupported :      Boolean;
+      parameterInOut :       array of {
+         localDataProperty : String(255);
+         valueListProperty : String(255);
+         label :             String(60);
+      };
+      parameterDisplayOnly : array of {
+         valueListProperty : String(255);
+         label :             String(60);
+      };
+   }
+
+   type InnvocationD : String(255);
+   type elementRef : String(255);
+   type Importance : String(10) enum {
+      Low    = 'Low';
+      Medium = 'Medium';
+      High   = 'High';
+   };
+   type Type : String(30) enum {
+      FOR_ACTION                   = 'FOR_ACTION';
+      AS_ADDRESS                   = 'AS_ADDRESS';
+      AS_DATAPOINT                 = 'AS_DATAPOINT';
+      AS_CONTACT                   = 'AS_CONTACT';
+      AS_CHART                     = 'AS_CHART';
+      FOR_INTENT_BASED_NAVIGATION  = 'FOR_INTENT_BASED_NAVIGATION';
+      STANDARD                     = 'STANDARD';
+      WITH_INTENT_BASED_NAVIGATION = 'WITH_INTENT_BASED_NAVIGATION';
+      WITH_NAVIGATION_PATH         = 'WITH_NAVIGATION_PATH';
+      WITH_URL                     = 'WITH_URL';
+   };
+   type Innvocation : String(16) enum {
+      ISOLATED   = 'ISOLATED';
+      CHANGE_SET = 'CHANGE_SET';
+   };
+   type Direction : String(20) enum {
+      MINIMIZE = 'MINIMIZE';
+      TARGET   = 'TARGET';
+      MAXIMIZE = 'MAXIMIZE';
+   };
+
+   /*  annotation UI {
+        lineItem {
+           position :   Integer;
+           exclude :    Boolean;
+           importance : Importance;
+        };
+     }*/
+   annotation UI {
+      hidden :                               Boolean;
+      masked :                               Boolean;
+      multiLineText :                        Boolean;
+      lineItem :                             array of {
+         qualifier :                         String(120);
+         position :                          Integer;
+         exclude :                           Boolean;
+         importance :                        Importance;
+         type :                              Type;
+         label :                             String(40);
+         iconUrl :                           String(255);
+         criticality :                       elementRef;
+         dataAction :                        String(128);
+         invocationGrouping :                Innvocation;
+         semanticObjectAction :              String(128);
+         value :                             elementRef;
+         targetElement :                     elementRef;
+         url :                               elementRef;
+      };
+      identification :                       array of {
+         position :                          Integer;
+         exclude :                           Boolean;
+         importance :                        Importance;
+         type :                              Type;
+         label :                             String(40);
+         iconUrl :                           String(255);
+         criticality :                       elementRef;
+         dataAction :                        String(128);
+         invocationGrouping :                Innvocation;
+         semanticObjectAction :              String(128);
+         value :                             elementRef;
+         targetElement :                     elementRef;
+         url :                               elementRef;
+      };
+      statusInfo :                           array of {
+         position :                          Integer;
+         exclude :                           Boolean;
+         importance :                        Importance;
+         type :                              Type;
+         label :                             String(40);
+         iconUrl :                           String(255);
+         criticality :                       elementRef;
+         dataAction :                        String(128);
+         invocationGrouping :                InnvocationD;
+         semanticObjectAction :              String(128);
+         value :                             elementRef;
+         targetElement :                     elementRef;
+         url :                               elementRef;
+      };
+      fieldGroup :                           array of {
+         qualifier :                         String(120);
+         groupLabel :                        String(40);
+         position :                          Integer;
+         exclude :                           Boolean;
+         importance :                        Importance;
+         type :                              Type;
+         label :                             String(40);
+         iconUrl :                           String(255);
+         criticality :                       elementRef;
+         dataAction :                        String(128);
+         invocationGrouping :                Innvocation;
+         semanticObjectAction :              String(128);
+         value :                             elementRef;
+         targetElement :                     elementRef;
+         url :                               elementRef;
+      };
+      dataPoint {
+         title :                             String(40);
+         description :                       String(80);
+         longDescription :                   String(190);
+         forecastValue :                     elementRef;
+         minimumValue :                      Integer;
+         maximumValue :                      Integer;
+         valueFormat {
+            scaleFactor :                    Integer;
+            numberOfFractionalDigits :       Integer;
+         };
+         referencePeriod {
+            description :                    String(80);
+            startP :                         elementRef;
+            endP :                           elementRef;
+         };
+         criticality :                       elementRef;
+         criticalityCalculation {
+            improvementDirection :           Direction;
+            toleranceRangeLowValue :         Integer;
+            toleranceRangeLowValueElement :  elementRef;
+            toleranceRangeHighValue :        Integer;
+            toleranceRangeHighValueElement : elementRef;
+            deviationRangeLowValue :         Integer;
+            deviationRangeLowValueElement :  elementRef;
+            deviationRangeHighValue :        Integer;
+            deviationRangeHighValueElement : elementRef;
+         };
+         trend :                             elementRef;
+         trendCalculation {
+            referenceValue :                 elementRef;
+            isRelativeDifference :           Boolean;
+            upDifference :                   Integer;
+            upDifferenceElement :            elementRef;
+            strongUpDifference :             Integer;
+            strongUpDifferenceElement :      elementRef;
+            downDifference :                 Integer;
+            downDifferenceElement :          elementRef;
+            strongDownDifference :           Integer;
+            strongDownDifferenceElement :    elementRef;
+         };
+         responsible :                       elementRef;
+         responsibleName :                   String(120);
+      };
+      selectionField :                       array of {
+         qualifier :                         String(120);
+         position :                          Integer;
+         exclude :                           Boolean;
+         element :                           elementRef;
+      };
+   };
+};

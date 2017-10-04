@@ -7,5 +7,9 @@ resources:
   - name: shine-user-container
     parameters:
       config:
-        schema: <SCHEMA_NAME>
+        schema: <SCHEMA_NAME_1>
 
+  - name: shine-container
+    parameters:
+      config:
+        schema: <SCHEMA_NAME_2>

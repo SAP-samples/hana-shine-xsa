@@ -39,7 +39,7 @@ function calcTomorrow() {
 }
 
 function getSessionId() {
-    var sessionId = $.request.cookies.get('xsUtilSession') || null;
+    var sessionId = encodeURI($.request.cookies.get('xsUtilSession')) || null;
     if (sessionId === null) {
         var conn = $.db.getConnection();
         var pstmt;

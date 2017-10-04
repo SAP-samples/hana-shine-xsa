@@ -39,6 +39,10 @@
     },{
       "source": "/user/xsodata/(.*)",
       "destination": "user-backend"
+    },
+    {
+      "source": "/user/xsjs/(.*)",
+      "destination": "user-backend"
     }, {
       "source": "^/admin-ui/(.*)",
       "localDir": "resources",

@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sap.refapps</groupId>
 	<artifactId>sap-xsac-shine-user-java</artifactId>
-	<version>1.3.3</version>
+	<version>1.4.2</version>
 	<packaging>war</packaging>
 
 	<properties>
 	<javax.version>3.0.1</javax.version>
-	<sap.gateway.version>1.2.2</sap.gateway.version>
-	<slf4j.version>1.7.7</slf4j.version>
-    <java-container-security.version>0.21.18</java-container-security.version>
+    <sap.gateway.version>1.2.2</sap.gateway.version>
+    <slf4j.version>1.7.7</slf4j.version>
+    <java-container-security.version>0.22.2</java-container-security.version>
   </properties>
 
 	<dependencies>
@@ -53,6 +53,11 @@
       <version>${sap.gateway.version}</version>
     </dependency>
     <dependency>
+	<groupId>com.sap.xs2.security</groupId>
+	<artifactId>java-container-security</artifactId>
+	<version>${java-container-security.version}</version>
+</dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4j.version}</version>
@@ -94,4 +99,11 @@
 			</plugin>
 		</plugins>
 	</build>
+		<!--Un-comment this section if the WebIDE is not able to fetch the jars from the Maven Central repository -->
+	<repositories>
+		<repository>
+			<id>SAP repository</id>
+			<url>http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.milestones</url>
+		</repository>
+	</repositories>
 </project>

@@ -31,6 +31,7 @@ Type HistT {
         VALIDITY: EPM.ValidityT;   
         LATITUDE: Double;
         LONGITUDE: Double; 
+		       
     } technical configuration {
     	unload priority 8;
     };
@@ -42,7 +43,7 @@ Type HistT {
         PHONENUMBER: EPM.PhoneT;
         FAXNUMBER: EPM.PhoneT null;
         WEBADDRESS: EPM.VLString;
-        ADDRESSES: Association to Addresses null;
+        ADDRESSES: Association to Addresses;
         COMPANYNAME: String(80);
         LEGALFORM: EPM.BusinessKey;
         HISTORY: HistT;

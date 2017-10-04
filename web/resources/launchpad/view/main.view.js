@@ -145,15 +145,6 @@ sap.ui.jsview("view.main", {
                     // label
 		
                  titleLabel
-                ],
- contentRight: [ 
-		 new sap.m.Button({
-      			icon : "sap-icon://attachment-zip-file",
-			tooltip: "Click to download the source code",
-     			press : function (evt){
-  					   sap.m.URLHelper.redirect("../source/sap-xsac-shine-src-code.zip", true); 
-     					      }
-     				     })
                 ]
 
             }),             

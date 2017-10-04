@@ -1,26 +1,13 @@
-PROCEDURE "generateTimeData" (  )
+PROCEDURE "generateTimeData" ( )
    LANGUAGE SQLSCRIPT
  AS
- 
 BEGIN
 
 declare lv_schema VARCHAR(50);
 declare lv_query string;
-declare curr_year string;
-declare next_year string;
-
-SELECT YEAR(CURRENT_DATE) into curr_year from Dummy ;
-
-
 
 select current_schema into lv_schema from dummy;
-
-
-
-lv_query = 'MDX UPDATE TIME DIMENSION HOUR 2011 "'||:curr_year||'" MONDAY TARGET_TABLE "Core.SHINE_TIME_DIM" TARGET_SCHEMA "'||:lv_schema||'"';
-
-
+lv_query = 'MDX UPDATE TIME DIMENSION HOUR 2011 2017  MONDAY TARGET_TABLE "Core.SHINE_TIME_DIM" TARGET_SCHEMA "'||:lv_schema||'"';
 EXECUTE IMMEDIATE(:lv_query);              
   
- 
 END

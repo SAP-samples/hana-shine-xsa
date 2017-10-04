@@ -1,4 +1,4 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS01
+SHINE for XS Advanced SAP HANA 2.0 SPS02
 ===============
 This release of the application consists of the following packages:
 
@@ -32,7 +32,9 @@ The following components should be installed before SHINE installation on XSA. I
 
 - XSAC_PORTAL_SERVICES
 
-- SAPUI5_FESV3   
+- SAPUI5_FESV3
+
+- Auditlog service   
 
 Note: In HANA Express, the Job Scheduler(XSAC_SERVICES) could be pre-installed.
 If the services are stopped, please contact the system administrator to start them.
@@ -54,8 +56,13 @@ If the services are stopped, please contact the system administrator to start th
 - Create Job Scheduler Service by executing the command in CLI of XSA system:
   
     `xs cs jobscheduler default shine-scheduler`
+- Create Auditlog service by executing the following command:   
+
+    `xs cs auditlog free shine-auditlog`
 
 - 	After all these services are created, build and run all modules like core-db, user-db, user-js, user-java and web.
+
+
 
 Note: While building the core-db module, the following two things have to be replaced in the mta.yaml:
 
@@ -68,18 +75,30 @@ For more details on how to do the above steps, please refer below:
 	
    a)	**UAA Endpoint**: Please replace the UAA end point URL in line 204 of mta.yaml to your respective UAA end point URL which will    be of the format :
 
-   `http(s)://< host-name >:3<instance-number>32/ uaa-security`
+   `http(s)://<host-name >:3<instance-number>32/ uaa-security`
 
    For example in HANA express the UAA endpoint can be https://hxehost:39032/uaa-security
 
    b)   **Controller Endpoint**: Please replace the controller end point URL in line 214 of the mta.yaml file to your respective XS controller end point.
    
-   ` http(s)://<XSA host name>:<xs controller port>`
+   ` http(s)://<host name>:<xs controller port>`
 
    By default, the xs controller port is 3##30 where ## is the instance number
 
    Please Note, In HANAExpress VM install has default instance as 90, Binary install is a user-defined number.   
    This will install SHINE without FLP. Please follow the steps in the below section to deploy SHINE with FLP.
+
+Please note, the audit log service needs to be bound manually to the shine-core-js
+application. This can be done by doing a dummy run of the core-js module and after it fails
+execute following command in the CLI of the XSA system:
+
+`xs bs <WEBIDE_USERNAME>…<PROJECTNAME>-core-js shine-auditlog`
+
+The core-js application deployed via SAP WebIDE for SAP HANA will be of the format  
+
+`<WEBIDE_USERNAME>…. <PROJECTNAME>-core-js`
+
+Rerun the core-js after executing the above command. 
 
 ## Deploy SHINE for XSA application with FLP  ##
 
@@ -87,38 +106,33 @@ After doing the above steps,
 
 - Right click on the shine project folder and select Build.
 - After successful build of the project, there will be a folder called mta_archives created in the workspace.
-- Expand the folder and expand the folder com.sap.refapps.shine_1.3.x.mtar file present inside.
+- Expand the folder and expand the folder com.sap.refapps.shine_1.x.x.mtar file present inside.
 - Right click on the mtar file present inside and select Export.
 - Once exported, login to the XSA system via CLI and deploy the mtar file using the following command:
     
-    `xs deploy com.sap.refapps.shine_1.3.x.mtar`
+    `xs deploy com.sap.refapps.shine_1.x.x.mtar`
     
 
 
-   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/doc/13ff61e61a8f442090e27050dc61f019/2.0.01/en-US/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_en_HANA2.0SPS01.pdf)
+   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.02/en-US/0a1c5d829a074a8a889acd2ace444042.html)
+
+
+
 
 ## Troubleshooting
 
-In case the build of the java module fails with error:
+1. If the SHINE installation message fails with the message, 
+Error resolving merged descriptor properties and parameters: No configuration entries were found matching the filter specified in resource "sapui5-provider" 
+Install SAPUI5_FESV3 version 1.44.8 and reinstall SHINE.
 
-    [ERROR] Failed to execute goal on project sap-xsac-shine-user-java: Could not resolve 
-    dependencies for project com.sap.refapps:sap-xsac-shine-user-java:war:1.2.2: The following
-    artifacts could not be resolved: com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.api:jar:1.2.2, com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.core:jar:1.2.2, 
-    com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.jdbc:jar:1.2.2, 
-    com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.cds:jar:1.2.2, 
-    com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.core.web:jar:1.2.2, 
-    com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.xsa:jar:1.2.2: Could not find artifact 
-    com.sap.gateway.v4.rt:com.sap.gateway.v4.rt.api:jar:1.2.2 in central 
+2. If the build of any module fails with the error message that looks like:   
+   **No compatible version found: @sap/jobs-client@1.1.1**
 
-Then please follow the below steps:
+Then open the package. json of the module which failed and change the version of the library shown in the error message to one of the correct versions also mentioned in the error message.
 
-1.Expand the folder user-java and open pom.xml file.
+You can also check the compatible versions of the libraries by right-clicking on the module and selecting “Show dependency updates”
 
-2.Look for the below line:    
 
-    	<sap.gateway.version>1.2.2</sap.gateway.version>
-
-3.Change the version from 1.2.2 to 1.2.1 and build and run the java module again.
 
 ## Support
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)

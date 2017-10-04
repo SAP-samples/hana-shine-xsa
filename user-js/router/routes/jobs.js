@@ -32,6 +32,46 @@ module.exports = function() {
 		});
 
 	});
+	
+		app.get('/getJobsCount', function(req, res) {
+		logger = req.loggingContext.getLogger("/jobs/getJobsCount");
+		var client = req.db;
+		var query = 'select count(*) as COUNT from "Jobs.ScheduleDetails"';
+		var jobArray = [];
+		var jobObj = {};
+		var jsonString = '{"d":'+'{"icon": "sap-icon://time-entry-request","info":" ",';
+		var jsonString3 = '"numberDigits": 1,"subtitle": "No of Jobs"}}'; 
+
+		client.exec(query, function(error, rows) {
+			if (error) {
+				logger.error('Error occured' + error);
+				util.callback(error, res, "Data Unavailable");
+			} else {
+				console.log("rows"+Object.keys(rows));
+				if(rows.length>=1){
+					console.log("rows[0] "+rows[0]);
+					var count =  rows[0].COUNT;
+					console.log("rowsLength"+rows.length);
+					console.log("count"+count);
+					var numberStateString = '"numberState": "Positive",';
+					if(count > 0){
+	   					numberStateString = '"numberState": "Positive",';
+					}else{
+           					numberStateString = '"numberState": "Negative",';
+					}
+					var jsonString2 = '"number":'+count+','+numberStateString;
+					var responseString = jsonString+jsonString2+jsonString3;
+					console.log("response string"+responseString);
+					var Response = JSON.parse(responseString);
+					console.log("Response"+Response);
+					res.writeHead(200, {
+						"Content-Type": "application/json"
+					});
+					res.end(JSON.stringify(Response));
+				}
+			}
+		});
+	});
 
 	app.get('/getalljobs', function(req, res) {
 		logger = req.loggingContext.getLogger("/jobs/getalljobs");

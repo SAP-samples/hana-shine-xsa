@@ -2,60 +2,52 @@
 "use strict";
 module.exports = {
 	initExpress: function() {
-		var https = require('https');
-		var xssec = require('@sap/xssec');
-		var express = require('express');
-		var passport = require('passport');
-		var hdbext = require('@sap/hdbext'); 
-		var routes = require('../routes/index');
-		var winston = require('winston');
-		var xsenv = require('@sap/xsenv');
-		
-		var PORT = process.env.PORT || 3000;
-		var app = express();
-		https.globalAgent.options.ca= xsenv.loadCertificates(); 
-		//log level
-		winston.level = process.env.winston_level || 'error';
-		
-		/**
-		 * Setup JWT authentication strategy
-		 * The default UAA credentials can be overriden
-		 * by defining a user defined service called 'uaa'.
-		 */
-		passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({uaa:{tag:'xsuaa'}}).uaa));
-		
-		
-		//use passport for authentication
-		app.use(passport.initialize());
-		
-		/*
-		 * Use JWT password policy for all routes. 
-		 *
-		 * use database connection pool provided by sap_hdb_conn
-		 * provides a db property containing the connection
-		 * object to the request object of all routes.
-		 */
-		 var hanaOptions = xsenv.getServices({	
-			hana: process.env.HANA_SERVICE_NAME || { tag: 'hana' }
-		}).hana;
+		var xsenv = require("@sap/xsenv");
+		var passport = require("passport");
+		var xssec = require("@sap/xssec");
+		var xsHDBConn = require("@sap/hdbext");
+		var express = require("express");
 
-		app.use('/',
-		    passport.authenticate('JWT', {session: false}),
-		    hdbext.middleware(hanaOptions),
-		    routes.datagen,
-		    routes.get,
-		    routes.reset);
-		
-		//start the HTTP server
-		
+		//logging
+		var logging = require("@sap/logging");
+		var appContext = logging.createAppContext();
+
+		//Initialize Express App for XS UAA and HDBEXT Middleware
+		var app = express();
+
+		passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
+			uaa: {
+				tag: "xsuaa"
+			}
+		}).uaa));
+		app.use(logging.expressMiddleware(appContext));
+		app.use(passport.initialize());
+		var hanaOptions = xsenv.getServices({
+			hana: {
+				tag: "hana"
+			}
+		});
+		app.use(
+			passport.authenticate("JWT", {
+				session: false
+			}),
+			xsHDBConn.middleware(hanaOptions.hana)
+		);
 		return app;
 	},
 
 	initXSJS: function(app) {
+		//	process.env.XS_APP_LOG_LEVEL='debug';
 		var xsjs = require("@sap/xsjs");
 		var xsenv = require("@sap/xsenv");
-			var options = {// anonymous : true, // remove to authenticate calls
-			redirectUrl: "/index.xsjs"
+		var options = {
+			anonymous : true, // remove to authenticate calls
+			redirectUrl: "/index.xsjs",
+			context: {
+				base: global.__base,
+				env: process.env,
+				answer: 42
+			}
 		};
 
 		//configure HANA
@@ -65,20 +57,35 @@ module.exports = {
 					tag: "hana"
 				}
 			}));
+			options = Object.assign(options, xsenv.getServices({
+				secureStore: {
+					tag: "hana"
+				}
+			}));
 		} catch (err) {
-			console.error(err);
+			console.log("[WARN]", err.message);
 		}
 
+		//Add SQLCC
+		// try {
+		// 	options.hana.sqlcc = xsenv.getServices({
+		// 		"xsjs.sqlcc_config": "CROSS_SCHEMA_SFLIGHT"
+		// 	});
+		// } catch (err) {
+		// 	console.log("[WARN]", err.message);
+		// }
+
 		// configure UAA
-	try {
+		try {
 			options = Object.assign(options, xsenv.getServices({
 				uaa: {
 					tag: "xsuaa"
 				}
 			}));
 		} catch (err) {
-			console.error(err);
+			console.log("[WARN]", err.message);
 		}
+
 		// start server
 		var xsjsApp = xsjs(options);
 		app.use(xsjsApp);

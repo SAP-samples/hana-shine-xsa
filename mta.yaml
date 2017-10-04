@@ -1,6 +1,6 @@
 _schema-version: "2.0.0"
 ID: com.sap.refapps.shine
-version: 1.3.4
+version: 1.4.2
 
 modules:
   - name: shine-web
@@ -39,6 +39,7 @@ modules:
            name: uaa 
            url: ~{url} 
            forwardAuthToken: true 
+
     parameters: 
        host: web 
        register-service-url: true 
@@ -52,10 +53,12 @@ modules:
       - name: core-js
         properties:
           url: "${default-url}"
+    
     requires:
       - name: shine-uaa
       - name: shine-container
       - name: shine-core-db
+      - name: shine-auditlog
 
   - name: shine-user-js
     type: nodejs
@@ -87,7 +90,7 @@ modules:
         properties:
          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
                {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
-        
+      
   - name: shine-core-db
     type: hdb
     path: core-db
@@ -110,13 +113,17 @@ modules:
        properties:
         TARGET_CONTAINER: ~{user-container-name}
  
-  - name: site-web
+ 
+
+
+  
+
+
+  - name: shine-site-web
     type: siteentry
     path: site-web
     parameters:
        memory: 64M
-    properties:
-      NODE_TLS_REJECT_UNAUTHORIZED: "0" 
     requires:
       - name: shine-uaa
       - name: sap-portal-services-host
@@ -152,19 +159,27 @@ modules:
       - name: sapui5-provider
         properties:
           sapui5url: '~{url}'
+    properties:
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"  
 
-  - name: site-content
+  
+     
+     
+  - name: shine-site-content
     type: sitecontent
     path: site-content
     parameters:
-       health-check-type: none
+       memory: 64M
     requires:
        - name: sap-portal-services-client
        - name: shine-uaa
     properties:
-      NODE_TLS_REJECT_UNAUTHORIZED: "0" 
-      
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"  
+
 resources:
+  - name: shine-auditlog
+    type: com.sap.xs.auditlog 
+    
   - name: shine-container
     type: com.sap.xs.hdi-container
     properties:
@@ -177,7 +192,7 @@ resources:
     parameters: 
      service-name: shine-user-container
      config:
-       schema: SHINE_USER_SCHEMA
+       schema: SHINE_USER12
 
   - name: shine-scheduler
     type: com.sap.xs.job-scheduler
@@ -185,7 +200,36 @@ resources:
   - name: shine-uaa
     type: com.sap.xs.uaa-space
     parameters:
-     path: xs-security.json
+     config:
+       xsappname: shine-admin
+       scopes:
+       - name: "$XSAPPNAME.JOBSCHEDULER"
+         description: Job Scheduler Scope
+         grant-as-authority-to-apps: [jobscheduler]
+       - name: "$XSAPPNAME.Display"
+         description: display
+       - name: "$XSAPPNAME.Edit"
+         description: edit
+       - name: "$XSAPPNAME.Delete"
+         description: delete
+       - name: "$XSAPPNAME.DataGenerator"
+         description: data generator
+       - name: xs_authorization.read
+         description: Read authorization information from UAA
+       - name: xs_authorization.write
+         description: Write authorization information to UAA
+       role-templates:
+       - name: Admin
+         description: refapps administrator
+         scope-references:
+         - "$XSAPPNAME.Display"
+         - "$XSAPPNAME.Edit"
+         - "$XSAPPNAME.Delete"
+         - "$XSAPPNAME.DataGenerator"
+         - "$XSAPPNAME.JOBSCHEDULER"
+         - xs_controller.read
+         - xs_authorization.read
+         - xs_authorization.write
          
   - name: sap-portal-services-host
     type: com.sap.portal.site-host
@@ -199,16 +243,31 @@ resources:
       config:
         siteId : XSAC_SHINE
 
+   
   - name: uaa 
     properties: 
-      url: https://<hostname>:3##32/uaa-security
+      url: "https://<hostname>:3##32/uaa-security"
       
   - name: sapui5-provider
     type: configuration
     parameters:
       provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3
       version: "1.44.8"
+  - name: sap-portal-services-host-com.sap.refapps.shine
+    parameters:
+       config:
+          siteId: com.sap.refapps.shine
+    type: com.sap.portal.site-host
 
+
+  - name: portal-uaa-com.sap.refapps.shine
+    parameters:
+       service-plan: space
+    type: com.sap.xs.uaa
+
+
+ 
+ 
   - name: controller
     properties:
-      url:  https://<hostname>:3##32/uaa-security
+      url: 'https://<hostname>:3##30'

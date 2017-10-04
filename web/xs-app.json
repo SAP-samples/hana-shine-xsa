@@ -13,6 +13,7 @@
       "source": "/sap/hana/democontent/epm/services/",
       "destination": "core-backend"
     },
+    
     {
       "source": "/sap/hana/democontent/epm/spatial/services/",
       "destination": "core-backend"
@@ -47,7 +48,8 @@
     },
     {
       "source": "/user/xsodata/(.*)",
-      "destination": "user-backend"
+      "destination": "user-backend",
+      "authenticationType": "none"
     },
     {
       "source": "^/admin-ui/(.*)",

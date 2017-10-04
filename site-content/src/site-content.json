@@ -47,7 +47,14 @@
                  "desktop": true,
                  "tablet": true,
                  "phone": true
-               }
+               },
+		"indicatorDataSource": {
+				"path": "/jobs/getJobsCount",
+				"refresh": "6000",
+				"type": "JSON"
+				
+			}
+
             }
            },
            "outbounds": {
@@ -69,7 +76,7 @@
          }
        }
      },
-    "user-crud": {
+     "user-crud": {
       "sap.app": {
         "_version": "1.3.0",
         "id": "user-crud",
@@ -87,13 +94,14 @@
                 "desktop": true,
                 "tablet": true,
                 "phone": true
-              }
-            },
-            "indicatorDataSource": {
-				"path": "/resources/shine/democontent/epm/usercrud/user-dynamic.json",
+              	},
+		"indicatorDataSource": {
+				"path": "/user/xsjs/userDetails.xsjs",
 				"refresh": "6000",
-				"displayNumberUnit": "%"
+				"type": "JSON"
+				
 			}
+            }
           },
           "outbounds": {
             
@@ -113,8 +121,7 @@
           "url": "/resources/usercrud"
         }
       }
-    },
-	"data-generator": {
+    },	"data-generator": {
       "sap.app": {
         "_version": "1.3.0",
         "id": "data-generator",
@@ -175,7 +182,14 @@
                 "desktop": true,
                 "tablet": true,
                 "phone": true
-              }
+              },
+		"indicatorDataSource": {
+				"path": "/sap/hana/democontent/epm/services/soDetails.xsjs",
+				"refresh": "6000",
+				"type": "JSON"
+				
+			}
+
             }
           },
           "outbounds": {
@@ -255,7 +269,14 @@
                 "desktop": true,
                 "tablet": true,
                 "phone": true
-              }
+              },
+		"indicatorDataSource": {
+				"path": "/sap/hana/democontent/epm/services/poDetails.xsjs",
+				"refresh": "6000",
+				"type": "JSON"
+				
+			}
+
             }
           },
           "outbounds": {
@@ -283,7 +304,6 @@
 			"identification": {
 				"id": "5acadc20-687e-11e6-8b77-86f30ca893d3",
 				"namespace": "",
-				"title": "{{group1.title}}",
 				"i18n": "i18n/bundle.properties"
 			},
 			"payload": {
@@ -291,7 +311,6 @@
 					"id": "dataGenerator",	
 					"title": "{{group1.datagenerator.title}}",
 					"description": "{{group1.datagenerator.desc}}",
-					"subTitle": "{{group1.datagenerator.sTitle}}",
                     "icon": "sap-icon://database",						
 					"target": {
 						"semanticObject": "datagenerator",
@@ -327,7 +346,6 @@
 					"id": "jobScheduler",	
 					"title": "{{group1.jobscheduler.title}}",
 					"description": "{{group1.jobscheduler.desc}}",
-					"subTitle": "{{group1.jobscheduler.sTitle}}",
                     "icon": "sap-icon://time-entry-request",						
 					"target": {
 						"semanticObject": "jobscheduler",
@@ -339,7 +357,6 @@
 					"id": "usercrud",	
 					"title": "{{group1.usercrud.title}}",
 					"description": "{{group1.usercrud.desc}}",
-					"subTitle": "{{group1.usercrud.sTitle}}",
                     "icon": "sap-icon://account",						
 					"target": {
 						"semanticObject": "usercrud",
@@ -350,7 +367,6 @@
 					"id": "spatial",	
 					"title": "{{group1.spatial.title}}",
 					"description": "{{group1.spatial.desc}}",
-					"subTitle": "{{group1.spatial.sTitle}}",
                     			"icon": "sap-icon://map",						
 					"target": {
 						"semanticObject": "spatial",

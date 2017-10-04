@@ -1,0 +1,13 @@
+service namespace "com.sap.openSAP.hana5.example.services" { 
+	"sap.hana.democontent.epm.models::BUYER"
+	as "BusinessPartners"
+	keys("PARTNERID");	
+	
+	"sap.hana.democontent.epm.models::GET_PARTNER_ROLES"
+	as "PartnerRoles"
+	keys("PARTNERROLE");	
+}
+
+annotations {
+   enable OData4SAP;
+}
