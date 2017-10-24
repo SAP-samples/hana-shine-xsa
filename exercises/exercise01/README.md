@@ -10,16 +10,16 @@ In this chapter you will create an account in SAP Cloud Platform and obtain an i
 
 ## Exercise Description
 ### 1. Log on to your trial account of the Cloud Foundry environment
-1. Log on to the SAP Cloud Platform cockpit using the cockpit URL [https://account.hanatrial.ondemand.com](https://account.hanatrial.ondemand.com).
-2. Navigate to the region 'US East(VA) AWS' where your trial account of the Cloud Foundry environment is located.
-3. Navigate to the subaccount 'trial'. 
-4. Click on Spaces in the left navigation pane.
-5. Click on space 'dev'. 
-6. Once applications are deployed they will be visible here.
+1. Log on to the SAP Cloud Platform cockpit of your trail account using the cockpit URL [https://account.hanatrial.ondemand.com](https://account.hanatrial.ondemand.com), if you do not yet have an account please register for one (it's free) or contact us and we will give you the login credentials for one.
+2. Click on 'Start Cloud Foundry Trial' and choose 'US West (VA)', this creates your Cloud Foundry trial account.
+3. Navigate to your subaccount 'trial'. 
+4. Click on 'Spaces' in the left navigation pane.
+5. Navigate to the your space 'dev'. 
+6. Once applications are deployed they will be visible there.
 
 ### 2. Clone SHINE code from GitHub
-1.  Launch SAP Web IDE by launching URL [https://wdflbmt0749.wdf.sap.corp:53075/]( https://wdflbmt0749.wdf.sap.corp:53075/) in Google Chrome.
-2. Login with User: `CPL165` and Password: `Sap12345`.
+1.  Launch SAP Web IDE for SAP HANA by launching the URL [https://wdflbmt0749.wdf.sap.corp:53075/](https://wdflbmt0749.wdf.sap.corp:53075/) in Google Chrome.
+2. Login with the User: `CPL165` and Password: `Sap12345`.
 ![Alt text](./images/WebIDE_Login.jpg "Web IDE Login Page")
 3. Launch the URL [https://github.com/SAP/hana-shine-xsa](https://github.com/SAP/hana-shine-xsa) in a new window. This is the GitHub Repository where you can find the code for the SHINE application.
 4. Click on `Clone or download` button.
