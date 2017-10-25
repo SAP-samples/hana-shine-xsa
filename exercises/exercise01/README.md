@@ -11,7 +11,7 @@ In this chapter you will create an account in SAP Cloud Platform and obtain an i
 ## Exercise Description
 ### 1. Log on to your trial account of the Cloud Foundry environment
 1. Log on to the SAP Cloud Platform cockpit of your trail account using the cockpit URL [https://account.hanatrial.ondemand.com](https://account.hanatrial.ondemand.com), if you do not yet have an account please register for one (it's free) or contact us and we will give you the login credentials for one.
-2. Click on 'Start Cloud Foundry Trial' and choose 'US West (VA)', this creates your Cloud Foundry trial account.
+2. Click on 'Start Cloud Foundry Trial' and choose 'US East (VA)', this creates your Cloud Foundry trial account.
 3. Navigate to your subaccount 'trial'. 
 4. Click on 'Spaces' in the left navigation pane.
 5. Navigate to the your space 'dev'. 
