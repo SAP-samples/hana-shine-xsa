@@ -30,7 +30,7 @@ In this exercise you will build the SHINE application after extending it and red
 6. The deployment starts and within a few minutes the complete application gets deployed.
 7. After deployment run the command `cf apps` to see all the deployed apps.
 8. Run command `cf apps` to see all the backing service instances created.
-9. Copy the url for the app shine-web and paste it in browser.  
+9. Copy the url for the app shine-web and paste it in browser. Alternatively or additionally, you can now also go back to your SAP Cloud Platform cockpit, refresh and you will see your deployed applications there. Under the service `shine-web` you will see the same URL which you can also open directly from there. 
 ![Alt text](./images/CF_Apps.jpg "CF Apps")
 10. Login to this url with the SAP Cloud Platform User ID and Password.
 
