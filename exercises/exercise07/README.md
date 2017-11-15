@@ -12,13 +12,13 @@ In this exercise you will build the SHINE application after extending it and red
 
 ### 1. Build SHINE application
 1. In Web IDE click on the hana-shine-xsa folder.
-2. Open mta.yaml and change version from 1.3.10 to 1.3.11.  
+2. Open mta.yaml and change version from 1.3.10 to 1.3.12.  
 ![Alt text](./images/Update_MTA.jpg "Update MTA")
 3. Click on Save button.
 4. Right click on the hana-shine-xsa folder and click on Build.
-5. When the project is built an mtar is in the folder workspace->mta_archives->com.sap.refapps.shine->com.sap.refapps.shine_1.3.11.mtar.  
+5. When the project is built an mtar is in the folder workspace->mta_archives->com.sap.refapps.shine->com.sap.refapps.shine_1.3.12.mtar.  
 ![Alt text](./images/Build.jpg "Build")
-6. Right click on com.sap.refapps.shine_1.3.11.mtar and click on export and download it to your machines Desktop.
+6. Right click on com.sap.refapps.shine_1.3.12.mtar and click on export and download it to your machines Desktop.
 
 ### 2. Deploy SHINE 
 1. Open Command Line Interface.
@@ -26,7 +26,7 @@ In this exercise you will build the SHINE application after extending it and red
 3. Undeploy older version of SHINE, this can be done by running below command
 ` cf undeploy com.sap.refapps.shine -f --delete-services`
 4. Wait for the undeploy to complete. You will notice one by one the modules being undeployed and finally the backing services being deleted. Remark: Undeployment is usually not necessary and included for showcasing. Delta deployment of a new version is also possible.
-5. Run the command `cf deploy com.sap.refapps.shine_1.3.11.mtar` to deploy the updated version of SHINE application.
+5. Run the command `cf deploy com.sap.refapps.shine_1.3.12.mtar` to deploy the updated version of SHINE application.
 6. The deployment starts and within a few minutes the complete application gets deployed.
 7. After deployment run the command `cf apps` to see all the deployed apps.
 8. Run command `cf apps` to see all the backing service instances created.
