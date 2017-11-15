@@ -30,25 +30,25 @@ In this hands-on session, you will learn
 This hands-on session consists of following exercises
 
 #### Exercise 1: Getting an SAP Cloud Platform developer account and cloning SHINE code from GitHub
-In this exercise, you will sign up for a free SAP Cloud Platform Cloud Foundry account which you can use to deploy and run the SHINE applications shown in Figure 1 above.  You will also clone the Git repository that contains the complete sample project from GitHub into your local environment. Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise01/README.md "Optional title") to get to the step-by-step description of this exercise.
+In this exercise, you will sign up for a free SAP Cloud Platform Cloud Foundry account which you can use to deploy and run the SHINE applications shown in Figure 1 above.  You will also clone the Git repository that contains the complete sample project from GitHub into your local environment. Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise01/README.md "Optional title")** to get to the step-by-step description of this exercise.
 
 #### Exercise 2: Understand SHINE modules and build the application
-In this exercise, you will explore the SHINE application which is a Multi Target Application(MTA), understand the different modules and the Multi Target Application Development Descriptor (mta.yaml) and then build the SHINE application and generate MTA archive(mtar). Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise02/README.md "Optional title") to get to the step-by-step description of this exercise.
+In this exercise, you will explore the SHINE application which is a Multi Target Application(MTA), understand the different modules and the Multi Target Application Development Descriptor (mta.yaml) and then build the SHINE application and generate MTA archive(mtar). Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise02/README.md "Optional title")** to get to the step-by-step description of this exercise.
 
 #### Exercise 3: Deploy application to SAP Cloud Platform Cloud Foundry Environment
-In this exercise, you will deploy the MTA archive (mtar) to SAP Cloud Platform Cloud Foundry Environment using the Cloud Foundry Command Line Interface(CLI). Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise03/README.md "Optional title") to get to the step-by-step description of this exercise.
+In this exercise, you will deploy the MTA archive (mtar) to SAP Cloud Platform Cloud Foundry Environment using the Cloud Foundry Command Line Interface(CLI). Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise03/README.md "Optional title")** to get to the step-by-step description of this exercise.
 
 #### Exercise 4: Implement a Table User Defined Function for fuzzy search
-In this exercise, you will add a HANA database artifact for performing Fuzzy search. Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise04/README.md "Optional title") to get to the step-by-step description of this exercise.  
+In this exercise, you will add a HANA database artifact for performing Fuzzy search. Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise04/README.md "Optional title")** to get to the step-by-step description of this exercise.  
 
 #### Exercise 5: Expose REST API for Fuzzy Search
-In this exercise, you will expose fuzzy search functionality implemented in exercise 4 as REST API. Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise05/README.md "Optional title") to get to the step-by-step description of this exercise.
+In this exercise, you will expose fuzzy search functionality implemented in exercise 4 as REST API. Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise05/README.md "Optional title")** to get to the step-by-step description of this exercise.
 
 #### Exercise 6: Develop User Interface
-In this exercise, you will develop a SAPUI5 based User Interface and bind it to REST API implemented in exercise 6 for firing the search. Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise06/README.md "Optional title") to get to the step-by-step description of this exercise.
+In this exercise, you will develop a SAPUI5 based User Interface and bind it to REST API implemented in exercise 6 for firing the search. Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise06/README.md "Optional title")** to get to the step-by-step description of this exercise.
 
 #### Exercise 7: Build updated SHINE application and deploy it
-In this exercise, you will build the SHINE application extended with Text Analysis feature and deploy it to SAP Cloud Platform Cloud Foundry Environment. Follow this [link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise07/README.md "Optional title") to get to the step-by-step description of this exercise.
+In this exercise, you will build the SHINE application extended with Text Analysis feature and deploy it to SAP Cloud Platform Cloud Foundry Environment. Follow this **[link](https://github.com/SAP/hana-shine-xsa/tree/shine-cf/exercises/exercise07/README.md "Optional title")** to get to the step-by-step description of this exercise.
 
 ## Summary
 In this hands-on session, you have learned how to, develop and deploy microservice based Multi Target Application on Cloud Foundry Environment, implement business logic in SQL and Node.js and finally consume it in SAPUI5 based user interface.
