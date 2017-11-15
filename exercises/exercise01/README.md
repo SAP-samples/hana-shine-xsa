@@ -15,10 +15,10 @@ In this chapter you will create an account in SAP Cloud Platform and obtain an i
 3. Navigate to your subaccount 'trial'. 
 4. Click on 'Spaces' in the left navigation pane.
 5. Navigate to the your space 'dev'. 
-6. Once applications are deployed they will be visible there.
+6. Once applications are deployed, which we will do in a later exercise, they will be visible there.
 
 ### 2. Clone SHINE code from GitHub
-1.  Launch SAP Web IDE for SAP HANA by launching the URL [https://wdflbmt0749.wdf.sap.corp:53075/](https://wdflbmt0749.wdf.sap.corp:53075/) in Google Chrome.
+1. Now, we will begin with our application. Launch SAP Web IDE for SAP HANA by launching the URL [https://wdflbmt0749.wdf.sap.corp:53075/](https://wdflbmt0749.wdf.sap.corp:53075/) in Google Chrome.
 2. Login with the User: `CPL165` and Password: `Sap12345`.
 ![Alt text](./images/WebIDE_Login.jpg "Web IDE Login Page")
 3. Launch the URL [https://github.com/SAP/hana-shine-xsa](https://github.com/SAP/hana-shine-xsa) in a new window. This is the GitHub Repository where you can find the code for the SHINE application.
