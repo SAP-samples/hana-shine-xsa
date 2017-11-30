@@ -46,7 +46,8 @@ The MTAR Builder needs Java, Git, Apache Maven, and Node.js including npm as pre
 2. Install Apache Maven, follow the steps described [here](https://maven.apache.org/install.html)
 
 #### Setup Node.js and NPM
-1. Install Node.js from [here](https://nodejs.org/en/download/).
+1. Install Node.js version v6.x.x from [here](https://nodejs.org/download/release/latest-v6.x/).  
+   *Please note: Use only node.js version 6 (i.e v6.x.x) for buidling SHINE. Do not use Node.js versions above major version 6(i.e do not use v7.x.x or v8.x.x etc)*
 2. Create a file with name `.npmrc` in your HOME directory. On Windows, that would be `C:/Users/<User Name>`, on macOS, that would be `~/Users/<User Name>`. 
 3. Copy the below content to the .npmrc file. With this configuration, you are instructing your npm client installation to download @sap scoped modules from the SAP NPM Registry. All other modules are still downloaded from the default registry. Update all 3 proxy settings (proxy, http-proxy, https-proxy) as per your network settings. If no proxy settings are required mark values of all 3 proxy settings as null.
 
