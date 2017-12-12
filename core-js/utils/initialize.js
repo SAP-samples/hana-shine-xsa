@@ -41,7 +41,7 @@ module.exports = {
 		var xsjs = require("@sap/xsjs");
 		var xsenv = require("@sap/xsenv");
 		var options = {
-			anonymous : true, // remove to authenticate calls
+			anonymous : false, // remove to authenticate calls
 			redirectUrl: "/index.xsjs",
 			context: {
 				base: global.__base,
