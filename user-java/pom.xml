@@ -10,7 +10,7 @@
 	<javax.version>3.0.1</javax.version>
     <sap.gateway.version>1.2.2</sap.gateway.version>
     <slf4j.version>1.7.7</slf4j.version>
-    <java-container-security.version>0.22.2</java-container-security.version>
+   
   </properties>
 
 	<dependencies>
@@ -52,11 +52,7 @@
       <artifactId>com.sap.gateway.v4.rt.xsa</artifactId>
       <version>${sap.gateway.version}</version>
     </dependency>
-    <dependency>
-	<groupId>com.sap.xs2.security</groupId>
-	<artifactId>java-container-security</artifactId>
-	<version>${java-container-security.version}</version>
-</dependency>
+   
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
