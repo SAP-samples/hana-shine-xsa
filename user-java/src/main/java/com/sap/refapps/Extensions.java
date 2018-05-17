@@ -37,14 +37,16 @@ public class Extensions {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(Extensions.class);
 	
-	private static final String INSERT = "INSERT INTO \"UserData.User\"(\"UserId\",\"FirstName\",\"LastName\",\"Email\") VALUES" + " (?,?,?,?)" ;
+	//private static final String INSERT = "INSERT INTO \"UserData.User\"(\"UserId\",\"FirstName\",\"LastName\",\"Email\") VALUES" + " (?,?,?,?)" ;
+	private static final String INSERT = "INSERT INTO \"UserData.User\"(\"FirstName\",\"LastName\",\"Email\") VALUES" + " (?,?,?)" ;
 	
 	private static final String UPDATE = "UPDATE \"UserData.User\" SET " + "\"FirstName\"=?,\"LastName\"=?,\"Email\"=? WHERE \"UserId\"=" + "?";
 	
 	private static final String DELETE = "DELETE FROM \"UserData.User\"  WHERE \"UserId\"= ?";
 	
-	private static final String SELECT = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + '=' + "?";
-
+	//private static final String SELECT = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + '=' + "?";
+	private static final String SELECT = "SELECT * FROM \"UserData.User\"";
+        private static final String SELECT_UPDATE = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + '=' + "?";
 	@ExtendDataProvider(entitySet = { "User" }, requestTypes = { RequestType.CREATE })
 	public void createUser(ExtensionContext ectx) throws ODataApplicationException {
 		LOGGER.info("Entered the method createUser");
@@ -55,30 +57,30 @@ public class Extensions {
 			DeserializerResult payload = dpCtx.getDeserializerResult();
 			Entity requestEntity = payload.getEntity();
 			//Generate the object Id via the Sequence.
-			String sequenceSQL = "select " + "\"userSeqId"+ "\".NEXTVAL  FROM " + "\"DUMMY\"";
+			//String sequenceSQL = "select " + "\"userSeqId"+ "\".NEXTVAL  FROM " + "\"DUMMY\"";
 			
-			ResultSet sequenceRs = idStmt.executeQuery(sequenceSQL);
-			while(sequenceRs.next()){
-				Long keyVal = sequenceRs.getLong(1);
-				LOGGER.debug("The Sequence Id for the User > " + keyVal);
+			//ResultSet sequenceRs = idStmt.executeQuery(sequenceSQL);
+			//while(sequenceRs.next()){
+				//Long keyVal = sequenceRs.getLong(1);
+				//LOGGER.debug("The Sequence Id for the User > " + keyVal);
 				
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);
-				pstmt.setString(1, keyVal.toString());
-				pstmt.setString(2, (String) requestEntity.getProperty("FirstName").getValue());
-				pstmt.setString(3, (String) requestEntity.getProperty("LastName").getValue());
-				pstmt.setString(4, (String) requestEntity.getProperty("Email").getValue());
+				//pstmt.setString(1, keyVal.toString());
+				pstmt.setString(1, (String) requestEntity.getProperty("FirstName").getValue());
+				pstmt.setString(2, (String) requestEntity.getProperty("LastName").getValue());
+				pstmt.setString(3, (String) requestEntity.getProperty("Email").getValue());
 				pstmt.execute();
 				
-				LOGGER.debug("Inserted record for Id > " + keyVal);
+				//LOGGER.debug("Inserted record for Id > " + keyVal);
 				
 				pstmt = conn.prepareStatement(SELECT);
-				pstmt.setString(1, keyVal.toString());
+				//pstmt.setString(1, keyVal.toString());
 				
 				ResultSet rs = pstmt.executeQuery();
 				Entity result = rs.next() ? createEntityFromResultSet(rs) : null;
 				dpCtx.setResultEntity(result);
 				LOGGER.debug("Data Successfully inserted");
-			}
+			//}
 			conn.close();
 			
 			
@@ -119,7 +121,7 @@ public class Extensions {
 			final Preferences.Return returnPreference = OData.newInstance()
 					.createPreferences(request.getHeaders(HttpHeader.PREFER)).getReturn();
 			if (returnPreference == null || returnPreference == Preferences.Return.REPRESENTATION) {
-				pstmt = conn.prepareStatement(SELECT);
+				pstmt = conn.prepareStatement(SELECT_UPDATE);
 				pstmt.setString(1, keyVal);
 				ResultSet rs = pstmt.executeQuery();
 				Entity result = rs.next() ? createEntityFromResultSet(rs) : null;

@@ -1,1 +1,1 @@
-{"type":"sap.java","builders":{"default":"sap.java.maven","configs":{}},"runners":{"default":"system:/sap.java/default","configs":{}},"attributes":{"mta_module_parent":["/shine-1"]},"description":"","mixinTypes":["mtamodule"]}
+{"type":"sap.java","builders":{"default":"sap.java.maven","configs":{}},"runners":{"default":"system:/sap.java/default","configs":{}},"attributes":{},"description":"","mixinTypes":["mtamodule"]}

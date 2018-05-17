@@ -1,0 +1,7 @@
+using POTextSearch as POTextSearch;
+
+define view text_search with parameters TERM: String(40),ATTRIBUTE: String(20) as
+SELECT from POTextSearch(TERMS: :TERM,ATTRIBUTE: :ATTRIBUTE){
+	RESULTS,
+	ATTRIBUTE
+};

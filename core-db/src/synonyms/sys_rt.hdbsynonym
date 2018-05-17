@@ -1,0 +1,14 @@
+{
+  "ESH_MODEL": {
+    "target": {
+      "object": "ESH_MODEL",
+      "schema": "_SYS_RT"
+    }
+  },
+  "ESH_MODEL_PROPERTY": {
+    "target": {
+      "object": "ESH_MODEL_PROPERTY",
+      "schema": "_SYS_RT"
+    }
+  }
+}

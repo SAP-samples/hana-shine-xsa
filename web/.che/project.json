@@ -1,1 +1,1 @@
-{"type":"sap.html5","builders":{"default":"ui5-builder","configs":{}},"runners":{"configs":{}},"attributes":{"mta_module_parent":["/shine-1"]},"description":"","mixinTypes":["mtamodule"]}
+{"type":"sap.html5","builders":{"default":"ui5-builder","configs":{}},"runners":{"configs":{}},"attributes":{},"description":"","mixinTypes":["mtamodule"]}

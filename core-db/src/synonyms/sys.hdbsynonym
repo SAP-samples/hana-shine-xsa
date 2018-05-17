@@ -5,6 +5,12 @@
       "schema": "SYS"
     }
   },
+    "SERIES_GENERATE_INTEGER": {
+    "target": {
+      "object": "SERIES_GENERATE_INTEGER",
+      "schema": "SYS"
+    }
+  },
   "VIEWS": {
     "target": {
       "object": "VIEWS",
@@ -26,6 +32,12 @@
   "SERIES_GENERATE_TIMESTAMP": {
     "target": {
       "object": "SERIES_GENERATE_TIMESTAMP",
+      "schema": "SYS"
+    }
+  },
+  "ESH_SEARCH": {
+    "target": {
+      "object": "ESH_SEARCH",
       "schema": "SYS"
     }
   }

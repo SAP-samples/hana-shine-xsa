@@ -1,0 +1,42 @@
+{
+	"engines": {
+		"node": " ^6 "
+	},
+	"dependencies": {
+		"@sap/xssec": "2.1.6",
+		"@sap/xsenv": "1.2.8",
+		"@sap/hdbext": "4.3.4",
+		"@sap/textbundle": "2.1.0",
+		"@sap/logging": "3.1.0",
+		"@sap/audit-logging": "2.1.1",
+		"@sap/jobs-client": "1.1.1",
+		"@sap/cds": "1.14.1",
+		"express": "4.16.2",
+		"express-ws": "3.0.0",
+		"passport": "0.4.0",
+		"async": "2.6.0",
+		"ws": "4.0.0",
+		"accept-language-parser": "1.4.1",
+		"node-xlsx": "0.11.2",
+		"node-zip": "1.1.1",
+		"xmldoc": "1.1.0",
+		"winston": "2.4.0",
+		"body-parser": "1.18.2",
+		"elementtree": "0.1.7"
+	},
+	"devDependencies": {
+		"eslint": "3.5.0",
+		"node-style": "2.0.0"
+	},
+	"description": "",
+	"files": [],
+	"main": "server.js",
+	"name": "shine-core-node",
+	"scripts": {
+		"lint": "eslint -c .eslintrc --ignore-path .gitignore .",
+		"start": "node server.js",
+		"test": "node ./node_modules/gulp/bin/gulp test",
+		"test-coverage": "node ./node_modules/gulp/bin/gulp test-coverage"
+	},
+"version": "1.5.2"
+}

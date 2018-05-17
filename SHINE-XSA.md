@@ -1,5 +1,33 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS02
+SHINE for XS Advanced SAP HANA 2.0 SPS03
 ===============
+
+The new and changed features included in this release of SHINE for XS Advanced are as follows:
+ 
+1. Fiori Elements
+
+   The User CRUD tile in Fiori Launchpad is now implemented using the Fiori elements.
+
+2. Full Text Search
+
+   SAP Search UI on SAP HANA provides an easy way to perform full text search on content stored in tables or exposed via          views. Just like searching on the Internet, full-text search finds terms irrespective of the sequence of characters and        words. Here the search is performed on the Product Categories and also on the Business Partners.
+
+3. Hana Secure Store
+
+   Hana Secure store is used to store the credentials of HERE maps securely.
+
+4. CDS enhancements
+
+   Comments field in CDS artifacts and usage of table functions in CDS views.
+
+5. Data Generator code push down
+
+   Time based data generation implemented entirely in HANA procedures
+
+6. ES6 standards enhancements
+
+7. Node.js code updated to use ECMA Script (ES6) features
+
+
 This release of the application consists of the following packages:
 
 
@@ -7,21 +35,21 @@ This release of the application consists of the following packages:
 - core-db - This is the core db package contains Core data models artifacts required to create the tables and other database artifacts (for example, .hdbcds, .hdbsequence, and so on).
 
 
-- core-js -This package has the Node.js implementation of Data Generator, PO Worklist, Sales Dashboard (back end).
+- core-node - This package has the Node.js implementation of Data Generator, Job Scheduler.
 
+- core-xsjs - This package has the Node.js implementation of PO Worklist, Sales Dashboard, Spatial Demo using xsodata libraries.
 
-- user-db - This package contains the artifacts contains the db artificats for User Creation 
+- site-content - This package contains the JSON configurations for the Fiori as a Service module.
 
+- site-web - This package contains the user interface for Fiori as a Service for the SHINE Launchpad.
 
-- user-js - This package contains the User CRUD implementation in nodejs using xsodata libraries.
+- user-db - This package contains the artifacts contains the db artificats for User Creation. 
 
 - user-java - This package contains the User CRUD implementation in Java using Java oData V4 libraries.
 
+- user-xsjs - This package contains the User CRUD implementation in nodejs using xsodata libraries.
+
 - web - This package contains the user interface for the SHINE Launchpad, Data Generator, and Purchase Order Worklist, Sales Dashboard, User CRUD pplications implemented in SAP UI5.
-
-- site-content - This package contains site configuration files required for SAP Fiori Launchpad.
-
-- site-web - This package contains the user interface for the SHINE Fiori Launchpad, Data Generator, Purchase Order Worklist, Job Scheduler, Sales Dashboard, Spatial, and User CRUD applications implemented in SAPUI5.
 
 ## Prerequisites
 The following components should be installed before SHINE installation on XSA. If not installed please contact your system administrator to install them.
@@ -32,7 +60,7 @@ The following components should be installed before SHINE installation on XSA. I
 
 - XSAC_PORTAL_SERVICES
 
-- SAPUI5_FESV3
+- SAPUI5_FESV4
 
 - Auditlog service   
 
@@ -59,8 +87,12 @@ If the services are stopped, please contact the system administrator to start th
 - Create Auditlog service by executing the following command:   
 
     `xs cs auditlog free shine-auditlog`
+    
+- Create HANA Secure store service by executing the following command:   
 
-- 	After all these services are created, build and run all modules like core-db, user-db, user-js, user-java and web.
+    `xs cs hana securestore secureStore`    
+
+- 	After all these services are created, build and run all modules like core-db, user-db, core-node, core-xsjs, user-xsjs, user-java and web.
 
 
 
@@ -88,17 +120,17 @@ For more details on how to do the above steps, please refer below:
    Please Note, In HANAExpress VM install has default instance as 90, Binary install is a user-defined number.   
    This will install SHINE without FLP. Please follow the steps in the below section to deploy SHINE with FLP.
 
-Please note, the audit log service needs to be bound manually to the shine-core-js
-application. This can be done by doing a dummy run of the core-js module and after it fails
+Please note, the audit log service needs to be bound manually to the shine-core-node
+application. This can be done by doing a dummy run of the core-node module and after it fails
 execute following command in the CLI of the XSA system:
 
-`xs bs <WEBIDE_USERNAME>…<PROJECTNAME>-core-js shine-auditlog`
+`xs bs <WEBIDE_USERNAME>…<PROJECTNAME>-core-node shine-auditlog`
 
-The core-js application deployed via SAP WebIDE for SAP HANA will be of the format  
+The core-node application deployed via SAP WebIDE for SAP HANA will be of the format  
 
-`<WEBIDE_USERNAME>…. <PROJECTNAME>-core-js`
+`<WEBIDE_USERNAME>…. <PROJECTNAME>-core-node`
 
-Rerun the core-js after executing the above command. 
+Rerun the core-node after executing the above command. 
 
 ## Deploy SHINE for XSA application with FLP  ##
 
@@ -114,7 +146,7 @@ After doing the above steps,
     
 
 
-   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.02/en-US/0a1c5d829a074a8a889acd2ace444042.html)
+   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.03/en-US/0a1c5d829a074a8a889acd2ace444042.html)
 
 
 
@@ -123,7 +155,7 @@ After doing the above steps,
 
 1. If the SHINE installation message fails with the message, 
 Error resolving merged descriptor properties and parameters: No configuration entries were found matching the filter specified in resource "sapui5-provider" 
-Install SAPUI5_FESV3 version 1.44.8 and reinstall SHINE.
+Install SAPUI5_FESV4 version 1.52 and reinstall SHINE.
 
 2. If the build of any module fails with the error message that looks like:   
    **No compatible version found: @sap/jobs-client@1.1.1**
@@ -136,6 +168,8 @@ You can also check the compatible versions of the libraries by right-clicking on
 
 ## Support
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)
+
+[SHINE XSA for HANA 2.0 SPS 03 Documentation ](https://help.sap.com/http.svc/rc/13ff61e61a8f442090e27050dc61f019/2.0.03/en-US/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_en_HANA2SPS03.pdf)
 
 ## License
 [Apache License 2.0](LICENSE)

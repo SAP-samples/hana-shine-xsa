@@ -1,5 +1,5 @@
 {
-  "xsappname": "shine-admin",
+  "xsappname": "shine",
   "scopes": [
   	{
         "name": "$XSAPPNAME.JOBSCHEDULER",
@@ -33,7 +33,7 @@
   ],
   "role-templates": [
     {
-      "name": "Admin",
+      "name": "shine_admin",
       "description": "refapps administrator",
       "scope-references": [
         "$XSAPPNAME.Display",

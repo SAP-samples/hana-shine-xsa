@@ -1,4 +1,0 @@
-service namespace "com.sap.openSAP.hana5.example.services" {
-  "MD.BusinessPartner"
-  as "BusinessPartners";
-}

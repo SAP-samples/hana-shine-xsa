@@ -1,0 +1,15 @@
+_schema-version: "3.1.0"
+ID: XSAC_SHINE-CONFIG1
+extends: XSAC_SHINE
+
+resources:
+          
+  - name: shine-user-container
+    parameters:
+      config:
+        schema: <SCHEMA_NAME_1>
+
+  - name: shine-container
+    parameters:
+      config:
+        schema: <SCHEMA_NAME_2>

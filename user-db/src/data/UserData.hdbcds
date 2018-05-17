@@ -1,13 +1,17 @@
-
-
 @OData.publish : true
 context UserData {
+    @Comment : 'User DB'
+    entity User {
+            @Comment : 'User ID'
+        	key UserId    : Integer generated always as identity(start with 1 increment by 1 no minvalue maxvalue 1999999999 no cache no cycle);
 
-	entity User {
-        key UserId: Integer;
-        FirstName: String(40);
-        LastName: String(40);
-        Email: String(255);
-     };        
+            @Comment : 'First Name'
+            FirstName : String(40);
 
+            @Comment : 'Last Name'
+            LastName  : String(40);
+
+            @Comment : 'Email'
+            Email     : String(255);
+    };
 };

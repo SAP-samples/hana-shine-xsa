@@ -1,58 +1,101 @@
 {
-  "routes": [
-    {
-      "source": "^/resources/(.*)",
-      "target": "$1",
-      "localDir": "resources/",
-      "cacheControl": "public, max-age=31536000,must-revalidate"
-    },{
-    "source": "/sap/rest/(.*)",
-    "destination": "uaa"
-    }, {
-      "source": "/sap/hana/democontent/epm/services/",
-      "destination": "core-backend"
-    }, {
-      "source": "/sap/hana/democontent/epm/spatial/services/",
-      "destination": "core-backend"
-    }, {
-      "source": "/get/(.*)",
-      "destination": "core-backend",
-      "scope": "$XSAPPNAME.DataGenerator"
-    }, {
-      "source": "/reset/(.*)",
-      "destination": "core-backend",
-      "scope": "$XSAPPNAME.DataGenerator"
-    }, {
-      "source": "/replicate/(.*)",
-      "destination": "core-backend",
-      "scope": "$XSAPPNAME.DataGenerator"
-    }, {
-      "source": "/jobs/(.*)",
-      "destination": "user-backend"
-    }, {
-      "source": "/schedules/(.*)",
-      "destination": "user-backend"
-    }, {
-      "source": "/jobactivity/(.*)",
-      "destination": "user-backend",
-      "authenticationType": "none"
-    },{
-      "source": "/user/xsodata/(.*)",
-      "destination": "user-backend"
-    },
-    {
-      "source": "/user/xsjs/(.*)",
-      "destination": "user-backend"
-    }, {
-      "source": "^/admin-ui/(.*)",
-      "localDir": "resources",
-      "scope": "$XSAPPNAME.DataGenerator"
-    }, {
-      "source": "^/user/odata/v4/(.*)",
-      "destination": "user-java-backend"
-    },{
-        "source":"/v2/.*",
-        "destination":"controller"
-      }
-  ]
+	"routes": [
+
+		{
+			"source": "^/resources/(.*)",
+			"target": "$1",
+			"localDir": "resources/",
+			"cacheControl": "public, max-age=31536000,must-revalidate"
+		},
+		{
+			"source": "/node(.*)",
+			"destination": "core-node-backend",
+			"csrfProtection": true,
+			"authenticationType": "xsuaa"
+		},
+		
+		{
+			"source": "/sap/rest/(.*)",
+			"destination": "uaa"
+		},
+		{
+			"source": "/sap/bc/lrep(.*)",
+			"destination": "core-node-backend",
+			"csrfProtection": true,
+			"authenticationType": "xsuaa"
+		},
+		{
+			"source": "/sap/hana/democontent/epm/(.*)",
+			"destination": "core-xsjs-backend"
+		},
+		
+		{
+			"source": "/user/odata/v4/(.*)",
+			"destination": "user-java-backend"
+
+		},
+		{
+			"source": "/get/(.*)",
+			"destination": "core-node-backend",
+			"scope": "$XSAPPNAME.DataGenerator"
+		},
+		{
+			"source": "/reset/(.*)",
+			"destination": "core-node-backend",
+			"scope": "$XSAPPNAME.DataGenerator"
+		},
+		{
+			"source": "/replicate/(.*)",
+			"destination": "core-node-backend",
+			"scope": "$XSAPPNAME.DataGenerator"
+		},
+		{
+			"source": "/jobs/(.*)",
+			"destination": "core-node-backend",
+			"scope": "$XSAPPNAME.JOBSCHEDULER"
+
+		},
+		{
+			"source": "/schedules/(.*)",
+			"destination": "core-node-backend",
+			"scope": "$XSAPPNAME.JOBSCHEDULER"
+		},
+		{
+			"source": "/jobactivity/(.*)",
+			"destination": "core-node-backend",
+			"authenticationType": "none",
+			"scope": "$XSAPPNAME.JOBSCHEDULER"
+		},
+		{
+			"source": "/user/(.*)",
+			"destination": "user-backend",
+			"authenticationType": "xsuaa"
+		},
+		{
+			"source": "^/admin-ui/(.*)",
+			"localDir": "resources",
+			"scope": "$XSAPPNAME.DataGenerator"
+		},
+		{
+			"source": "^/job-ui/(.*)",
+			"localDir": "resources",
+			"scope": "$XSAPPNAME.JOBSCHEDULER"
+		},
+		{
+			"source": "(.*)(.xsjs)",
+			"destination": "core-xsjs-backend",
+			"csrfProtection": true,
+			"authenticationType": "xsuaa"
+		},
+		{
+			"source": "(.*)(.xsodata)",
+			"destination": "core-xsjs-backend",
+			"authenticationType": "xsuaa"
+		},
+		{
+			"source": "/v2/.*",
+			"destination": "controller"
+		}
+
+	]
 }

@@ -46,7 +46,7 @@ else
              		lv_taxamount,'N','I','I');
          			
 	insert into "SO.Item" 
-             values ('0' || lv_salesOrderId,'0000000010',lv_productid,'',lv_currency,lv_grossamount,lv_netamount, lv_taxamount,
+             values ('0' || lv_salesOrderId,'10',lv_productid,'',lv_currency,lv_grossamount,lv_netamount, lv_taxamount,
         			'I','',lv_quantity,'EA',lv_date);   			
         			
  end if;

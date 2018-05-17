@@ -18,35 +18,54 @@ Type HistT {
         INITIALS : EPM.BusinessKey;
       };
  type SexT : String(1);
- 
+	@Comment: 'Addresses entity'
     Entity Addresses {
+    	@Comment: 'Address ID'
         key  ADDRESSID: EPM.BusinessKey;
+        @Comment: 'City'
         CITY: EPM.SString;
+        @Comment: 'Postal Code'
         POSTALCODE: EPM.BusinessKey;
+        @Comment: 'Street'
         STREET: EPM.MString;
+        @Comment: 'Building'
         BUILDING: EPM.BusinessKey;
+        @Comment: 'Country'
         COUNTRY: String(3);
+        @Comment: 'Region'
         REGION: String(4);
+        @Comment: 'Address Type'
         ADDRESSTYPE: String(2);
-        VALIDITY: EPM.ValidityT;   
+        VALIDITY: EPM.ValidityT; 
+        @Comment: 'Latitude'
         LATITUDE: Double;
+        @Comment: 'Longitude'
         LONGITUDE: Double; 
 		       
     } technical configuration {
     	unload priority 8;
     };
-    
+    @Comment: 'Buisness Partner entity'
     Entity BusinessPartner {
+    	@Comment: 'Partner ID'
         key  PARTNERID: EPM.BusinessKey;
+        @Comment: 'Partner Role'
         PARTNERROLE: String(3); //Business Partner Role
+        @Comment: 'Partner EmailID'
         EMAILADDRESS: EPM.LString;
+        @Comment: 'Partner Phone Number'
         PHONENUMBER: EPM.PhoneT;
+        @Comment: 'Partner Fax Number'
         FAXNUMBER: EPM.PhoneT null;
+        @Comment: 'Partner Website'
         WEBADDRESS: EPM.VLString;
         ADDRESSES: Association to Addresses;
+        @Comment: 'Partner Company Name'
         COMPANYNAME: String(80);
+        @Comment: 'Partner Legal Form'
         LEGALFORM: EPM.BusinessKey;
         HISTORY: HistT;
+        @Comment: 'Partner Currency Code'
         CURRENCY: EPM.CurrencyT;
     } technical configuration {
     	partition by HASH  (PARTNERID) Partitions GET_NUM_SERVERS();

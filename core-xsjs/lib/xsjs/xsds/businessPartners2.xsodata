@@ -1,0 +1,13 @@
+service  { 
+  "MD.BuyerView"
+	as "Buyer"
+	keys("Id")
+   create using "xsjs.xsds:businessPartners.xsjslib::bpCreateBuyer";
+
+  "MD.SupplierView"
+	as "Supplier"
+	keys("Id")
+   create using "xsjs.xsds:businessPartners.xsjslib::bpCreateSupplier";
+   
+
+}

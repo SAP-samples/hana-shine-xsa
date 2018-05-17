@@ -67,6 +67,8 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 		
 		var aUrl = '/sap/hana/democontent/epm/services/poWorklistQuery.xsjs?cmd=getSessionInfo';
 		var loggedUser = "";
+		var that = this;
+		
         jQuery.ajax({
             url: aUrl,
             method: 'GET',
@@ -74,15 +76,19 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
             success: function(myJSON) {
             	userId = myJSON.session[0].UserName ;
                 jQuery.sap.require("jquery.sap.storage");
-            	  oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
+            	//  oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 			        var appIdKey = userId+":appId";
 			        var appCodeKey = userId+":appCode";
-			        if(oStorage.get(appIdKey))
+			        var cred = that.checkCredentials(appIdKey,appCodeKey);
+			        
+			        if(cred.appID!==null&cred.appCode!==null)
 			        {
-			        	var appId = atob(oStorage.get(appIdKey));
-			         	var appCode = atob(oStorage.get(appCodeKey));
+			         
+			        	console.log("cred"+JSON.stringify(cred));
+			        	var appId = atob(cred.appID);
+			         	var appCode = atob(cred.appCode);
 			         	var aUrl1 = "https://signature.venue.maps.api.here.com/venues/signature/v1?xnlp=CL_JSMv3.0.12.5&app_id="+appId+"&app_code="+appCode;
-					jQuery.ajax({
+					    jQuery.ajax({
 						url: aUrl1,
 						method: 'GET',
 						success: function(jqXHR1){
@@ -139,7 +145,29 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 		var welcomeDialog = new sap.account.WelcomeDialog(oController, isSettings);
 		welcomeDialog.open();
 	},
-
+    
+    checkCredentials: function(appIdKey,appCodeKey)
+    {    
+    	 var config = appIdKey+"@"+appCodeKey;
+    	 console.log("config"+config);
+    	 var results;
+    	 var read_url = "/sap/hana/democontent/epm/services/secureStore.xsjs?cmd=read&query="+config;
+    	 jQuery.ajax({
+		            url: read_url,
+		            method: 'GET',
+		            dataType: 'json',
+		            async: false,
+		            success: function(myJSON) {
+		            		
+		            		results =  myJSON;
+		            },
+		            error: function(err)
+		            {
+		            	sap.ui.commons.MessageBox.alert("Unexpected Error"+err+"Please check the application logs for more details");
+		            }
+		        });
+		        return results;
+    },
 	/**
 	 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
 	 * @memberOf shine_so.main

@@ -25,8 +25,7 @@ select "UserId", "FirstName", "LastName", "Email"
                      'No Way! E-Mail field can not be empty' as detail from dummy;
 else
                       
-   insert into "UserData.User" 
-             values ("userSeqId".NEXTVAL, lv_firstname,lv_lastname, lv_e_mail);
+  insert into "UserData.User" ("FirstName", "LastName", "Email") values (lv_firstname,lv_lastname, lv_e_mail);
                      
  end if; 
   

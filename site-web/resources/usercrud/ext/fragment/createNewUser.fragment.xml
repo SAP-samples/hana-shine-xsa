@@ -1,0 +1,24 @@
+<Dialog xmlns:sap.ui.core="sap.ui.core"  xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.commons.layout" id="dlgpocrn" showHeader="true" title="Create New User" width="20%"  height="40%" modal="true">
+		<l:HorizontalLayout>
+			 <f:SimpleForm  layout="ResponsiveGridLayout"
+                labelSpanL="4"
+                labelSpanM="4"
+                emptySpanL="0"
+                emptySpanM="0"
+                columnsL="3"
+                columnsM="3">
+			 	<f:content>
+					<Label design="Bold" id="firstName" text="First Name" class="createNewUserLabelSpacing" labelFor="firstName"/>
+					<Input design="Bold" id="firstNameTextField" required="true" width="100%" value="{user>/FirstName}"/>
+					<Label design="Bold" id="lastName" text="Last Name" class="createNewUserLabelSpacing" labelFor="lastName"/>
+					<Input design="Bold" id="lastNameTextField" required="true" width="100%" value="{user>/LastName}"/>
+					<Label design="Bold" id="email" text="Email" class="createNewUserLabelSpacing" labelFor="email"/>
+					<Input design="Bold" id="emailTextField" required="true" width="100%" value="{user>/Email}"/>
+				</f:content>
+			</f:SimpleForm>
+		</l:HorizontalLayout>
+<buttons>
+	<Button id="submit" press="createUser" text="Create"/>
+	<Button id="close" press="close" text="Close"/>
+</buttons>
+</Dialog>

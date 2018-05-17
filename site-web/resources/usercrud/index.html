@@ -1,38 +1,30 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title>User CRUD</title>
-		
-		<script src="{{{sapui5url}}}/resources/sap-ui-core.js"
-				id="sap-ui-bootstrap"
-				data-sap-ui-libs="sap.ui.commons, sap.ui.table,sap.ui.unified,sap.m"
-				data-sap-ui-theme="sap_bluecrystal"
-				data-sap-ui-preload=""
-				data-sap-ui-xx-bindingSyntax="complex"
-				data-sap-ui-resourceroots='{"shine.democontent.epm.usercrud" : "./"}'>
-		</script>
-		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
-
-		<script>
-                sap.ui.getCore().attachInit(function(){
-                   new sap.ui.core.ComponentContainer({
+       <head>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+			  <title>User Crud</title>
+			  
+	<!-- Bootstrap the UI5 core library -->
+		<script id="sap-ui-bootstrap" src="{{{sapui5_sb.url}}}/resources/sap-ui-core.js"
+                data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.ui.table,sap.m,sap.ui.comp,sap.ui.core,sap.ui.layout"
+                data-sap-ui-theme="sap_bluecrystal"
+		data-sap-ui-xx-bindingSyntax="complex"
+		data-sap-ui-compatVersion="edge"
+		data-sap-ui-preload="async"
+		data-sap-ui-language="en"
+		data-sap-ui-resourceroots='{"shine.democontent.epm.usercrud" : "./"}'>
+              </script>
+   	      <script>
+   		sap.ui.getCore().attachInit(function(){
+                    new sap.ui.core.ComponentContainer({
                        height : "100%",
                        name : "shine.democontent.epm.usercrud"
                    }).placeAt('content'); 
                 });
-		</script>
-		<script>
-		  jQuery.sap.require("jquery.sap.resources");
-          var sLocale = 
-            sap.ui.getCore().getConfiguration().getLanguage();
-          var oBundle = 
-            jQuery.sap.resources({url : "./i18n/messagebundle.hdbtextbundle", locale: sLocale});
-		</script>
+   	     </script>
 
-	</head>
-	<body class="sapUiBody" role="application">
-		<div id="content"></div>
+       </head>
+	<body class="sapUiBody" id="content" role="application">
 	</body>
 </html>

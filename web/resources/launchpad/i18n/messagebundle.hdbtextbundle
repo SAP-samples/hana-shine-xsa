@@ -14,7 +14,7 @@ USER=User CRUD
 HANA_UIS_BLUE=HANA UI Integration Services - Blue Crystal Theme
 HANA_UIS_GOLD=HANA UI Integration Services - Gold Reflection Theme
 SPATIAL=Spatial Demo
-INATOOLKIT=INA Toolkit Demo
+INATOOLKIT=Full Text Search
 SALES_DASH_MOB=Sales Dashboard Mobile
 FIORI_LAUNCHPAD=Fiori Launchpad
 XSDS=XS Data Services (XSDS)
@@ -29,7 +29,7 @@ JOBSCHEDULING=Runtime Job Scheduling
 ETAGSXSODATA=ETags and Null values in XSOData
 
 SHINE_INTRO=SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build applications on SAP HANA Extended Application Services Advanced Model. This demo application is delivered as a package which contains sample data and design-time developer objects for the applications database tables, views, OData and user interface.
-SHINE_WHATS_NEW=<ul><li>Dynamic tiles in Fiori Launchpad which shows dynamic data in the tiles.</li><li>Consumes audit logging service to log the changes to transactional data</li><li>CDS enhancements like Constraints for referential integrity and comments for tables.</li><li>SQL Script enhancements like Insert/Update/Delete operators on Table Variables</li></ul>
+SHINE_WHATS_NEW=<ul><li>Full Text Search - Product category search and Business partner search implemented in Full text search tile</li><li>Fiori Elements - implemented in User CRUD tile in Fiori launchpad </li><li>Hana Secure Store - Implemented in Spatial tile.HERE maps credentials stored in HANA secure store</li><li>CDS enhancements- Comments in CDS artifacts and usage of table functions in CDS views.</li><li>Data Generator code push down - Time based data generation implemented entirely in HANA procedures</li><li>ES6 standards enhancements</li></ul>
 SHINE_WHATS_NEW_1.1.12=<ul><li>Micro services based architecture</li><li>XSOData service from a node based XSJS library</li><li>All database artifacts using HDI</li></ul>
 SHINE_WHATS_NEW_PREV=<ul><li>ETags and Null values in XSOData</li><li>Migration from $.db to $.hdb and XSDS in services</li><li>XSJS features - Multipart Message handling, Text Access API, XML parsing</li><li>Table type definition in Procedures</li></ul>
 
@@ -41,7 +41,7 @@ TILE_DESC_US=<div>The userCRUD ( Create Read Update Delete) folder contains a si
 TILE_DESC_UIS_BLUE=<div>SAP HANA UI integration services act as a container for mini web pages. Rather than developing an entire site with dependencies between the various components, you develop small chunks of functions called widgets. Widgets are added in an application site container where they are consumed to build your final web site.</br></br>This UI Shows the Blue Crystal Runtime of the Site.</div>
 TILE_DESC_UIS_GOLD=<div>SAP HANA UI integration services act as a container for mini web pages. Rather than developing an entire site with dependencies between the various components, you develop small chunks of functions called widgets. Widgets are added in an application site container where they are consumed to build your final web site.</br></br>This UI Shows the Gold Reflection Runtime of the Site.</div>
 TILE_DESC_SPATIAL=<div>This UI illustrates a small demo on how spatial features and analyisis can be integrated with HANA XS applications. In this UI we use the latitude and longitude data from Address table to perform analysis over Sales and Customer data.</div>
-TILE_DESC_INATOOLKIT=<div>This UI illustrates a demo on how SAP HANA INA Toolkit and INA Service can be used to create flexible search UI's. In this demo, we can do a free style search on the SalesOrders based on product name and product description.</br><font color="red">To use INA Toolkit you should have the following DU imported<ul><li>HCO_INA_UITOOLKIT.tgz (To be obtained from SAP Service Marketplace)</li><li>HCO_INA_SERVICE.tgz (To be obtained from the server)</li></ul>You will also need to assign this particular role to the user<ul><li>sap.bc.ina.service.v2.userRole::INA_USER</li></ul></font></div>
+TILE_DESC_INATOOLKIT=<div>SAP Search UI on HANA provides an easy way to perform full text search on content stored in tables or exposed via views.Just like searching on the Internet, full-text search finds terms irrespective of the sequence of characters and words.Here the search is performed on the Product categories and also on the business partners.</br></div>
 TILE_DESC_SALES_MOBILE=<div>This Mobile UI illustrates a comprehensive dashboard concept that contains several charts based on the OData model constructed in the demo content. You can see  sales specific charts based on Region/Country/Discount per region and  charts that provide sales information categorized by product.</div>
 TILE_DESC_FIORI=<div>SAP Fiori launchpad is the entry point to Fiori apps on mobile or desktop devices.</br>First of all, the launchpad displays various tiles. Tiles are rectangular objects that provide access to applications. Which tiles are displayed on a userâ€™s entry page depends on the userâ€™s role. Depending on the role, the user can choose from a wide choice of ready-to-use tiles from the tile catalog as part of the launchpad personalization.</div>
 TILE_DESC_XSDS=<div>XS Data Services (XSDS) are a native JavaScript CDS client and query builder for the XS engine to consume HANA-based records as native JavaScript objects. This UI illustrates how a sales order with multiple items can be created using XSDS query builder. In future versions of SHINE all XSJS scripts will be modified to use XSDS.</div>
@@ -60,7 +60,7 @@ TILE_DB_VIEWS_SD=<ul><li>SO.Header CDS Table, SO.Item CDS Table</li><li>SALESORD
 TILE_DB_VIEWS_UIS_BLUE=<ul><li>EPM.Purchase.Header</li><li>EPM.Purchase.Item</li><li>AN_PURCHASE_Overview.analyticview</li><ul>
 TILE_DB_VIEWS_UIS_GOLD=<ul><li>EPM.Purchase.Header</li><li>EPM.Purchase.Item</li><li>AN_PURCHASE_Overview.analyticview</li><ul>
 TILE_DB_VIEWS_SPATIAL=<ul><li>MD.Addresses</li><li>MD.BusinessPartner</li><li>SO.Header</li></ul>
-TILE_DB_VIEWS_INATOOLKIT=<ul><li>EPM.Util.Texts</li><li>AT_SALES_ORDER_WORKLIST.attributeview</li></ul>
+TILE_DB_VIEWS_INATOOLKIT=<ul><li>MD.BusinessPartner and BuyerView</li><li>MD.Products and productTexts</li></ul>
 TILE_DB_VIEWS_SALES_MOB=<ul><li>EPM.Sales.Header</li><li>EPM.Sales.Item</li><li>AN_SALES_ORDER_RANKING.analyticview</li><li>CV_SALES_YEAR_COMPARISON.calculationview</li><li>CV_SALES_ORDER_RANKING*.calculationview</li></ul>
 TILE_DB_VIEWS_FIORI=<div>No specific DB Views or Tables are used</div>
 TILE_DB_VIEWS_XSDS=<ul><li>EPM.Sales.Header</li><li>EPM.Sales.Item</li><li>EPM.MasterData.BusinessPartner</li></ul>
@@ -77,7 +77,7 @@ TILE_UI_FOLDER_US=/user-ui/
 TILE_UI_FOLDER_UIS_BLUE=/sap/hana/democontent/epm/ui/uis/site/UISExample/
 TILE_UI_FOLDER_UIS_GOLD=/sap/hana/democontent/epm/ui/uis/site/UISExample/
 TILE_UI_FOLDER_SPATIAL=/spatial-ui/
-TILE_UI_FOLDER_INATOOLKIT=/sap/hana/democontent/epm/fulltextsearch/ui
+TILE_UI_FOLDER_INATOOLKIT=/fulltext-ui/
 TILE_UI_FOLDER_SALES_MOB=/sap/hana/democontent/epm/ui/salesDashMobile/
 TILE_UI_FOLDER_FIORI=/sap/hana/democontent/epm/ui/uis/FioriLaunchPad
 TILE_UI_FOLDER_XSDS=/sap/hana/democontent/epm/xsds/ui
@@ -86,7 +86,7 @@ TILE_UI_FOLDER_UI5SEARCH=/sap/hana/democontent/epm/ui5search/ui
 TILE_UI_FOLDER_JOBSCHEDULING=/job-ui/
 TILE_UI_FOLDER_ETAGSXSODATA=/sap/hana/democontent/epm/etagsxsodata/ui/
 
-TILE_PERMS_DG=<div><font color="red">To access the Data Generator <ul><li>User should create Role Collection SHINE_ADMIN </li><li>Assign Admin role to Role Collection SHINE_ADMIN</li><li>Assign SHINE_ADMIN Role Collection to User</li></ul> Refer to SHINE for XSA documentation for steps</font>.</div>
+TILE_PERMS_DG=<div><font color="red">To access the Data Generator <ul><li>User should create Role Collection SHINE_ADMIN </li><li>Assign shine_admin role to Role Collection SHINE_ADMIN</li><li>Assign SHINE_ADMIN Role Collection to User</li></ul> Refer to SHINE for XSA documentation for steps</font>.</div>
 TILE_PERMS_PO=<div>None.</div>
 TILE_PERMS_SO=<div>Time Data has to be generated.</div>
 TILE_PERMS_SD=<div>Time Data has to be generated.</div>
@@ -94,7 +94,7 @@ TILE_PERMS_US=<div>None.</div>
 TILE_PERMS_UIS_BLUE=<div>User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator. We need sap.hana.uis.db::SITE_DESIGNER & sap.hana.uis.db::SITE_USER with sap.hana.uis.privileges::AppSiteAccess-All ( Application Privilege) to access the Site. ( these are already added as part of User.Hdbrole)</div>
 TILE_PERMS_UIS_GOLD=<div>User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator. We need sap.hana.uis.db::SITE_DESIGNER & sap.hana.uis.db::SITE_USER with sap.hana.uis.privileges::AppSiteAccess-All ( Application Privilege) to access the Site. ( these are already added as part of User.Hdbrole)</div>
 TILE_PERMS_SPATIAL=<li>User should have User.hdbrole.</li>
-TILE_PERMS_INATOOLKIT=<div>User should have User.hdbrole and sap.bc.ina.service.v2.userRole::INA_USER.</div>
+TILE_PERMS_INATOOLKIT=<div>None.</div>
 TILE_PERMS_SALES_MOB=<div>User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator.</div>
 TILE_PERMS_FIORI=<div>WidgetAccess:FioriShineCatalog and AppSiteAccess:FioriShineLaunchPad</div>
 TILE_PERMS_XSDS=<div>User should have User.hdbrole, Time Data has to be generated, Create Synonyms should have been executed in Data Generator.</div>
@@ -139,3 +139,4 @@ ERROR_ROLECREATION=An error occured while creating roles. Please contact your sy
 SUCCESS_ROLECOLLECTION=Role Collections have been successfully created. please logout of the application for the changes to be reflected.
 ERROR_CSRFTOKEN=An error occured while checking your authorization. Please assign the XS_AUTHORIZATION_ADMIN role collection to your user and retry.
 ERROR_APPLICATION_NOT_FOUND=Couldnt find the required application for authorization. Please contact your system administrator for further investigation.
+GDPR_MESSAGE=Note : No real data should be entered.

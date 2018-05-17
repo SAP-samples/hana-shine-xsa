@@ -1,6 +1,9 @@
 .sapMStdTileInfo{
 	color: #007cc0;
 }
+.sapUiUfdShellSearch{
+	max-width: 650px !important;	
+}
 #__view0{
     width: 85%;
 }
@@ -24,45 +27,114 @@
 	white-space: normal !important;
 	margin-top: 1rem !important;
 }
-.templateTileClass{
-	background-size: 192px;
+/* Enter your custom styles here */
+.logo{
+	float:left;
+}
+#__xmlview0--sTitle{
+	font-weight: bolder;
+}
+
+.fulltextsearchClass{
+	background-image: url('thumbnails/ui5search.JPG');
+        background-size: 192px;
 	background-repeat: no-repeat;
-	background-position: center;		
-}
-.dgClass{
-	background-image: url('thumbnails/dg.png');
-}
-.poClass{
-	background-image: url('thumbnails/poworklist.png');
-}
-.soClass{
-	background-image: url('thumbnails/sales.png');
-}
-.sowClass{
-	background-image: url('thumbnails/salesWorklist.png');
-}		
-.ucClass{
-	background-image: url('thumbnails/userCRUD.png');
+	background-position: center;	
 }
 .spatialClass{
 	background-image: url('thumbnails/spatial.jpg');
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
-.inatoolkitClass{
-	background-image: url('thumbnails/inatoolkit.png');
+.ucClass{
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url('thumbnails/userCRUD.png');
 }
-.salesMobileClass{
-	background-image: url('thumbnails/salesMobile.jpg');
+.dgClass{
+	background-image: url('thumbnails/dg.png');
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
+	
+	
 }
-.fioriLaunchpadClass{
-	background-image: url('thumbnails/fioriLaunchpad.JPG');
+.soClass{
+	background-image: url('thumbnails/sales.png');
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
-.xsdsClass{
-	background-image: url('thumbnails/xsds.JPG');
+.jobschedulingClass{
+	background-image: url('thumbnails/JobScheduler.PNG');
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
-.ui5searchClass{
-	background-image: url('thumbnails/ui5search.JPG');
+.poClass{
+	background-image: url('thumbnails/poworklist.png');
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
+.sapMStdTileBottomRow{
+	height: 1rem !important;
+	margin-top: 6rem !important;
+}
+.sapMStdTileTitle{
+	color: #007CC0 !important;
+}
+.fulltextschedulingClass{
+ 	background-image: url('thumbnails/FullText.JPG');
+	background-size: 192px;
+	background-repeat: no-repeat;
+	background-position: center;
+ }
+/* CSS for moving the top row appear in bottom 
+.relocateItems > .sapMTileContent > .sapMStdTileTopRow {
+	position: absolute !important;
+	width: 10rem !important;
+	height: 12rem !important;
+}
+
+/* CSS for moving the icon float to left 
+.relocateItems > .sapMTileContent > .sapMStdTileTopRow > .sapMStdTileIconDiv {
+	float: right !important;
+}*/
+
+/* CSS for moving the number to left adjusting the width 
+.relocateItems > .sapMTileContent > .sapMStdTileTopRow > .sapMStdTileNumDiv {
+	float: left !important;
+	width: auto !important;
+	margin-top: 5rem !important;
+}*/
+
+/* CSS for moving the number unit to left 
+.relocateItems > .sapMTileContent > .sapMStdTileTopRow > .sapMStdTileNumDiv > .sapMStdTileNumUnit {
+	float: left !important;
+}*/
+
+/* CSS for adjusting the padding for bottom row (now top row)
+.relocateItems > .sapMTileContent > .sapMStdTileBottomRow {
+	padding: 1rem !important;
+	height: 12rem !important;
+}*/
+
+/* CSS for adjusting the info 
+.relocateItems > .sapMTileContent > .sapMStdTileBottomRow > .sapMStdTileInfo {
+	float: left !important;
+	margin-top: 6rem !important;
+}*/
+
+/* CSS for adjusting the title */
+.relocateItems > .sapMTileContent > .sapMStdTileBottomRow > .sapMStdTileTitle {
+	height: 1rem !important;
+	margin-top: 10rem !important;
+	color: #007CC0 !important;
+}}
 .etagsXSODataTileClass{
 	background-image: url('thumbnails/etagsdemo.JPG');
 }
@@ -84,6 +156,7 @@
 .welcomeDlg .sapUiDlgCont {
 	background-color: #FFFFFF !important;
 	padding: 10px 25px 12px;
+	overflow-x: hidden;
 }
 .welcomeHeaderTextAlign {
 	font-size: 22px !important;
@@ -91,4 +164,8 @@
 }		
 .dialogTextColor{
 	color: #007CC0 !important;
+}
+#__view4{
+	font-weight: bold;
+    color: red;
 }

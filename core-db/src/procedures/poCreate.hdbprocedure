@@ -9,9 +9,9 @@ BEGIN
  *****************************/
 declare lv_purchaseorderid string;
 declare lv_partnerid string;
-declare lv_grossamount DECIMAL(5,2);
-declare lv_netamount DECIMAL(5,2);
-declare lv_taxamount DECIMAL(5,2);
+declare lv_grossamount DECIMAL(14,2);
+declare lv_netamount DECIMAL(14,2);
+declare lv_taxamount DECIMAL(14,2);
 declare lv_currency string;
 declare lv_productid string;
 declare lv_quantity integer;

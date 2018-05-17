@@ -74,7 +74,10 @@
          "componentProperties": {
            "url": "/resources/job"
          }
-       }
+       },
+        "sap.platform.cf": {
+      	"oAuthScopes": ["$XSAPPNAME.JOBSCHEDULER"]  
+	  }
      },
      "user-crud": {
       "sap.app": {

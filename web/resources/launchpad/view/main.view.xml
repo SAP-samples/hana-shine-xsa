@@ -1,0 +1,46 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.unified="sap.ui.unified"
+	xmlns:sap.ui.core.mvc="sap.ui.core.mvc" controllerName="shine.democontent.epm.launchpad.view.main" displayBlock="true">
+	<sap.ui.unified:Shell title="SHINE" icon="images/sap_18.png" showPane="false" showCurtain="false" showCurtainPane="false"
+		headerHiding="false">
+		<sap.ui.unified:content>
+			<!--<App>-->
+			<!--	<Page>-->
+			<!--		<content>-->
+						<App id="__app1">
+							<pages>
+								<TileContainer editable="false" allowAdd="true" id="__container0">
+									<tiles>
+										<StandardTile id="dg" class="dgClass" title="Data Generator" icon="sap-icon://database" activeIcon="sap-icon://database" busy="false"
+											press="handlePress"/>
+										<StandardTile id="po" class="poClass" title="Purchase Order Worklist" icon="sap-icon://monitor-payments"
+											activeIcon="sap-icon://monitor-payments" press="handlePress"/>
+										<StandardTile id="jobscheduling" class="jobschedulingClass" title="Runtime Job Scheduling" icon="sap-icon://time-entry-request"
+											activeIcon="sap-icon://time-entry-request" press="handlePress"/>
+										<StandardTile id="so" class="soClass" title="Sales Dashboard" icon="sap-icon://sales-order" activeIcon="sap-icon://sales-order"
+											press="handlePress"/>
+										<StandardTile id="uc" class="ucClass" title="User CRUD" icon="sap-icon://account" activeIcon="sap-icon://account" press="handlePress"/>
+										<StandardTile id="spatial" class="spatialClass" title="Spatial Demo" icon="sap-icon://map" activeIcon="sap-icon://map" press="handlePress"/>
+                                                                                <StandardTile id="fulltextsearch" class="fulltextschedulingClass" title="Full Text Search" icon="sap-icon://inspection" activeIcon="sap-icon://inspection" press="handlePress"/>
+									
+									</tiles>
+								</TileContainer>
+							</pages>
+						</App>
+			<!--		</content>-->
+			<!--	</Page>-->
+			<!--</App>-->
+		</sap.ui.unified:content>
+		<sap.ui.unified:search textAlign="Center">
+			 <Label id="sTitle" design="sap.m.LabelDesign.Bold" text="SHINE (SAP HANA Interactive Education) for SAP HANA XS Advanced Model"
+									class="sapMTitle"/>
+		</sap.ui.unified:search>
+		<sap.ui.unified:headEndItems>
+			<sap.ui.unified:ShellHeadItem press="sourceCodeDownload" activeIcon="sap-icon://attachment-zip-file" icon="sap-icon://attachment-zip-file"
+				tooltip="Click to download the source code"/>
+			<sap.ui.unified:ShellHeadItem icon="sap-icon://log" tooltip="Logoff" press="logout"></sap.ui.unified:ShellHeadItem>
+		</sap.ui.unified:headEndItems>
+		<sap.ui.unified:user>
+			<sap.ui.unified:ShellHeadUserItem username="{config>/UserName}" image="sap-icon://person-placeholder"></sap.ui.unified:ShellHeadUserItem>
+		</sap.ui.unified:user>
+	</sap.ui.unified:Shell>
+</mvc:View>

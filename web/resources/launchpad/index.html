@@ -10,37 +10,23 @@
 				id="sap-ui-bootstrap"
 				data-sap-ui-libs="sap.m,sap.me,sap.ui.commons"
 				data-sap-ui-preload=""
-				data-sap-ui-theme="sap_bluecrystal">
+				data-sap-ui-theme="sap_belize"
+				data-sap-ui-resourceroots='{"shine.democontent.epm.launchpad" : ""}'>
 		</script>
 
 		<script>
 		
-			sap.app = {};
 		
-			jQuery.sap.registerModulePath('app', 'js');
-			
-			jQuery.sap.require("app.welcome");
-			jQuery.sap.require("app.tileDialog");
-			jQuery.sap.require("app.checkDialog");
-			jQuery.sap.require("app.localstorage");
-			
-			// Internationalization:
-			// create global i18n resource bundle for texts in application UI
-			sap.app.i18n = jQuery.sap.resources({
-				url : "i18n/messagebundle.hdbtextbundle",
-				locale : sap.ui.getCore().getConfiguration().getLanguage()
+			sap.ui.getCore().attachInit(function() {
+				   
+                new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "shine.democontent.epm.launchpad"
+					})
+				}).placeAt("content");
 			});
-			sap.ui.getCore().setModel(sap.app.i18n, "i18n");
-		
-			// instantiate initial view with a shell
-			sap.ui.localResources("view");
-			var oMainView = sap.ui.view({
-				id : "main-shell",
-				viewName : "view.main",
-				type : sap.ui.core.mvc.ViewType.JS
-			});
-			
-			oMainView.placeAt("content");
+			// oMainView.placeAt("content");
 				
 		</script>
 

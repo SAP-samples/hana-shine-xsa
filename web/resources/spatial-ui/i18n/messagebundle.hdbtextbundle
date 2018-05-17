@@ -39,7 +39,7 @@ INIT_HELP=<ul><li>The data on the right side reflects the analysis for the visib
 OK=OK
 REMOVE_POLYGON=Remove Polygon
 
-WELCOME_DESC=To run this demo you need to first obtain an Evaluation key from Nokia HERE maps. This key is required for communicating with Nokia HERE maps server. 
+WELCOME_DESC=To run this demo you need to first obtain an Evaluation key from HERE maps. This key is required for communicating with HERE maps server. 
 WELCOME_LINK_EVAL=http://developer.here.com/get-started
 WELCOME_LINK_EVAL_TITLE=Get your Evaluation key here
 WELCOME_LINK_INFO=http://developer.here.com/get-started

@@ -1,33 +1,195 @@
-_schema-version: "2.0.0"
+_schema-version: '2.0'
 ID: com.sap.refapps.shine
-version: 1.4.2
+version: 1.5.2
 
 modules:
+  - name: shine-user-db
+    type: hdb
+    path: user-db
+    requires:
+      - name: shine-user-container
+        properties:
+          TARGET_CONTAINER: '~{user-container-name}'
+          
+  - name: shine-core-db
+    type: hdb
+    path: core-db
+    requires:
+      - name: shine-container
+        properties:
+          TARGET_CONTAINER: '~{container-name}'
+      
+      - name: shine-user-container
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-user-service
+          service: '~{user-container-name}'
+      - name: shine-user-db
+      
+          
+  - name: shine-core-node
+    type: nodejs
+    path: core-node
+    parameters:
+      host: shine-core-node
+      register-service-url: true
+      service-name: shine-core-node
+      service-url: '${default-url}'      
+    properties:
+      UAA_SERVICE_NAME: shine-uaa 
+      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
+    provides:
+      - name: core_node_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: shine-uaa
+      - name: shine-auditlog
+      - name: shine-container
+      - name: shine-core-db
+      - name: shine-scheduler
+   
+      
+  - name: shine-user-xsjs
+    type: nodejs
+    path: user-xsjs
+    parameters:
+      host: shine-user-xsjs
+      register-service-url: true
+      service-name: shine-user-xsjs
+      service-url: '${default-url}'      
+    properties:
+      SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
+    provides:
+      - name: user_xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: shine-uaa
+      - name: shine-user-container
+      - name: shine-user-db
+
+
+  - name: shine-user-java
+    type: java
+    path: user-java
+    provides:
+      - name: user_java_api
+        properties:
+          url: '${default-url}'
+           
+    requires:
+      - name: shine-uaa
+      - name: shine-user-container
+        properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
+      - name: shine-user-db
+      
   - name: shine-web
     type: html5
     path: web
-    provides: 
+    provides:
       - name: web
         properties:
-          ui-url: "${default-url}"
+          ui-url: '${default-url}'
+    parameters:
+      host: shine-web
+      register-service-url: true
+      service-name: shine-web
+      service-url: '${default-url}'
     requires:
       - name: shine-uaa
       - name: sapui5-provider
         properties:
-          sapui5url: ~{url}
-      - name: core-js
+          sapui5url: '~{url}'
+      - name: ui5Service 
+        group: destinations 
+        properties: 
+          name: ui5Service 
+          url: ~{url} 
+          forwardAuthToken: true 
+      - name: core_node_api
         group: destinations
         properties:
-          name: core-backend
+          name: core-node-backend
+          url: '~{url}'
+          forwardAuthToken: true
+      - name: core_xsjs_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: '~{url}'
+          forwardAuthToken: true          
+      - name: user_xsjs_api
+        group: destinations
+        properties:
+          name: user-backend
+          url: '~{url}'
+          forwardAuthToken: true
+      - name: user_java_api
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: '~{url}'
+          forwardAuthToken: true
+          
+      - name: uaa 
+        group: destinations 
+        properties: 
+           name: uaa 
+           url: ~{url} 
+           forwardAuthToken: true 
+
+  - name: shine-core-xsjs
+    type: nodejs
+    path: core-xsjs
+    provides:
+     - name: core_xsjs_api
+       properties:
+          url: ${default-url}
+    parameters:
+      host: shine-core-xsjs
+      register-service-url: true
+      service-name: shine-core-xsjs
+      service-url: '${default-url}'            
+    requires:
+      - name: shine-uaa
+      - name: shine-container
+      - name: secureStore
+      
+  - name: shine-site-web
+    type: siteentry
+    path: site-web
+    requires:
+      - name: shine-uaa
+      - name: sap-portal-services-host
+      - name: controller
+        group: destinations
+        properties:
+          name: controller
           url: ~{url}
-          forwardAuthToken: true 
-      - name: user-js
+          forwardAuthToken: true
+      
+      - name: core_node_api
+        group: destinations
+        properties:
+          name: core-node-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: core_xsjs_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: user_xsjs_api
         group: destinations
         properties:
           name: user-backend
           url: ~{url}
           forwardAuthToken: true
-      - name: user-java
+       
+      - name: user_java_api
         group: destinations
         properties:
           name: user-java-backend
@@ -38,133 +200,12 @@ modules:
         properties: 
            name: uaa 
            url: ~{url} 
-           forwardAuthToken: true 
-
-    parameters: 
-       host: web 
-       register-service-url: true 
-       service-name: web 
-       service-url: "${default-url}"
-        
-  - name: shine-core-js
-    type: nodejs
-    path: core-js
-    provides: 
-      - name: core-js
-        properties:
-          url: "${default-url}"
-    
-    requires:
-      - name: shine-uaa
-      - name: shine-container
-      - name: shine-core-db
-      - name: shine-auditlog
-
-  - name: shine-user-js
-    type: nodejs
-    path: user-js
-    properties: 
-      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
-    provides: 
-      - name: user-js
-        properties:
-          url: "${default-url}"
-    requires:
-      - name: shine-uaa
-      - name: shine-scheduler
-      - name: shine-user-db
-      - name: shine-user-container
-      
-  - name: shine-user-java
-    type: java
-    path: user-java
-    provides: 
-      - name: user-java
-        properties:
-          url: "${default-url}"
-    requires:
-      - name: shine-uaa
-      - name: shine-scheduler
-      - name: shine-user-db
-      - name: shine-user-container
-        properties:
-         JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
-               {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
-      
-  - name: shine-core-db
-    type: hdb
-    path: core-db
-    requires:
-      - name: shine-container
-        properties:
-          TARGET_CONTAINER: ~{container-name}
-  
-      - name: shine-user-container
-        group: SERVICE_REPLACEMENTS
-        properties:
-          key: hdi-user-service
-          service: ~{user-container-name} 
-      
-  - name: shine-user-db
-    type: hdb
-    path: user-db
-    requires:
-     - name: shine-user-container
-       properties:
-        TARGET_CONTAINER: ~{user-container-name}
- 
- 
-
-
-  
-
-
-  - name: shine-site-web
-    type: siteentry
-    path: site-web
-    parameters:
-       memory: 64M
-    requires:
-      - name: shine-uaa
-      - name: sap-portal-services-host
-      - name: user-js
-        group: destinations
-        properties:
-          name: user-backend
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: controller
-        group: destinations
-        properties:
-          name: controller
-          url: ~{url}
-      - name: user-java
-        group: destinations
-        properties:
-          name: user-java-backend
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: core-js
-        group: destinations
-        properties:
-          name: core-backend
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: uaa 
-        group: destinations 
-        properties: 
-           name: uaa 
-           url: '~{url}' 
            forwardAuthToken: true
       - name: sapui5-provider
-        properties:
-          sapui5url: '~{url}'
+        
     properties:
       NODE_TLS_REJECT_UNAUTHORIZED: "0"  
-
-  
-     
-     
+        
   - name: shine-site-content
     type: sitecontent
     path: site-content
@@ -174,85 +215,38 @@ modules:
        - name: sap-portal-services-client
        - name: shine-uaa
     properties:
-      NODE_TLS_REJECT_UNAUTHORIZED: "0"  
-
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"     
+           
 resources:
-  - name: shine-auditlog
-    type: com.sap.xs.auditlog 
-    
-  - name: shine-container
-    type: com.sap.xs.hdi-container
-    properties:
-      container-name: ${service-name}
-         
   - name: shine-user-container
-    type: com.sap.xs.hdi-container
     properties:
-      user-container-name: ${service-name}
-    parameters: 
-     service-name: shine-user-container
-     config:
-       schema: SHINE_USER12
+      user-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+    parameters:
+      config:
+        schema: SHINE_USER
+  - name: shine-container
+    properties:
+      container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+    parameters:
+      
+      config:
+        schema: SHINE_CORE
 
+  - name: secureStore
+    type: com.sap.xs.hana-securestore
+
+  - name: shine-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      config-path: ./xs-security.json
   - name: shine-scheduler
     type: com.sap.xs.job-scheduler
 
-  - name: shine-uaa
-    type: com.sap.xs.uaa-space
-    parameters:
-     config:
-       xsappname: shine-admin
-       scopes:
-       - name: "$XSAPPNAME.JOBSCHEDULER"
-         description: Job Scheduler Scope
-         grant-as-authority-to-apps: [jobscheduler]
-       - name: "$XSAPPNAME.Display"
-         description: display
-       - name: "$XSAPPNAME.Edit"
-         description: edit
-       - name: "$XSAPPNAME.Delete"
-         description: delete
-       - name: "$XSAPPNAME.DataGenerator"
-         description: data generator
-       - name: xs_authorization.read
-         description: Read authorization information from UAA
-       - name: xs_authorization.write
-         description: Write authorization information to UAA
-       role-templates:
-       - name: Admin
-         description: refapps administrator
-         scope-references:
-         - "$XSAPPNAME.Display"
-         - "$XSAPPNAME.Edit"
-         - "$XSAPPNAME.Delete"
-         - "$XSAPPNAME.DataGenerator"
-         - "$XSAPPNAME.JOBSCHEDULER"
-         - xs_controller.read
-         - xs_authorization.read
-         - xs_authorization.write
-         
-  - name: sap-portal-services-host
-    type: com.sap.portal.site-host
-    parameters:
-      config:
-        siteId : XSAC_SHINE
-        
-  - name: sap-portal-services-client
-    type: com.sap.portal.site-content
-    parameters:
-      config:
-        siteId : XSAC_SHINE
+  - name: shine-auditlog
+    type: com.sap.xs.auditlog
 
-   
-  - name: uaa 
-    properties: 
-      url: "https://<hostname>:3##32/uaa-security"
-      
-  - name: sapui5-provider
-    type: configuration
-    parameters:
-      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3
-      version: "1.44.8"
   - name: sap-portal-services-host-com.sap.refapps.shine
     parameters:
        config:
@@ -265,9 +259,36 @@ resources:
        service-plan: space
     type: com.sap.xs.uaa
 
+  - name: sap-portal-services-host
+    type: com.sap.portal.site-host
+    parameters:
+      config:
+        siteId : XSAC_SHINE
+        
+  - name: sap-portal-services-client
+    type: com.sap.portal.site-content
+    parameters:
+      config:
+        siteId : XSAC_SHINE
+ 
+  - name: uaa 
+    properties: 
+      url: "https:///<hostname>:3##32/uaa-security"
+      
+  - name: sapui5-provider
+    type: configuration
+    parameters:
+      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4
+      version: ">=1.52.2"
 
- 
- 
+
+  - name: ui5Service
+    type: configuration
+    parameters:
+      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4
+      version: ">=1.52.2"  
+      
   - name: controller
     properties:
       url: 'https://<hostname>:3##30'
+  

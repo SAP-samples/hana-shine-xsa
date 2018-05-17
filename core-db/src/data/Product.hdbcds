@@ -1,8 +1,12 @@
 context Product {
 
+	@Comment: 'Products entity'
     Entity Products{
+    @Comment: 'Product ID'
      key PRODUCTID: String(10);
+     @Comment: 'Product Category'
      CATEGORY: String(40);
+     @Comment: 'Product Price'
      PRICE: Decimal(15,2);
     }; 
 

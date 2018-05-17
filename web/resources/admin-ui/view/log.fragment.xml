@@ -8,7 +8,7 @@
 					displayValue="{/displayValue}" showValue="true" state="None" />
 			</CustomListItem>
 			<CustomListItem>
-				<TextArea id="txtLog" value ="{/txtLog}" rows="8" width="100%" class="logArea" editable="false"/>
+				<TextArea id="txtLog" value ="{/txtLog}" rows="8" width="100%" height="30%" class="logArea" editable="false"/>
 			</CustomListItem>
 		</List>
 	</Panel>
