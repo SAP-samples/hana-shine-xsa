@@ -3,7 +3,7 @@ context UserData {
     @Comment : 'User DB'
     entity User {
             @Comment : 'User ID'
-        	key UserId    : Integer generated always as identity(start with 1 increment by 1 no minvalue maxvalue 1999999999 no cache no cycle);
+        key UserId    : Integer generated always as identity(start with 1000000225 increment by 1 no minvalue maxvalue 1999999999 no cache no cycle);
 
             @Comment : 'First Name'
             FirstName : String(40);
@@ -15,3 +15,4 @@ context UserData {
             Email     : String(255);
     };
 };
+

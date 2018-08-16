@@ -9,21 +9,11 @@
     "logoutPage": "/"
   },
   "routes": [
-     {
-      "source": "/resources/es/(.*)",
-      "destination": "core-node-backend"
+	{
+      "source": "^/python/download/(.*)$",
+      "target": "$1",
+      "destination": "core-python-backend"
     },
-
-    {
-      "source": "/resources/sap/(.*)",
-      "destination": "ui5Service"
-    },
-
-     {
-      "source": "/resources/(.*)",
-      "destination": "ui5Service"
-    },
-	
     {
       "source": "/node(.*)",
       "destination": "core-node-backend",
@@ -122,7 +112,7 @@
       "destination": "core-xsjs-backend",
       "authenticationType": "xsuaa"
     },
-     {
+    {
       "source": "/(.*)",
       "localDir": "resources",
       "authenticationType": "xsuaa",
@@ -134,7 +124,7 @@
         ],
         "vars": [
           "sapui5url"
-	]
+        ]
       }
     }
   ]

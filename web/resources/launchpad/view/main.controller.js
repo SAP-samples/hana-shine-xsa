@@ -55,9 +55,9 @@ sap.ui.controller("shine.democontent.epm.launchpad.view.main", {
 		if (tileId === "__xmlview0--spatial") {
 			tileID = 8;
 		}
-		if (tileId === "__xmlview0--fulltextsearch") {
-		 	tileID = 9;
-	        }
+		// if (tileId === "__xmlview0--fulltextsearch") {
+		// 	tileID = 1;
+		// }
 
 		var value = sap.app.localStorage.getPreference(sap.app.localStorage.PREF_TILE_HELP_SHOW_PREFIX + tileID);
 		if (value !== 'false') {

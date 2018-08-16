@@ -1,1 +1,0 @@
-{"type":"sap.java","builders":{"default":"sap.java.maven","configs":{}},"runners":{"default":"system:/sap.java/default","configs":{}},"attributes":{},"description":"","mixinTypes":["mtamodule"]}

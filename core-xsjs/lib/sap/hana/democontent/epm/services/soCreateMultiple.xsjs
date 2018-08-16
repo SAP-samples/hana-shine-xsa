@@ -112,9 +112,9 @@ console.log("tax"+responseBody);
         query = 'insert into "SO.Item"' + " values(?,?,?,'','EUR',?,?,?,'I','',?,'EA','')";
         finalItemId = '';
         if (item_id >= 100) {
-            finalItemId =  item_id;
+            finalItemId = '0000000' + item_id;
         } else {
-            finalItemId =  item_id;
+            finalItemId = '00000000' + item_id;
         }
 			console.log("item_id"+finalItemId+" overAllId"+overAllId); 
         rs = conn.executeUpdate(query, ''+overAllId, finalItemId, lv_productid, lv_grossamount,

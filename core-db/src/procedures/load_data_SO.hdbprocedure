@@ -129,7 +129,7 @@ Item_Prod_Details= SELECT Header_Id,
     
     
     Items_Final = Select TO_NVARCHAR(MaxSO+ Header_Id) as "SALESORDERID",
-                              TO_NVARCHAR(ItemNum * 10) as "SALESORDERITEM",
+                              CONCAT(  '00000000' , TO_NVARCHAR(ItemNum * 10)) as "SALESORDERITEM",
                               PRODUCTID as "PRODUCT.PRODUCTID",
                               'NoteId' as "NOTEID",
                               'EUR' as "CURRENCY",

@@ -22,44 +22,4 @@ module.exports = (app, server) => {
 	app.use('/replicate', require('./routes/datagen')());
 	app.use('/reset', require('./routes/reset')());
 	app.use('/get', require('./routes/get')());
-       app.use('/resources/es/odata/callbuildin.xsjs', function (req, res, next) {
-         var client = req.db;
-         client.on('error', function (err) {
-			console.error('Network connection error', err);
-	});
-        client.connect(function (err) {
-	if (err){
-				return console.error('Connect error', err);
-			}
-	});
-    client.prepare('call esh_search (?, ?)', function (err, statement) {
-        if (err) {
-            return console.error('Prepare error:', err);
-        }
-        var request = req.path;
-        var parameters = '';
-        for (var n in req.query) {
-            var separator;
-            separator = (parameters.length === 0 ? '' : '&');
-            parameters = parameters + separator + n + '=' + req.query[n];
-        }
-        if (parameters) {
-            request = request + '/?' + parameters;
-        }
-        statement.exec({
-                REQUEST: '["' + request + '"]'
-            },
-            function (err, parameters, rows) {
-                if (err) {
-                    return console.error('Exec error:', err);
-                }
-                if (req.path.indexOf('$metadata') > -1) {
-                    res.set('Content-Type', 'application/xml');
-                } else {
-                    res.set('Content-Type', 'application/json');
-                }
-                res.send(new Buffer(rows[0].RESPONSE));
-            });
-    });
-});
 };

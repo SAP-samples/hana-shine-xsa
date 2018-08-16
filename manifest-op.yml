@@ -1,0 +1,41 @@
+---
+applications:
+- name: core-db
+  path: db
+  memory: 256M
+  no-route: true
+  services:
+    - shine-hdi-container
+
+- name: shine-core-js
+  port: 49010
+  path: core-js
+  memory: 512M
+  services:
+    - shine-container
+    - uaa-refapps
+
+- name: shine-user-js
+  port: 49040
+  memory: 256M
+  path: user-js/
+  services:
+    - shine-user-conatiner
+    - shine-uaa
+    - shine-scheduler
+
+- name: shine-web
+  port: 49020
+  path: web
+  memory: 768M
+  env:
+    destinations: >
+      [
+        {"name":"core-backend", "url":"http://<xsa-host>:49010", "forwardAuthToken": true},
+        {"name":"user-backend", "url":"http://<xsa-host>:49040", "forwardAuthToken": true}
+      ]
+  services:
+    - shine-uaa
+  env:
+    HANA_SERVICE_NAME: shine-container
+    UAA_SERVICE_NAME: shine-uaa

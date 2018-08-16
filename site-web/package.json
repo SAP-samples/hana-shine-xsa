@@ -3,7 +3,7 @@
     "node": "~4.x || ~6.x"
   },
   "name": "shine-site-web",
-  "version": "1.5.2",
+  "version": "1.5.0",
   "dependencies": {
     "@sap/site-entry": "1.9.10"
   },

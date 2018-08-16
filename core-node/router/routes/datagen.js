@@ -26,10 +26,11 @@ module.exports = function() {
 		var totalRecords = encodeURI((req.body.noRec)) * 1000;
 		var id = req.body.id;
 		var query;
-		function convertDate(d){
-			console.log("inside func");
+	    function convertDate(d){
+	    	console.log("inside func");
             var parts = d.split(" ");
             var months = {Jan: "01",Feb: "02",Mar: "03",Apr: "04",May: "05",Jun: "06",Jul: "07",Aug: "08",Sep: "09",Oct: "10",Nov: "11",Dec: "12"};
+            
             return parts[2]+"."+months[parts[1]]+"."+parts[3];
         }
 		var aStartDate = req.body.startdate;
@@ -60,7 +61,6 @@ module.exports = function() {
 						}
 				}
 			});
-		client.close();
 	});
 
 // method will pick records from SOShadow.Header and add to SO.Header
@@ -131,7 +131,6 @@ module.exports = function() {
 					});
 				}
 			});
-		client.close();
 		});
 	});
 
@@ -199,7 +198,6 @@ module.exports = function() {
 					});
 				}
 			});
-		client.close();
 		});
 	});
 	return app;

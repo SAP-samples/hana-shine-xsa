@@ -175,13 +175,12 @@ getServiceUrl:function(state){
                  'Accept': "application/json"
             },
             success: function(){
-                sap.m.MessageToast.show(oThis.getView().getModel("i18n").getProperty("USER_CREATED"));
+                sap.ui.commons.MessageBox.alert(oThis.getView().getModel("i18n").getProperty("USER_CREATED"));
                 oThis.loadJobsTable();
                 oThis.resetUserModel();
             },
             error: function(error) {
-	        sap.m.MessageToast.show(oThis.getView().getModel("i18n").getProperty("USR_CRT_ERROR"));
-              
+               sap.ui.commons.MessageBox.alert(oThis.getView().getModel("i18n").getProperty("USR_CRT_ERROR"));
                 
             }
         });
@@ -350,12 +349,12 @@ getServiceUrl:function(state){
                     'x-csrf-token': xsrf_token
                 },
                 success: function(){
-		    sap.m.MessageToast.show(oThis.getView().getModel("i18n").getProperty("USER_DELETED_SUCCESS"));
+                    sap.ui.commons.MessageBox.alert(oThis.getView().getModel("i18n").getProperty("USER_DELETED_SUCCESS"));
                     oThis.loadJobsTable();
                 },
                 error: function(error) {
-		     sap.m.MessageToast.show(oThis.getView().getModel("i18n").getProperty("USER_DELETE_FAILURE"));
-                 
+                    sap.ui.commons.MessageBox.alert(oThis.getView().getModel("i18n").getProperty("USER_DELETE_FAILURE"));
+                    //console.log(error);
                 }
             });
 

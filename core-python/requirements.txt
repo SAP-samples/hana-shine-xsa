@@ -1,0 +1,6 @@
+Flask==0.12.2
+cfenv==0.5.3
+openpyxl==2.4.8
+hdbcli==2.3.14
+sap_xssec==1.1.5
+sap-cf-logging==3.1.1

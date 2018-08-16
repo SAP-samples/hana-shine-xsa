@@ -130,7 +130,7 @@ Item_Prod_Details= SELECT Header_Id,
     
     
     Items_Final = Select TO_NVARCHAR(MaxPO+ Header_Id) as "PURCHASEORDERID",
-                              TO_NVARCHAR(ItemNum * 10) as "PURCHASEORDERITEM",
+                              CONCAT(  '00000000' , TO_NVARCHAR(ItemNum * 10)) as "PURCHASEORDERITEM",
                               PRODUCTID as "PRODUCT.PRODUCTID",
                               'NoteId' as "NOTEID",
                               'EUR' as "CURRENCY",

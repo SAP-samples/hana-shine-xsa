@@ -30,22 +30,6 @@
                 Entity Type from chosen collection 
                 ================================================================================-->
 			<Annotations Target="sap.hana.democontent.epm.services.UsersType">
-				<Annotation Term="UI.Identification">
-					<Collection>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="FirstName"/>
-							<PropertyValue Property="Label" String="{@i18n&gt;FIRST_NAME}"/>
-						</Record>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="LastName"/>
-							<PropertyValue Property="Label" String="{@i18n&gt;LAST_NAME}"/>
-						</Record>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="Email"/>
-							<PropertyValue Property="Label" String="{@i18n&gt;EMAIL}"/>
-						</Record>
-					</Collection>
-				</Annotation>
 				<Annotation Term="UI.LineItem">
 					<Collection>
 						<Record Type="UI.DataField">
@@ -87,7 +71,7 @@
 								<Collection>
 									<Record Type="UI.ReferenceFacet">
 										<PropertyValue Property="Label" String="{@i18n&gt;UserInfoFacetLabel}"/>
-										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.LineItem"/>
 									</Record>
 								</Collection>
 							</PropertyValue>

@@ -30,7 +30,6 @@ module.exports = {
 					}
 					callback(error1, response1, res, origTable + ' reloaded successfully');
 				});
-				client.close();
             }
     });
     }
@@ -50,7 +49,6 @@ module.exports = {
                 client.exec(query, function(error1, response1){
                     callback(error1, response1, res, origTable + ' reloaded successfully');
                 });
-				client.close();
             }
     });
     }
@@ -99,7 +97,6 @@ module.exports = {
 					maxId=rs;
 					console.log('result' + rs);
 			});
-			client.close();
 			console.log('After query execution');
 		} catch (e) {
 			console.log('inside getMaxId function error ' + e.message);
@@ -116,7 +113,6 @@ module.exports = {
             }
             callback(error, response);
     });
-	client.close();
   },
   callback: function(error, response, res, message) {
     if (error) {
@@ -168,7 +164,6 @@ module.exports = {
 			console.log('bpDict in utils');
 			callback1(error, response);
 		});
-		client.close();
 	},
 	getProducts: function(client, callback2) {
 		//console.log("inside prodDict");

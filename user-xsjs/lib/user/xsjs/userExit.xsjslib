@@ -13,7 +13,7 @@ function my_create_after_exit(param) {
             Email = rs.getString(4);
         }
 
-        pStmt = param.connection.prepareStatement("insert into \"UserData.User\" values('"+FirstName+"','"+LastName+"','"+Email+"')");
+        pStmt = param.connection.prepareStatement('insert into "UserData.User" ("FirstName","LastName","Email") values(\''+FirstName+'\',\''+LastName+'\',\''+Email+'\')');
         // pStmt.setString(1, FirstName);
         // pStmt.setString(2, LastName);
         // pStmt.setString(3, Email);

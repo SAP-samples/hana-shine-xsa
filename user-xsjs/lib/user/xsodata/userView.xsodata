@@ -1,5 +1,6 @@
 service namespace "sap.hana.democontent.epm.services" {
-   "UserViews.UserHeader" as "Users" keys("UserId") concurrencytoken ("FirstName", "LastName","Email") 
+   "UserViews.UserHeader" as "Users" keys("UserId") concurrencytoken ("FirstName", "LastName", "Email") 
+    create using "user.xsjs:userExit.xsjslib::my_create_after_exit"
     delete using "user.xsjs:userExit.xsjslib::my_delete_after_exit"
     update using "user.xsjs:userExit.xsjslib::my_update_after_exit";
  }

@@ -20,7 +20,6 @@
 											press="handlePress"/>
 										<StandardTile id="uc" class="ucClass" title="User CRUD" icon="sap-icon://account" activeIcon="sap-icon://account" press="handlePress"/>
 										<StandardTile id="spatial" class="spatialClass" title="Spatial Demo" icon="sap-icon://map" activeIcon="sap-icon://map" press="handlePress"/>
-                                                                                <StandardTile id="fulltextsearch" class="fulltextschedulingClass" title="Full Text Search" icon="sap-icon://inspection" activeIcon="sap-icon://inspection" press="handlePress"/>
 									
 									</tiles>
 								</TileContainer>

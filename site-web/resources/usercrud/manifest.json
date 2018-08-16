@@ -119,28 +119,7 @@
 			}
 		},
 		"extends": {
-			"extensions": {
-				"sap.ui.controllerExtensions": {
-					"sap.suite.ui.generic.template.ObjectPage.view.Details": {
-						"controllerName": "shine.democontent.epm.usercrud.ext.controller.ListReportExt"
-					},
-					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
-						"controllerName": "shine.democontent.epm.usercrud.ext.controller.ListReportExt",
-						"sap.ui.generic.app": {
-							"Users": {
-								"EntitySet": "Users",
-								"Actions": {
-									"ActionPOHeader1": {
-										"id": "createUserButton",
-										"text": "Create",
-										"press": "newUser"
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+			"extensions": {}
 		},
 		"contentDensities": {
 			"compact": true,

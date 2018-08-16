@@ -57,7 +57,32 @@ sap.account.WelcomeDialog.prototype.open = function() {
 
     oContentMatrix.addRow(createDividerRow());
 	
+	//GDPR warning message
 	
+	oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+
+    oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+        hAlign: sap.ui.commons.layout.HAlign.Left,
+        width: '100%'
+    });
+    oTextView = new sap.ui.commons.TextView({
+    	text: sap.app.i18n.getText("GDPR_MESSAGE"),
+        design: sap.ui.commons.TextViewDesign.H5,
+        width: '100%'
+    });
+    oCell.addContent(oTextView);
+    oRow.addCell(oCell);
+    oContentMatrix.addRow(oRow);
+
+    // vspace
+    oContentMatrix.addRow(new sap.ui.commons.layout.MatrixLayoutRow({
+        height: '2px'
+    }));
+	
+	
+	
+	
+	oContentMatrix.addRow(createDividerRow());
 	
     // what's new
     oRow = new sap.ui.commons.layout.MatrixLayoutRow();
@@ -111,31 +136,6 @@ sap.account.WelcomeDialog.prototype.open = function() {
     oContentMatrix.addRow(oRow);
 	
 	//Adding the button check pre-requisites....
-     oContentMatrix.addRow(createDividerRow());
-	
-   //GDPR warning message
-	oRow = new sap.ui.commons.layout.MatrixLayoutRow();
-
-    oCell = new sap.ui.commons.layout.MatrixLayoutCell({
-        hAlign: sap.ui.commons.layout.HAlign.Center,
-        width: '100%'
-    });
-    oTextView = new sap.ui.commons.TextView({
-        text: sap.app.i18n.getText("GDPR_MESSAGE"),
-        design: sap.ui.commons.TextViewDesign.Standard,
-    });
-    oCell.addContent(oTextView);
-    oRow.addCell(oCell);
-    oContentMatrix.addRow(oRow);
-
-    // vspace
-    // oContentMatrix.addRow(new sap.ui.commons.layout.MatrixLayoutRow({
-    //     height: '2px'
-    // }));
-	
-	
-	
-    //Adding the button check pre-requisites....
      oContentMatrix.addRow(createDividerRow());
 
     // check prerequisites

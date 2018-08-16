@@ -25,9 +25,6 @@ sap.account.TileDialog.prototype.getHrefLocation = function(tileID) {
         case 8:
             url = '/spatial-ui/index.html';
             break;
-        case 9:
-            url = '/fulltext-ui/index.html';
-            break;
    }
    return url;
 };
