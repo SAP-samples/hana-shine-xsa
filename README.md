@@ -27,4 +27,4 @@ The application consists of the following packages:
 - web - This package contains the user interface for the SHINE Launchpad, Data Generator, and Purchase Order Worklist, Sales Dashboard, User CRUD pplications implemented in SAP UI5.
 
 
-For details on how to deploy the application on XS Advanced, kindly refer to <blog>.
+For details on how to deploy the application on XS Advanced, kindly refer to [blog](https://blogs.sap.com/2018/08/16/shine-with-python-runtime-for-sap-hana-xs-advanced/#).
