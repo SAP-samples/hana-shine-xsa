@@ -8,7 +8,7 @@
 
 	<properties>
 	<javax.version>3.0.1</javax.version>
-    <sap.gateway.version>1.5.0</sap.gateway.version>
+    <sap.gateway.version>1.2.3</sap.gateway.version>
     <slf4j.version>1.7.7</slf4j.version>
   </properties>
 
