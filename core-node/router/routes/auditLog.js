@@ -9,7 +9,7 @@ module.exports = function() {
 	var xsenv = require('@sap/xsenv');
 	xsenv.loadEnv();
 	var credentials = xsenv.getServices({
-		auditlog: 'shine-auditlog'
+		auditlog: process.env.AUDITLOG_INSTANCE_NAME
 	}).auditlog;
 	var auditLog = require('@sap/audit-logging')(credentials);
 
