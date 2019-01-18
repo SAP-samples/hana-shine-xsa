@@ -1,5 +1,6 @@
-core-js
-user-js
+core-xsjs
+user-xsjs
+core-node
 user-java
 site-web
 web
