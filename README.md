@@ -13,7 +13,8 @@ SHINE for XS Advanced can be run on SAP HANA Extended Application services, adva
 For detailed description on each release follow the below links
 
 ### SAP HANA Extended Application Services, Advanced Model
-- [SHINE for XS Advanced SAP HANA 2.0 SPS03](SHINE-XSA.md)
+- [SHINE for XS Advanced SAP HANA 2.0 SPS03 FR1](SHINE-XSA.md)
+- [SHINE for XS Advanced SAP HANA 2.0 SPS03](https://github.com/SAP/hana-shine-xsa/blob/HANA2.0-SPS03/README.md)
 - [SHINE for XS Advanced SAP HANA 2.0 SPS02](https://github.com/SAP/hana-shine-xsa/blob/HANA2.0-SPS02/README.md)
 - [SHINE for XS Advanced SAP HANA 2.0 SPS01](https://github.com/SAP/hana-shine-xsa/blob/HANA2.0-SPS01/README.md) 
 - [SHINE for XS Advanced SAP HANA 2.0 SPS00](https://github.com/SAP/hana-shine-xsa/blob/HANA2.0-SPS00/README.md)

@@ -36,12 +36,13 @@ BEGIN
 END;
 
 
+  begin parallel execution
 
 SELECT Count(*) into BP_COUNT  from "MD.BusinessPartner";
 SELECT Count(*) into PROD_COUNT  from "MD.Products";
 SELECT MAX(PURCHASEORDERID) into MaxPO FROM "PO.Header";
     
-
+end;
 
 
 
@@ -142,7 +143,7 @@ Item_Prod_Details= SELECT Header_Id,
                               CreatedAt as "DELIVERYDATE"
                     FROM :Item_Prod_Details; 
                     
-                    
+             
     Insert into "PO.Header" (SELECT * FROM :Header_Final);
     Insert into "PO.Item" (SELECT * FROM :Items_Final);
 

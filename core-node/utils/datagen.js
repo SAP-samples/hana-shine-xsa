@@ -15,7 +15,6 @@ module.exports = {
 					});
 				}
 			});
-		client.close();
 	},
 	getTableInfo: function(client, tableName, tableSynonym, callback) {
 		var queryPrefix = 'SELECT "RECORD_COUNT","TABLE_SIZE" FROM "M_TABLES" where "TABLE_NAME"=\'';
@@ -26,7 +25,6 @@ module.exports = {
 				}
 				callback(error, response);
 			});
-		client.close();
 	},
 	callback: function(error, response, res, message) {
 		if (error) {
@@ -85,7 +83,6 @@ module.exports = {
 			console.log('bpDict in utils');
 			callback1(error, response);
 		});
-		client.close();
 	},
 	getProducts: function(client, callback2) {
 		//console.log("inside prodDict");
@@ -95,7 +92,6 @@ module.exports = {
 			// console.log("prodDict in utils");
 			callback2(error, response);
 		});
-		client.close();
 	}
 
 };

@@ -14,32 +14,19 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Search", {
 
         //Change from the Display Attribute Names to the property names in the ODATA service
         switch (gFilterAttribute) {
-            case 'Company Name':
-            case 'Firmenname':
+            case 'COMPANYNAME':
                 gFilterAttribute = 'COMPANYNAME';
                 break;
-            case 'Product ID':
-            case 'Produkt':
+            case 'PRODUCTID':
                 gFilterAttribute = 'PRODUCT_PRODUCTID';
                 break;
-            case 'Product Name':
-            case 'Produkt Benennung':
-                gFilterAttribute = 'ProductName';
-                break;
-            case 'Product Description':
-            case 'Produktbeschreibung':
-                gFilterAttribute = 'PRODUCTDESC';
-                break;
-            case 'City':
-            case 'Stadt':
+            case 'CITY':
                 gFilterAttribute = 'CITY';
                 break;
-            case 'Category':
-            case 'Kategorie':
+            case 'CATEGORY':
                 gFilterAttribute = 'CATEGORY';
                 break;
-            case 'Purchase Order ID':
-            case 'Auftragsbestätigung':
+            case 'PURCHASEORDERID':
                 gFilterAttribute = 'PURCHASEORDERID';
                 break;
         }

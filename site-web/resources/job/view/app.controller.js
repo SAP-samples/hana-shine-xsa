@@ -91,6 +91,7 @@ sap.ui.controller("shine.democontent.epm.job.view.app", {
             // item.password= window.btoa(item.password);
              item.appurl = "https://"+window.location.hostname+":"+window.location.port+"/jobactivity/create";
 			var xsrf_token;
+			var jobLength;
 			$.ajax({
 				type: "GET",
 				async: false,
@@ -102,6 +103,7 @@ sap.ui.controller("shine.democontent.epm.job.view.app", {
 				},
 				success: function(data, textStatus, request) {
 					xsrf_token = request.getResponseHeader('x-csrf-token');
+					jobLength = data.length;
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					sap.ui.commons.MessageBox.show("Error in fetching XSRF token",
@@ -110,7 +112,14 @@ sap.ui.controller("shine.democontent.epm.job.view.app", {
 					return;
 				}
 			});
-
+			
+			if(jobLength != undefined && jobLength > 4){
+				sap.m.MessageBox.show("Maximum Job reached.",
+						     "ERROR",
+						     "Error");
+				return;
+			}
+			
 			$.ajax({
 				type: "POST",
 				url: "/schedules/createJobSchedule",

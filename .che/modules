@@ -1,9 +1,9 @@
-core-xsjs
-user-xsjs
-core-node
 user-java
-site-web
 web
+core-node
+user-xsjs
+core-xsjs
 user-db
 core-db
 site-content
+site-web

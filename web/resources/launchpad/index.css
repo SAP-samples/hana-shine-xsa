@@ -4,8 +4,8 @@
 .sapUiUfdShellSearch{
 	max-width: 650px !important;	
 }
-#__view0{
-    width: 85%;
+#__view0 {
+    width: 87%; 
 }
 #__tile11-info{
 	white-space: normal !important;
@@ -157,6 +157,7 @@
 	background-color: #FFFFFF !important;
 	padding: 10px 25px 12px;
 	overflow-x: hidden;
+	max-height: 500px; 
 }
 .welcomeHeaderTextAlign {
 	font-size: 22px !important;

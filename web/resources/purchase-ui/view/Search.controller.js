@@ -13,37 +13,23 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Search", {
         oTable = this.getOwnerComponent().getAggregation("rootControl").byId("po_table_view").byId("poTable");
 
         //Change from the Display Attribute Names to the property names in the ODATA service
-        switch (gFilterAttribute) {
-            case 'Company Name':
-            case 'Firmenname':
+         switch (gFilterAttribute) {
+            case 'COMPANYNAME':
                 gFilterAttribute = 'COMPANYNAME';
                 break;
-            case 'Product ID':
-            case 'Produkt':
+            case 'PRODUCTID':
                 gFilterAttribute = 'PRODUCT_PRODUCTID';
                 break;
-            case 'Product Name':
-            case 'Produkt Benennung':
-                gFilterAttribute = 'ProductName';
-                break;
-            case 'Product Description':
-            case 'Produktbeschreibung':
-                gFilterAttribute = 'PRODUCTDESC';
-                break;
-            case 'City':
-            case 'Stadt':
+            case 'CITY':
                 gFilterAttribute = 'CITY';
                 break;
-            case 'Category':
-            case 'Kategorie':
+            case 'CATEGORY':
                 gFilterAttribute = 'CATEGORY';
                 break;
-            case 'Purchase Order ID':
-            case 'Auftragsbestätigung':
+            case 'PURCHASEORDERID':
                 gFilterAttribute = 'PURCHASEORDERID';
                 break;
         }
-
 
         //Build OData Service Sorter by PO ID, and Item
         var sort1 = new sap.ui.model.Sorter("PURCHASEORDERID,PURCHASEORDERITEM");

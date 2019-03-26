@@ -27,7 +27,7 @@ passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({
 		tag: 'xsuaa'
 	}
 }).uaa));
-app.use(logging.expressMiddleware(appContext));
+app.use(logging.middleware({ appContext: appContext, logNetwork: true }));
 app.use(passport.initialize());
 var hanaOptions = xsenv.getServices({
 	hana: {

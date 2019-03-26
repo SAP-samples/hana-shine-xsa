@@ -1,14 +1,14 @@
 {
 	"engines": {
-		"node": " ^6 "
+		"node": "8.x"
 	},
 	"dependencies": {
-		"@sap/xssec": "2.1.6",
-		"@sap/xsenv": "1.2.8",
-		"@sap/xsjs": "3.3.0"
+		"@sap/xssec": "2.1.15",
+		"@sap/xsenv": "1.2.9",
+		"@sap/xsjs": "3.5.0"
 	},
 	"devDependencies": {
-		"@sap/xsjs-test": "2.0.9"
+		"@sap/xsjs-test": "2.0.16"
 	},
 	"files": [],
 	"main": "server.js",
@@ -16,5 +16,5 @@
 	"scripts": {
 		"start": "node server.js"
 	},
-"version": "1.5.2"
+"version": "1.6.1"
 }

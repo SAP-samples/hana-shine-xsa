@@ -1,6 +1,8 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0, no-undef:0 */
+/*eslint-env node, es6*/
 'use strict';
 var express = require('express');
+var JobSchedulerDB = require('./JobSchedulerDBPromises');
 
 module.exports = function() {
 	var app = express.Router();
@@ -28,12 +30,11 @@ module.exports = function() {
 	// method will insert Job Data into Job table
 	app.post('/create',jsonParser,function(req, res) {
 			logger = req.loggingContext.getLogger('/jobactivity/create');
-			var client = req.db;
-			var query = 'select "jobId".NEXTVAL as nJobId from "DUMMY"';
 			var jname = req.body.jobname;
 			var jobid;
 			var timestamp;
 			var accessToken;
+			
 			if (req.headers.authorization) {
 				accessToken = req.headers.authorization.split(' ')[1];
 			}else {
@@ -49,27 +50,33 @@ module.exports = function() {
 			}
 
 			if (securityContext.checkScope(SCOPE)) {
-				client.exec(query, function(error, rows) {
-						if (error) {
-							logger.error('Error occured' + error);
-						} else {
-							jobid = rows[0].NJOBID;
-							timestamp = new Date().toISOString();
-							query = "INSERT INTO \"Jobs.Data\" VALUES('" + jobid.toString() + "','" + jname + "','" + timestamp +
-								"')";
-							client.exec(query, function(error, status) {
-								if (error) {
-									logger.error('Error occured' + error);
-									res.status(401).json({message: 'couldnt insert record to SHINE'});
-
-								} else {
-									res.status(200).json({status: 'record inserted into shine'});
-								}
-							});
-
-						}
+				var js = new JobSchedulerDB(req);
+				js.getNewJobId()
+				.then((rows) => {
+					jobid = rows[0].NJOBID;
+					timestamp = new Date().toISOString();
+				
+					js.createJob(jobid,timestamp,jname)
+					.then((status) => {
+						console.log("Record inserted .....");
+						res.status(200).json({status: 'record inserted into shine'});
+					})
+					.then(() => {
+						js.closeDB();
+					})
+					.catch((error) => {
+						js.closeDB();
+						logger.error('Error occured' + error);
+						res.status(401).json({message: 'couldnt insert record to SHINE'});
 					});
-				//	client.close();
+				})
+				.then(() => {
+					js.closeDB();
+				})
+				.catch((error) => {
+					js.closeDB();
+					logger.error('Error occured' + error);
+				});
 			} else {
 				logger.error('Unauthorized, Scope required is missing');
 				res.status(401).json({message: 'Unauthorized, Scope required is missing'});

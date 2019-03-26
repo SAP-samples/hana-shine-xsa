@@ -1,35 +1,16 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS03
+SHINE for XS Advanced SAP HANA 2.0 SPS03 FR1
 ===============
 
 The new and changed features included in this release of SHINE for XS Advanced are as follows:
  
-1. Fiori Elements
+1. Node.js enhancements
 
-   The User CRUD tile in Fiori Launchpad is now implemented using the Fiori elements.
+2. SQL scripts enhancements
 
-2. Full Text Search
-
-   SAP Search UI on SAP HANA provides an easy way to perform full text search on content stored in tables or exposed via          views. Just like searching on the Internet, full-text search finds terms irrespective of the sequence of characters and        words. Here the search is performed on the Product Categories and also on the Business Partners.
-
-3. Hana Secure Store
-
-   Hana Secure store is used to store the credentials of HERE maps securely.
-
-4. CDS enhancements
-
-   Comments field in CDS artifacts and usage of table functions in CDS views.
-
-5. Data Generator code push down
-
-   Time based data generation implemented entirely in HANA procedures
-
-6. ES6 standards enhancements
-
-7. Node.js code updated to use ECMA Script (ES6) features
+3. Using SAP UI5 service broker
 
 
 This release of the application consists of the following packages:
-
 
 
 - core-db - This is the core db package contains Core data models artifacts required to create the tables and other database artifacts (for example, .hdbcds, .hdbsequence, and so on).
@@ -91,6 +72,10 @@ If the services are stopped, please contact the system administrator to start th
 - Create HANA Secure store service by executing the following command:   
 
     `xs cs hana securestore secureStore`    
+
+- Create SAPUI5 broker service by executing the following command:
+
+    `xs cs sapui5_sb sapui5-1.52 sapui5-provider`
 
 - 	After all these services are created, build and run all modules like core-db, user-db, core-node, core-xsjs, user-xsjs, user-java and web.
 

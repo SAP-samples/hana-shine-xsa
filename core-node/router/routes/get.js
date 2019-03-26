@@ -13,8 +13,8 @@ module.exports = function() {
 	var app = express.Router();
 	winston.level = process.env.winston_level || 'error';
 	app.get('/tablesize', function (req, res) {
-		var reqContext = appContext.createRequestContext(req);
-		logger = reqContext.getLogger("/tablesize");
+		//var reqContext = appContext.createRequestContext(req);
+		logger = req.loggingContext.getLogger("/tablesize");
 		var client = req.db;
 		var query, rs, maxId;
 		query = 'SELECT * from "getTableSize"()';
@@ -34,8 +34,8 @@ module.exports = function() {
 		}
 	});
 	app.get('/tablesize1', function(req, res) {
-		var reqContext = appContext.createRequestContext(req);
-		logger = reqContext.getLogger('/get/tablesize');
+		//var reqContext = appContext.createRequestContext(req);
+		logger = req.loggingContext.getLogger('/get/tablesize');
 		var client = req.db;
 		var tableDict = [{
 			"tableName": "MD.Addresses",

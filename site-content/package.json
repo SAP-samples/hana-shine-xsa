@@ -1,9 +1,9 @@
 {
   "engines": {
-    "node": "~4.x || ~6.x"
+    "node": "8.x"
   },
   "name": "shine-site-content",
-  "version": "1.5.2",
+  "version": "1.6.1",
   "dependencies": {
    "@sap/site-content-deployer": "1.9.7"
   },

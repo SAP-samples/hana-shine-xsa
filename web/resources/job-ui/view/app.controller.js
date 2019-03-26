@@ -118,7 +118,7 @@ sap.ui.controller("sap.hana.democontent.epm.job.view.app", {
                                                         "ERROR",
                                                         "Error");
                                                         return;
-            }
+            		}
 
 			$.ajax({
 				type: "POST",

@@ -1,5 +1,6 @@
 PROCEDURE "get_bp_addresses_by_role" ( in im_partnerrole nvarchar(3) DEFAULT '1',
-    out ex_bp_addresses "Procedures.tt_bp_addresses" 
+    out ex_bp_addresses TABLE ( "ADDRESSID" NVARCHAR(10) , "CITY" VARCHAR(40),
+                    "POSTALCODE" NVARCHAR(10), "STREET" NVARCHAR(60) ) 
 )
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
@@ -9,12 +10,13 @@ BEGIN
    /*************************************
        Write your procedure logic 
    *************************************/
-ex_bp_addresses = 
-     select a."PARTNERID", a."PARTNERROLE", a."EMAILADDRESS", a."COMPANYNAME",
-            a."ADDRESSES.ADDRESSID" as "ADDRESSID", b."CITY", b."POSTALCODE", b."STREET"
-              from "MD.BusinessPartner" as a 
-                 inner join "MD.Addresses" as b
-                     on a."ADDRESSES.ADDRESSID" = b."ADDRESSID" 
-                              where a."PARTNERROLE" = :im_partnerrole;
+lt_employees = select "PARTNERID", "PARTNERROLE", "EMAILADDRESS", "COMPANYNAME", "ADDRESSES.ADDRESSID" 
+FROM "MD.BusinessPartner" where "PARTNERROLE" = :im_partnerrole ;
+
+ex_bp_addresses =  MAP_MERGE(:lt_employees, 
+	                     "get_address_func"(:lt_employees."ADDRESSES.ADDRESSID"));
+
+
+
 
 END
