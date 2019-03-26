@@ -28,4 +28,4 @@ For detailed description on each release follow the below links
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/). For any question/clarification or report an issue in SHINE for CF Environment please mention [shine-cf] in the title to differentiate issue between SHINE for XS Advanced and SHINE for CF Environment
 
 ## License
-The license is changed from Apache License 2.0 to [SAP SAMPLE CODE LICENSE AGREEMENT](LICENSE)
+With release of SHINE for XS Advanced 1.6.1 for HANA 2.0 SPS03 FR1 the license is changed from Apache License 2.0 to [SAP SAMPLE CODE LICENSE AGREEMENT](LICENSE)
