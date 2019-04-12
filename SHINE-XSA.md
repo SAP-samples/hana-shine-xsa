@@ -153,4 +153,4 @@ For any question/clarification or report an issue in SHINE please [create issue]
 [SHINE XSA for HANA 2.0 SPS 03 Documentation ](https://help.sap.com/http.svc/rc/13ff61e61a8f442090e27050dc61f019/2.0.03/en-US/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_en_HANA2SPS03.pdf)
 
 ## License
-[Apache License 2.0](LICENSE)
+[SAP SAMPLE CODE LICENSE AGREEMENT](LICENSE)
