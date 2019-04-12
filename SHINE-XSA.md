@@ -37,7 +37,7 @@ The following components should be installed before SHINE installation on XSA. I
 
 - XSAC_PORTAL_SERVICES
 
-- SAPUI5_FESV4
+- SAPUI5_FESV5
 
 - Auditlog service   
 
@@ -71,7 +71,7 @@ If the services are stopped, please contact the system administrator to start th
 
 - Create SAPUI5 broker service by executing the following command:
 
-    `xs cs sapui5_sb sapui5-1.52 sapui5-provider`
+    `xs cs sapui5_sb sapui5-1.60 sapui5-provider`
 
 - 	After all these services are created, build and run all modules like core-db, user-db, core-node, core-xsjs, user-xsjs, user-java and web.
 
