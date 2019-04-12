@@ -35,8 +35,6 @@
 									class="sapMTitle"/>
 		</sap.ui.unified:search>
 		<sap.ui.unified:headEndItems>
-			<sap.ui.unified:ShellHeadItem press="sourceCodeDownload" activeIcon="sap-icon://attachment-zip-file" icon="sap-icon://attachment-zip-file"
-				tooltip="Click to download the source code"/>
 			<sap.ui.unified:ShellHeadItem icon="sap-icon://log" tooltip="Logoff" press="logout"></sap.ui.unified:ShellHeadItem>
 		</sap.ui.unified:headEndItems>
 		<sap.ui.unified:user>

@@ -45,11 +45,6 @@
       "destination": "uaa"
     },
     {
-      "source": "/user/odata/v4/(.*)",
-      "destination": "user-java-backend"
-      
-    },
-    {
       "source": "/get/(.*)",
       "destination": "core-node-backend",
       "scope": "$XSAPPNAME.DataGenerator"

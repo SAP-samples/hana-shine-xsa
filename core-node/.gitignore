@@ -1,2 +1,7 @@
-/node_modules/
-/.testresults/
+.settings
+.project
+*.log
+node_modules
+node
+target
+etc

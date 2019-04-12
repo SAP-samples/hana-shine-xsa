@@ -1,11 +1,12 @@
 {
-    "name": "shine-user-db",
-	"description": "SHINE User Database Container Artifacts",
-  "version": "1.6.1",
-	"dependencies":{
-	"@sap/hdi-deploy": "3.7.0"
-	},"private":true,
-	"scripts":{
-	"start":"node node_modules/@sap/hdi-deploy/deploy.js"
-	}
+  "name": "shine-user-db",
+  "description": "SHINE User Database Container Artifacts",
+  "version": "1.7.4",
+  "dependencies": {
+    "@sap/hdi-deploy": "3.7.0"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/@sap/hdi-deploy/deploy.js"
+  }
 }

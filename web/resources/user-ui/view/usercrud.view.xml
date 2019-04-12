@@ -1,26 +1,17 @@
-<sap.ui.core.mvc:View xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.commons="sap.ui.commons" xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.ui.table="sap.ui.table" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" controllerName="shine.democontent.epm.usercrud.view.usercrud">
+<sap.ui.core.mvc:View xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.commons="sap.ui.commons"
+	xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.ui.table="sap.ui.table"
+	xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" controllerName="shine.democontent.epm.usercrud.view.usercrud">
 	<u:Shell id="myShell" showCurtainPane="true">
 		<u:headItems>
 			<!--u:ShellHeadItem tooltip="Home" icon="sap-icon://home" visible="true" press="handlePressHome"/-->
 		</u:headItems>
 		<u:paneContent>
-			<List id="langlist" headerText="Languages" items="{                     path: 'lang&gt;/languages'                 }" itemPress="onListItemPress">
+			<List id="langlist" headerText="Languages" items="{ path: 'lang&gt;/languages'}" itemPress="onListItemPress">
 				<StandardListItem title="{lang&gt;name}" type="Active" press="onListItemPress"/>
 			</List>
 		</u:paneContent>
 		<u:content>
-			<Toolbar>
-                        <ToolbarSpacer/>
-                        <SegmentedButton id="serviceUrlMode" selectedKey="nodejs">
-                              <items>
-                                    <SegmentedButtonItem id="nodejs" text="Nodejs" key="nodejs" press="onChange"/>
-                                    <SegmentedButtonItem id="java" text="Java" key="java" press="onChange"/>
-                                    
-                              </items>
-                        </SegmentedButton>
-                        <ToolbarSpacer/>
-                  </Toolbar>
-
 			<sap.ui.commons.layout:MatrixLayout columns="0" class="addPadding" width="99%">
 				<sap.ui.commons.layout:rows>
 					<sap.ui.commons.layout:MatrixLayoutRow>
@@ -108,7 +99,7 @@
 									<sap.ui.layout:HorizontalLayout>
 										<sap.ui.layout:content>
 											<sap.ui.commons:Button id="batchButton" text="{i18n>CREATE_BATCH}" press="openBatchDialog"></sap.ui.commons:Button>
-											<sap.ui.commons:Button id="batchHelpButton" class="helpButton" text="?" data:tileDialog="2" press="openTileDialog"></sap.ui.commons:Button> 
+											<sap.ui.commons:Button id="batchHelpButton" class="helpButton" text="?" data:tileDialog="2" press="openTileDialog"></sap.ui.commons:Button>
 											<!-- <sap.ui.commons:Button class="buttonMarginLeft" text="{i18n>CREATE_XML}" press="onUsrCreateXmlBtnPress"></sap.ui.commons:Button> 
 											<sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="4" press="openTileDialog"></sap.ui.commons:Button> -->
 										</sap.ui.layout:content>
@@ -138,7 +129,6 @@
 													<!-- <sap.ui.commons:Button id="btnAddCC" text="{i18n>ADD_CREDIT_CARD}" press="onAddCC"></sap.ui.commons:Button>
 													<sap.ui.commons:Button id="btnViewCC" text="{i18n>VIEW_CREDIT_CARD}" press="onViewCC"></sap.ui.commons:Button>
 													<sap.ui.commons:Button id="btnDeleteCC" text="{i18n>DELETE_CC_NUMBER}" press="onDeleteCC"></sap.ui.commons:Button> -->
-												
 													<sap.ui.commons:Button class="helpButton" text="?" data:tileDialog="3" press="openTileDialog"/>
 												</sap.ui.commons:items>
 											</sap.ui.commons:Toolbar>

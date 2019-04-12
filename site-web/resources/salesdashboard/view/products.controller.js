@@ -78,7 +78,11 @@ sap.ui.controller("sap.hana.democontent.epm.salesdashboard.view.products", {
             } ]
         });
         dataset.setModel(oModel);
-        dataset.bindData("/SalesByProduct");
+        //dataset.bindData("/SalesByProduct");
+        dataset.bindData({
+                path: "/SalesByProduct",
+            	length: 1000
+        });
 
         //var oSalesRankBubble = sap.ui.getCore().byId("products--productSalesScatter");
         var oSalesRankBubble = this.getView().byId("productSalesScatter");

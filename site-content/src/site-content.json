@@ -311,7 +311,8 @@
 			},
 			"payload": {
 				"tiles": [{
-					"id": "dataGenerator",	
+					"id": "dataGenerator",
+					"appId": "data-generator",
 					"title": "{{group1.datagenerator.title}}",
 					"description": "{{group1.datagenerator.desc}}",
                     "icon": "sap-icon://database",						
@@ -323,6 +324,7 @@
 				},
 				{
 					"id": "poWorklist",	
+					"appId": "po-worklist",
 					"title": "{{group1.poworklist.title}}",
 					"description": "{{group1.poworklist.desc}}",
 					"subTitle": "{{group1.poworklist.sTitle}}",
@@ -335,6 +337,7 @@
 				},
 				{
 					"id": "salesDashboard",	
+					"appId": "sales-dashboard",
 					"title": "{{group1.salesdashboard.title}}",
 					"description": "{{group1.salesdashboard.desc}}",
 					"subTitle": "{{group1.salesdashboard.sTitle}}",
@@ -346,7 +349,8 @@
 					}
 				},
 				{
-					"id": "jobScheduler",	
+					"id": "jobScheduler",
+					"appId": "job-scheduler",
 					"title": "{{group1.jobscheduler.title}}",
 					"description": "{{group1.jobscheduler.desc}}",
                     "icon": "sap-icon://time-entry-request",						
@@ -358,6 +362,7 @@
 				},
 				{
 					"id": "usercrud",	
+					"appId": "user-crud",
 					"title": "{{group1.usercrud.title}}",
 					"description": "{{group1.usercrud.desc}}",
                     "icon": "sap-icon://account",						
@@ -367,7 +372,8 @@
 						"parameters": []
 					}
 				},{
-					"id": "spatial",	
+					"id": "spatial",
+					"appId": "spatial",
 					"title": "{{group1.spatial.title}}",
 					"description": "{{group1.spatial.desc}}",
                     			"icon": "sap-icon://map",						

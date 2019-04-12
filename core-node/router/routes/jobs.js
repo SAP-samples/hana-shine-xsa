@@ -2,7 +2,7 @@
 /*eslint-env node, es6*/
 'use strict';
 var express = require('express');
-var JobSchedulerDB = require('./JobSchedulerDBPromises');
+//var JobSchedulerDB = require('./JobSchedulerDBPromises');
 
 module.exports = function() {
 	var app = express.Router();
@@ -19,7 +19,31 @@ module.exports = function() {
 	app.delete('/deleteData', (req, res) => {
 		logger = req.loggingContext.getLogger('/jobs/deleteData');
 		
-		var js = new JobSchedulerDB(req);
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		
+		var query = 'truncate table "Jobs.Data"';
+		
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, [])
+			.then(results => {
+				res.writeHead(200, {
+					'Content-Type': 'application/json'
+				});
+				res.end(JSON.stringify({'message': 'All records in Jobs Data table deleted'}));
+			})
+			.catch((error) => {
+				logger.error('Error occured' + error);
+				util.callback(err, res, "");	
+			})
+		})
+		.catch((error) => {
+			logger.error('Error occured' + error);
+			util.callback(err, res, "");	
+		});
+		
+		/*var js = new JobSchedulerDB(req);
 
 		js.deleteTriggeredJobsData()
 		.then(() => {
@@ -35,7 +59,7 @@ module.exports = function() {
 			logger.error('Error occured' + err);
 			js.closeDB();
 			util.callback(err, res, "");	
-		});
+		});*/
 	});
 	
 	//method will get all jobs count
@@ -46,7 +70,50 @@ module.exports = function() {
 		var jsonString = '{"d":'+'{"icon": "sap-icon://time-entry-request","info":" ",';
 		var jsonString3 = '"numberDigits": 1,"subtitle": "No of Jobs"}}';
 		
-		var js =  new JobSchedulerDB(req);
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		
+		var query = 'select count(*) as COUNT from "Jobs.ScheduleDetails"';
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, [])
+			.then(rows => {
+				logger.info("rows"+Object.keys(rows));
+				if(rows.length >= 1){
+					logger.info("rows[0] "+rows[0]);
+					var count =  rows[0].COUNT;
+					logger.info("rowsLength"+rows.length);
+					logger.info("count"+count);
+					var numberStateString = '"numberState": "Positive",';
+					if(count > 0){
+						numberStateString = '"numberState": "Positive",';
+					}else{
+						numberStateString = '"numberState": "Negative",';
+					}
+					var jsonString2 = '"number":'+count+','+numberStateString;
+					var responseString = jsonString+jsonString2+jsonString3;
+					logger.info("response string"+responseString);
+					var response = JSON.parse(responseString);
+					logger.info("Response "+response);
+					res.writeHead(200, {
+						"Content-Type": "application/json"
+					});
+					res.end(JSON.stringify(response));
+				}
+			})
+			.catch((err) => {
+				logger.error('Error occured' + err);
+				util.callback(err, res, 'Jobs Data Unavailable');
+			})
+		})
+		.catch((err) => {
+			logger.error('Error occured' + err);
+			util.callback(err, res, 'Jobs Data Unavailable');
+		})
+		
+		
+		
+		/*var js =  new JobSchedulerDB(req);
 		
 		js.getJobsCount()
 		.then((rows) => {
@@ -80,7 +147,7 @@ module.exports = function() {
 			js.closeDB();
 			logger.error('Error occured' + err);
 			util.callback(err, res, 'Data Unavailable');
-		});
+		});*/
 	});
 
 	//method will get all jobs data
@@ -89,7 +156,39 @@ module.exports = function() {
 		var jobArray = [];
 		var jobObj = {};
 		
-		var js = new JobSchedulerDB(req);
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		
+		var query = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data"';
+		
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, [])
+			.then(rows => {
+				for (var i in rows) {
+					jobObj = {
+						"Id": rows[i].ID,
+						"Name": rows[i].NAME,
+						"TimeStamp": rows[i].TIMESTAMP
+					};
+					jobArray.push(jobObj);
+				}
+				res.writeHead(200, {
+					"Content-Type": "application/json"
+				});
+				res.end(JSON.stringify(jobArray));
+			})
+			.catch((err) => {
+				logger.error('Error occured' + err);
+				util.callback(err, res, "Job fetching failed");	
+			})
+		})
+		.catch((err) => {
+			logger.error('Error occured' + err);
+			util.callback(err, res, "Job fetching failed");	
+		})
+		
+		/*var js = new JobSchedulerDB(req);
 		
 		js.getAllJobs()
 		.then((rows) => {
@@ -113,7 +212,7 @@ module.exports = function() {
 			logger.error('Error occured' + err);
 			js.closeDB();
 			util.callback(err, res, "Job fetching failed");	
-		});
+		});*/
 		
 	});
 
@@ -124,7 +223,39 @@ module.exports = function() {
 		var jobArray = [];
 		var jobObj = {};
 		
-		var js = new JobSchedulerDB(req);
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		
+		var query = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data" WHERE NAME = "'+name+'"';
+		
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, [])
+			.then(rows => {
+				for (var i in rows) {
+					jobObj = {
+						"Id": rows[i].ID,
+						"Name": rows[i].NAME,
+						"TimeStamp": rows[i].TIMESTAMP
+					};
+					jobArray.push(jobObj);
+				}
+				res.writeHead(200, {
+					"Content-Type": "application/json"
+				});
+				res.end(JSON.stringify(jobArray));	
+			})
+			.catch((err) => {
+				logger.error('Error occured' + err);
+				util.callback(err, res, "Job by name fetching failed");	
+			})
+		})
+		.catch((err) => {
+			logger.error('Error occured' + err);
+			util.callback(err, res, "Job by name fetching failed");	
+		})
+		
+		/*var js = new JobSchedulerDB(req);
 		
 		var params = [name];
 		js.getJobsByName(params)
@@ -149,7 +280,7 @@ module.exports = function() {
 			js.closeDB();
 			logger.error('Error occured' + err);
 			util.callback(err, res, "Job fetching failed");
-		});
+		});*/
 		
 	});
 	return app;

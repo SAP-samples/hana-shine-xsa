@@ -29,14 +29,13 @@ passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({
 }).uaa));
 app.use(logging.middleware({ appContext: appContext, logNetwork: true }));
 app.use(passport.initialize());
-var hanaOptions = xsenv.getServices({
-	hana: {
-		tag: 'hana'
-	}
-});
-//hanaOptions.hana.rowsWithMetadata = true;
-app.use('/jobactivity',
-			xsHDBConn.middleware(hanaOptions.hana));
+var hanaOptions = xsenv.filterCFServices({
+	plan: 'hdi-shared'
+})[0].credentials;
+
+hanaOptions =  { 'hana': hanaOptions };
+hanaOptions.hana.pooling = true;
+//app.use('/jobactivity', xsHDBConn.middleware(hanaOptions.hana));
 app.use('/',
 	passport.authenticate('JWT', {
 		session: false

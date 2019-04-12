@@ -4,16 +4,15 @@
 var hdb = require('@sap/hdbext');
 var xsenv = require('@sap/xsenv');
 var async = require('async');
-var hanaOptions = xsenv.getServices({
-	hana: {
-		tag: 'hana'
-	}
-});
-var pool = hdb.getPool(hanaOptions.hana);
+var hanaOptions = xsenv.filterCFServices({
+	plan: 'hdi-shared'
+})[0].credentials;
+hanaOptions =  { 'hana': hanaOptions };
+hanaOptions.hana.pooling = true;
 
 module.exports = {
 	callHANA: (wss) => {
-		pool.acquire(null, (error, client) => {
+		hdb.createConnection(hanaOptions.hana, (error, client) => {
 			if (error) {
 				console.error(error);
 			}
@@ -30,7 +29,7 @@ module.exports = {
 						}
 						client.disconnect((cb) => {
 							wss.broadcast('Database Disconnected');
-							pool.release(client);
+							//pool.release(client);
 						});
 					});
 			} //End if client
@@ -39,8 +38,7 @@ module.exports = {
 	}, //end callHANA
 
 	callHANA1: (cb, wss) => {
-		//hdb.createConnection(hanaService, function(error, client) {
-		pool.acquire(null, (error, client) => {
+		hdb.createConnection(hanaOptions.hana, (error, client) => {
 			if (error) {
 				console.error(error);
 			}
@@ -71,21 +69,21 @@ module.exports = {
 						client.disconnect();
 						wss.broadcast('Database Disconnected #1');
 						wss.broadcast('End Waterfall #1');
-						pool.release(client);
+						//pool.release(client);
 						cb();
 					},
 
 					function disconnectDone(callback) {
 						wss.broadcast('Database Disconnected #1');
 						wss.broadcast('End Waterfall #1');
-						pool.release(client);
+						//pool.release(client);
 						cb();
 					}
 
 				], (err, result) => {
 					wss.broadcast(err || 'done');
 					wss.broadcast('Error Occured disrupting flow of Waterfall for #1');
-					pool.release(client);
+					//pool.release(client);
 					cb();
 				}); //end Waterfall
 
@@ -96,8 +94,7 @@ module.exports = {
 
 	callHANA2: (cb, wss) => {
 
-			//hdb.createConnection(hanaService, function(error, client) {
-			pool.acquire(null, (error, client) => {
+			hdb.createConnection(hanaOptions.hana,  (error, client) => {
 				if (error) {
 					console.error(error.toString());
 				}
@@ -128,21 +125,21 @@ module.exports = {
 							client.disconnect();
 							wss.broadcast('Database Disconnected #2');
 							wss.broadcast('End Waterfall #2');
-							pool.release(client);
+							//pool.release(client);
 							cb();
 						},
 
 						function disconnectDone(callback) {
 							wss.broadcast('Database Disconnected #2');
 							wss.broadcast('End Waterfall #2');
-							pool.release(client);
+							//pool.release(client);
 							cb();
 						}
 
 					], (err, result) => {
 						wss.broadcast(err || 'done');
 						wss.broadcast('Error Occured disrupting flow of Waterfall for #2');
-						pool.release(client);
+						//pool.release(client);
 						cb();
 					}); //end Waterfall
 				} //end if client

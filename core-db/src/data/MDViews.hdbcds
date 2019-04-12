@@ -529,7 +529,29 @@ context MDViews {
          B.TEXT
       };
 
+   
    @Search.searchable        : true
+	@EnterpriseSearch.enabled : true
+   define view ProductTexts as
+        select from MD.Products as P join MDViews.texts as T on P.NAMEID = T.TEXTID 
+        {
+        	@EnterpriseSearch.key              : true
+        	P.PRODUCTID,
+        	
+        	@EnterpriseSearch.presentationMode : [ #TITLE ]
+            @EnterpriseSearch.usageMode        : [ #SUGGESTION, #AUTO_FACET ]
+            @Search.defaultSearchElement       : true
+        	P.CATEGORY,
+        	
+        	@EnterpriseSearch.presentationMode : [ #DETAIL ]
+            @EnterpriseSearch.usageMode        : [ #SUGGESTION, #AUTO_FACET ]
+            @Search.defaultSearchElement       : true
+        	T.TEXT
+        };
+
+
+
+   /*@Search.searchable        : true
    @EnterpriseSearch.enabled : true
    define view productTexts as
       select from MD.Products as A
@@ -555,6 +577,6 @@ context MDViews {
          @Search.defaultSearchElement       : true
          @EnterpriseSearch.presentationMode : [ #DETAIL ]
          T.TEXT
-      };
+      };*/
 
 };

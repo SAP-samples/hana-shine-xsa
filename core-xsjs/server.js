@@ -52,6 +52,14 @@ try {
 	console.log("[WARN]", err.message);
 }
 
+// configure AuditLog
+try {
+        options = Object.assign(options, xsenv.getServices({ auditLog: {tag: "auditlog"} }));
+} catch (err) {
+        console.log("[WARN]", err.message);
+}
+
+
 // start server
 xsjs(options).listen(port);
 console.log("Server listening on port %d", port);

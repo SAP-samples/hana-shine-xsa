@@ -29,7 +29,8 @@ JOBSCHEDULING=Runtime Job Scheduling
 ETAGSXSODATA=ETags and Null values in XSOData
 
 SHINE_INTRO=SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build applications on SAP HANA Extended Application Services Advanced Model. This demo application is delivered as a package which contains sample data and design-time developer objects for the applications database tables, views, OData and user interface.
-SHINE_WHATS_NEW=<ul><li>SQL Script Enhancements </li><li>Nodejs Enhancements</li><li>SAP UI5 service Broker</li></ul>
+SHINE_WHATS_NEW=<ul><li>Unit tests for tables,views,functions,procedures in Node.js </li><li>SecureStore in Node.js</li></ul>
+SHINE_WHATS_NEW_1.6.1=<ul><li>SQL Script Enhancements </li><li>Nodejs Enhancements</li><li>SAP UI5 service Broker</li></ul>
 SHINE_WHATS_NEW_1.1.12=<ul><li>Micro services based architecture</li><li>XSOData service from a node based XSJS library</li><li>All database artifacts using HDI</li></ul>
 SHINE_WHATS_NEW_PREV=<ul><li>ETags and Null values in XSOData</li><li>Migration from $.db to $.hdb and XSDS in services</li><li>XSJS features - Multipart Message handling, Text Access API, XML parsing</li><li>Table type definition in Procedures</li></ul>
 

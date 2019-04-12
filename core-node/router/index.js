@@ -10,30 +10,24 @@ module.exports = (app, server) => {
 	app.use('/node/zip', require('./routes/zip')());
 	app.use('/node/cds', require('./routes/cds')());
 	app.use('/node/auditLog', require('./routes/auditLog')());
-
 	app.use('/sap/bc/lrep', require('./routes/lrep')());
 	app.use('/node/annotations', require('./routes/annotations')());
 	app.use('/node/JavaScriptBasics', require('./routes/JavaScriptBasics')());
 	app.use('/node/promises', require('./routes/promises')());
 	app.use('/node/es6', require('./routes/es6')());
+	app.use("/node/secureStore", require("./routes/secureStore")());
+	
 	app.use('/jobactivity', require('./routes/jobactivity')());
 	app.use('/jobs', require('./routes/jobs')());
 	app.use('/schedules', require('./routes/schedules')());
 	app.use('/replicate', require('./routes/datagen')());
 	app.use('/reset', require('./routes/reset')());
 	app.use('/get', require('./routes/get')());
-       app.use('/resources/es/odata/callbuildin.xsjs', function (req, res, next) {
+       	app.use('/resources/es/odata/callbuildin.xsjs', function (req, res, next) {
          console.log("inside call");
          var client = req.db;
          console.log("inside builtin"+client);
-         client.on('error', function (err) {
-   			 console.error('Network connection error', err);
-	});
-        client.connect(function (err) {
-   	 if (err) {
-        		return console.error('Connect error', err);
-    		}
-	});
+        
         
     client.prepare('call esh_search (?, ?)', function (err, statement) {
         if (err) {
@@ -49,6 +43,7 @@ module.exports = (app, server) => {
         if (parameters) {
             request = request + '/?' + parameters;
         }
+	request = encodeURI(request);
         statement.exec({
                 REQUEST: '["' + request + '"]'
             },
@@ -61,7 +56,8 @@ module.exports = (app, server) => {
                 } else {
                     res.set('Content-Type', 'application/json');
                 }
-                res.send(new Buffer(rows[0].RESPONSE));
+		 res.send(parameters[0].RESPONSE);
+                //res.send(new Buffer(rows[0].RESPONSE));
             });
     });
 });	

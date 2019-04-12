@@ -1,7 +1,8 @@
 service namespace "sap.hana.democontent.epm.services" {
    "PO.POView" as "purchaseDetails" key ("PURCHASEORDERID")
-    create using "Procedures::poCreate"
-    events(before "sap.hana.democontent.epm.services:poExits.xsjslib::po_create_before_exit");
+    //create using "Procedures::poCreate"
+    //events(before "sap.hana.democontent.epm.services:poExits.xsjslib::po_create_before_exit");
+     create using "sap.hana.democontent.epm.services:purchaseOrderExits.xsjslib::po_create_before_exit";
 }
 
 settings {
