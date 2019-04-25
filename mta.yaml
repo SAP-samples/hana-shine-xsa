@@ -94,6 +94,8 @@ modules:
     build-parameters:
      builder: npm
      timeout: 60m
+    properties:
+     httpHeaders: "[{\"Content-Security-Policy\" : \"style-src 'self' 'unsafe-inline' https://sapui5.hana.ondemand.com  https://*.api.here.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://sapui5.hana.ondemand.com https://*.api.here.com; connect-src 'self' https://sapui5.hana.ondemand.com  https://*.api.here.com\"}]"
     parameters:
        memory: 128M
     requires:
