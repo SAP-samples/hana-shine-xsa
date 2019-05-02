@@ -246,7 +246,7 @@ resources:
  
   - name: uaa 
     properties: 
-      url: "https://mo-1f9ef82eb.mo.sap.corp:39032/uaa-security"
+      url: "https://<hostname>:3##32/uaa-security"
       
   - name: sapui5-provider
     type: org.cloudfoundry.managed-service
@@ -262,5 +262,5 @@ resources:
       
   - name: controller
     properties:
-      url: 'https://mo-1f9ef82eb.mo.sap.corp:39030'
+      url: 'https://<hostname>:3##30'
   

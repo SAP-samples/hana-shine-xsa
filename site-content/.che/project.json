@@ -1,0 +1,1 @@
+{"type":"sitecontent","builders":{"default":"sitecontent","configs":{}},"runners":{"default":"system:/sap.site.content.deployer/default","configs":{}},"description":"","mixinTypes":["mtamodule"]}

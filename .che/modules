@@ -1,8 +1,8 @@
-user-java
-web
+user-db
+core-db
 core-node
 user-xsjs
 core-xsjs
-user-db
-core-db
-tests
+web
+site-web
+site-content
