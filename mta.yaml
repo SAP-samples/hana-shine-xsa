@@ -190,13 +190,7 @@ modules:
           name: user-backend
           url: ~{url}
           forwardAuthToken: true
-       
-      - name: user_java_api
-        group: destinations
-        properties:
-          name: user-java-backend
-          url: ~{url}
-          forwardAuthToken: true
+          
       - name: uaa 
         group: destinations 
         properties: 
