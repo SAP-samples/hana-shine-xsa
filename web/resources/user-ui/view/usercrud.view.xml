@@ -9,18 +9,6 @@
 			</List>
 		</u:paneContent>
 		<u:content>
-			<Toolbar>
-                        <ToolbarSpacer/>
-                        <SegmentedButton id="serviceUrlMode" selectedKey="nodejs">
-                              <items>
-                                    <SegmentedButtonItem id="nodejs" text="Nodejs" key="nodejs" press="onChange"/>
-                                    <SegmentedButtonItem id="java" text="Java" key="java" press="onChange"/>
-                                    
-                              </items>
-                        </SegmentedButton>
-                        <ToolbarSpacer/>
-                  </Toolbar>
-
 			<sap.ui.commons.layout:MatrixLayout columns="0" class="addPadding" width="99%">
 				<sap.ui.commons.layout:rows>
 					<sap.ui.commons.layout:MatrixLayoutRow>

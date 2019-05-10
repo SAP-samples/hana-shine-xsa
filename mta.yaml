@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.refapps.shine
-version: 1.5.2
+version: 1.5.3
 
 modules:
   - name: shine-user-db
@@ -86,22 +86,6 @@ modules:
       - name: shine-uaa
       - name: shine-user-container
       - name: shine-user-db
-
-
-  - name: shine-user-java
-    type: java
-    path: user-java
-    provides:
-      - name: user_java_api
-        properties:
-          url: '${default-url}'
-           
-    requires:
-      - name: shine-uaa
-      - name: shine-user-container
-        properties:
-          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
-      - name: shine-user-db
       
   - name: shine-web
     type: nodejs
@@ -142,12 +126,6 @@ modules:
         group: destinations
         properties:
           name: user-backend
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: user_java_api
-        group: destinations
-        properties:
-          name: user-java-backend
           url: '~{url}'
           forwardAuthToken: true
       - name: core_python_api

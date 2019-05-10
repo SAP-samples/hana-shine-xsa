@@ -1,7 +1,7 @@
 {
   "name": "shine-core-db",
   "description": "SHINE Core Database Container Artifacts",
-  "version": "1.5.0",
+  "version": "1.5.3",
   "dependencies": {
     "@sap/ui-annotations": "2.0.3",
     "@sap/hdi-deploy": "3.2.0"
