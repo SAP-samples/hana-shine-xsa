@@ -32,12 +32,6 @@
 			"source": "/sap/hana/democontent/epm/(.*)",
 			"destination": "core-xsjs-backend"
 		},
-		
-		{
-			"source": "/user/odata/v4/(.*)",
-			"destination": "user-java-backend"
-
-		},
 		{
 			"source": "/get/(.*)",
 			"destination": "core-node-backend",
