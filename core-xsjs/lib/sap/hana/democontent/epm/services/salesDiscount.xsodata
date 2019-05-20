@@ -1,6 +1,0 @@
-service namespace "sap.hana.democontent.epm"  {
-    "sap.hana.democontent.epm.models::CUSTOMER_DISCOUNT_BY_RANKING_AND_REGION"
-    as "sales"
-        keys generate local "ID"
-    aggregates always;
-}

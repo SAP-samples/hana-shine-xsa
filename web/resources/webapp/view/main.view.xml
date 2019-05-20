@@ -1,0 +1,113 @@
+<mvc:View controllerName="com.sap.refapps.shine.web.controller.main" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m">
+	<App id="idAppControl">
+		<pages>
+			<Page class="sapUiContentPadding">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<!--<Image src="images/sap_18.png"/>-->
+						</contentLeft>
+						<contentMiddle>
+							<Image src="images/sap_18.png"/>
+							<Label id="header" design="Bold" text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button id="gettingStarted" text="Getting Started" icon="sap-icon://sys-help-2" press="openHelpDialog"/>
+							<Button id="logoutBtn" tooltip="Logout" icon="sap-icon://log" press="onLogoutPress"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Table sticky="HeaderToolbar" growing="true" growingThreshold="15" noDataText="No Sales Order found" id="sotable"
+						items="{ path: '/salesOrders' }"
+						includeItemInSelection="false" mode="SingleSelectLeft" select="onSelection">
+						<items>
+							<ColumnListItem id="item0" type="Navigation" press="onItemPress">
+								<cells>
+									<Text text="{SALESORDERID}"/>
+									<Text text="{PARTNER.PARTNERID}"/>
+									<Text text="{COMPANYNAME}"/>
+									<Text text="{CITY}"/>
+									<Text text="{GROSSAMOUNT}"/>
+									<Text text="{TAXAMOUNT}"/>
+									<Text text="{CURRENCY}"/>
+									<Text text="{LIFECYCLESTATUS}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+						<columns>
+							<Column id="column1">
+								<header>
+									<Label text="Sales Order ID" id="label1"/>
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="Partner ID" id="label2"/>
+								</header>
+							</Column>
+							<Column id="column3">
+								<header>
+									<Label text="Company" id="label3"/>
+								</header>
+							</Column>
+							<Column id="column4">
+								<header>
+									<Label text="City" id="label4"/>
+								</header>
+							</Column>
+							<Column id="column5">
+								<header>
+									<Label text="Gross Amount" id="label5"/>
+								</header>
+							</Column>
+							<Column id="column6">
+								<header>
+									<Label text="Tax Amount" id="label6"/>
+								</header>
+							</Column>
+							<Column id="column7">
+								<header>
+									<Label text="Currency" id="label7"/>
+								</header>
+							</Column>
+							<Column id="column8">
+								<header>
+									<Label text="Status" id="label8"/>
+								</header>
+							</Column>
+						</columns>
+						<headerToolbar>
+							<OverflowToolbar width="100%" id="toolbar1">
+								<content>
+									<Title  id="mainTitle" text="Sales Orders ({/count})" level="H2"/>
+									<Button id="backBtn1" visible="false" icon="sap-icon://arrow-left" press="onSalesDashboard"/>
+									<Title id="backBtn" visible="false" text="New Sales Orders ({/count})" level="H2"/>
+									<ToolbarSpacer/>
+									<Button id="adminBtn" icon="sap-icon://activity-items" text="Sales Order Admin" press="showAdminScreen"/>
+									<Button id="trainBtn" icon="sap-icon://activate" text="Train Model" press="trainModelPress"/>
+									<Button id="generateBtn" icon="sap-icon://media-play" text="Generate Data" press="generateDataPress"/>
+									
+									
+									<ToolbarSpacer/>
+									<Button type="Accept" visible="false" id="acceptBtn" icon="sap-icon://accept" text="Accept" press="acceptSO"/>
+									<Button type="Reject" visible="false" id="rejectBtn" icon="sap-icon://decline" text="Reject" press="rejectSO"/>
+									
+									<Button id="refreshBtn" icon="sap-icon://refresh" tooltip="Refresh table"
+										press="onRefreshPress"/>
+									<Button id="addBtn" icon="sap-icon://add" tooltip="Create" press="onCreate">
+										<layoutData>
+											<OverflowToolbarLayoutData priority="NeverOverflow"/>
+										</layoutData>
+									</Button>
+									<Button id="deleteBtn" tooltip="Delete" class="deleteButton" icon="sap-icon://delete" press="onDelete"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

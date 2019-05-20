@@ -1,266 +1,63 @@
-_schema-version: '2.0'
-ID: com.sap.refapps.shine
-version: 1.7.4
+ID: XSAC_SHINE_ML
+_schema-version: '2.1'
+version: 1.0.0
 
 modules:
-  - name: shine-user-db
-    type: hdb
-    path: user-db
-    requires:
-      - name: shine-user-container
-        properties:
-          TARGET_CONTAINER: '~{user-container-name}'
-          
-  - name: shine-core-db
-    type: hdb
-    path: core-db
-    requires:
-      - name: shine-container
-        properties:
-          TARGET_CONTAINER: '~{container-name}'
+ - name: shine-ml-db
+   type: hdb
+   path: db
+   requires:
+    - name: shine-ml-container
+      properties:
+        TARGET_CONTAINER: ~{container-name}
       
-      - name: shine-user-container
-        group: SERVICE_REPLACEMENTS
-        properties:
-          key: hdi-user-service
-          service: '~{user-container-name}'
-      - name: shine-user-db
-      
-          
-  - name: shine-core-node
-    type: nodejs
-    path: core-node
-    parameters:
-      host: shine-core-node
-      register-service-url: true
-      service-name: shine-core-node
-      service-url: '${default-url}'      
-    properties:
-      UAA_SERVICE_NAME: shine-uaa 
-      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
-    provides:
-      - name: core_node_api
-        properties:
-          url: '${default-url}'
-    requires:
-      - name: shine-scheduler
-      - name: shine-uaa
-      - name: shine-auditlog
-      - name: shine-container
-      - name: shine-core-db
-      - name: secureStore
-   
-      
-  - name: shine-user-xsjs
-    type: nodejs
-    path: user-xsjs
-    parameters:
-      host: shine-user-xsjs
-      register-service-url: true
-      service-name: shine-user-xsjs
-      service-url: '${default-url}'      
-    properties:
-      SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
-    provides:
-      - name: user_xsjs_api
-        properties:
-          url: '${default-url}'
-    requires:
-      - name: shine-uaa
-      - name: shine-user-container
-      - name: shine-user-db
-      - name: shine-auditlog
-
-  - name: shine-web
-    type: html5
-    path: web
-    provides:
-      - name: web
-        properties:
-          ui-url: '${default-url}'
-    parameters:
-      host: shine-web
-      register-service-url: true
-      service-name: shine-web
-      service-url: '${default-url}'
-    requires:
-      - name: shine-uaa
-      - name: sapui5-provider
-      - name: ui5Service 
-        group: destinations 
-        properties: 
-          name: ui5Service 
-          url: ~{url} 
-          forwardAuthToken: true 
-      - name: core_node_api
-        group: destinations
-        properties:
-          name: core-node-backend
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: core_xsjs_api
-        group: destinations
-        properties:
-          name: core-xsjs-backend
-          url: '~{url}'
-          forwardAuthToken: true          
-      - name: user_xsjs_api
-        group: destinations
-        properties:
-          name: user-backend
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: uaa 
-        group: destinations 
-        properties: 
-           name: uaa 
-           url: ~{url} 
-           forwardAuthToken: true 
+    - name: cross-container-service
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: consumed-db
+        service: ~{the-service-name}
+        
 
 
-  - name: shine-core-xsjs
-    type: nodejs
-    path: core-xsjs
-    provides:
-     - name: core_xsjs_api
+ - name: shine-ml-xsjs
+   type: nodejs
+   path: xsjs
+   requires:
+    - name: shine-uaa
+    - name: shine-ml-db
+    - name: shine-ml-container
+    - name: cross-container-service
+   provides:
+    - name: xsjs_api
+      properties:
+         url: ${default-url}
+
+
+ - name: shine-ml-web
+   type: html5
+   path: web
+   requires:
+     - name: shine-uaa
+     - name: xsjs_api
+       group: destinations
        properties:
-          url: ${default-url}
-    parameters:
-      host: shine-core-xsjs
-      register-service-url: true
-      service-name: shine-core-xsjs
-      service-url: '${default-url}'            
-    requires:
-      - name: shine-uaa
-      - name: shine-container
-      - name: secureStore
-      - name: shine-auditlog
-
-  - name: shine-site-web
-    type: javascript.nodejs
-    path: site-web/
-    requires:
-      - name: shine-uaa
-      - name: sap-portal-services-host
-      - name: controller
-        group: destinations
-        properties:
-          name: controller
-          url: ~{url}
-          forwardAuthToken: true
-      
-      - name: core_node_api
-        group: destinations
-        properties:
-          name: core-node-backend
-          url: ~{url}
-          forwardAuthToken: true
-      - name: core_xsjs_api
-        group: destinations
-        properties:
-          name: core-xsjs-backend
-          url: ~{url}
-          forwardAuthToken: true
-      - name: user_xsjs_api
-        group: destinations
-        properties:
-          name: user-backend
-          url: ~{url}
-          forwardAuthToken: true
-      - name: uaa 
-        group: destinations 
-        properties: 
-           name: uaa 
-           url: ~{url} 
-           forwardAuthToken: true
-      - name: sapui5-provider
-        
-    properties:
-      NODE_TLS_REJECT_UNAUTHORIZED: "0"
-      httpHeaders: "[{\"Content-Security-Policy\" : \"style-src 'self' 'unsafe-inline' https://sapui5.hana.ondemand.com  https://*.api.here.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://sapui5.hana.ondemand.com https://*.api.here.com; connect-src 'self' https://sapui5.hana.ondemand.com  https://*.api.here.com\"}]"
- 
-        
-  - name: shine-site-content
-    type: com.sap.portal.site-content
-    path: site-content/
-    requires:
-       - name: sap-portal-services-client
-       - name: shine-uaa
-    properties:
-      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+         forwardAuthToken: true
+         name: xsjs_api
+         url: '~{url}'
 
 resources:
-  - name: shine-user-container
-    properties:
-      user-container-name: '${service-name}'
-    type: com.sap.xs.hdi-container
-    parameters:
-      config:
-        schema: SHINE_USER
-  - name: shine-container
-    properties:
-      container-name: '${service-name}'
-    type: com.sap.xs.hdi-container
-    parameters:
+ - name: shine-ml-container
+   type: com.sap.xs.hdi-container
+   properties:
+      container-name: ${service-name}
       
-      config:
-        schema: SHINE_CORE
+ - name: cross-container-service
+   parameters:
+      service-name: shine-container
+   properties:
+      the-service-name: ${service-name}
+   type: org.cloudfoundry.existing-service
 
-  - name: secureStore
-    type: com.sap.xs.hana-securestore
+ - name: shine-uaa
+   type: org.cloudfoundry.existing-service
 
-  - name: shine-uaa
-    type: com.sap.xs.uaa
-    parameters:
-      config-path: ./xs-security.json
-      
-  - name: shine-scheduler
-    type: com.sap.xs.job-scheduler
-
-  - name: shine-auditlog
-    type: com.sap.xs.auditlog
-  
-  - name: sap-portal-services-host-com.sap.refapps.shine
-    parameters:
-       config:
-          siteId: com.sap.refapps.shine
-    type: com.sap.portal.site-host
-
-
-  - name: portal-uaa-com.sap.refapps.shine
-    parameters:
-       service-plan: space
-    type: com.sap.xs.uaa
-
-  - name: sap-portal-services-host
-    type: com.sap.portal.site-host
-    parameters:
-      config:
-        siteId : XSAC_SHINE
-        
-  - name: sap-portal-services-client
-    type: com.sap.portal.site-content
-    parameters:
-      config:
-        siteId : XSAC_SHINE
- 
-  - name: uaa 
-    properties: 
-      url: "https://<hostname>:3##32/uaa-security"
-      
-  - name: sapui5-provider
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: sapui5_sb
-      service-plan: sapui5-1.60
-      
-  - name: ui5Service
-    type: configuration
-    parameters:
-      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV5:sapui5_fesv5
-      version: ">=1.60.2"   
-      
-  - name: controller
-    properties:
-      url: 'https://<hostname>:3##30'
-  

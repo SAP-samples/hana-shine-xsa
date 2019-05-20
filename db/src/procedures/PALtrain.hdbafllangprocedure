@@ -1,0 +1,26 @@
+{ 
+  "area" : "AFLPAL", 
+  "function" : "LOGISTICREGRESSION", 
+  "parameters" : [ 
+    { 
+      "type" : "PAL.TTData", 
+      "direction" : "IN" 
+    }, 
+    { 
+      "type" : "PAL.TTParams", 
+      "direction" : "IN" 
+    }, 
+    { 
+      "type" : "PAL.TTModel", 
+      "direction" : "OUT" 
+    },
+    { 
+      "type" : "PAL.TTStatistics", 
+      "direction" : "OUT" 
+    },
+    { 
+      "type" : "PAL.TTPmml", 
+      "direction" : "OUT" 
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/* Enter your custom styles here */
+#__xmlview1--nextBtn{
+	float: right;
+}
+#__xmlview1--prevBtn{
+	float: right;
+}
+.success{
+	color: green;
+}
+.danger{
+	color: red;
+}

@@ -1,0 +1,20 @@
+PROCEDURE "train"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+BEGIN
+   upsert "PAL.ParamsTrain" values ('MAX_ITERATION', 100, null, null) where "name" = 'MAX_ITERATION';
+   upsert "PAL.ParamsTrain" values ('EXIT_THRESHOLD', null, 0.00001, null) where "name" = 'EXIT_THRESHOLD';
+	upsert "PAL.ParamsTrain" values ('METHOD', 0, null, null) where "name" = 'METHOD';
+	upsert "PAL.ParamsTrain" values ('PMML_EXPORT', 0, null, null) where "name" = 'PMML_EXPORT';
+	upsert "PAL.ParamsTrain" values ('CLASS_MAP0', null, null, 'P') where "name" = 'CLASS_MAP0';
+	upsert "PAL.ParamsTrain" values ('CLASS_MAP1', null, null, 'X') where "name" = 'CLASS_MAP1';
+	delete from "PAL.model";
+	p1 = select "SO.Header"."PARTNER.PARTNERID" as "partnerID","SO.Header"."GROSSAMOUNT" as "grossAmount","SO.Item"."QUANTITY" as "noOfItems","SO.Header"."LIFECYCLESTATUS" as "lifeCycleStatus" from "SO.Header" inner join "SO.Item" ON "SO.Header"."SALESORDERID" = "SO.Item"."SALESORDERID" where "SO.Header"."LIFECYCLESTATUS" = 'P' or "SO.Header"."LIFECYCLESTATUS" = 'X';
+	p2 = select * from "PAL.ParamsTrain";
+	
+	call "PALtrain" (:p1, :p2, :p3,:p4,:p5);                              
+	--select * from :p3;
+	insert into "PAL.model" select * from :p3;
+END

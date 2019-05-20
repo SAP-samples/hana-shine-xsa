@@ -1,7 +1,0 @@
-.settings
-.project
-*.log
-node_modules
-node
-target
-etc

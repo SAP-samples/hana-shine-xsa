@@ -1,14 +1,12 @@
 {
-  "name": "shine-web",
-  "description": "Web Moduele of SHINE",
-  "version": "1.7.4",
-  "dependencies": {
-    "@sap/approuter": "5.12.0"
-  },
-  "engines": {
-    "node": "8.x"
-  },
-  "scripts": {
-    "start": "node node_modules/@sap/approuter/approuter.js"
-  }
+	"name": "com.sap.refapps.shine-approuter",
+	"engines": {
+		"node": ">=4.0.0 <9.0.0"
+	},
+	"dependencies": {
+		"@sap/approuter": "5.13.0"
+	},
+	"scripts": {
+		"start": "node node_modules/@sap/approuter/approuter.js"
+	}
 }

@@ -1,0 +1,100 @@
+<mvc:View sId="detail" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form" xmlns="sap.m"
+	xmlns:l="sap.ui.layout" controllerName="com.sap.refapps.shine.web.controller.details">
+	<App>
+		<pages>
+			<Page id="detailPage" showNavButton="true" navButtonPress="onBack">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button press="onBack" tooltip="Back" icon="sap-icon://nav-back"/>
+						</contentLeft>
+						<contentMiddle>
+							<Image src="images/sap_18.png"/>
+							<Label id="header" design="Bold" text="{i18n>title}"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel expandable="true" expanded="true" width="auto" headerText="Sales Order Details ({/salesOrderDetails/SALESORDERID})" id="salesdetails" class="sapUiResponsiveMargin">
+						<content>
+							<VBox class="sapUiSmallMargin">
+								<f:SimpleForm id="SimpleFormDisplayColumn_oneGroup" editable="false" layout="ColumnLayout">
+									<f:content>
+										<Label text="Sales Order ID"/>
+										<Text id="nameText" text="{/salesOrderDetails/SALESORDERID}"/>
+										<Label text="Partner ID"/>
+										<Text text="{/salesOrderDetails/PARTNER.PARTNERID}"/>
+										<Label text="Company Name"/>
+										<Text text="{/salesOrderDetails/COMPANYNAME}"/>
+										<Label text="City"/>
+										<Text text="{/salesOrderDetails/CITY}"/>
+										<Label text="Gross Amount"/>
+										<Text text="{/salesOrderDetails/GROSSAMOUNT}"/>
+										<Label text="Tax Amount"/>
+										<Text text="{/salesOrderDetails/TAXAMOUNT}"/>
+										<Label text="Currency"/>
+										<Text text="{/salesOrderDetails/CURRENCY}"/>
+										<Label text="Status"/>
+										<Text text="{/salesOrderDetails/LIFECYCLESTATUS}"/>
+									</f:content>
+								</f:SimpleForm>
+							</VBox>
+						</content>
+					</Panel>
+					<Panel expandable="true" expanded="true" headerText="Sales Order Items ({/salesOrderDetails/SALESORDERID})" width="auto" id="salesitems"
+						class="sapUiResponsiveMargin">
+						<content>
+							<Table growing="true" growingThreshold="5" noDataText="No Sales Order Item found" id="soitemtable" items="{ path: '/salesOrderItems' }"
+								includeItemInSelection="false">
+								<items>
+									<ColumnListItem id="item0">
+										<cells>
+											<Text text="{SALESORDERITEM}"/>
+											<Text text="{PRODUCT.PRODUCTID}"/>
+											<Text text="{PRODUCTNAME}"/>
+											<Text text="{QUANTITY}"/>
+											<Text text="{NETAMOUNT}"/>
+											<Text text="{TAXAMOUNT}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="column1">
+										<header>
+											<Label text="Sales Order Item ID" id="label1"/>
+										</header>
+									</Column>
+									<Column id="column2">
+										<header>
+											<Label text="Product ID" id="label2"/>
+										</header>
+									</Column>
+									<Column id="column3">
+										<header>
+											<Label text="Product Name" id="label3"/>
+										</header>
+									</Column>
+									<Column id="column4">
+										<header>
+											<Label text="Quantity" id="label4"/>
+										</header>
+									</Column>
+									<Column id="column5">
+										<header>
+											<Label text="Net Amount" id="label5"/>
+										</header>
+									</Column>
+									<Column id="column6">
+										<header>
+											<Label text="Tax Amount" id="label6"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,19 @@
+<Dialog xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.commons.layout" xmlns:core="sap.ui.core"
+	id="generateDialog" showHeader="true" title="Generate Data for Sales Orders">
+	<l:HorizontalLayout>
+		<f:SimpleForm  maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4"
+			emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+			<f:content title="">
+				<Label design="Bold" text="Date Range"/>
+				<DateRangeSelection id="dateRange" dateValue="{path:'/dateValue'}" secondDateValue="{path:'/secondDateValue'}"
+					minDate="{path:'/dateMin'}" maxDate="{path:'/dateMax'}"/>
+				<Label design="Bold" text="No. of Sales Orders"/>
+				<Input value="1000" id="numberOfSO"/>
+			</f:content>
+		</f:SimpleForm>
+	</l:HorizontalLayout>
+	<buttons>
+		<Button id="generateSO" press="generateSOPress" text="Submit"/>
+		<Button id="closeGenerateDialog" press="closeGenerateDialog" text="Close"/>
+	</buttons>
+</Dialog>

@@ -1,0 +1,72 @@
+{
+  "SO.Header": {
+    "target": {
+      "object": "SO.Header",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "SO.Item": {
+    "target": {
+      "object": "SO.Item",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "MD.BusinessPartner": {
+    "target": {
+      "object": "MD.BusinessPartner",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "MD.Addresses": {
+    "target": {
+      "object": "MD.Addresses",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "MD.Products": {
+    "target": {
+      "object": "MD.Products",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "Util.Texts": {
+    "target": {
+      "object": "Util.Texts",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "tax_calculation": {
+    "target": {
+      "object": "tax_calculation",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "SOShadow.Header": {
+    "target": {
+      "object": "shadow::SOShadow.Header",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "SOShadow.Item": {
+    "target": {
+      "object": "shadow::SOShadow.Item",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  },
+  "load_data_SO": {
+    "target": {
+      "object": "load_data_SO",
+      "schema": "SHINE_CORE",
+      "database": "XSA"
+    }
+  }
+}

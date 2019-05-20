@@ -1,0 +1,16 @@
+PROCEDURE "predict"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+BEGIN
+   upsert "PAL.ParamsPredict" values ('CLASS_MAP0', null, null, 'P') where "name" = 'CLASS_MAP0';
+	upsert "PAL.ParamsPredict" values ('CLASS_MAP1', null, null, 'X') where "name" = 'CLASS_MAP1';
+	delete from "PAL.result";
+	p1 = select * from "PAL.SO_Predict";
+	p3 = select * from "PAL.model";
+	p2 = select * from "PAL.ParamsPredict";
+	call "PALpredict" (:p1, :p2, :p3, :p4);
+	insert into "PAL.result" select * from :p4;
+	insert into "PAL.resultWithNewStatus"  select * from "PAL.result" where "category" = 'X';
+END

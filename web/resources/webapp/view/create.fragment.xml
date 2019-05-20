@@ -1,0 +1,25 @@
+<Dialog xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.commons.layout" xmlns:core="sap.ui.core"
+	id="createDialog" showHeader="true" title="Create New Sales Order">
+	<l:HorizontalLayout>
+		<f:SimpleForm id="socreateform" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0"
+			emptySpanM="0" columnsL="2" columnsM="2">
+			<f:content title="">
+				<Label design="Bold" id="bp" text="Business Partner" class="createNewUserLabelSpacing" labelFor="bp"/>
+				<Select id="bpDropdown" change="onBpChange" showSecondaryValues="true"
+					items="{ path: '/businessPartners', sorter: { path: 'COMPANYNAME' } }">
+					<core:ListItem key="{PARTNERID}" text="{COMPANYNAME}" additionalText="{PARTNERID}"/>
+				</Select>
+				<Label design="Bold" id="product" text="Product" class="createNewUserLabelSpacing" labelFor="product"/>
+				<Select id="productDropdown" showSecondaryValues="true" items="{ path: '/products', sorter: { path: 'COMPANYNAME' } }">
+					<core:ListItem key="{PRODUCTID}" text="{PRODUCTNAME}" additionalText="{PRICE} {CURRENCY}"/>
+				</Select>
+				<Label design="Bold" id="quantity" text="Quantity" class="createNewUserLabelSpacing" labelFor="quantity"/>
+				<Input value="1" id="quantityField"/>
+			</f:content>
+		</f:SimpleForm>
+	</l:HorizontalLayout>
+	<buttons>
+		<Button id="create" press="createSO" text="Create"/>
+		<Button id="close" press="close" text="Close"/>
+	</buttons>
+</Dialog>

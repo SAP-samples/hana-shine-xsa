@@ -1,8 +1,0 @@
-service namespace "sap.hana.democontent.epm.services"  { 
-   "sap.hana.democontent.epm.models::PROD" as "ProductDetails" 
-   keys ("PRODUCTID");
-}
-
-settings {
-	    metadata cache-control "max-age= 604800";
-}

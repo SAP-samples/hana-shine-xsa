@@ -1,0 +1,23 @@
+<Dialog xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.commons.layout" xmlns:core="sap.ui.core"
+	id="helpDialog" showHeader="true" title="Getting Started">
+	<content>
+		<Carousel id="carousel" class="sapUiContentPadding">
+			<pages>
+				<!--<ScrollContainer horizontal="false" vertical="false">-->
+				<!--	<Text text="Welcome to SHINE ML"/>-->
+				<!--	<Image src="images/getting-started-1.png" alt="Welcome Image"/>-->
+				<!--</ScrollContainer>-->
+				<Image src="images/getting-started-1.png" height="450px" alt="Welcome Image"/>
+				<Image src="images/getting-started-2.gif" height="450px"/>
+				<Image src="images/getting-started-3.gif" height="450px"/>
+				<Image src="images/getting-started-4.gif" height="450px"/>
+			</pages>
+		</Carousel>
+		<CheckBox id="helpCheckbox" text="Don't show on startup" selected="false" select="handleCheckbox"/>
+	</content>
+	<buttons>
+		<Button id="prevBtn" text="Prev" press="onPrev"/>
+		<Button id="nextBtn" text="Next" press="onNext"/>
+		<Button press="closeHelpDialog" text="Close"/>
+	</buttons>
+</Dialog>

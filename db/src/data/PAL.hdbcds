@@ -1,0 +1,88 @@
+context PAL {
+	table type TTData{
+      partnerID    : String(10);
+      grossAmount : Double;
+      noOfItems	: Double;
+      lifeCycleStatus : String(2);
+   };
+   
+   table type TTParams {
+      name       : String(256);
+      intArgs    : Integer;
+      doubleArgs : Double;
+      stringArgs : String(1000);
+   };
+   
+   table type TTModel {
+      id  : String(1000);
+      COEFFICIENT : Double;
+      Z_SCORE : Double;
+      P_VALUE :Double;
+   };
+   
+   table type TTStatistics {
+      id    : String(256);
+      value	: String(1000);
+   };
+   
+   table type TTPmml {
+      id    : Integer;
+      PMML	: String(5000);
+   };
+   
+   table type TTSO_Predict {
+      id : Integer;
+   	partnerID : String(10);
+   	grossAmount: Double;
+   	noOfItems: Double;
+   };
+   
+   table type TTResult {
+      id    : Integer;
+      yValue	: Double;
+      catagoty : String(2);
+   };
+   
+   entity model{
+   	  id  : String(1000);
+      COEFFICIENT : Double;
+      Z_SCORE : Double;
+      P_VALUE :Double;
+   }
+   
+   entity ParamsTrain{
+   	  name       : String(256);
+      intArgs    : Integer;
+      doubleArgs : Double;
+      stringArgs : String(1000);
+   }
+   
+   entity ParamsPredict{
+   	  name       : String(256);
+      intArgs    : Integer;
+      doubleArgs : Double;
+      stringArgs : String(1000);
+   }
+   
+   entity SO_Predict{
+   	id : Integer;
+   	partnerID : String(10);
+   	grossAmount: Double;
+   	noOfItems: Double;
+   }
+   entity SO_Predict_Temp{
+   	SalesOrderId: String(10);
+   	SO_PredictId: Integer;
+   }
+   entity result{
+   	  id    : Integer;
+      yValue	: Double;
+      category : String(2);
+   }
+   
+   entity resultWithNewStatus{
+   	  id    : Integer;
+      yValue	: Double;
+      category : String(2);
+   }
+};

@@ -1,0 +1,22 @@
+{ 
+  "area" : "AFLPAL", 
+  "function" : "FORECASTWITHLOGISTICR", 
+  "parameters" : [ 
+    { 
+      "type" : "PAL.TTSO_Predict", 
+      "direction" : "IN" 
+    }, 
+    { 
+      "type" : "PAL.TTParams", 
+      "direction" : "IN" 
+    }, 
+    { 
+      "type" : "PAL.TTModel", 
+      "direction" : "IN" 
+    },
+    { 
+      "type" : "PAL.TTResult", 
+      "direction" : "OUT" 
+    } 
+  ]
+}

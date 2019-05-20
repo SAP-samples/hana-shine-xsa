@@ -1,6 +1,0 @@
-{
-	"exposed": true,
-	"authentication": [{ "method": "LogonTicket" },{ "method" : "Form" }], 
-	"authorization": [ "sap.hana.democontent.epm::Basic" ],
-	"prevent_xsrf" : true
-}
