@@ -27,7 +27,7 @@
     "then-request": "6.0.0"
   },
   "devDependencies": {
-    "eslint": "3.5.0",
+    "eslint": ">=4.18.2",
     "node-style": "2.0.0",
     "gulp": "3.9.1",
     "supertest": "3.4.1",
