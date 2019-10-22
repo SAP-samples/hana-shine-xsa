@@ -5,7 +5,7 @@
   "name": "shine-site-web",
   "version": "1.7.4",
   "dependencies": {
-    "@sap/site-entry": "1.9.23"
+    "@sap/site-entry": "1.9.26"
   },
   "scripts": {
     "start": "node --harmony node_modules/@sap/site-entry/server.js"
