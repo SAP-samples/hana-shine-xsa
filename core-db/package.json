@@ -4,7 +4,7 @@
   "version": "1.7.4",
   "dependencies": {
     "@sap/ui-annotations": "2.0.5",
-    "@sap/hdi-deploy": "3.7.0"
+    "@sap/hdi-deploy": "3.11.2"
   },
   "scripts": {
     "start": "node node_modules/@sap/hdi-deploy/deploy.js"
