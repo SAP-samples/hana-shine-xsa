@@ -1,6 +1,9 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0, no-undef:0 */
+/*eslint-env node, es6*/
+
 'use strict';
 var express = require('express');
+//var JobSchedulerDB = require('./JobSchedulerDBPromises');
 
 module.exports = function() {
 	var bodyParser = require('body-parser');
@@ -14,7 +17,7 @@ module.exports = function() {
 
 	winston.level = process.env.winston_level || 'error';
 
-	app.post('/createJobSchedule',jsonParser, function(req, res) {
+	app.post('/createJobSchedule', jsonParser, function(req, res) {
 		logger = req.loggingContext.getLogger('/schedules/createJobSchedule');
 		logger.error('info' + req.body);
 		var jname = encodeURI(req.body.jobname);
@@ -47,7 +50,6 @@ module.exports = function() {
 		var jobid;
 		var options = util.appconfig();
 		var appUrl = req.body.appurl;
-		var client = req.db;
 		var scheduleId;
 		var myJob = {
 			'name': jname,
@@ -72,15 +74,22 @@ module.exports = function() {
 				}
 			}]
 		};
+		//var js = new JobSchedulerDB(req);
+		//var client = req.db;
+		
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+				
+		
 		var scheduler = new jobsc.Scheduler(options);
 		var scJob = {
 			job: myJob
 		};
 		scheduler.createJob(scJob, function(error, body) {
 			if (error) {
-				if((error.message).includes('xscron')){
+				if ((error.message).includes('xscron')) {
 					util.callback(error, res, 'Invalid xscron');
-				}else{
+				} else {
 					util.callback(error, res, 'Error registering new job ');
 				}
 				logger.error('Error occured' + error);
@@ -94,7 +103,14 @@ module.exports = function() {
 						'active': true
 					}
 				};
-				var sql = 'INSERT INTO \"Jobs.ScheduleDetails\" VALUES(?,?,?,?,?,?)';
+				
+				
+				startTime = startTime.split(" ")[0] + " "+ startTime.split(" ")[1];
+				endTime = endTime.split(" ")[0] + " "+ endTime.split(" ")[1];
+				var params = [jobid.toString(), jname, startTime, endTime, cron, scheduleId];
+				
+				
+				/*var sql = 'INSERT INTO \"Jobs.ScheduleDetails\" VALUES(?,?,?,?,?,?)';
 				try{
 					client.prepare(sql, function(error, stmt) {
 						if (error) {
@@ -122,9 +138,57 @@ module.exports = function() {
 					});
 				}catch(err){
 					logger.error('ERROR : '+err);
-				}finally{
-					client.close();
-				}
+				}*/
+				
+				
+				
+				//var query = "INSERT INTO \"Jobs.ScheduleDetails\" VALUES('" + jobid.toString() + "', '" + jname + "', '" + startTime + "', '" + endTime + "', '" + cron + "', '" + scheduleId + "')";
+				var query = 'INSERT INTO \"Jobs.ScheduleDetails\" VALUES(?,?,?,?,?,?)';
+				db.preparePromisified(query)
+				.then(statement => {
+					db.statementExecPromisified(statement, params)
+					.then(results => {
+						res.status(200).send(JSON.stringify({
+							JobId: jobid,
+							JobName: jname,
+							Desc: description,
+							StartTime: startTime,
+							EndTime: endTime,
+							Cron: cron,
+							ScheduleId: scheduleId
+						}));
+					})
+					.catch((error) => {
+						logger.error('Error occured: ' + JSON.stringify(error));
+						util.callback(error, res, 'Unable to insert new job details to db');
+					})
+				})
+				.catch((error) => {
+					logger.error(error);
+					logger.error('Error occured : ' + JSON.stringify(error));
+					util.callback(error, res, 'Unable to prepare statement to insert new job details to db');
+				})
+				
+				/*js.createJobSchedule(params)
+					.then((status) => {
+						res.status(200).send(JSON.stringify({
+							JobId: jobid,
+							JobName: jname,
+							Desc: description,
+							StartTime: startTime,
+							EndTime: endTime,
+							Cron: cron,
+							ScheduleId: scheduleId
+						}));
+					})
+					.then(() => {
+						js.closeDB();
+					})
+					.catch((error) => {
+						js.closeDB();
+						logger.error('Error occured' + error);
+						util.callback(error, res, 'Unable to insert new job details to db');
+					});*/
 			}
 
 		});
@@ -133,82 +197,135 @@ module.exports = function() {
 
 	app.get('/getJobSchedules', function(req, res) {
 		logger = req.loggingContext.getLogger('/schedules/getJobSchedules');
-		var client = req.db;
-
-		var query = 'SELECT "JOBID","NAME","STARTTIME","ENDTIME","CRON" FROM "Jobs.ScheduleDetails"';
 		var jobArray = [];
 		var jobObj = {};
-		try{
-			client.exec(query, function(error, rows) {
-				if (error) {
-					logger.error('Error occured' + error);
-					util.callback(error, res, 'Job fetching failed');
-				} else {
-					for (var i in rows) {
-						jobObj = {
-							'JobId': rows[i].JOBID,
-							'JobName': rows[i].NAME,
-							'StartTime': rows[i].STARTTIME,
-							'EndTime': rows[i].ENDTIME,
-							'Cron': rows[i].CRON
-						};
-						jobArray.push(jobObj);
-					}
-					res.writeHead(200, {
-						'Content-Type': 'application/json'
-					});
-					res.end(JSON.stringify(jobArray));
+
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		
+		var query = 'SELECT "JOBID","NAME","STARTTIME","ENDTIME","CRON" FROM "Jobs.ScheduleDetails"';
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, [])
+			.then(rows => {
+				for (var i in rows) {
+					jobObj = {
+						'JobId': rows[i].JOBID,
+						'JobName': rows[i].NAME,
+						'StartTime': rows[i].STARTTIME,
+						'EndTime': rows[i].ENDTIME,
+						'Cron': rows[i].CRON
+					};
+					jobArray.push(jobObj);
 				}
-			});
-		}catch(error){
-			logger.error('ERROR : '+error);
-		}finally{
-			client.close();
-		}
+				res.writeHead(200, {
+					'Content-Type': 'application/json'
+				});
+				res.end(JSON.stringify(jobArray));
+			})
+			.catch((error) => {
+				logger.error('Error occured' + error);
+				util.callback(error, res, 'Job fetching failed');
+			})
+		})
+		.catch((error) => {
+			logger.error('Error occured' + error);
+			util.callback(error, res, 'Job fetching failed');
+		})
+		
+		/*var js = new JobSchedulerDB(req);
+		js.getJobSchedules()
+			.then((rows) => {
+				for (var i in rows) {
+					jobObj = {
+						'JobId': rows[i].JOBID,
+						'JobName': rows[i].NAME,
+						'StartTime': rows[i].STARTTIME,
+						'EndTime': rows[i].ENDTIME,
+						'Cron': rows[i].CRON
+					};
+					jobArray.push(jobObj);
+				}
+				res.writeHead(200, {
+					'Content-Type': 'application/json'
+				});
+				res.end(JSON.stringify(jobArray));
+			})
+			.then(() => {
+				js.closeDB();
+			})
+			.catch((error) => {
+				js.closeDB();
+				logger.error('Error occured' + error);
+				util.callback(error, res, 'Job fetching failed');
+			});*/
 
 	});
 
 	app.get('/getJobSchedulesByName/:name', function(req, res) {
 		logger = req.loggingContext.getLogger('/schedules/getJobSchedulesByName');
-		var client = req.db;
 		var name = req.params.name;
-		var sql = 'SELECT "JOBID","NAME" FROM "Jobs.ScheduleDetails" WHERE NAME= ?';
 		var jobArray = [];
 		var jobObj = {};
-		try{
-			client.prepare(sql, function(error, stmt) {
-				if (error) {
-					logger.error('Error occured' + error);
-					util.callback(error, res, 'Job Schedule fetching failed');
-				} else {
-					var params = [name];
-					stmt.exec(params, function(err, rows) {
-						if (err) {
-							logger.error('Error occured' + err);
-							util.callback(err, res, 'Job fetching failed');
-						} else {
-							for (var i in rows) {
-								jobObj = {
-									'Id': rows[i].ID,
-									'Name': rows[i].NAME,
-									'TimeStamp': rows[i].TIMESTAMP
-								};
-								jobArray.push(jobObj);
-							}
-							res.writeHead(200, {
-								'Content-Type': 'application/json'
-							});
-							res.end(JSON.stringify(jobArray));
-						}
-					});
-				}
-			});
-		}catch(error){
-			logger.error('ERROR : '+error);
-		}finally{
-			client.close();
-		}
+		var params = [name];
 
+		
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		
+		var query = 'SELECT "JOBID","NAME" FROM "Jobs.ScheduleDetails" WHERE NAME= ?';
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, params)
+			.then(rows => {
+				for (var i in rows) {
+					jobObj = {
+						'Id': rows[i].ID,
+						'Name': rows[i].NAME,
+						'TimeStamp': rows[i].TIMESTAMP
+					};
+					jobArray.push(jobObj);
+				}
+				res.writeHead(200, {
+					'Content-Type': 'application/json'
+				});
+				res.end(JSON.stringify(jobArray));
+			})
+			.catch((error) => {
+				logger.error('Error occured' + error);
+				util.callback(error, res, 'Job Schedule fetching failed');
+			})
+		})
+		.catch((error) => {
+			logger.error('Error occured' + error);
+			util.callback(error, res, 'Job Schedule fetching failed');
+		})
+		
+		/*var js = new JobSchedulerDB(req);
+
+		js.getJobSchedulesByName(params)
+			.then((rows) => {
+				for (var i in rows) {
+					jobObj = {
+						'Id': rows[i].ID,
+						'Name': rows[i].NAME,
+						'TimeStamp': rows[i].TIMESTAMP
+					};
+					jobArray.push(jobObj);
+				}
+				res.writeHead(200, {
+					'Content-Type': 'application/json'
+				});
+				res.end(JSON.stringify(jobArray));
+			})
+			.then(() => {
+				js.closeDB();
+			})
+			.catch((error) => {
+				js.closeDB();
+				logger.error('Error occured' + error);
+				util.callback(error, res, 'Job Schedule fetching failed');
+			});*/
 	});
 
 	app.delete('/deleteJobSchedules/:jobid', function(req, res) {
@@ -218,7 +335,69 @@ module.exports = function() {
 		var scheduleId;
 		var options = util.appconfig();
 		var jobName = 'Null';
-		var sql = 'SELECT "SCHEDULE", "NAME" FROM "Jobs.ScheduleDetails" WHERE JOBID=?';
+	
+			
+		const dbClass = require(global.__base + "utils/dbPromises");
+		let db = new dbClass(req.db);
+		var query = 'SELECT "SCHEDULE", "NAME" FROM "Jobs.ScheduleDetails" WHERE JOBID=?';
+		var params = [jobId];
+			
+		db.preparePromisified(query)
+		.then(statement => {
+			db.statementExecPromisified(statement, params)
+			.then(rows => {
+				scheduleId = rows[0].SCHEDULE;
+				jobName = rows[0].NAME;
+				var myJob = {
+					'jobId': jobId,
+					'scheduleId': scheduleId
+				};
+				var scheduler = new jobsc.Scheduler(options);
+				scheduler.deleteJobSchedule(myJob, function(error, body) {
+					if (error) {
+						util.callback(error, res, 'Error deleteing new job ');
+						logger.error('Error occured' + error);
+					}else{
+						var query = 'DELETE FROM "Jobs.ScheduleDetails" WHERE JOBID=' + jobId;
+						db.preparePromisified(query)
+						.then(statement => {
+							db.statementExecPromisified(statement, [])
+							.then(rows => {
+								res.writeHead(200, {
+									'Content-Type': 'application/json'
+								});
+								res.end(JSON.stringify({
+									'message': 'Schedule for job ' + jobName + ' is deleted'
+								}));
+							})
+							.catch((error) => {
+								logger.error('Error occured' + err);
+								util.callback(err, res, 'Deleting Job schedule failed');
+							})
+						})
+						.catch((error) => {
+							logger.error('Error occured' + err);
+							util.callback(err, res, 'Deleting Job schedule failed');
+						})
+					}
+				});
+			})
+			.catch((error) => {
+				logger.error('Error occured' + err);
+				util.callback(err, res, 'Job fetching failed');
+			})
+		})
+		.catch((error) => {
+			logger.error('Error occured' + error);
+			util.callback(error, res, 'Job Schedule fetching failed');
+		})
+			
+			
+			
+			
+			
+		//need to comment this section
+		/*var sql = 'SELECT "SCHEDULE", "NAME" FROM "Jobs.ScheduleDetails" WHERE JOBID=?';
 		try{
 			client.prepare(sql, function(error, stmt) {
 				if (error) {
@@ -247,6 +426,7 @@ module.exports = function() {
 									client.exec(query, function(error, rows) {
 										if (error) {
 											logger.error('Error occured' + error);
+											client.close();
 											util.callback(error, res, 'Job fetching failed');
 
 										} else {
@@ -256,6 +436,7 @@ module.exports = function() {
 											res.end(JSON.stringify({
 												'message': 'Schedule for job ' + jobName + ' is deleted'
 											}));
+											client.close();
 										}
 									});
 								}
@@ -267,10 +448,11 @@ module.exports = function() {
 		}catch(error){
 			logger.error(error);
 		}finally{
-			client.close();
-		}
+			
+		}*/
 
 	});
 
 	return app;
 };
+

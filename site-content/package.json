@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "~4.x || ~6.x"
+    "node": "~8.x || ~10.x"
   },
   "name": "shine-site-content",
   "version": "1.5.3",
