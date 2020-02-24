@@ -212,7 +212,7 @@ resources:
   - name: shine-uaa
     type: com.sap.xs.uaa
     parameters:
-      config-path: ./xs-security.json
+      path: xs-security.json
       
   - name: shine-scheduler
     type: com.sap.xs.job-scheduler
