@@ -31,7 +31,7 @@ modules:
           forwardAuthToken: true
       
     parameters: 
-        memory: 64M
+        memory: 128M
         
   - name: shine-core-js
     type: nodejs
@@ -52,6 +52,7 @@ modules:
       - name: shine-uaa
       - name: shine-container
       - name: shine-core-db
+      - name: shine-auditlog
 
   - name: shine-user-js
     type: nodejs
@@ -72,13 +73,13 @@ modules:
       - name: shine-scheduler
       - name: shine-core-db
       - name: shine-container
+      - name: shine-auditlog
       
   
   - name: shine-core-db
     type: hdb
     path: core-db
     build-parameters:
-      builder: hdb
       timeout: 60m
     parameters:
         memory: 244M
@@ -126,7 +127,6 @@ modules:
     type: sitecontent
     path: site-content
     build-parameters:
-     builder: sitecontent
      timeout: 60m
     parameters:
        memory: 308M
@@ -149,6 +149,10 @@ resources:
     parameters:
      service: jobscheduler
      service-plan: lite
+     
+     
+  - name: shine-auditlog
+    type: com.sap.xs.auditlog
      
    
   - name: shine-uaa
