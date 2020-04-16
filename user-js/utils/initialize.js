@@ -20,7 +20,7 @@ module.exports = {
 				tag: "xsuaa"
 			}
 		}).uaa));
-		app.use(logging.expressMiddleware(appContext));
+		app.use(logging.middleware({ appContext: appContext, logNetwork: true }));
 		// app.use(bodyParser.json());
 		app.use(passport.initialize());
 		var hanaOptions = xsenv.getServices({	
@@ -70,6 +70,14 @@ module.exports = {
 			}));
 		} catch (err) {
 			console.error(err);
+		}
+		
+		//configure Audit log
+
+		try {
+			options = Object.assign(options, xsenv.getServices({ auditLog: {tag: "auditlog"} }));
+		} catch (err) {
+			console.log("[WARN]", err.message);
 		}
 
 		// start server

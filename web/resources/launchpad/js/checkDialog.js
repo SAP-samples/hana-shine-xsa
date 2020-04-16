@@ -379,10 +379,10 @@ sap.account.CheckDialog.prototype.open = function() {
 }
 }); 
 //Disable check for Time Dimensional Data as data is pre loaded in CF
-//oCheckDialog.generateTimeDataBtn.setEnabled(true);
-oCheckDialog.generateTimeDataBtn.setEnabled(false);
+oCheckDialog.generateTimeDataBtn.setEnabled(true);
+//oCheckDialog.generateTimeDataBtn.setEnabled(false);
 
-/*$.ajax({ 
+$.ajax({ 
                          type: 'GET', 
                          url: "/sap/hana/democontent/epm/services/checkTimeData.xsjs", 
                          async: false, 
@@ -397,13 +397,13 @@ oCheckDialog.generateTimeDataBtn.setEnabled(false);
                          error: function(error) { 
                             var ifTimeDataSuccess = false; 	
                          } 
-                     }); */
+                     }); 
  
 
  if(!ifTimeDataSuccess)
 {
 		oCheckDialog.timeDataLayout.removeAllContent();
-					//oCheckDialog.generateTimeDataBtn.setEnabled(true);
+					oCheckDialog.generateTimeDataBtn.setEnabled(true);
 					oCheckDialog.timeDataLayout.addContent(new sap.ui.commons.Image({
                         src: './images/green_tick.png'}));
 }   

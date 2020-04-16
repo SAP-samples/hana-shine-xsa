@@ -1,7 +1,7 @@
 {
   "name": "deploy",
   "dependencies": {
-    "@sap/hdi-deploy": "3.1.2"
+    "@sap/hdi-deploy": "3.11.5"
   },
   "private": true,
   "scripts": {

@@ -18,7 +18,7 @@ module.exports = function() {
 	app.post('/createjobschedule',jsonParser, function(req, res) {
 		logger = req.loggingContext.getLogger("/schedules/createjobschedule");
 		logger.error('info' + req.body);
-		var jname = req.body.jobname;
+		var jname = encodeURI(req.body.jobname);
 		if (!(util.isAlphaNumeric(jname))) {
 			// throw new Error("Invalid Job Name");
 			logger.error('inside job name error');

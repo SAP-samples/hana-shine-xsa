@@ -1,5 +1,5 @@
 {
-  "xsappname": "${org}-${space}-shine",
+  "xsappname": "referenceappscf-shine-shine",
   "tenant-mode":"dedicated",
   "scopes": [
   	{

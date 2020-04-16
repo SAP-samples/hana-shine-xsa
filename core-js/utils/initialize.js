@@ -23,7 +23,9 @@ module.exports = {
 		 */
 		passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({uaa:{tag:'xsuaa'}}).uaa));
 		
-		
+		var logging = require('@sap/logging');
+		var appContext = logging.createAppContext();
+		app.use(logging.middleware({ appContext: appContext, logNetwork: true }));
 		//use passport for authentication
 		app.use(passport.initialize());
 		
@@ -78,6 +80,15 @@ module.exports = {
 		} catch (err) {
 			console.error(err);
 		}
+		
+		//configure Audit log
+
+		try {
+			options = Object.assign(options, xsenv.getServices({ auditLog: {tag: "auditlog"} }));
+		} catch (err) {
+			console.log("[WARN]", err.message);
+		}
+		
 		// start server
 		var xsjsApp = xsjs(options);
 		app.use(xsjsApp);

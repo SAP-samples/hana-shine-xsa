@@ -357,8 +357,8 @@ try
 	var calc;
 	var startDay, startMonth, startYear, StartDateStr, BATCHSIZE;
 	var client = req.db;
-	var reqContext = appContext.createRequestContext(req);
-	logger = reqContext.getLogger("/replicate/timebasedPO");
+	//var reqContext = appContext.createRequestContext(req);
+	logger = req.loggingContext.getLogger("/replicate/timebasedPO");
 	logger.info(' Time based Sales Data generation initiated');
 	console.log("Time based purchase Data generation initiated"+"+++++++++"+ req.body.id);
 	var bpDict = [];
@@ -457,8 +457,9 @@ startDay= startMonth= startYear=StartDateStr= BATCHSIZE = totalRecords ==null;
 });
 
 router.get('/replicate/sales', function(req, res) {
-	var reqContext = appContext.createRequestContext(req);
-	logger = reqContext.getLogger("/replicate/sales");
+	//var reqContext = appContext.createRequestContext(req);
+
+	logger = req.loggingContext.getLogger("/replicate/sales");
 	logger.info('Sales Data generation initiated');
 
 	var client = req.db;
@@ -499,8 +500,8 @@ router.get('/replicate/sales', function(req, res) {
 // method will pick records from POShadow.Header and add to PO.Header
 // and POShadow.Item to PO.Item
 router.get('/replicate/purchase', function(req, res) {
-	var reqContext = appContext.createRequestContext(req);
-	logger = reqContext.getLogger("/replicate/purchase");
+	//var reqContext = appContext.createRequestContext(req);
+	logger = req.loggingContext.getLogger("/replicate/purchase");
 	logger.info('Purchase Data generation initiated');
 	var client = req.db;
 	var origTable = "PO.Header";

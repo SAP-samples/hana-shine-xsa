@@ -7,7 +7,7 @@
     <variableProperties datatype="DATE" mandatory="false">
       <valueDomain type="Date"/>
       <selection multiLine="false"/>
-      <defaultRange lowValue="2015"/>
+      <defaultRange lowValue="2019"/>
     </variableProperties>
   </variable>
   <variable id="IP_TO_DTE" parameter="true">
@@ -15,7 +15,7 @@
     <variableProperties datatype="DATE" mandatory="true">
       <valueDomain type="Date"/>
       <selection multiLine="false"/>
-      <defaultRange lowValue="2016"/>
+      <defaultRange lowValue="2020"/>
     </variableProperties>
   </variable>
 </localVariables>

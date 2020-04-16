@@ -25,7 +25,7 @@ select company_name, region, sales, orders, sales_rank, order_rank, discount fro
 		        	  THEN 5
 		        	   when region = 'AFR' AND dense_rank() over ( order by count("SALESORDERID") desc ) >5 AND count("SALESORDERID")<8 AND sum("NETAMOUNT")<= 3000 AND dense_rank() over ( order by sum("NETAMOUNT") desc ) >5  
 		        	  THEN 2.5
-		        	  else 0
+		        	  else 0.5
 		        	  end as discount
 		              from "sap.hana.democontent.epm.models::SALES_ORDER_RANKING"
 		              where DATE_SQL between :IP_FR_DTE and :IP_TO_DTE
