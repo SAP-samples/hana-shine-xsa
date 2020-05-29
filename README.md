@@ -56,7 +56,13 @@ https-proxy=http://proxy:8080/
 You can read more about the SAP NPM Registry in "[SAP NPM Registry launched: Making the lives of Node.js developers easier](https://blogs.sap.com/2017/05/16/sap-npm-registry-launched-making-the-lives-of-node.js-developers-easier/)".
 
 ## Setup Cloud Foundry Environment Account and CLI
-1. If you do not yet have a Cloud Foundry environment trial or enterprise account, signup for a Cloud Foundry environment trial account by following the documentation "[Get a Trial Space on the Cloud Foundry Instance](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/76e79d62fa0149d5aa7b0698c9a33687.html)"
+1. To run shine on cloud foundry you need to have Cloud Foundry enterprise account. Check if the Cloud Foundry Space you will be deploying the application has the following entitlements:
+
+         xsuaa: application - 1
+         auditlog: standard - 1
+         portal-services: site - 1
+         Application Runtime: 6
+
 2. Download and install the Cloud Foundry CLI as described [here](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/4ef907afb1254e8286882a2bdef0edf4.html)
 3. To deploy the MTAR we need the MTA CF CLI plugin, download the MTA CF CLI Plugin from [here](https://tools.hana.ondemand.com/#cloud) 
 4. To install the MTA CF CLI Plugin open your CLI and run the command: `cf install-plugin <path to plugin download folder>/cf-cli-mta-plugin-0.7.0-xyz.exe|tar.gz`
