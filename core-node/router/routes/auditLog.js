@@ -11,7 +11,13 @@ module.exports = function() {
 	var credentials = xsenv.getServices({
 		auditlog: 'shine-auditlog'
 	}).auditlog;
-	var auditLog = require('@sap/audit-logging')(credentials);
+
+	var auditLog = require('@sap/audit-logging')
+	var auditLogGlobal = null;
+	auditLog.v2(credentials, function(err, audLog) {
+		if (err) return console.log(err);
+		auditLogGlobal = audLog
+	});
 
 	//TOC
 	app.get('/', (req, res) => {
@@ -31,13 +37,16 @@ module.exports = function() {
 		} else {
 			ip = req.ip;
 		}
-		auditLog.securityMessage('%d unsuccessful login attempts', 3).by(req.user.id).externalIP(ip).log(function(err, id) {
-			// Place all of the remaining logic here
+
+		auditLogGlobal.securityMessage('%d unsuccessful login attempts', 3)
+		.by(req.user.id)
+		.externalIP(ip)
+		.log(function(err) {
 			if (err) {
 				res.type("text/plain").status(500).send("ERROR: " + err.toString());
 				return;
 			}
-			res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved as: ${id}`));
+			res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved`));
 		});
 	});
 

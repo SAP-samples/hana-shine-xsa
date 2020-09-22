@@ -262,7 +262,7 @@ sap.ui.controller("shine.democontent.epm.job.view.app", {
 			element.setValueState(sap.ui.core.ValueState.none);
 		}
 		this.setDateTimeValue();
-		this.getView().byId("xsCronInput").setValue("* * * * * * */40");
+		this.getView().byId("xsCronInput").setValue("* * * * * * */30");
 	},
 	
 	onTabPress: function(oEvent){

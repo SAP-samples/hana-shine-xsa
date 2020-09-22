@@ -8,18 +8,13 @@ var express = require('express');
 module.exports = function() {
 	var bodyParser = require('body-parser');
 	var app = express.Router();
-
-	var winston = require('winston');
 	var util = require(global.__base + 'utils/util');
 	var jobsc = require('@sap/jobs-client');
 	var jsonParser = bodyParser.json();
 	var logger;
 
-	winston.level = process.env.winston_level || 'error';
-
 	app.post('/createJobSchedule', jsonParser, function(req, res) {
 		logger = req.loggingContext.getLogger('/schedules/createJobSchedule');
-		logger.error('info' + req.body);
 		var jname = encodeURI(req.body.jobname);
 		if (!(util.isAlphaNumeric(jname))) {
 			logger.error('inside job name error');
@@ -74,12 +69,9 @@ module.exports = function() {
 				}
 			}]
 		};
-		//var js = new JobSchedulerDB(req);
-		//var client = req.db;
 		
 		const dbClass = require(global.__base + "utils/dbPromises");
 		let db = new dbClass(req.db);
-				
 		
 		var scheduler = new jobsc.Scheduler(options);
 		var scJob = {
@@ -96,53 +88,11 @@ module.exports = function() {
 			} else {
 				jobid = body._id;
 				scheduleId = body.schedules[0].scheduleId;
-
-				var upJob = {
-					'jobId': jobid,
-					'job': {
-						'active': true
-					}
-				};
-				
 				
 				startTime = startTime.split(" ")[0] + " "+ startTime.split(" ")[1];
 				endTime = endTime.split(" ")[0] + " "+ endTime.split(" ")[1];
 				var params = [jobid.toString(), jname, startTime, endTime, cron, scheduleId];
 				
-				
-				/*var sql = 'INSERT INTO \"Jobs.ScheduleDetails\" VALUES(?,?,?,?,?,?)';
-				try{
-					client.prepare(sql, function(error, stmt) {
-						if (error) {
-							logger.error('Error occured' + error);
-							util.callback(error, res, 'Unable to insert new job details to db');
-						} else {
-							var params = [jobid.toString(), jname, startTime, endTime, cron, scheduleId];
-							stmt.exec(params, function(err, rows) {
-								if (err) {
-									logger.error('Error occured' + err);
-									util.callback(err, res, 'Unable to insert new job details to db');
-								} else {
-									res.status(200).send(JSON.stringify({
-										JobId: jobid,
-										JobName: jname,
-										Desc: description,
-										StartTime: startTime,
-										EndTime: endTime,
-										Cron: cron,
-										ScheduleId: scheduleId
-									}));
-								}
-							});
-						}
-					});
-				}catch(err){
-					logger.error('ERROR : '+err);
-				}*/
-				
-				
-				
-				//var query = "INSERT INTO \"Jobs.ScheduleDetails\" VALUES('" + jobid.toString() + "', '" + jname + "', '" + startTime + "', '" + endTime + "', '" + cron + "', '" + scheduleId + "')";
 				var query = 'INSERT INTO \"Jobs.ScheduleDetails\" VALUES(?,?,?,?,?,?)';
 				db.preparePromisified(query)
 				.then(statement => {
@@ -168,31 +118,8 @@ module.exports = function() {
 					logger.error('Error occured : ' + JSON.stringify(error));
 					util.callback(error, res, 'Unable to prepare statement to insert new job details to db');
 				})
-				
-				/*js.createJobSchedule(params)
-					.then((status) => {
-						res.status(200).send(JSON.stringify({
-							JobId: jobid,
-							JobName: jname,
-							Desc: description,
-							StartTime: startTime,
-							EndTime: endTime,
-							Cron: cron,
-							ScheduleId: scheduleId
-						}));
-					})
-					.then(() => {
-						js.closeDB();
-					})
-					.catch((error) => {
-						js.closeDB();
-						logger.error('Error occured' + error);
-						util.callback(error, res, 'Unable to insert new job details to db');
-					});*/
 			}
-
 		});
-
 	});
 
 	app.get('/getJobSchedules', function(req, res) {

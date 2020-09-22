@@ -3,10 +3,7 @@
 module.exports = function() {
 	//var DataGeneratorDB = require('./DataGeneratorDBPromises');
 	var express = require('express');
-	var winston = require('winston');
 	var util = require('./util');
-	var logging = require('@sap/logging');
-	var appContext = logging.createAppContext();
 	var logger;
 	var bodyParser = require('body-parser');
 	var jsonParser = bodyParser.json();
@@ -15,12 +12,17 @@ module.exports = function() {
 	var credentials = xsenv.getServices({
 		auditlog: 'shine-auditlog'
 	}).auditlog;
-	var auditLog = require('@sap/audit-logging')(credentials);
+
+	var auditLog = require('@sap/audit-logging')
+	var auditLogGlobal = null;
+	auditLog.v2(credentials, function(err, audLog) {
+		if (err) return console.log(err);
+		auditLogGlobal = audLog
+	});
+	
 	var app = express.Router();
-	winston.level = process.env.winston_level || 'error';
 	//Generate time based Data
 	app.post('/timebasedPO', jsonParser, (req, res) => {
-		//var reqContext = appContext.createRequestContext(req);
 		logger = req.loggingContext.getLogger('/replicate/timebasedPO');
 		logger.info('Time based Sales Data generation initiated');
 		var totalRecords = encodeURI((req.body.noRec)) * 1000;
@@ -142,18 +144,34 @@ module.exports = function() {
 	// method will pick records from SOShadow.Header and add to SO.Header
 	// and SOShadow.Item to SO.Item
 	app.post('/sales', (req, res) => {
+		// console.log('auditLogGlobal ----->>>>', auditLogGlobal)
+		// console.log('req.baseUrl -------->>>>>>>', JSON.stringify(req.baseUrl,null,2))
+		// console.log('req.ip -------->>>>>>>', JSON.stringify(req.ip,null,2))
+		// console.log('req.body -------->>>>>>>', JSON.stringify(req.body,null,2))
+		// console.log('req.user -------->>>>>>>', JSON.stringify(req.user,null,2))
+		// console.log('req.db -------->>>>>>>', JSON.stringify(req.db,null,2))
+		// console.log('req.connection -------->>>>>>>', req.connection)
+		// console.log('req.headers -------->>>>>>>', JSON.stringify(req.headers,null,2))
+		// console.log('req.loggingContext -------->>>>>>>', req.loggingContext)
+		// console.log('req.authInfo -------->>>>>>>', req.authInfo)
+		// console.log('req -------->>>>>>>', req)
 		var usrName = req.user.id;
 		var client = req.db;
-		//var reqContext = appContext.createRequestContext(req);
 		logger = req.loggingContext.getLogger('/replicate/sales');
 		logger.info('Sales Data generation initiated');
-		var msg = auditLog.update('Sales order generation initialted ').attribute('Data generation initiation', true).by(usrName);
-		msg.log(function(err, id) {
-			// Place all of the remaining logic here
+		msg = auditLogGlobal.update({ type: 'Data Generator', id:{ api: '/replicate/sales'}})
+			.attribute({ name:'Data generation of 1000 records initiation'})
+			.dataSubject({ type: 'core-node', id: { data: 'sales' }})
+			.by(usrName);
+		msg.logPrepare(function(err) {
 			if (err) {
 				logger.info('ERROR: ' + err.toString());
 			}
-			logger.info('Log Entry Saved as: ' + id);
+			msg.logSuccess(function(err) {
+				if (err) {
+					logger.info('ERROR: ' + err.toString());
+				}
+			})
 		});
 		var origTable = 'SO.Header';
 		util.getTableInfo(client, origTable, origTable, (error, response) => {
@@ -183,15 +201,19 @@ module.exports = function() {
 						db.statementExecPromisified(statement,[])
 						.then(results => {
 							logger.info('SO Item query executed successfully');
-							msg = auditLog.update('Sales order generation successful')
-								.attribute('Data generation of 1000 records', true)
+							msg = auditLogGlobal.update({ type: 'Data Generator', id:{ api: '/replicate/sales'}})
+								.attribute({ name:'Data generation successful'})
+								.dataSubject({ type: 'core-node', id: { data: 'sales' }})
 								.by(usrName);
-							msg.log(function(err, id) {
-								// Place all of the remaining logic here
+							msg.logPrepare(function(err) {
 								if (err) {
 									logger.info('ERROR: ' + err.toString());
 								}
-								logger.info('Log Entry Saved as: ' + id);
+								msg.logSuccess(function(err) {
+									if (err) {
+										logger.info('ERROR: ' + err.toString());
+									}
+								})
 							});
 						})
 						.then(() =>{
@@ -201,25 +223,28 @@ module.exports = function() {
 						.catch((error) => {
 							dg.closeDB();
 							logger.error('SO Item Query execution error: ' + error);
-							msg = auditLog.update('Purchase order generation failed')
-								.attribute('Data generation', false)
+							msg = auditLogGlobal.update({ type: 'Data Generator', id:{ api: '/replicate/sales'}})
+								.attribute({ name:'Data generation failed'})
+								.dataSubject({ type: 'core-node', id: { data: 'sales' }})
 								.by(usrName);
-							msg.log(function(err, id) {
+							msg.logPrepare(function(err) {
 								if (err) {
 									res.type("text/plain").status(500).send("ERROR: " + err.toString());
 									return;
 								}
-								res.type("application/json").status(200).send(JSON.stringify('Log Entry Saved as: ' + id));
+								msg.logFailure(function(err) {
+									if (err) {
+										res.type("text/plain").status(500).send("ERROR: " + err.toString());
+										return;
+									}
+								})
 							});
-
 						})
 					})
-					
 				})
 				.catch((error) => {
 					logger.error('SO header Query execution error: ' + error);
 					util.callback(error, response, res, "");
-
 				})
 			})
 			
@@ -237,15 +262,20 @@ module.exports = function() {
 					dg.executeQuery(query)
 						.then((status) => {
 							logger.info('SO Item query executed successfully');
-							msg = auditLog.update('Sales order generation successful')
-								.attribute('Data generation of 1000 records', true)
+							msg = auditLogGlobal.update({type:'Sales order generation successful', id:{key:'value'}})
+								.attribute({name:'Data generation of 1000 records'})
+								.dataSubject({ type: 'data-subject-type', id: { key: 'value' }})
 								.by(usrName);
-							msg.log(function(err, id) {
-								// Place all of the remaining logic here
+							msg.logPrepare(function(err) {
 								if (err) {
 									logger.info('ERROR: ' + err.toString());
 								}
-								logger.info('Log Entry Saved as: ' + id);
+								msg.logSuccess(function(err){
+									if (err) {
+										logger.info('ERROR: ' + err.toString());
+									}	
+									logger.info('Log Entry Saved as: ' + id);
+								})
 							});
 						})
 						.then(() => {
@@ -256,15 +286,22 @@ module.exports = function() {
 						.catch((error) => {
 							dg.closeDB();
 							logger.error('SO Item Query execution error: ' + error);
-							msg = auditLog.update('Purchase order generation successful')
-								.attribute('Data generation', false)
+							msg = auditLogGlobal.update({ type:'Purchase order generation successful', id:{ key:'value' }})
+								.attribute({ name: 'Data generation'})
+								.dataSubject({ type: 'data-subject-type', id: { key: 'value' }})
 								.by(usrName);
-							msg.log(function(err, id) {
+							msg.logPrepare(function(err) {
 								if (err) {
 									res.type("text/plain").status(500).send("ERROR: " + err.toString());
 									return;
 								}
-								res.type("application/json").status(200).send(JSON.stringify('Log Entry Saved as: ' + id));
+								msg.logFailure(function(err) {
+									if (err) {
+										res.type("text/plain").status(500).send("ERROR: " + err.toString());
+										return;
+									}
+									res.type("application/json").status(200).send(JSON.stringify('Log Entry Saved as: ' + id));
+								})
 							});
 						})
 						.then(() => {
@@ -283,18 +320,22 @@ module.exports = function() {
 	// method will pick records from POShadow.Header and add to PO.Header
 	// and POShadow.Item to PO.Item
 	app.post('/purchase', (req, res) => {
-		//var reqContext = appContext.createRequestContext(req);
 		var usrName = req.user.id;
 		logger = req.loggingContext.getLogger('/replicate/purchase');
 		logger.info('Purchase Data generation initiated');
-		var msg = auditLog.update('Purchase order generation initiated ')
-			.attribute('Data generation initiation', true)
+		var msg = auditLogGlobal.update({ type: 'Data Generator', id:{ api: '/replicate/purchases'}})
+			.attribute({ name:'Data generation of 1000 records initiation'})
+			.dataSubject({ type: 'core-node', id: { data: 'purchases' }})
 			.by(usrName);
-		msg.log(function(err, id) {
+		msg.logPrepare(function(err) {
 			if (err) {
 				logger.info('ERROR: ' + err.toString());
 			}
-			logger.info('Log Entry Saved as: ' + id);
+			msg.logSuccess(function(err) {
+				if (err) {
+					logger.info('ERROR: ' + err.toString());
+				}
+			});
 		});
 		var client = req.db;
 		var origTable = 'PO.Header';
@@ -324,14 +365,19 @@ module.exports = function() {
 						db.statementExecPromisified(statement,[])
 						.then(results => {
 							logger.info('PO Item query executed successfully');
-							msg = auditLog.update('Purchase order generation successful')
-							.attribute('Data generation 1000 records', true)
+							var msg = auditLogGlobal.update({ type: 'Data Generator', id:{ api: '/replicate/purchases'}})
+							.attribute({ name:'Data generation of 1000 records successful'})
+							.dataSubject({ type: 'core-node', id: { data: 'purchases' }})
 							.by(usrName);
-							msg.log(function(err, id) {
+							msg.logPrepare(function(err) {
 								if (err) {
 									logger.info('ERROR: ' + err.toString());
 								}
-								logger.info('Log Entry Saved as: ' + id);
+								msg.logSuccess(function(err) {
+									if (err) {
+										logger.info('ERROR: ' + err.toString());
+									}
+								});
 							});
 						})
 						.then(() => {
@@ -340,18 +386,22 @@ module.exports = function() {
 						})
 						.catch((error) => {
 							logger.error('PO Item Query execution error: ' + error);
-							msg = auditLog.update('Purchase order generation successful')
-								.attribute('Data generation', false)
-								.by(usrName);
-							msg.log(function(err, id) {
+							var msg = auditLogGlobal.update({ type: 'Data Generator', id:{ api: '/replicate/purchases'}})
+							.attribute({ name:'Data generation of 1000 records failed'})
+							.dataSubject({ type: 'core-node', id: { data: 'purchases' }})
+							.by(usrName);
+							msg.logPrepare(function(err) {
 								if (err) {
 									logger.info('ERROR: ' + err.toString());
 								}
-								logger.info('Log Entry Saved as: ' + id);
+								msg.logFailure(function(err) {
+									if (err) {
+										logger.info('ERROR: ' + err.toString());
+									}
+								})
 							});
 						});
-					})
-				
+					})				
 				})
 				.catch((error) => {
 					logger.error('PO header Query execution error: ' + error);
@@ -372,14 +422,20 @@ module.exports = function() {
 				dg.executeQuery(query)
 				.then((response) => {
 					logger.info('PO Item query executed successfully');
-					msg = auditLog.update('Purchase order generation successful')
-						.attribute('Data generation 1000 records', true)
+					msg = auditLogGlobal.update({ type: 'Purchase order generation successful', id: { key: 'value' }})
+						.attribute({ name: 'Data generation 1000 records'})
+						.dataSubject({ type: 'data-subject-type', id: { key: 'value' }})
 						.by(usrName);
-					msg.log(function(err, id) {
+					msg.logPrepare(function(err) {
 						if (err) {
 							logger.info('ERROR: ' + err.toString());
 						}
-						logger.info('Log Entry Saved as: ' + id);
+						msg.logSuccess(function(err) {
+							if (err) {
+								logger.info('ERROR: ' + err.toString());
+							}
+							logger.info('Log Entry Saved as: ' + id);
+						})
 					});
 				})
 				.then(() => {
@@ -390,14 +446,20 @@ module.exports = function() {
 				.catch((error) => {
 					dg.closeDB();
 					logger.error('PO Item Query execution error: ' + error);
-					msg = auditLog.update('Purchase order generation successful')
-						.attribute('Data generation', false)
+					msg = auditLogGlobal.update({ type:'Purchase order generation successful', id: { key: 'value' }})
+						.attribute({ name: 'Data generation'})
+						.dataSubject({ type: 'data-subject-type', id: { key: 'value' }})
 						.by(usrName);
-					msg.log(function(err, id) {
+					msg.logPrepare(function(err) {
 						if (err) {
 							logger.info('ERROR: ' + err.toString());
 						}
-						logger.info('Log Entry Saved as: ' + id);
+						msg.logFailure(function(err) {
+							if (err) {
+								logger.info('ERROR: ' + err.toString());
+							}
+							logger.info('Log Entry Saved as: ' + id);
+						})
 					});
 				});
 			})

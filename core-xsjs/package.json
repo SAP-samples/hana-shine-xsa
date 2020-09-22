@@ -1,14 +1,14 @@
 {
   "dependencies": {
-    "@sap/xssec": "2.1.16",
-    "@sap/xsenv": "2.0.0",
-    "@sap/xsjs": "5.2.0",
-    "node-xlsx": "0.12.1",
+    "@sap/xssec": "3.0.3",
+    "@sap/xsenv": "2.2.0",
+    "@sap/xsjs": "6.0.4",
+    "node-xlsx": "0.15.0",
     "node-zip": "1.1.1",
     "xmldoc": "1.1.2"
   },
   "devDependencies": {
-    "@sap/xsjs-test": "2.0.16"
+    "@sap/xsjs-test": "3.1.3"
   },
   "files": [],
   "main": "server.js",
@@ -18,7 +18,7 @@
     "test": "node testrun.js"
   },
   "engines": {
-    "node": "8.x"
+    "node": "10.x || 12.x"
   },
-  "version": "1.7.4"
+  "version": "1.8.7"
 }

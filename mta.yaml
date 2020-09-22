@@ -1,6 +1,6 @@
-_schema-version: '2.0'
+_schema-version: '3.1.0'
 ID: com.sap.refapps.shine
-version: 1.7.4
+version: 1.8.7
 
 modules:
   - name: shine-user-db
@@ -10,7 +10,7 @@ modules:
       - name: shine-user-container
         properties:
           TARGET_CONTAINER: '~{user-container-name}'
-          
+
   - name: shine-core-db
     type: hdb
     path: core-db
@@ -18,15 +18,13 @@ modules:
       - name: shine-container
         properties:
           TARGET_CONTAINER: '~{container-name}'
-      
       - name: shine-user-container
         group: SERVICE_REPLACEMENTS
         properties:
           key: hdi-user-service
           service: '~{user-container-name}'
       - name: shine-user-db
-      
-          
+
   - name: shine-core-node
     type: nodejs
     path: core-node
@@ -34,7 +32,7 @@ modules:
       host: shine-core-node
       register-service-url: true
       service-name: shine-core-node
-      service-url: '${default-url}'      
+      service-url: '${default-url}'
     properties:
       UAA_SERVICE_NAME: shine-uaa 
       SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
@@ -43,14 +41,13 @@ modules:
         properties:
           url: '${default-url}'
     requires:
-      - name: shine-scheduler
       - name: shine-uaa
+      - name: shine-scheduler
       - name: shine-auditlog
       - name: shine-container
       - name: shine-core-db
       - name: secureStore
-   
-      
+
   - name: shine-user-xsjs
     type: nodejs
     path: user-xsjs
@@ -58,7 +55,7 @@ modules:
       host: shine-user-xsjs
       register-service-url: true
       service-name: shine-user-xsjs
-      service-url: '${default-url}'      
+      service-url: '${default-url}'
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     provides:
@@ -103,7 +100,7 @@ modules:
         properties:
           name: core-xsjs-backend
           url: '~{url}'
-          forwardAuthToken: true          
+          forwardAuthToken: true
       - name: user_xsjs_api
         group: destinations
         properties:
@@ -113,10 +110,9 @@ modules:
       - name: uaa 
         group: destinations 
         properties: 
-           name: uaa 
-           url: ~{url} 
-           forwardAuthToken: true 
-
+          name: uaa 
+          url: ~{url} 
+          forwardAuthToken: true
 
   - name: shine-core-xsjs
     type: nodejs
@@ -129,7 +125,7 @@ modules:
       host: shine-core-xsjs
       register-service-url: true
       service-name: shine-core-xsjs
-      service-url: '${default-url}'            
+      service-url: '${default-url}'
     requires:
       - name: shine-uaa
       - name: shine-container
@@ -138,7 +134,7 @@ modules:
 
   - name: shine-site-web
     type: javascript.nodejs
-    path: site-web/
+    path: site-web
     requires:
       - name: shine-uaa
       - name: sap-portal-services-host
@@ -148,7 +144,6 @@ modules:
           name: controller
           url: ~{url}
           forwardAuthToken: true
-      
       - name: core_node_api
         group: destinations
         properties:
@@ -170,22 +165,20 @@ modules:
       - name: uaa 
         group: destinations 
         properties: 
-           name: uaa 
-           url: ~{url} 
-           forwardAuthToken: true
+          name: uaa 
+          url: ~{url} 
+          forwardAuthToken: true
       - name: sapui5-provider
-        
     properties:
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
       httpHeaders: "[{\"Content-Security-Policy\" : \"style-src 'self' 'unsafe-inline' https://sapui5.hana.ondemand.com  https://*.api.here.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://sapui5.hana.ondemand.com https://*.api.here.com; connect-src 'self' https://sapui5.hana.ondemand.com  https://*.api.here.com\"}]"
- 
-        
+
   - name: shine-site-content
     type: com.sap.portal.site-content
-    path: site-content/
+    path: site-content
     requires:
-       - name: sap-portal-services-client
-       - name: shine-uaa
+      - name: sap-portal-services-client
+      - name: shine-uaa
     properties:
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
 
@@ -197,70 +190,66 @@ resources:
     parameters:
       config:
         schema: SHINE_USER
+    parameters-metadata:
+        config:
+          overwritable: true
+
   - name: shine-container
     properties:
       container-name: '${service-name}'
     type: com.sap.xs.hdi-container
     parameters:
-      
       config:
         schema: SHINE_CORE
+    parameters-metadata:
+      config:
+        overwritable: true
 
   - name: secureStore
     type: com.sap.xs.hana-securestore
 
   - name: shine-uaa
-    type: com.sap.xs.uaa
-    parameters:
-      config-path: ./xs-security.json
-      
+    type: org.cloudfoundry.existing-service
+
   - name: shine-scheduler
     type: com.sap.xs.job-scheduler
+    parameters:
+      config:
+       enable-xsuaa-support: true
 
   - name: shine-auditlog
     type: com.sap.xs.auditlog
-  
-  - name: sap-portal-services-host-com.sap.refapps.shine
-    parameters:
-       config:
-          siteId: com.sap.refapps.shine
-    type: com.sap.portal.site-host
+    properties:
+      container-name: ${service-name}
 
-
-  - name: portal-uaa-com.sap.refapps.shine
+  - name: sapui5-provider
+    type: org.cloudfoundry.managed-service
     parameters:
-       service-plan: space
-    type: com.sap.xs.uaa
+      service: sapui5_sb
+      service-plan: sapui5-1.71
 
   - name: sap-portal-services-host
     type: com.sap.portal.site-host
     parameters:
       config:
-        siteId : XSAC_SHINE
-        
+        siteId : com.sap.refapps.shine
+
   - name: sap-portal-services-client
     type: com.sap.portal.site-content
     parameters:
       config:
-        siteId : XSAC_SHINE
- 
+        siteId : com.sap.refapps.shine
+
   - name: uaa 
     properties: 
-      url: "https://<hostname>:3##32/uaa-security"
-      
-  - name: sapui5-provider
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: sapui5_sb
-      service-plan: sapui5-1.60
-      
+      url: "https://<host>:3##32/uaa-security"
+
   - name: ui5Service
     type: configuration
     parameters:
-      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV5:sapui5_fesv5
-      version: ">=1.60.2"   
-      
+      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV6:sapui5_fesv6
+      version: ">=1.71.21"
+
   - name: controller
     properties:
-      url: 'https://<hostname>:3##30'
-  
+      url: 'https://<host>:3##30'

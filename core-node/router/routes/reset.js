@@ -3,13 +3,8 @@
 module.exports = function() {
 var express = require('express');
 var async = require('async');
-var cds = require('@sap/cds');
-//var router = express.Router();
-var winston = require('winston');
-//var util = require(global.__base + "utils/datagen");
 var util = require('./util');
 var app = express.Router();
-winston.level = process.env.winston_level || 'error';
 app.post('/soheader', function (req, res) {
     console.log('reset so header triggered');
     util.resetTable(

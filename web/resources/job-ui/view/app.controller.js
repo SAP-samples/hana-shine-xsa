@@ -262,7 +262,7 @@ sap.ui.controller("sap.hana.democontent.epm.job.view.app", {
 			element.setValueState(sap.ui.core.ValueState.none);
 		}
 		this.setDateTimeValue();
-		sap.ui.getCore().byId("__xmlview0--xsCronInput").setValue("* * * * * * */40");
+		sap.ui.getCore().byId("__xmlview0--xsCronInput").setValue("* * * * * * */30");
 	},
 	
 	onTabPress: function(oEvent){

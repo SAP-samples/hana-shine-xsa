@@ -4,16 +4,10 @@
 module.exports = function() {
 	var express = require('express');
 	var async = require('async');
-	var cds = require('@sap/cds');
-	var winston = require('winston');
 	var util = require(global.__base + 'utils/datagen');
-	var logging = require('@sap/logging');
-	var appContext = logging.createAppContext();
 	var logger;
 	var app = express.Router();
-	winston.level = process.env.winston_level || 'error';
 	app.get('/tablesize', function (req, res) {
-		//var reqContext = appContext.createRequestContext(req);
 		logger = req.loggingContext.getLogger("/tablesize");
 		var client = req.db;
 		var query, rs, maxId;
@@ -34,7 +28,6 @@ module.exports = function() {
 		}
 	});
 	app.get('/tablesize1', function(req, res) {
-		//var reqContext = appContext.createRequestContext(req);
 		logger = req.loggingContext.getLogger('/get/tablesize');
 		var client = req.db;
 		var tableDict = [{

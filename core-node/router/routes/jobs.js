@@ -6,14 +6,8 @@ var express = require('express');
 
 module.exports = function() {
 	var app = express.Router();
-
-	var winston = require('winston');
 	var util = require(global.__base + "utils/util");
-
-	var logger;
-
-	winston.level = process.env.winston_level || 'error';
-	
+	var logger;	
 
 	// method will delete all job data
 	app.delete('/deleteData', (req, res) => {

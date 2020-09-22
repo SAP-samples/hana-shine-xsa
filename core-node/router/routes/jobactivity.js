@@ -6,7 +6,6 @@ var express = require('express');
 
 module.exports = function() {
 	var app = express.Router();
-	var winston = require('winston');
 	var util = require(global.__base + 'utils/util');
 	var bodyParser = require('body-parser');
 	var jsonParser = bodyParser.json();
@@ -18,7 +17,6 @@ module.exports = function() {
 			tag: 'xsuaa'
 		}
 	});
-	winston.level = process.env.winston_level || 'error';
 	var xsuaaCredentials = uaaService.uaa;
 	if (!xsuaaCredentials) {
 		logger.error('uaa service not found');
@@ -37,7 +35,7 @@ module.exports = function() {
 			
 			if (req.headers.authorization) {
 				accessToken = req.headers.authorization.split(' ')[1];
-				console.log("AccessToken++++++++ " +accessToken);
+				// console.log("AccessToken++++++++ " +accessToken);
 			}else {
 				logger.error('Authorization header not found');
 				res.status(401).json({message: 'Authorization header not found'});
@@ -50,7 +48,6 @@ module.exports = function() {
 				res.status(401).json({message: 'Invalid access token'});
 				return;
 			}
-
 			if (securityContext.checkScope(SCOPE)) {			
 				const dbClass = require(global.__base + "utils/dbPromises");
 				let db = new dbClass(req.db);

@@ -42,7 +42,7 @@
 			<l:MatrixLayoutRow>
 			<l:MatrixLayoutCell>
 				<sap.ui.commons:Label labelFor="xsCronInput" text="{i18n&gt;XSCRONSCHEDULE}" width="30%"/>
-				<sap.ui.commons:TextField id="xsCronInput" value="* * * * * * */40" required="true" tooltip="{i18n&gt;crontooltip}"/>
+				<sap.ui.commons:TextField id="xsCronInput" value="* * * * * * */30" required="true" tooltip="{i18n&gt;crontooltip}"/>
 			</l:MatrixLayoutCell>
 		</l:MatrixLayoutRow>
 		<l:MatrixLayoutRow>
