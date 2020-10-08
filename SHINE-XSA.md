@@ -42,8 +42,6 @@ If the services are stopped, please contact the system administrator to start th
 
 - Create the xs-security.json file manually via CLI by copy pasting contents from the xs-security.json file in the repository.
 
-- Before creating a xsuaa service instance, go to XSA Cockpit application, create a role collection named SHINE_ADMIN and assign it to the logged-in user. The role collection can have no role added when assigned. After creating “shine-uaa” service, the role collection SHINE_ADMIN will have a role added of name “shine_admin” automatically.
-
 - Create a service for the UAA by executing the command in CLI of XSA system:
 
     `xs create-service xsuaa space shine-uaa -c xs-security.json`
@@ -97,10 +95,17 @@ For more details on how to do the above steps, please refer below:
 
 - On running the Web module as Web Application, choose the ‘launchpad/index.html’ if prompted.
 
+- Click on "Check Prerequisites" button, generate Time Data and create Role Collections. The application will log off automatically. Don't login back just yet.
+
+- Go to XSA Cockpit application, assign the role collection "SHINE_ADMIN" to your user.
+
+- Now login back to shine web application to access all modules seamlessly.
+
 ## Deploy SHINE for XSA application with FLP  ##
 
 After doing the above steps,
 
+- Uncomment the site-web and site-content module code in mta.yaml
 - Right click on the shine project folder and select Build.
 - After successful build of the project, there will be a folder called **mta_archives** created in the workspace.
 - Expand the folder and right click on the file **com.sap.refapps.shine_1.x.x.mtar** present inside and select Export.
