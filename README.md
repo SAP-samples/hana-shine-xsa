@@ -1,5 +1,7 @@
 SHINE for SAP HANA Extended Application Services, Advanced Model
 ===============
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/hana-shine-xsa)](https://api.reuse.software/info/github.com/SAP-samples/hana-shine-xsa)
+
 ## What is it
 SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build applications on SAP HANA extended application services advanced model. This demo application is delivered as a package that contains sample data and design-time developer objects for the applications database tables, views, OData and user interface. SHINE is a Muti-Target Application (MTA) and follows the XS Advanced Programming Model
 
