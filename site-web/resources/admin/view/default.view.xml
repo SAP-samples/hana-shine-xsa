@@ -1,6 +1,0 @@
-<core:View controllerName="sap.hana.democontent.epm.admin.view.default" xmlns="sap.m"
-	xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core">
-	<core:Fragment fragmentName="sap.hana.democontent.epm.admin.view.settings" type="XML" />
-    <core:Fragment fragmentName="sap.hana.democontent.epm.admin.view.log" type="XML" /> 
-    <core:Fragment fragmentName="sap.hana.democontent.epm.admin.view.volumeChart" type="XML" /> 
-</core:View>

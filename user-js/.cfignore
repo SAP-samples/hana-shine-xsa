@@ -3,3 +3,4 @@ sql_trace.js
 logs
 temp
 config.json
+node_modules

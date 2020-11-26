@@ -1,15 +1,14 @@
 'use strict';
-
 module.exports = class {
 
 	static createConnection() {
 		return new Promise((resolve, reject) => {
 			const xsenv = require("@sap/xsenv");
-			var options = xsenv.filterCFServices({
+			const options = xsenv.filterCFServices({
 				plan: 'hdi-shared'
 			})[0].credentials;
 			options =  { 'hana': options };
-			var hdbext = require("@sap/hdbext");
+			const hdbext = require("@sap/hdbext");
 			options.hana.pooling = true;
 			hdbext.createConnection(options.hana, (error, client) => {
 				if (error) {

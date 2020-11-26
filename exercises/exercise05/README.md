@@ -19,11 +19,9 @@ In this exercise you will expose the Fuzzy Search as REST API using node.js.
 var express = require('express');
 
 var router = express.Router();
-var winston = require('winston');
 var logging = require('@sap/logging');
 var appContext = logging.createAppContext();
 var logger;
-winston.level = process.env.winston_level || 'error'
 
 router.get('/search/fulltextsearch', function (req, res) {
     var reqContext = appContext.createRequestContext(req);

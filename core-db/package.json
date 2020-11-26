@@ -1,10 +1,11 @@
 {
   "name": "deploy",
   "dependencies": {
-    "@sap/hdi-deploy": "3.11.5"
+    "@sap/hdi-deploy": "3.11.11"
   },
   "private": true,
   "scripts": {
     "start": "node node_modules/@sap/hdi-deploy/deploy.js"
-  }
+  },
+  "version": "1.3.11"
 }

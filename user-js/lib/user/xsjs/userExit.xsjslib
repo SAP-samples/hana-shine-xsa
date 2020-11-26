@@ -24,7 +24,7 @@ function my_create_after_exit(param) {
         console.log(LastName);
         console.log(Email);
 
-        pStmt = param.connection.prepareStatement("insert into \"UserData.User\" values('"+FirstName+"','"+LastName+"','"+Email+"')");
+        pStmt = param.connection.prepareStatement("insert into \"UserData.User\" values('"+PersNo+"','"+FirstName+"','"+LastName+"','"+Email+"')");
         // pStmt.setString(1, FirstName);
         // pStmt.setString(2, LastName);
         // pStmt.setString(3, Email);

@@ -1,14 +1,38 @@
----
 applications:
 - name: shine-web
-  host: web1
-  memory: 768M
+  disk_quota: 1G
+  path: .
   env:
-    destinations: >
-      [
-        {"name":"core-backend", "url":"https://trial-i321572-shine-core-js.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true},
-        {"name":"user-backend", "url":"https://trial-i321572-shine-user-js.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true},
-        {"name":"user-java-backend", "url":"https://trial-i321572-shine-user-java.cfapps.sap.hana.ondemand.com", "forwardAuthToken": true}
-      ]
+    DEPLOY_ATTRIBUTES: |-
+      {
+        "app-content-digest" : "FE9C53C03129D81E2F1B7E6FCD31C4EC"
+      }
+    MTA_METADATA: |-
+      {
+        "id" : "com.sap.refapps.shine",
+        "version" : "1.3.10"
+      }
+    MTA_MODULE_METADATA: |-
+      {
+        "name" : "shine-web"
+      }
+    MTA_MODULE_PROVIDED_DEPENDENCIES: '[ ]'
+    MTA_SERVICES: '[ "shine-uaa" ]'
+    destinations: |-
+      [ {
+        "forwardAuthToken" : true,
+        "name" : "core-backend",
+        "url" : "https://referenceappscf-sfcf-shine-core-js.cfapps.eu10.hana.ondemand.com"
+      }, {
+        "forwardAuthToken" : true,
+        "name" : "user-backend",
+        "url" : "https://referenceappscf-sfcf-shine-user-js.cfapps.eu10.hana.ondemand.com"
+      } ]
+    sapui5url: https://sapui5.hana.ondemand.com/1.44.8
+  instances: 1
+  memory: 1G
+  routes:
+  - route: referenceappscf-sfcf-shine-web.cfapps.eu10.hana.ondemand.com
   services:
-    - shine-uaa
+  - shine-uaa
+  stack: cflinuxfs3

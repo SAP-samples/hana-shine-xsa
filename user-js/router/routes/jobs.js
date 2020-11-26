@@ -1,23 +1,18 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
 "use strict";
-var express = require("express");
+const express = require("express");
 
-module.exports = function() {
-	var app = express.Router();
-
-	var winston = require('winston');
-	var util = require(global.__base + "utils/util");
-
-	var logger;
-
-	winston.level = process.env.winston_level || 'error';
+module.exports = () => {
+	const app = express.Router();
+	const util = require(global.__base + "utils/util");
+	let logger;
 
 	// method will delete all job data
-	app.delete('/deletedata', function(req, res) {
+	app.delete('/deletedata', (req, res) => {
 		logger = req.loggingContext.getLogger("/jobs/deletedata");
-		var query = 'truncate table "Jobs.Data"';
-		var client = req.db;
-		client.exec(query, function(error, rows) {
+		let query = 'truncate table "Jobs.Data"';
+		const client = req.db;
+		client.exec(query, (error, rows) => {
 			if (error) {
 				logger.error('Error occured' + error);
 				util.callback(error, res, "");
@@ -30,21 +25,20 @@ module.exports = function() {
 				}));
 			}
 		});
-
 	});
 
-	app.get('/getalljobs', function(req, res) {
+	app.get('/getalljobs', (req, res) => {
 		logger = req.loggingContext.getLogger("/jobs/getalljobs");
-		var client = req.db;
-		var query = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data"';
-		var jobArray = [];
-		var jobObj = {};
-		client.exec(query, function(error, rows) {
+		const client = req.db;
+		const query = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data"';
+		let jobArray = [];
+		let jobObj = {};
+		client.exec(query, (error, rows) => {
 			if (error) {
 				logger.error('Error occured' + error);
 				util.callback(error, res, "Job fetching failed");
 			} else {
-				for (var i in rows) {
+				for (let i in rows) {
 					jobObj = {
 						"Id": rows[i].ID,
 						"Name": rows[i].NAME,
@@ -52,33 +46,31 @@ module.exports = function() {
 					};
 					jobArray.push(jobObj);
 				}
-				res.writeHead(200, {
-					"Content-Type": "application/json"
-				});
+				res.writeHead(200, { "Content-Type": "application/json" });
 				res.end(JSON.stringify(jobArray));
 			}
 		});
 	});
 
-	app.get('/getjobsbyname/:name', function(req, res) {
+	app.get('/getjobsbyname/:name', (req, res) => {
 		logger = req.loggingContext.getLogger("/jobs/getjobsbyname");
-		var client = req.db;
-		var name = req.params.name;
-		var sql = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data" WHERE NAME =?';
-		var jobArray = [];
-		var jobObj = {};
-		client.prepare(sql, function(error, stmt) {
+		const client = req.db;
+		const name = req.params.name;
+		const sql = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data" WHERE NAME =?';
+		let jobArray = [];
+		let jobObj = {};
+		client.prepare(sql, (error, stmt) => {
 			if (error) {
 				logger.error('Error occured' + error);
 				util.callback(error, res, "Job fetching failed");
 			} else {
-				var params = [name];
-				stmt.exec(params, function(err, rows) {
+				let params = [name];
+				stmt.exec(params, (err, rows) => {
 					if (err) {
 						logger.error('Error occured' + err);
 						util.callback(err, res, "Job fetching failed");
 					} else {
-						for (var i in rows) {
+						for (let i in rows) {
 							jobObj = {
 								"Id": rows[i].ID,
 								"Name": rows[i].NAME,
@@ -86,9 +78,7 @@ module.exports = function() {
 							};
 							jobArray.push(jobObj);
 						}
-						res.writeHead(200, {
-							"Content-Type": "application/json"
-						});
+						res.writeHead(200, { "Content-Type": "application/json" });
 						res.end(JSON.stringify(jobArray));
 					}
 				});

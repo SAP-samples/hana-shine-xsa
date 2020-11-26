@@ -1,9 +1,9 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
 "use strict";
-var xsenv = require("@sap/xsenv");
+const xsenv = require("@sap/xsenv");
 
 module.exports = {
-	callback: function(error, res, message) {
+	callback: (error, res, message) => {
 		if (error) {
 			res.writeHead(500, {
 				'Content-Type': 'application/json'
@@ -20,8 +20,8 @@ module.exports = {
 			}));
 		}
 	},
-	appconfig: function() {
-        var services = xsenv.getServices({jobscheduler:{ tag: "jobscheduler" }}).jobscheduler;
+	appconfig: () => {
+		const services = xsenv.getServices({jobscheduler:{ tag: "jobscheduler" }}).jobscheduler;
 		return {
 			timeout: 15000,
     		user: services.user,
@@ -29,8 +29,8 @@ module.exports = {
     		baseURL: services.url
 		};
 	},
-	isAlphaNumeric: function(str) {
-		var code, i, len;
+	isAlphaNumeric: (str) => {
+		let code, i, len;
 		for (i = 0, len = str.length; i < len; i++) {
 			code = str.charCodeAt(i);
 			if (!(code > 47 && code < 58) && // numeric (0-9)
@@ -42,8 +42,8 @@ module.exports = {
 		return true;
 	},
 	
-	isAlphaNumericAndSpace: function(str) {
-		 var res = str.match(/^[a-z\d\-_\s]+$/i);
+	isAlphaNumericAndSpace: (str) => {
+		 const res = str.match(/^[a-z\d\-_\s]+$/i);
 		 if(res)
 		 {
 		 	return true ;
@@ -55,10 +55,8 @@ module.exports = {
 		
 	},
 
-	isValidDate: function(date) {
-		console.log("date"+date);
-		var timestamp = Date.parse(date);
-		console.log("timsestamp"+timestamp);
+	isValidDate: (date) => {
+		let timestamp = Date.parse(date);
 		if (isNaN(timestamp) === true) {
 			return false;
 		}

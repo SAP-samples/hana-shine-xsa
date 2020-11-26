@@ -1,20 +1,19 @@
 /*eslint no-console: 0, no-unused-vars: 0*/
 "use strict";
 module.exports = {
-	initExpress: function() {
-		var https = require('https');
-		var xssec = require('@sap/xssec');
-		var express = require('express');
-		var passport = require('passport');
-		var hdbext = require('@sap/hdbext'); 
-		var routes = require('../routes/index');
-		var winston = require('winston');
-		var xsenv = require('@sap/xsenv');
-		var PORT = process.env.PORT || 3000;
-		var app = express();
-		https.globalAgent.options.ca= xsenv.loadCertificates(); 
-		//log level
-		winston.level = process.env.winston_level || 'error';
+	initExpress: () => {
+		const https = require('https');
+		const xssec = require('@sap/xssec');
+		const express = require('express');
+		const passport = require('passport');
+		const hdbext = require('@sap/hdbext');
+		const logging = require('@sap/logging');
+		const xsenv = require('@sap/xsenv');
+
+		const routes = require('../routes/index');
+		const app = express();
+		// loads the trusted CA certificates so they are used for all subsequent outgoing HTTPS connections
+		https.globalAgent.options.ca= xsenv.loadCertificates();
 		
 		/**
 		 * Setup JWT authentication strategy
@@ -22,24 +21,17 @@ module.exports = {
 		 * by defining a user defined service called 'uaa'.
 		 */
 		passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({uaa:{tag:'xsuaa'}}).uaa));
-		
-		var logging = require('@sap/logging');
-		var appContext = logging.createAppContext();
+		// setting up logging middleware
+		const appContext = logging.createAppContext();
 		app.use(logging.middleware({ appContext: appContext, logNetwork: true }));
 		//use passport for authentication
 		app.use(passport.initialize());
-		
-		/*
-		 * Use JWT password policy for all routes. 
-		 *
-		 * use database connection pool provided by sap_hdb_conn
-		 * provides a db property containing the connection
-		 * object to the request object of all routes.
-		 */
-		 var hanaOptions = xsenv.getServices({	
+
+		let hanaOptions = xsenv.getServices({
 			hana: process.env.HANA_SERVICE_NAME || { tag: 'hana' }
 		}).hana;
-
+		
+		// @sap/hdbext provides a middleware which allows easy database connection creation
 		app.use('/',
 		    passport.authenticate('JWT', {session: false}),
 		    hdbext.middleware(hanaOptions),
@@ -47,15 +39,13 @@ module.exports = {
 		    routes.get,
 		    routes.reset);
 		
-		//start the HTTP server
-		
 		return app;
 	},
 
-	initXSJS: function(app) {
-		var xsjs = require("@sap/xsjs");
-		var xsenv = require("@sap/xsenv");
-			var options = {// anonymous : true, // remove to authenticate calls
+	initXSJS: (app) => {
+		const xsjs = require("@sap/xsjs");
+		const xsenv = require("@sap/xsenv");
+		let options = {// anonymous : true, // remove to authenticate calls
 			redirectUrl: "/index.xsjs"
 		};
 
@@ -83,14 +73,14 @@ module.exports = {
 		
 		//configure Audit log
 
-		try {
-			options = Object.assign(options, xsenv.getServices({ auditLog: {tag: "auditlog"} }));
-		} catch (err) {
-			console.log("[WARN]", err.message);
-		}
+		// try {
+		// 	options = Object.assign(options, xsenv.getServices({ auditLog: {tag: "auditlog"} }));
+		// } catch (err) {
+		// 	console.log("[WARN]", err.message);
+		// }
 		
 		// start server
-		var xsjsApp = xsjs(options);
+		const xsjsApp = xsjs(options);
 		app.use(xsjsApp);
 	}
 };

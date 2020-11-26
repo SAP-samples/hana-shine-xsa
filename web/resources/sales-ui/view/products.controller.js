@@ -77,7 +77,6 @@ sap.ui.controller("sap.hana.democontent.epm.salesdashboard.view.products", {
             } ]
         });
         dataset.setModel(oModel);
-        // dataset.bindData("/SalesByProduct");
         dataset.bindData({
                 path: "/SalesByProduct",
                 length: 1000

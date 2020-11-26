@@ -1,17 +1,16 @@
-/*eslint no-console: 0*/
 "use strict";
-var https= require('https');
-var express = require('express');
-var passport = require('passport');
-var xssec = require('@sap/xssec');
-var routes = require('./routes/index');
-var hdbext = require('@sap/hdbext');
-var bodyParser = require('body-parser');
-var logging = require('@sap/logging');
-var xsenv = require('@sap/xsenv');
-var appContext = logging.createAppContext();
-var app = express();
-var PORT = process.env.PORT || 3000;
+const https= require('https');
+const express = require('express');
+const passport = require('passport');
+const xssec = require('@sap/xssec');
+const routes = require('./routes/index');
+const hdbext = require('@sap/hdbext');
+const bodyParser = require('body-parser');
+const logging = require('@sap/logging');
+const xsenv = require('@sap/xsenv');
+const appContext = logging.createAppContext();
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 https.globalAgent.options.ca= xsenv.loadCertificates(); 
 
@@ -20,16 +19,16 @@ app.use(logging.expressMiddleware(appContext));
 app.use(bodyParser.json());
 //use passport for authentication
 app.use(passport.initialize());
-var hanaOptions = xsenv.getServices({	
+const hanaOptions = xsenv.getServices({	
 		hana: process.env.HANA_SERVICE_NAME || { tag: 'hana' }
 }).hana;
 
 app.use('/',hdbext.middleware(hanaOptions),
-           passport.authenticate('JWT', {session: false}),
-           routes.jobs,
-           routes.schedules,
-           routes.jobactivity);
+    passport.authenticate('JWT', {session: false}),
+    routes.jobs,
+    routes.schedules,
+    routes.jobactivity);
 //start the HTTP server
-app.listen(PORT, function () {
+app.listen(PORT, () => {
     console.log('Server running on http://localhost:' + PORT);
 });

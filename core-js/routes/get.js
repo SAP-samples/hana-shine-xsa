@@ -1,49 +1,33 @@
-var express = require('express');
-var async = require('async');
-var router = express.Router();
-var winston = require('winston');
-var util = require('./util');
-var logging = require('@sap/logging');
-var appContext = logging.createAppContext();
-var logger;
+const express = require('express');
+const async = require('async');
+const router = express.Router();
+const util = require('./util');
+let logger;
 
-winston.level = process.env.winston_level || 'error'
-router.get('/get/tablesize', function (req, res) {
-	console.log("inside get table size")
-    //var reqContext = appContext.createRequestContext(req);
+router.get('/get/tablesize', (req, res) => {
     logger = req.loggingContext.getLogger("/get/tablesize");
-    	
-    var client = req.db;
-    var query, rs, maxId;
-	console.log("inside get table size1")
+    const client = req.db;  // db client for issuing query
+    let query;
 	query = 'SELECT * from "getTableSize"()';
-	console.log("inside get table size2")
 	try {
-		client.exec(query, function(error, result) {
+		client.exec(query, (error, result) => {
 			if (error) {
-				console.log("inside get table size3")
 				logger.error("Error in getting table sizes" + error);
-				console.log("error "+error);
-				
 			} else {
-                console.log("result array in getTableSize "+JSON.stringify(result));
+                logger.info("result array in getTableSize "+JSON.stringify(result));
                 res.writeHead(200, {'Content-Type' : 'application/json'});
                 res.end(JSON.stringify(result));
-				console.log("inside get table size4")
             }
-    });
+        });
 	}catch (e) {
-		console.log("inside getTableSize error " + e.message);
+		logger.error("inside getTableSize error " + e.message);
 	}
 });
 
-router.get('/get/tablesize1', function (req, res) {
-    //var reqContext = appContext.createRequestContext(req);
-    //logger = reqContext.getLogger("/get/tablesize");
-    logger = req.loggingContext.getLogger("/get/tablesize");    
-    var client = req.db;
-	console.log("inside get table size5")
-    var tableDict = [{
+router.get('/get/tablesize1',  (req, res) => {
+    logger = req.loggingContext.getLogger("/get/tablesize1");
+    const client = req.db;
+    const tableDict = [{
         "tableName": "MD.Addresses",
         "tableSynonym": "Address"
     }, {
@@ -78,94 +62,92 @@ router.get('/get/tablesize1', function (req, res) {
         "tableSynonym": "Texts"
     }];
     async.parallel([
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[0].tableName,
                 tableDict[0].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[1].tableName,
                 tableDict[1].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[2].tableName,
                 tableDict[2].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[3].tableName,
                 tableDict[3].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[4].tableName,
                 tableDict[4].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[5].tableName,
                 tableDict[5].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[6].tableName,
                 tableDict[6].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[7].tableName,
                 tableDict[7].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[8].tableName,
                 tableDict[8].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[9].tableName,
                 tableDict[9].tableSynonym,
                 callback);
         },
-        function(callback) {
+        (callback) => {
             util.getTableInfo(client, 
                 tableDict[10].tableName,
                 tableDict[10].tableSynonym,
                 callback);
         }],
-        function(error, result) {
+        (error, result) => {
             if (error) {
                 res.writeHead(500, {'Content-Type' : 'text/plain'});
-                //console.log(error);
-                logger.info(error);
+                logger.error(error);
                 res.end(error.message);
             } else {
-                var combinedArray = [];
-                for (var i = 0; i < result.length; i++) {
+                let combinedArray = [];
+                for (let i = 0; i < result.length; i++) {
                     combinedArray.push(result[i][0]);
                 }
                 res.writeHead(200, {'Content-Type' : 'application/json'});
                 res.end(JSON.stringify(combinedArray));
             }
         }
-    );    
-    
+    );
 });
 
-router.get('/get/sessioninfo', function (req, res) {
+router.get('/get/sessioninfo', (req, res) => {
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify({userEncoded: encodeURI(JSON.stringify(req.user))}));
+    res.end(JSON.stringify({userEncoded: encodeURI(JSON.stringify(req.user))})); //user info in req.user
 });
 
 module.exports = router;

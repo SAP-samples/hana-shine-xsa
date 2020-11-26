@@ -1,22 +1,13 @@
-var express = require('express');
-var async = require('async');
+const express = require('express');
+const router = express.Router();
+const util = require('./util');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+let logger;
 
-var router = express.Router();
-var winston = require('winston');
-var util = require('./util');
-var logging = require('@sap/logging');
-var appContext = logging.createAppContext();
-var logger;
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
+const getMaxId = (idType, client, callback) => {
 
-winston.level = process.env.winston_level || 'error'
-	// method will pick records from SOShadow.Header and add to SO.Header
-	// and SOShadow.Item and add to SO.Item
-
-function getMaxId(idType, client, callback) {
-
-	var query, rs, maxId;
+	let query;
 	switch (idType) {
 		case "SalesOrderId":
 			query = 'SELECT "SALESORDERID" FROM "SO.Header" ORDER BY "SALESORDERID" DESC';
@@ -26,7 +17,7 @@ function getMaxId(idType, client, callback) {
 			break;
 	}
 	try {
-		client.exec(query, function(error, result) {
+		client.exec(query, (error, result) => {
 			if (error) {
 				logger.error("Error in max orderID generation" + error);
 			} else {
@@ -39,54 +30,47 @@ function getMaxId(idType, client, callback) {
 			}
 		});
 	} catch (e) {
-		console.log("inside getMaxId function error " + e.message);
+		logger.error("inside getMaxId function error " + e.message);
 	}
 
 }
 
-function createTimeBasedPO(startDates, batchSizes, totalSize, bpDict, prodDict, client, id, res,callback) {
+const createTimeBasedPO = (startDates, batchSizes, totalSize, bpDict, prodDict, client, id, res,callback) => {
 
-	var maxPoId = '';
-	var randProductIndex, randProduct, randPrice, randQuantity, randNetAmount = 0,
+	let maxPoId = '';
+	let randProductIndex, randProduct, randPrice, randQuantity, randNetAmount = 0,
 		randTaxAmount = 0,
 		randGrossAmount = 0,
 		randBPIndex, randBP;
-	var items = [];
-	var headers = [];
+	let items = [];
+	let headers = [];
 	try {
-		var i;
-		var queryHeaders = "";
-		var queryItems = "";
+		let i;
+		let queryHeaders = "";
+		let queryItems = "";
 		if(id === "PurchaseOrderId"){
-			//Insert statement for purchaseOrderItem table
-			console.log("inside poqueryheaders");
-			//Insert statement for purchaseOrderItem table
 			queryItems = "INSERT INTO \"PO.Item\" " +
 				"(\"PURCHASEORDERID\", \"PURCHASEORDERITEM\", \"PRODUCT.PRODUCTID\", \"NOTEID\", \"CURRENCY\", \"GROSSAMOUNT\", \"NETAMOUNT\", \"TAXAMOUNT\", \"QUANTITY\", \"QUANTITYUNIT\", \"DELIVERYDATE\") " +
 				"VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-
-			//Insert statement for purchaseOrderHeader table
-				queryHeaders = "INSERT INTO \"PO.Header\"" +
+			queryHeaders = "INSERT INTO \"PO.Header\"" +
 			"(\"PURCHASEORDERID\", \"HISTORY.CREATEDBY.EMPLOYEEID\", \"HISTORY.CREATEDAT\", \"HISTORY.CHANGEDBY.EMPLOYEEID\", \"HISTORY.CHANGEDAT\", \"NOTEID\", \"PARTNER.PARTNERID\", \"CURRENCY\", \"GROSSAMOUNT\", \"NETAMOUNT\", \"TAXAMOUNT\", \"LIFECYCLESTATUS\", \"APPROVALSTATUS\", \"CONFIRMSTATUS\", \"ORDERINGSTATUS\", \"INVOICINGSTATUS\" )" +
 				"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		}else if(id === "SalesOrderId"){	
-			//Insert statement for salesOrderItem table
+		}else if(id === "SalesOrderId"){
 			queryItems = "INSERT INTO \"SO.Item\" " + "(\"SALESORDERID\", \"SALESORDERITEM\", \"PRODUCT.PRODUCTID\", \"NOTEID\", \"CURRENCY\", \"GROSSAMOUNT\", \"NETAMOUNT\", \"TAXAMOUNT\",\"QUANTITY\", \"QUANTITYUNIT\", \"DELIVERYDATE\",\"ITEMATPSTATUS\",\"OPITEMPOS\") " + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			//Insert statement for salesOrderHeader table
 			queryHeaders = "INSERT INTO \"SO.Header\"" + "(\"SALESORDERID\", \"HISTORY.CREATEDBY.EMPLOYEEID\", \"HISTORY.CREATEDAT\", \"HISTORY.CHANGEDBY.EMPLOYEEID\", \"HISTORY.CHANGEDAT\", \"NOTEID\", \"PARTNER.PARTNERID\", \"CURRENCY\", \"GROSSAMOUNT\", \"NETAMOUNT\", \"TAXAMOUNT\", \"LIFECYCLESTATUS\", \"BILLINGSTATUS\", \"DELIVERYSTATUS\")" + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		}
-		var itemCounts = [];
-		var l;
-		var count;
-		var j;
-		var StartDateStr;
-		var BATCHSIZE;
-		var itemCount;
-		var productIDs;
-		var k;
-		var netAmountItem;
-		var taxAmountItem;
-		var grossAmountItem;
+		let itemCounts = [];
+		let l;
+		let count;
+		let j;
+		let StartDateStr;
+		let BATCHSIZE;
+		let itemCount;
+		let productIDs;
+		let k;
+		let netAmountItem;
+		let taxAmountItem;
+		let grossAmountItem;
 
 		for (l = 0; l < totalSize; l++) {
 			// Decide number of items, max 5
@@ -96,7 +80,7 @@ function createTimeBasedPO(startDates, batchSizes, totalSize, bpDict, prodDict, 
 		l = 0;
 
 		//Extract the max PO Id
-		getMaxId(id, client, function(maxId) {
+		getMaxId(id, client, (maxId) => {
 			
 			if (maxId === -1 && maxId === undefined) {
 				logger.error("Error in getMaxId" + maxId);
@@ -140,7 +124,6 @@ function createTimeBasedPO(startDates, batchSizes, totalSize, bpDict, prodDict, 
 							// calculate amounts
 							randQuantity = Math.floor((Math.random() * 9) + 1);
 							netAmountItem = parseInt((randQuantity * randPrice).toFixed(2), 10);
-							// console.log("netamountItem"+netAmountItem);
 							taxAmountItem = parseInt((netAmountItem * 0.19).toFixed(2), 10); // Taking 19% Tax
 							grossAmountItem = netAmountItem + taxAmountItem;
 
@@ -212,57 +195,47 @@ function createTimeBasedPO(startDates, batchSizes, totalSize, bpDict, prodDict, 
 					}
 				}
 
-
-				client.prepare(queryHeaders, function(errHeaderPrepare, statement) {
+				client.prepare(queryHeaders, (errHeaderPrepare, statement) => {
 					if (errHeaderPrepare) {
 						if(id === "PurchaseOrderId"){
-                        logger.error("Error in PO Header preparation");
-                        util.callback(errHeaderPrepare, statement, res, "Error in Header preparation");
-						return console.error('Prepare error in PO Headers:', errHeaderPrepare);
-						
+							util.callback(errHeaderPrepare, statement, res, "Error in Header preparation");
+							return logger.error('Prepare error in PO Headers:', errHeaderPrepare);
 						}
 						else
 						{
-							 logger.error("Error in SO Header preparation");
-							 util.callback(errHeaderPrepare, statement, res, "Error in Header preparation");
-							return console.error('Prepare error in SO Headers:', errHeaderPrepare);
+							util.callback(errHeaderPrepare, statement, res, "Error in Header preparation");
+							return logger.error('Prepare error in SO Headers:', errHeaderPrepare);
 						}
 					}
 
-					statement.exec(headers, function(errorHeaders, affectedRowsHeader) {
+					statement.exec(headers, (errorHeaders, affectedRowsHeader) => {
 						if (errorHeaders) {
-							 
-						    logger.error("Error in Header query execution");
 						    util.callback(errorHeaders, affectedRowsHeader, res, "Error in Header insertion");
 						    return logger.error('Exec error in PO Headers:'+id, errorHeaders);
 						} else {
 							logger.info("PoHeader row inserted");
 					
-						client.prepare(queryItems, function(errItemsPrepare, statement1) {
-							if (errItemsPrepare) {
-                                util.callback(errItemsPrepare, statement1, res, "Error in Items preparation");
-								return logger.error('Prepare error po Items:', errItemsPrepare);
-							}
-							
-							statement1.exec(items, function(errItems, affectedRowsItems) {
-								if (errItems) {
-									util.callback(errItems, affectedRowsItems, res, "Error in Items insertion");
-									return logger.error('Exec error in PO Items1:'+id, errItems);
+							client.prepare(queryItems, (errItemsPrepare, statement1) => {
+								if (errItemsPrepare) {
+									util.callback(errItemsPrepare, statement1, res, "Error in Items preparation");
+									return logger.error('Prepare error po Items:', errItemsPrepare);
 								}
-								callback("Success");
+								statement1.exec(items, (errItems, affectedRowsItems) => {
+									if (errItems) {
+										util.callback(errItems, affectedRowsItems, res, "Error in Items insertion");
+										return logger.error('Exec error in PO Items1:'+id, errItems);
+									}
+									callback("Success");
+								});
 							});
-
-						});
 						}
-
 					});
-
 				});
-
 			}
 		});
 
 	} catch (e) {
+		// flag - why xsjs code here ?
 		$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
 		$.response.setBody(e.message);
 	}
@@ -274,7 +247,7 @@ function createTimeBasedPO(startDates, batchSizes, totalSize, bpDict, prodDict, 
 	}
 }
 
-function callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, dates, batchSizes, prodDict, bpDict, client, id, res, cb) {
+const callCreateTimeBasedPo = (j, diffDays, thetaArray, StartDate, totalSize, dates, batchSizes, prodDict, bpDict, client, id, res, cb) => {
     
     //if thetaArray[j] === 0 and if its not the last loop then proceed to the next iteration
     try
@@ -291,9 +264,9 @@ function callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, da
 		return false;
 	}
 
-	var startDay = StartDate.getDate();
-	var startMonth = StartDate.getMonth() + 1; // Jan is 0
-	var startYear = StartDate.getFullYear();
+	let startDay = StartDate.getDate();
+	let startMonth = StartDate.getMonth() + 1; // Jan is 0
+	let startYear = StartDate.getFullYear();
 
 	if (startDay < 10) {
 		startDay = '0' + startDay;
@@ -301,14 +274,14 @@ function callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, da
 	if (startMonth < 10) {
 		startMonth = '0' + startMonth;
 	}
-	var StartDateStr = startYear.toString() + "-" + startMonth.toString() + "-" + startDay;
+	let StartDateStr = startYear.toString() + "-" + startMonth.toString() + "-" + startDay;
 
-	var BATCHSIZE = thetaArray[j];
+	let BATCHSIZE = thetaArray[j];
 	totalSize += BATCHSIZE;
 	dates.push(StartDateStr);
 	batchSizes.push(BATCHSIZE);
 	if (totalSize < 1000 || j === (diffDays - 1) && diffDays < 1000) {
-		createTimeBasedPO(dates, batchSizes, totalSize, bpDict, prodDict, client, id,res, function(msg) {
+		createTimeBasedPO(dates, batchSizes, totalSize, bpDict, prodDict, client, id,res, (msg) => {
 			if (msg != "Success") {
 				return false;
 
@@ -322,7 +295,6 @@ function callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, da
 				j = j + 1;
 				callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, dates, batchSizes, prodDict, bpDict, client,id, res, cb);
 			} else {
-				console.log("===================== Response==============");
 				cb();
 
 			}
@@ -345,52 +317,52 @@ function callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, da
 }
 
 
-router.post('/replicate/timebasedPO', jsonParser, function(req, res) {
-try
-{
-	var body = '';
-	var alpha = 0;
-	var thetaArray = [];
-	var i = 0;
-	var randNo = 0;
-	var j;
-	var calc;
-	var startDay, startMonth, startYear, StartDateStr, BATCHSIZE;
-	var client = req.db;
-	//var reqContext = appContext.createRequestContext(req);
+router.post('/replicate/timebasedPO', jsonParser, (req, res) => {
+  let totalRecords = (req.body.noRec) * 1000;
+  let startDay, startMonth, startYear, StartDateStr, BATCHSIZE;
+  let randNo = 0;
+  let alpha = 0;
+  try
+  {
+	let body = '';
+	let thetaArray = [];
+	let i = 0;
+	let j;
+	let calc;
+	const client = req.db;
 	logger = req.loggingContext.getLogger("/replicate/timebasedPO");
 	logger.info(' Time based Sales Data generation initiated');
-	console.log("Time based purchase Data generation initiated"+"+++++++++"+ req.body.id);
-	var bpDict = [];
-	var prodDict = [];
-	var totalRecords = (req.body.noRec) * 1000;
-	var id = req.body.id;
+	logger.info("Time based purchase Data generation initiated"+"+++++++++"+ req.body.id);
+	let bpDict = [];
+	let prodDict = [];
+	let id = req.body.id;
 	//get business partner details in an array bpDict
-	util.getBuinessPartners(client, function(errorinbp, businessPartners) {
-		var row;
+	util.getBuinessPartners(client, (errorinbp, businessPartners) => {
+		if(errorinbp) logger.error("PO /replicate/timeBasedPO 1 error: " + errorinbp);
+		let row;
 		for (row = 0; row < businessPartners.length; row++) {
 			bpDict.push(businessPartners[row].PARTNERID);
 		}
-    //get product details in an array prodDict
-	util.getProducts(client, function(errorinprod, products) {
-
+      //get product details in an array prodDict
+	  util.getProducts(client, (errorinprod, products) => {
+			if(errorinprod) logger.error("PO /replicate/timeBasedPO 2 error: " + errorinprod);
 			for (row = 0; row < products.length; row++) {
 				prodDict.push([products[row].PRODUCTID, products[row].PRICE]);
 			}
 
-			var aStartDate = req.body.startdate;
-			var aEndDate = req.body.enddate;
+			let aStartDate = req.body.startdate;
+			let aEndDate = req.body.enddate;
 			if (aStartDate) {
 				aStartDate = aStartDate.replace("'", "");
 			}
 			if (aEndDate) {
 				aEndDate = aEndDate.replace("'", "");
 			}
-			var StartDate = new Date(aStartDate);
-			var endDate = new Date(aEndDate);
-			var timeDiff = Math.abs(endDate.getTime() - StartDate.getTime());
-			var diffDays = (Math.ceil(timeDiff / (1000 * 3600 * 24))) + 1;
-			var aNoRec = encodeURI(req.body.noRec);
+			let StartDate = new Date(aStartDate);
+			let endDate = new Date(aEndDate);
+			let timeDiff = Math.abs(endDate.getTime() - StartDate.getTime());
+			let diffDays = (Math.ceil(timeDiff / (1000 * 3600 * 24))) + 1;
+			let aNoRec = encodeURI(req.body.noRec);
 
 			aNoRec = parseInt(aNoRec, 10) * 1000;
 			if (aNoRec === 0) {
@@ -422,14 +394,14 @@ try
 			if (aNoRec > 0) {
 				thetaArray[diffDays - 1] = +aNoRec || 0;
 			}
-			var totalSize = 0;
-			var dates = [],
+			let totalSize = 0;
+			let dates = [],
 				batchSizes = [];
 			j = 0;
 
-			callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, dates, batchSizes, prodDict, bpDict, client, id, res, function() {
+			callCreateTimeBasedPo(j, diffDays, thetaArray, StartDate, totalSize, dates, batchSizes, prodDict, bpDict, client, id, res, () => {
 				
-				var text = "";
+				let text = "";
 				if(id === "PurchaseOrderId"){
 					text = "Purchase Orders";
 				}else if(id === "SalesOrderId"){
@@ -439,50 +411,48 @@ try
 				
 			});
 
-		});
+	  });
 	});
-}
-catch(e)
-{
-		logger.error('Unexpected error occured'+e );
-}
-finally
-{
-
-alpha = null;
-	
-startDay= startMonth= startYear=StartDateStr= BATCHSIZE = totalRecords ==null;
+  }
+  catch(e)
+  {
+	logger.error('Unexpected error occured'+e );
+  }
+  finally
+  {
+	alpha = null;
+	startDay= startMonth= startYear=StartDateStr= BATCHSIZE == null;
 	randNo = null;
-}
+  }
 });
 
-router.get('/replicate/sales', function(req, res) {
-	//var reqContext = appContext.createRequestContext(req);
+router.get('/replicate/sales', (req, res) => {
 
 	logger = req.loggingContext.getLogger("/replicate/sales");
 	logger.info('Sales Data generation initiated');
 
-	var client = req.db;
-	var origTable = "SO.Header";
-	util.getTableInfo(client, origTable, origTable, function(error, response) {
-		var tableSize = response[0].RECORD_COUNT;
+	const client = req.db;
+	let origTable = "SO.Header";
+	util.getTableInfo(client, origTable, origTable, (error, response) => {
+		if(error) logger.error("PO /replicate/sales error: " + error);
+		let tableSize = response[0].RECORD_COUNT;
 		logger.info('Table size:' + tableSize);
-		var query = 'insert into "SO.Header" ' + 'SELECT TOP 1000 ' + "(\"SALESORDERID\" + " + tableSize + ') AS "SALESORDERID",' +
+		const query = 'insert into "SO.Header" ' + 'SELECT TOP 1000 ' + "(\"SALESORDERID\" + " + tableSize + ') AS "SALESORDERID",' +
 			' "HISTORY.CREATEDBY.EMPLOYEEID",	"HISTORY.CREATEDAT",' + ' "HISTORY.CHANGEDBY.EMPLOYEEID",	"HISTORY.CHANGEDAT",' +
 			' "NOTEID", "PARTNER.PARTNERID",	"CURRENCY",	"GROSSAMOUNT",' + '	"NETAMOUNT", "TAXAMOUNT", "LIFECYCLESTATUS", "BILLINGSTATUS",' +
 			'	"DELIVERYSTATUS" FROM "shadow::SOShadow.Header"';
-		client.exec(query, function(error, response) {
+		client.exec(query, (error, response) => {
 			if (error) {
 				logger.error("SO header Query execution error: " + error);
 				util.callback(error, response, res, "");
 			} else {
 				logger.info('SO header query executed successfully');
-				var salesOrdersAdded = response;
-				var query = 'insert into "SO.Item" ' + 'SELECT ' + "(\"SALESORDERID\" + " + tableSize + ') AS "SALESORDERID",' +
+				let salesOrdersAdded = response;
+				const query = 'insert into "SO.Item" ' + 'SELECT ' + "(\"SALESORDERID\" + " + tableSize + ') AS "SALESORDERID",' +
 					' "SALESORDERITEM", "PRODUCT.PRODUCTID", "NOTEID",' + ' "CURRENCY", "GROSSAMOUNT", "NETAMOUNT", "TAXAMOUNT",' +
 					' "ITEMATPSTATUS", "OPITEMPOS", "QUANTITY", "QUANTITYUNIT",' + ' "DELIVERYDATE" FROM "shadow::SOShadow.Item"' +
 					' WHERE "SALESORDERID" < 500001000';
-				client.exec(query, function(error, response) {
+				client.exec(query, (error, response) => {
 					if (error) {
 						logger.error("SO Item Query execution error: " + error);
 					} else {
@@ -499,30 +469,31 @@ router.get('/replicate/sales', function(req, res) {
 
 // method will pick records from POShadow.Header and add to PO.Header
 // and POShadow.Item to PO.Item
-router.get('/replicate/purchase', function(req, res) {
-	//var reqContext = appContext.createRequestContext(req);
+router.get('/replicate/purchase', (req, res) => {
+
 	logger = req.loggingContext.getLogger("/replicate/purchase");
 	logger.info('Purchase Data generation initiated');
-	var client = req.db;
-	var origTable = "PO.Header";
-	util.getTableInfo(client, origTable, origTable, function(error, response) {
-		var tableSize = response[0].RECORD_COUNT;
+	const client = req.db;
+	let origTable = "PO.Header";
+	util.getTableInfo(client, origTable, origTable, (error, response) => {
+		if(error) logger.error("PO /replicate/purchase error: " + error);
+		let tableSize = response[0].RECORD_COUNT;
 		logger.info('Table size:' + tableSize);
-		var query = 'insert into "PO.Header" ' + 'SELECT ' + "(\"PURCHASEORDERID\" + " + tableSize + ') AS "PURCHASEORDERID",' +
+		const query = 'insert into "PO.Header" ' + 'SELECT ' + "(\"PURCHASEORDERID\" + " + tableSize + ') AS "PURCHASEORDERID",' +
 			' "HISTORY.CREATEDBY.EMPLOYEEID",	"HISTORY.CREATEDAT",' + ' "HISTORY.CHANGEDBY.EMPLOYEEID",	"HISTORY.CHANGEDAT",' +
 			' "NOTEID", "PARTNER.PARTNERID",	"CURRENCY",	"GROSSAMOUNT",' + '	"NETAMOUNT", "TAXAMOUNT", "LIFECYCLESTATUS", "APPROVALSTATUS",' +
 			' "CONFIRMSTATUS", "ORDERINGSTATUS",' + '	"INVOICINGSTATUS" FROM "shadow::POShadow.Header"';
-		client.exec(query, function(error, response) {
+		client.exec(query, (error, response) => {
 			if (error) {
 				logger.error("PO header Query execution error: " + error);
 				util.callback(error, response, res, "");
 			} else {
 				logger.info("PO header Query execution successful");
-				var purchaseOrdersAdded = response;
-				var query = 'insert into "PO.Item" ' + 'SELECT ' + "(\"PURCHASEORDERID\" + " + tableSize + ') AS "PURCHASEORDERID",' +
+				let purchaseOrdersAdded = response;
+				const query = 'insert into "PO.Item" ' + 'SELECT ' + "(\"PURCHASEORDERID\" + " + tableSize + ') AS "PURCHASEORDERID",' +
 					' "PURCHASEORDERITEM", "PRODUCT.PRODUCTID", "NOTEID",' + ' "CURRENCY", "GROSSAMOUNT", "NETAMOUNT", "TAXAMOUNT",' +
 					' "QUANTITY", "QUANTITYUNIT",' + ' "DELIVERYDATE" FROM "shadow::POShadow.Item"';
-				client.exec(query, function(error, response) {
+				client.exec(query, (error, response) => {
 					if (error) {
 						logger.error("PO Item Query execution error: " + error);
 					} else {

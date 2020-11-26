@@ -1,13 +1,8 @@
-var express = require('express');
-var async = require('async');
-//var router = express.Router();
-var winston = require('winston');
-var util = require('./util');
-var app = express.Router();
+const express = require('express');
+const util = require('./util');
+const router = express.Router();
 
-winston.level = process.env.winston_level || 'error'
-app.get('/reset/soheader', function (req, res) {
-    console.log('reset so header triggered');
+router.get('/reset/soheader', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -17,8 +12,7 @@ app.get('/reset/soheader', function (req, res) {
     );
 });
 
-app.get('/reset/soitem', function (req, res) {
-    console.log('reset so item triggered');
+router.get('/reset/soitem', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -28,8 +22,7 @@ app.get('/reset/soitem', function (req, res) {
     );
 });
 
-app.get('/reset/poheader', function (req, res) {
-    console.log('reset po header triggered');
+router.get('/reset/poheader', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -39,8 +32,7 @@ app.get('/reset/poheader', function (req, res) {
     );
 });
 
-app.get('/reset/poitem', function (req, res) {
-    console.log('reset po item triggered');
+router.get('/reset/poitem', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -50,8 +42,7 @@ app.get('/reset/poitem', function (req, res) {
     );
 });
 
-app.get('/reset/addresses', function (req, res) {
-    console.log('reset addresses triggered');
+router.get('/reset/addresses', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -61,8 +52,7 @@ app.get('/reset/addresses', function (req, res) {
     );
 });
 
-app.get('/reset/partners', function (req, res) {
-    console.log('reset business partners triggered');
+router.get('/reset/partners', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -72,8 +62,7 @@ app.get('/reset/partners', function (req, res) {
     );
 });
 
-app.get('/reset/employees', function (req, res) {
-    console.log('reset employees triggered');
+router.get('/reset/employees', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -83,8 +72,7 @@ app.get('/reset/employees', function (req, res) {
     );
 });
 
-app.get('/reset/products', function (req, res) {
-    console.log('reset products triggered');
+router.get('/reset/products', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -94,8 +82,7 @@ app.get('/reset/products', function (req, res) {
     );
 });
 
-app.get('/reset/constants', function (req, res) {
-    console.log('reset constants triggered');
+router.get('/reset/constants', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -105,8 +92,7 @@ app.get('/reset/constants', function (req, res) {
     );
 });
 
-app.get('/reset/texts', function (req, res) {
-    console.log('reset texts triggered');
+router.get('/reset/texts', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -116,8 +102,7 @@ app.get('/reset/texts', function (req, res) {
     );
 });
 
-app.get('/reset/notes', function (req, res) {
-    console.log('reset notes triggered');
+router.get('/reset/notes', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -127,8 +112,7 @@ app.get('/reset/notes', function (req, res) {
     );
 });
 
-app.get('/reset/attachments', function (req, res) {
-    console.log('reset attachments triggered');
+router.get('/reset/attachments', (req, res) => {
     util.resetTable(
         req, 
         res,
@@ -138,4 +122,4 @@ app.get('/reset/attachments', function (req, res) {
     );
 });
 
-module.exports = app;
+module.exports = router;
