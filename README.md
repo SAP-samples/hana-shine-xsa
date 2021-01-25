@@ -59,7 +59,7 @@ You can read more about the SAP NPM Registry in "[SAP NPM Registry launched: Mak
 4. To install the MTA CF CLI Plugin open your CLI and run the command: `cf install-plugin <path to plugin download folder>/mta_plugin_<os-name>_amd64.exe|tar.gz`
 
 ## Build the Source Code
-1. Clone the SHINE code from this external repository to your local drive via Git or GitHub Desktop, the branch is **shine-cf**; alternatively, download and unpack the ZIP. If internal repository is cloned, the branch is **master** only.
+1. Clone the SHINE code from this  repository to your local drive via Git or GitHub Desktop, the branch is **shine-cf**; alternatively, download and unpack the ZIP. 
 2. Logon to your Cloud Foundry environment instance by following the steps explained [here](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/7a37d66c2e7d401db4980db0cd74aa6b.html)  
 *Please note: The Cloud Foundry API endpoints are listed [here](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/350356d1dc314d3199dca15bd2ab9b0e.html), for the Cloud Foundry environment in Frankfurt it's https://api.cf.eu10.hana.ondemand.com and for the Cloud Foundry environment in Virginia it's https://api.cf.us10.hana.ondemand.com.*
 > The Job Scheduler service is used by SHINE, therefore this needs to be available. Currently, the Job Scheduler service is only available in the Cloud Foundry environments in Frankfurt and Virginia, not in the beta in California. Therefore, the installation of SHINE into the Cloud Foundry environment in California would fail. Please install SHINE only in the Cloud Foundry environments in Frankfurt and Virginia.
