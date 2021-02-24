@@ -1,4 +1,4 @@
-SHINE for the Cloud Foundry Environment within SAP Cloud Platform (v1.3.11)
+SHINE for the Cloud Foundry Environment within SAP Business Technology Platform(v1.3.11)
 ===============
 SHINE is a Muti-Target Application (MTA) and follows the XS Advanced Programming Model. It consists of the following packages:
 
@@ -18,7 +18,7 @@ Architecture:
 
 ![Alt text](./images/SHINE-CF.jpg "Architecture")
 
-This repository contains a version of SHINE which is configured to run on the Cloud Foundry environment within SAP Cloud Platform. You can read more about the "[General Availability of the XS Advanced Programming Model with Cloud Foundry on SAP Cloud Platform](https://blogs.sap.com/2017/05/16/general-availability-of-the-xs-advanced-programming-model-with-cloud-foundry-on-sap-cloud-platform/)". The code base of SHINE that is used is version SHINE for XSA SAP HANA 2.0 SPS01. A blog post with the same instructions as in this readme can be found [here](https://blogs.sap.com/2017/07/10/deploying-shine-on-the-cloud-foundry-environment-within-sap-cloud-platform/).
+This repository contains a version of SHINE which is configured to run on the Cloud Foundry environment within SAP Business Technology Platform. You can read more about the "[General Availability of the XS Advanced Programming Model with Cloud Foundry on SAP Business Technology Platform](https://blogs.sap.com/2017/05/16/general-availability-of-the-xs-advanced-programming-model-with-cloud-foundry-on-sap-cloud-platform/)". The code base of SHINE that is used is version SHINE for XSA SAP HANA 2.0 SPS01. A blog post with the same instructions as in this readme can be found [here](https://blogs.sap.com/2017/07/10/deploying-shine-on-the-cloud-foundry-environment-within-sap-cloud-platform/).
 
 ## Setup Cloud MBT Build tool
 
