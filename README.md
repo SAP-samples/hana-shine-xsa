@@ -8,7 +8,7 @@ SAP HANA Interactive Education, or SHINE, is a demo application that makes it ea
 ## Overview
 This repository contains the source code for SHINE for SAP HANA Extended Application services, advanced Model (SHINE for XS Advanced)
 
-SHINE for XS Advanced can be run on SAP HANA Extended Application services, advanced Model (XS Advanced) on premise.  An adapted version of SHINE for CF Environment is available to be run on SAP Cloud Platform Cloud Foundry Environment Trial Landscapes
+SHINE for XS Advanced can be run on SAP HANA Extended Application services, advanced Model (XS Advanced) on premise.  An adapted version of SHINE for CF Environment is available to be run on SAP Business Technology Platform Cloud Foundry Environment Trial Landscapes
 
 ## Releases
 
@@ -31,7 +31,7 @@ For detailed description on each release follow the below links
 #### SHINE using HANA PAL
 - [SHINE-ML](https://github.com/SAP/hana-shine-xsa/blob/HANA2.0-SPS04-ml/README.md)
 
-### SAP Cloud Platform Cloud Foundry Environment
+### SAP Business Technology Platform Cloud Foundry Environment
 - [SHINE for CF Environment](https://github.com/SAP/hana-shine-xsa/blob/shine-cf/README.md)
 
 
