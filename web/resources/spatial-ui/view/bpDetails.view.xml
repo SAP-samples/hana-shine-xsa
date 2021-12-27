@@ -15,11 +15,11 @@
 						</sap.m:ObjectAttribute>
 					</sap.m:attributes>	
 					<sap.m:firstStatus>
-						<sap.m:ObjectStatus id="bpEmail" state="sap.ui.core.ValueState.None">
+						<sap.m:ObjectStatus id="bpEmail" state="None">
 						</sap.m:ObjectStatus>
 					</sap.m:firstStatus>
 					<sap.m:secondStatus>
-						<sap.m:ObjectStatus id="bpPhone" state="sap.ui.core.ValueState.None">
+						<sap.m:ObjectStatus id="bpPhone" state="None">
 						</sap.m:ObjectStatus>
 					</sap.m:secondStatus>
 				</sap.m:ObjectListItem>

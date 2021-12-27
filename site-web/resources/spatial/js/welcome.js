@@ -7,6 +7,8 @@ sap.account.WelcomeDialog = function(oFrameController, isSettings){
 };
 
 sap.account.WelcomeDialog.prototype.open = function() {
+	
+	var radioselectIndex = 0;
 
 	var oContent = new sap.ui.commons.layout.VerticalLayout({
 		height : "100%",
@@ -28,6 +30,115 @@ sap.account.WelcomeDialog.prototype.open = function() {
 	oContentMatrix.addRow(new sap.ui.commons.layout.MatrixLayoutRow({
 		height : '30px'
 	}));
+	
+	function setSelectedIndex(index) {
+
+		radioselectIndex = index;
+
+	}
+
+	function getSelectedIndex() {
+
+		return radioselectIndex;
+	}
+
+	function addDisclaimer() {
+
+		oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+		oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+			hAlign: sap.ui.commons.layout.HAlign.Left,
+			width: '100%'
+		});
+		/*oTextView = new sap.ui.core.HTML({
+        content: permissions,
+        width: '100%'
+    }); */
+
+		var oTextView = new sap.ui.commons.TextView({
+			text: sap.app.i18n.getText("DISCLAIMER"),
+			design: sap.ui.commons.TextViewDesign.H3,
+			width: '100%',
+			textAlign: sap.ui.core.TextAlign.Left,
+		});
+		oTextView.addStyleClass('dialogTextColor');
+		oCell.addContent(oTextView);
+
+		oTextView = new sap.m.TextArea({
+			value: sap.app.i18n.getText("DISCLAIMER_TEXT"),
+			rows: 10,
+			editable: false,
+			width: '100%'
+		});
+		oTextView.addStyleClass('sapUiSmallMarginTop');
+
+		oCell.addContent(oTextView);
+		oRow.addCell(oCell);
+		oContentMatrix.addRow(oRow);
+
+	}
+
+	function addDisclaimerButtons() {
+
+		oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+		oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+			hAlign: sap.ui.commons.layout.HAlign.Left,
+			width: '100%'
+		});
+		oRadioButtonGrp = new sap.m.RadioButtonGroup({
+			id: "rbgrp1",
+			columns: 5,
+			selectedIndex: 0,
+			width: '100%'
+
+		});
+		oRadioButtonGrp.addButton(new sap.m.RadioButton({
+			text: "Yes"
+		}))
+		oRadioButtonGrp.addButton(new sap.m.RadioButton({
+			text: "No"
+		}))
+
+		oRadioButtonGrp.attachEvent("select", function (event) {
+
+		var selectedIndex = event.getParameter("selectedIndex");
+			if(selectedIndex === 1){
+				appIdInput.setEnabled(false); 
+				appIdInput.setValue("");
+				appCodeInput.setEnabled(false);
+				appCodeInput.setValue("");
+			}
+			else
+			{
+				appIdInput.setEnabled(true); 
+				appCodeInput.setEnabled(true)
+			}
+			
+			setSelectedIndex(selectedIndex);
+		})
+
+		oRadioButtonGrp.addStyleClass('sapUiTinyMarginTop');
+
+		var oLabel = new sap.m.Label({
+			labelFor: "rbgrp1",
+			columns: "5",
+			text: sap.app.i18n.getText("ACCEPT")
+		});
+		oLabel.addStyleClass('sapUiSmallMarginTop');
+		oCell.addContent(oLabel);
+		oCell.addContent(oRadioButtonGrp);
+
+		oRow.addCell(oCell);
+		oContentMatrix.addRow(oRow);
+
+	}
+
+	addDisclaimer();
+	addDisclaimerButtons();
+	oContentMatrix.addRow(new sap.ui.commons.layout.MatrixLayoutRow({
+		height: '20px'
+	}));
+
+	oContentMatrix.addRow(createDividerRow());
 
 	oRow = new sap.ui.commons.layout.MatrixLayoutRow();
 
@@ -197,8 +308,24 @@ sap.account.WelcomeDialog.prototype.open = function() {
 		oContentMatrix.addRow(oRow);
 	
 		oContent.addContent(oContentMatrix);
+		
 	
+		
+		oContentMatrix.addRow(new sap.ui.commons.layout.MatrixLayoutRow({
+		height: '10px'
+	}));
+	
+	oContentMatrix.addRow(createDividerRow());
+	
+
 		var ok = function(oEvent) {
+			var showpopup = true;
+	        	if (getSelectedIndex() === 1) {
+
+				window.location.href = 'sites#Shell-home';
+				oWelcomeDialog.close();
+				showpopup = false;
+			}
 	        
 	        // store the user input in database
 	        if (appIdInput.getValue() != '' && appCodeInput.getValue() != '') {
@@ -276,7 +403,9 @@ sap.account.WelcomeDialog.prototype.open = function() {
 		        });
 	    		oWelcomeDialog.close();
 	        } else {
+		    if(showpopup){
 	            sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("WELCOME_INVALID_KEY"));
+		    }
 	        }
 	        
 			

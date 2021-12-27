@@ -1,4 +1,4 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS05
+SHINE for XS Advanced SAP HANA 2.0 SPS06
 ===============
 
 This release of the application consists of the following packages:
@@ -47,13 +47,13 @@ If the services are stopped, please contact the system administrator to start th
     `xs create-service xsuaa space shine-uaa -c xs-security.json`
 
 - Create Job Scheduler Service by executing the command in CLI of XSA system:
-  
+
     `xs cs jobscheduler default shine-scheduler`
 
 - Create Auditlog service by executing the following command:   
 
     `xs cs auditlog free shine-auditlog`
-    
+
 - Create HANA Secure store service by executing the following command:   
 
     `xs cs hana securestore secureStore`    
@@ -68,12 +68,12 @@ If the services are stopped, please contact the system administrator to start th
 
 Note: Before building the modules, the following two things have to be replaced in the mta.yaml:
 
-a)	UAA Endpoint 
+a)	UAA Endpoint
 
 b)	Controller Endpoint
-	
+
 For more details on how to do the above steps, please refer below:
-	
+
    a)	**UAA Endpoint**: Please replace the UAA end point URL in line 245 of mta.yaml to your respective UAA end point URL which will be of the format :
 
    `http(s)://<host-name >:3<instance-number>32/ uaa-security`
@@ -83,7 +83,7 @@ For more details on how to do the above steps, please refer below:
    For example in HANA express the UAA endpoint can be https://hxehost:39032/uaa-security
 
    b)   **Controller Endpoint**: Please replace the controller end point URL in line 255 of the mta.yaml file to your respective XS controller end point.
-   
+
    ` http(s)://<host name>:<xs controller port>`
 
    By default, the xs controller port is 3##30 where ## is the instance number
@@ -119,7 +119,7 @@ After doing the above steps,
 
 - Then deploy it using the following command:
 
-    `xs deploy com.sap.refapps.shine_1.8.x.mtar`
+    `xs deploy com.sap.refapps.shine_1.9.x.mtar`
 
    For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.05/en-US/0a1c5d829a074a8a889acd2ace444042.html)
 
@@ -133,8 +133,8 @@ After doing the above steps,
 
 ## Troubleshooting
 
-1. If the SHINE installation message fails with the message, 
-Error resolving merged descriptor properties and parameters: No configuration entries were found matching the filter specified in resource "sapui5-provider" 
+1. If the SHINE installation message fails with the message,
+Error resolving merged descriptor properties and parameters: No configuration entries were found matching the filter specified in resource "sapui5-provider"
 Install SAPUI5_FESV6 version 1.71 and reinstall SHINE.
 
 2. If the build of any module fails with the error message that looks like:   
@@ -147,7 +147,7 @@ You can also check the compatible versions of the libraries by right-clicking on
 ## Support
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)
 
-[SHINE XSA for HANA 2.0 SPS 05 Documentation ](https://help.sap.com/doc/13ff61e61a8f442090e27050dc61f019/2.0.05/en-US/SAP_HANA_Interactive_Education_SHINE_for_SAP_HANA_XS_Advanced_en_HANA2.0SPS05.pdf)
+[SHINE XSA for HANA 2.0 SPS 06 Documentation ](https://help.sap.com/viewer/shine-xsa/2.0.06/en-US)
 
 ## License
 [SAP SAMPLE CODE LICENSE AGREEMENT](LICENSE)
