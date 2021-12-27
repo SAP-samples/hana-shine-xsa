@@ -31,6 +31,7 @@ SELECT_BP=Select a marker to view its details
 SALES_DATA=Customer Sales Data
 REVEAL_COORDINATES=Please accept to reveal your coordinates
 LOCREQUIRED=Location Required
+ACCEPT=Accept?
 
 SALES_ANALYSIS=Sales Analysis
 SALES_REGION_DATA=Sales data for selected region
@@ -53,6 +54,10 @@ WELCOME_INVALID_KEY=Please provide valid App Code and App ID
 PRODUCT_SALES=Product Sales
 CHOOSE_PRODUCT=Choose a Product
 PRODUCT_SALES_YOY=Yearly sales for this product
+
+DISCLAIMER= Disclaimer
+DISCLAIMER_TEXT=The use of SHINE Spatial Demo requires certain voluntary map content and base map services provided by third party service providers (“Third-Party Map Services”).  We may facilitate your use of the Third-Party Map Services by providing hyperlinks or other methods to aid your access to and use of such third-party services.  While we endeavor to direct you to helpful, trustworthy third-party services, we cannot endorse, approve, or guarantee the software, information, products, or services provided by such third parties.  You shall determine the accuracy, completeness, timeliness, fitness for a particular purpose, appropriateness and lawfulness for your use of any Third-Party Map Services in connection with the SHINE Spatial Demo, and we are not liable for any loss or damage resulting from your use of, or any failure of, such Third-Party Map Services.  In particular, local laws and regulations may stipulate certain requirements or restrictions relating to Third-Party Map Services.  Please assess if such Third-Party Map Services is in compliance with local laws and regulations before you decide to activate or use the SHINE Spatial Demo. 
+
 
 help=Help
 settings=Settings

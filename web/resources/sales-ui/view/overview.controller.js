@@ -138,7 +138,8 @@ sap.ui.controller("sap.hana.democontent.epm.salesdashboard.view.overview", {
                     operator: sap.ui.model.FilterOperator.EQ,
                     value1: aFilter
                 }])
-            ]
+            ],
+            sorter: new sap.ui.model.Sorter("DISCOUNT")
            
         });
       

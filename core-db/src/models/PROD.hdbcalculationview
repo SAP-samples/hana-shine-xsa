@@ -323,7 +323,7 @@
     </input>
     <joinAttribute name="JOIN$ADDRESSES_ADDRESSID$ADDRESSID"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Product_Name" joinType="textTable" cardinality="C1_1" languageColumn="LANGUAGE">
+  <calculationView xsi:type="Calculation:JoinView" id="Product_Name" cardinality="CN_N" joinType="inner">
     <viewAttributes>
       <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>

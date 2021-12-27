@@ -10,7 +10,7 @@
   },
   "routes": [
      {
-      "source": "/resources/es/(.*)",
+      "source": "/sap/es/(.*)",
       "destination": "core-node-backend"
     },
 
