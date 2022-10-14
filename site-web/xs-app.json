@@ -5,7 +5,11 @@
 			"source": "^/resources/(.*)",
 			"target": "$1",
 			"localDir": "resources/",
-			"cacheControl": "public, max-age=31536000,must-revalidate"
+			"cacheControl": "public, max-age=31536000,must-revalidate",
+			"replace": {
+				"pathSuffixes": ["index.html"],
+				"vars": ["sapui5url"]
+			}
 		},
 		{
 			"source": "/node(.*)",
@@ -13,7 +17,6 @@
 			"csrfProtection": true,
 			"authenticationType": "xsuaa"
 		},
-		
 		{
 			"source": "/sap/rest/(.*)",
 			"destination": "uaa"

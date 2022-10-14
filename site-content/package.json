@@ -3,9 +3,9 @@
     "node": "12.x || 14.x"
   },
   "name": "shine-site-content",
-  "version": "1.9.0",
+  "version": "1.9.2",
   "dependencies": {
-    "@sap/site-content-deployer": "1.9.14"
+    "@sap/site-content-deployer": "1.9.16"
   },
   "scripts": {
     "start": "node --harmony node_modules/@sap/site-content-deployer/deploy.js"
