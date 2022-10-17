@@ -246,7 +246,7 @@ resources:
       config:
         siteId : com.sap.refapps.shine
 
-  - name: uaa 
+  - name: uaa
     properties:
       url: "https://<host>:3##32/uaa-security"
 

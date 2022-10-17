@@ -29,7 +29,7 @@
   "files": [],
   "main": "server.js",
   "name": "shine-core-node",
-    "scripts": {
+      "scripts": {
     "lint": "eslint -c .eslintrc --ignore-path .gitignore .",
     "start": "node server.js"
   },
