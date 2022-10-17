@@ -3,19 +3,19 @@
     "node": "12.x || 14.x"
   },
   "dependencies": {
-    "@sap/xssec": "3.2.10",
+    "@sap/xssec": "3.2.13",
     "@sap/xsenv": "3.1.1",
-    "@sap/hdbext": "7.4.0",
+    "@sap/hdbext": "7.6.4",
     "@sap/textbundle": "4.0.0",
     "@sap/logging": "6.0.3",
-    "@sap/audit-logging": "5.1.0",
+    "@sap/audit-logging": "5.5.4",
     "@sap/jobs-client": "1.6.1",
     "express": "4.17.1",
-    "passport": "0.5.0",
+    "passport": "0.6.0",
     "async": "3.2.1",
     "ws": "8.2.2",
     "accept-language-parser": "1.5.0",
-    "node-xlsx": "0.17.2",
+    "node-xlsx": "0.18.0",
     "node-zip": "1.1.1",
     "xmldoc": "1.1.2",
     "body-parser": "1.19.0",
@@ -33,5 +33,5 @@
     "lint": "eslint -c .eslintrc --ignore-path .gitignore .",
     "start": "node server.js"
   },
-  "version": "1.9.0"
+  "version": "1.9.2"
 }
