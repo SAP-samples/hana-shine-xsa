@@ -1,19 +1,19 @@
 {
   "dependencies": {
     "@sap/xsenv": "3.1.1",
-    "@sap/xsjs": "6.2.0",
-    "node-xlsx": "0.17.2",
+    "@sap/xsjs": "6.6.4",
+    "node-xlsx": "0.18.0",
     "node-zip": "1.1.1",
     "xmldoc": "1.1.2"
   },
   "files": [],
   "main": "server.js",
   "name": "shine-core-xsjs",
-      "scripts": {
+  "scripts": {
     "start": "node server.js"
   },
   "engines": {
     "node": "12.x || 14.x"
   },
-  "version": "1.9.0"
+  "version": "1.9.2"
 }

@@ -1,6 +1,6 @@
 _schema-version: '3.1.0'
 ID: com.sap.refapps.shine
-version: 1.9.0
+version: 1.9.2
 
 modules:
   - name: shine-user-db
@@ -83,6 +83,8 @@ modules:
     requires:
       - name: shine-uaa
       - name: sapui5-provider
+        properties: 
+           sapui5url: ~{url}
       - name: ui5Service 
         group: destinations 
         properties: 
@@ -169,10 +171,11 @@ modules:
           url: ~{url} 
           forwardAuthToken: true
       - name: sapui5-provider
+        properties: 
+           sapui5url: ~{url}
     properties:
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
-      httpHeaders: "[{\"Content-Security-Policy\" : \"style-src 'self' 'unsafe-inline' https://sapui5.hana.ondemand.com  https://*.api.here.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://sapui5.hana.ondemand.com https://*.api.here.com; connect-src 'self' https://sapui5.hana.ondemand.com  https://*.api.here.com\"}]"
-
+      httpHeaders: "[{ \"Content-Security-Policy-Report-Only\": \"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'\"}]"
   - name: shine-site-content
     type: com.sap.portal.site-content
     path: site-content
@@ -209,7 +212,9 @@ resources:
     type: com.sap.xs.hana-securestore
 
   - name: shine-uaa
-    type: org.cloudfoundry.existing-service
+    type: com.sap.xs.uaa-space
+    parameters:
+     config-path: xs-security.json
 
   - name: shine-scheduler
     type: com.sap.xs.job-scheduler
@@ -223,10 +228,11 @@ resources:
       container-name: ${service-name}
 
   - name: sapui5-provider
-    type: org.cloudfoundry.managed-service
+    type: configuration
     parameters:
-      service: sapui5_sb
-      service-plan: sapui5-1.71
+      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV6:sapui5_fesv6
+      version: '>=1.71.0'
+      provider-nid: mta
 
   - name: sap-portal-services-host
     type: com.sap.portal.site-host
@@ -240,8 +246,8 @@ resources:
       config:
         siteId : com.sap.refapps.shine
 
-  - name: uaa
-    properties:
+  - name: uaa 
+    properties: 
       url: "https://<host>:3##32/uaa-security"
 
   - name: ui5Service
