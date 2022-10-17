@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "@sap/xsenv": "3.1.1",
-    "@sap/xsjs": "6.6.4",
-    "node-xlsx": "0.18.0",
+    "@sap/xsjs": "6.2.0",
+    "node-xlsx": "0.17.2",
     "node-zip": "1.1.1",
     "xmldoc": "1.1.2"
   },
@@ -15,5 +15,5 @@
   "engines": {
     "node": "12.x || 14.x"
   },
-  "version": "1.9.2"
+  "version": "1.9.0"
 }
