@@ -7,7 +7,7 @@
   "dependencies": {
     "@sap/site-content-deployer": "1.9.14"
   },
-    "scripts": {
+      "scripts": {
     "start": "node --harmony node_modules/@sap/site-content-deployer/deploy.js"
   }
 }

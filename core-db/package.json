@@ -5,7 +5,7 @@
   "dependencies": {
     "@sap/hdi-deploy": "4.2.0"
   },
-    "scripts": {
+  "scripts": {
     "start": "node node_modules/@sap/hdi-deploy/deploy.js"
   }
 }
