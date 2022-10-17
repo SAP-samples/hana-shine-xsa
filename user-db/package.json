@@ -6,7 +6,7 @@
     "@sap/hdi-deploy": "4.3.3"
   },
   "private": true,
-  "scripts": {
+    "scripts": {
     "start": "node node_modules/@sap/hdi-deploy/deploy.js"
   }
 }

@@ -7,7 +7,7 @@
   "dependencies": {
     "@sap/site-entry": "1.9.38"
   },
-  "scripts": {
+    "scripts": {
     "start": "node --harmony node_modules/@sap/site-entry/server.js"
   }
 }
