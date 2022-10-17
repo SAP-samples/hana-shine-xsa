@@ -4,7 +4,7 @@
   },
   "dependencies": {
     "@sap/xsenv": "3.1.1",
-    "@sap/xsjs": "6.6.4"
+    "@sap/xsjs": "6.2.0"
   },
   "files": [],
   "main": "server.js",
@@ -12,5 +12,5 @@
   "scripts": {
     "start": "node server.js"
   },
-  "version": "1.9.2"
+  "version": "1.9.0"
 }
