@@ -9,7 +9,7 @@
   "files": [],
   "main": "server.js",
   "name": "shine-user-xsjs",
-  "scripts": {
+    "scripts": {
     "start": "node server.js"
   },
   "version": "1.9.0"

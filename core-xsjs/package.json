@@ -9,7 +9,7 @@
   "files": [],
   "main": "server.js",
   "name": "shine-core-xsjs",
-  "scripts": {
+    "scripts": {
     "start": "node server.js"
   },
   "engines": {

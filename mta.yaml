@@ -241,7 +241,7 @@ resources:
         siteId : com.sap.refapps.shine
 
   - name: uaa 
-    properties: 
+    properties:
       url: "https://<host>:3##32/uaa-security"
 
   - name: ui5Service
