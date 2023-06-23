@@ -1,4 +1,4 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS06
+SHINE for XS Advanced SAP HANA 2.0 SPS07
 ===============
 
 This release of the application consists of the following packages:
@@ -147,7 +147,7 @@ You can also check the compatible versions of the libraries by right-clicking on
 ## Support
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)
 
-[SHINE XSA for HANA 2.0 SPS 06 Documentation ](https://help.sap.com/viewer/shine-xsa/2.0.06/en-US)
+[SHINE XSA for HANA 2.0 SPS 07 Documentation ](https://help.sap.com/viewer/shine-xsa/2.0.06/en-US)
 
 ## License
 [SAP SAMPLE CODE LICENSE AGREEMENT](LICENSE)
