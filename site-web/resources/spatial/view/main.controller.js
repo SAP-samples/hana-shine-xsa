@@ -13,11 +13,9 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 	 */
 	getCachedView: function(viewName) {
 		if (!this.oViewCache[viewName]) {
-			 var oShell1 = this.getView().byId("myShell");
-        		var idd1 = oShell1.getId();
 			var fullViewName = "shine.democontent.epm.spatial.view" + "." + viewName;
 			this.oViewCache[viewName] = sap.ui.view({
-				id: idd1+viewName,
+				id: viewName,
 				viewName: fullViewName,
 				type: sap.ui.core.mvc.ViewType.XML
 			});
@@ -40,20 +38,20 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 	 * @memberOf shine_so.main
 	 */
 	onAfterRendering: function() {
-	var oController = this;
+		var oController = this;
 		var view = this.getView();
-		var oShell = view.byId("myShell");
-		var idd=oShell.getId();
+		var oShell = view.byId("main");
+
 		oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
-			id: idd+"nav-bpDetails",
+			id: "nav-bpDetails",
 			text: sap.app.i18n.getText("BP_DETAILS_TITLE")
 		}));
 		oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
-			id: idd+"nav-sales-analysis",
+			id: "nav-sales-analysis",
 			text: sap.app.i18n.getText("SALES_ANALYSIS")
 		}));
 		oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
-			id: idd+"nav-productsHeatMap",
+			id: "nav-productsHeatMap",
 			text: sap.app.i18n.getText("PRODUCT_SALES")
 		}));
 
@@ -61,62 +59,48 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 
 		// action when shell workset item are clicked
 		oShell.attachWorksetItemSelected(function(oEvent) {
-			var sViewName = oEvent.getParameter("id").replace(idd+"nav-", "");
-			//sViewName = sViewName.replace("main--", "");
+			var sViewName = oEvent.getParameter("id").replace("nav-", "");
+			sViewName = sViewName.replace("main--", "");
 			oShell.setContent(sap.app.mainController.getCachedView(sViewName));
 		});
 	    var userId = "";		
 		
 		var aUrl = '/sap/hana/democontent/epm/services/poWorklistQuery.xsjs?cmd=getSessionInfo';
-		var that = this;
 		var loggedUser = "";
+		var that = this;
+		
         jQuery.ajax({
             url: aUrl,
             method: 'GET',
             dataType: 'json',
             success: function(myJSON) {
             	userId = myJSON.session[0].UserName ;
-            
-            	  var appIdKey = userId+":appId";
-			        var appCodeKey = userId+":appCode";
-			        var cred = that.checkCredentials(appIdKey,appCodeKey);
+                jQuery.sap.require("jquery.sap.storage");
+            	//  oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
+			        var apiKeyKey = userId + ":apiKey";
+			        var cred = that.checkCredentials(apiKeyKey);
 			        
-			        if(cred.appID!==null&cred.appCode!==null)
-			        
+			        if(cred.apiKey!==null)
 			        {
+			         
 			        	console.log("cred"+JSON.stringify(cred));
-			        	var appId = atob(cred.appID);
-			         	var appCode = atob(cred.appCode);
-			         	var aUrl1 = "https://signature.venue.maps.api.here.com/venues/signature/v1?xnlp=CL_JSMv3.0.12.5&app_id="+appId+"&app_code="+appCode;
-					jQuery.ajax({
-						url: aUrl1,
-						method: 'GET',
-						success: function(jqXHR1){
-			        			sap.app.platform = new H.service.Platform({
-											'app_id': appId,
-											'app_code': appCode,
-											'useHTTPS': true
-										});
-							// initialize the view
-							// add initial shell content
+			        	var apiKey = atob(cred.apiKey);
+			         	try{
+							sap.app.platform = new H.service.Platform({
+								'apikey': apiKey
+							});
 							oShell.setContent(sap.app.mainController.getCachedView("bpDetails"));
-						},
-						error: function(jqXHR, textStatus, errorThrown){
-						jQuery.sap.require("sap.ui.commons.MessageBox");
-						sap.ui.commons.MessageBox.show("Please enter a valid appid and appcode. Please click YES inorder to update",
-							sap.ui.commons.MessageBox.Icon.ERROR,
-							"Invalid Evaluation Credentials",
-							[sap.ui.commons.MessageBox.Action.YES, sap.ui.commons.MessageBox.Action.NO],
-							function callback(sResult){
-							 	if(sResult === "YES"){
-									sap.app.mainController.openWelcomeDialog(true);
-							 	}
-							 },
+						}catch(e){
+							jQuery.sap.require("sap.ui.commons.MessageBox");
+							sap.ui.commons.MessageBox.show("Please enter a valid API Key. Please click YES inorder to update",sap.ui.commons.MessageBox.Icon.ERROR,"Invalid Evaluation Credentials",
+								[sap.ui.commons.MessageBox.Action.YES, sap.ui.commons.MessageBox.Action.NO],
+									 function callback(sResult){
+									 	if(sResult === "YES"){
+											sap.app.mainController.openWelcomeDialog(true);
+									 	}
+									},
 							sap.ui.commons.MessageBox.Action.YES);
-							// handleError: function(){
-							// 	alert("inside error");   
-							// }
-						}});
+						}	
 			        }
 			        else
 			        {
@@ -145,14 +129,10 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 		var welcomeDialog = new sap.account.WelcomeDialog(oController, isSettings);
 		welcomeDialog.open();
 	},
-
-	/**
-	 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-	 * @memberOf shine_so.main
-	 */
-        checkCredentials: function(appIdKey,appCodeKey)
+    
+    checkCredentials: function(apiKeyKey)
     {    
-    	 var config = appIdKey+"@"+appCodeKey;
+    	 var config = apiKeyKey;
     	 console.log("config"+config);
     	 var results;
     	 var read_url = "/sap/hana/democontent/epm/services/secureStore.xsjs?cmd=read&query="+config;
@@ -172,6 +152,10 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 		        });
 		        return results;
     },
+	/**
+	 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
+	 * @memberOf shine_so.main
+	 */
 	onExit: function() {
 
 	}

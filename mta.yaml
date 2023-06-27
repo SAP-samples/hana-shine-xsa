@@ -1,6 +1,6 @@
 _schema-version: '3.1.0'
 ID: com.sap.refapps.shine
-version: 1.9.2
+version: 1.9.5
 
 modules:
   - name: shine-user-db
@@ -214,7 +214,8 @@ resources:
   - name: shine-uaa
     type: com.sap.xs.uaa-space
     parameters:
-     config-path: xs-security.json
+      path: xs-security.json
+      service-name: shine-uaa
 
   - name: shine-scheduler
     type: com.sap.xs.job-scheduler

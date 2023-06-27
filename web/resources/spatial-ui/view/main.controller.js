@@ -77,46 +77,30 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
             	userId = myJSON.session[0].UserName ;
                 jQuery.sap.require("jquery.sap.storage");
             	//  oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
-			        var appIdKey = userId+":appId";
-			        var appCodeKey = userId+":appCode";
-			        var cred = that.checkCredentials(appIdKey,appCodeKey);
+			        var apiKeyKey = userId + ":apiKey";
+			        var cred = that.checkCredentials(apiKeyKey);
 			        
-			        if(cred.appID!==null&cred.appCode!==null)
+			        if(cred.apiKey!==null)
 			        {
 			         
 			        	console.log("cred"+JSON.stringify(cred));
-			        	var appId = atob(cred.appID);
-			         	var appCode = atob(cred.appCode);
-			         	var aUrl1 = "https://signature.venue.maps.api.here.com/venues/signature/v1?xnlp=CL_JSMv3.0.12.5&app_id="+appId+"&app_code="+appCode;
-					    jQuery.ajax({
-						url: aUrl1,
-						method: 'GET',
-						success: function(jqXHR1){
-			        			sap.app.platform = new H.service.Platform({
-											'app_id': appId,
-											'app_code': appCode,
-											'useHTTPS': true
-										});
-							// initialize the view
-							// add initial shell content
+			        	var apiKey = atob(cred.apiKey);
+			         	try{
+							sap.app.platform = new H.service.Platform({
+								'apikey': apiKey
+							});
 							oShell.setContent(sap.app.mainController.getCachedView("bpDetails"));
-			        		},
-			        		error: function(jqXHR, textStatus, errorThrown){
+						}catch(e){
 							jQuery.sap.require("sap.ui.commons.MessageBox");
-							sap.ui.commons.MessageBox.show("Please enter a valid appid and appcode. Please click YES inorder to update",
-									sap.ui.commons.MessageBox.Icon.ERROR,
-									"Invalid Evaluation Credentials",
-									[sap.ui.commons.MessageBox.Action.YES, sap.ui.commons.MessageBox.Action.NO],
+							sap.ui.commons.MessageBox.show("Please enter a valid API Key. Please click YES inorder to update",sap.ui.commons.MessageBox.Icon.ERROR,"Invalid Evaluation Credentials",
+								[sap.ui.commons.MessageBox.Action.YES, sap.ui.commons.MessageBox.Action.NO],
 									 function callback(sResult){
 									 	if(sResult === "YES"){
 											sap.app.mainController.openWelcomeDialog(true);
 									 	}
 									},
-									sap.ui.commons.MessageBox.Action.YES);
-							// handleError: function(){
-							// 	alert("inside error");   
-							// }
-						}});
+							sap.ui.commons.MessageBox.Action.YES);
+						}	
 			        }
 			        else
 			        {
@@ -146,9 +130,9 @@ sap.ui.controller("shine.democontent.epm.spatial.view.main", {
 		welcomeDialog.open();
 	},
     
-    checkCredentials: function(appIdKey,appCodeKey)
+    checkCredentials: function(apiKeyKey)
     {    
-    	 var config = appIdKey+"@"+appCodeKey;
+    	 var config = apiKeyKey;
     	 console.log("config"+config);
     	 var results;
     	 var read_url = "/sap/hana/democontent/epm/services/secureStore.xsjs?cmd=read&query="+config;

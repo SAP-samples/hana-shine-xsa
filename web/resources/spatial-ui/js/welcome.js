@@ -287,28 +287,28 @@ sap.account.WelcomeDialog.prototype.open = function () {
 			hAlign: sap.ui.commons.layout.HAlign.Left,
 			width: '100%'
 		});
-		var appIdInput = new sap.ui.commons.TextField({
-			placeholder: sap.app.i18n.getText("WELCOME_INPUT_APPID"),
+		var apiKeyInput = new sap.ui.commons.TextField({
+			placeholder: sap.app.i18n.getText("WELCOME_INPUT_APIKEY"),
 			width: '100%'
 		});
-		oCell.addContent(appIdInput);
+		oCell.addContent(apiKeyInput);
 		oRow.addCell(oCell);
 		oContentMatrix.addRow(oRow);
 
 		// add APP Code input
-		oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+		// oRow = new sap.ui.commons.layout.MatrixLayoutRow();
 
-		oCell = new sap.ui.commons.layout.MatrixLayoutCell({
-			hAlign: sap.ui.commons.layout.HAlign.Left,
-			width: '100%'
-		});
-		var appCodeInput = new sap.ui.commons.TextField({
-			placeholder: sap.app.i18n.getText("WELCOME_INPUT_APPCODE"),
-			width: '100%'
-		});
-		oCell.addContent(appCodeInput);
-		oRow.addCell(oCell);
-		oContentMatrix.addRow(oRow);
+		// oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+		// 	hAlign: sap.ui.commons.layout.HAlign.Left,
+		// 	width: '100%'
+		// });
+		// var appCodeInput = new sap.ui.commons.TextField({
+		// 	placeholder: sap.app.i18n.getText("WELCOME_INPUT_APPCODE"),
+		// 	width: '100%'
+		// });
+		// oCell.addContent(appCodeInput);
+		// oRow.addCell(oCell);
+		// oContentMatrix.addRow(oRow);
 
 		oContent.addContent(oContentMatrix);
 
@@ -322,7 +322,7 @@ sap.account.WelcomeDialog.prototype.open = function () {
 			}
 
 			// store the user input in database
-			if (appIdInput.getValue() != '' && appCodeInput.getValue() != '') {
+			if (apiKeyInput.getValue() != '') {
 
 				// handle xsrf token
 				// first obtain token using Fetch
@@ -342,17 +342,13 @@ sap.account.WelcomeDialog.prototype.open = function () {
 				});
 
 				var entry = {};
-				var appIdInputValue = appIdInput.getValue();
-				var appCodeInputValue = appCodeInput.getValue();
-
-				entry.APP_ID = btoa(appIdInputValue);
-				entry.APP_CODE = btoa(appCodeInputValue);
+				var apiKeyInputValue = apiKeyInput.getValue();
+				entry.API_KEY = btoa(apiKeyInputValue);
 
 				var userId = "";
 				var aUrl = '/sap/hana/democontent/epm/services/poWorklistQuery.xsjs?cmd=getSessionInfo';
 				var loggedUser = "";
-				var appIdKey;
-				var appCodeKey;
+				var apiKeyKey;
 				jQuery.ajax({
 					url: aUrl,
 					method: 'GET',
@@ -362,21 +358,15 @@ sap.account.WelcomeDialog.prototype.open = function () {
 						userId = myJSON.session[0].UserName;
 
 						location.reload();
-						// oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
-						appIdKey = userId + ":appId";
-						appCodeKey = userId + ":appCode";
-						//  oStorage.put(appIdKey, entry.APP_ID);
-						// oStorage.put(appCodeKey, entry.APP_CODE);
+						apiKeyKey = userId + ":apiKey";
 					},
 					error: function (err) {
 						sap.ui.commons.MessageBox.alert("Unexpected Error" + err + "Please check the application logs for more details");
 					}
 				});
 				var secureStore = {};
-				secureStore.appIdKey = appIdKey;
-				secureStore.appCodeKey = appCodeKey;
-				secureStore.appId = entry.APP_ID;
-				secureStore.appCode = entry.APP_CODE;
+				secureStore.apiKeyKey = apiKeyKey;
+				secureStore.apiKey = entry.API_KEY;
 
 				jQuery.ajax({
 					url: "/sap/hana/democontent/epm/services/secureStore.xsjs?cmd=store",

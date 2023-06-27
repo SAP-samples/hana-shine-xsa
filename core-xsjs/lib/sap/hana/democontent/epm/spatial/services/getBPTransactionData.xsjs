@@ -1,4 +1,4 @@
-function getData() {
+async function getData() {
     // encodeURI to avoud injection attacks
     var bpId = encodeURI($.request.parameters.get('bpId'));
         //for distance calculation
@@ -8,16 +8,16 @@ function getData() {
     var userLongitude = encodeURI($.request.parameters.get('userlong'));
     var output = {};
     var entry;
-    var conn = $.hdb.getConnection();
+    var conn = await $.hdb.getConnection();
     // get total sales amount
     var query = 
         'select sum(GROSSAMOUNT) as AMOUNT from ' 
         + '"SO.Header" ' 
         + 'where "PARTNER.PARTNERID" = ?';
-    var rs = conn.executeQuery(query, bpId);
+    var rs = await conn.executeQuery(query, bpId);
 
     if (rs.length < 1) {
-        $.response.setBody("Failed to retieve data");
+        await $.response.setBody("Failed to retieve data");
         $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
     } else {
         output.salesTotal = rs[0].AMOUNT;
@@ -31,10 +31,10 @@ function getData() {
             + 'where "PARTNER.PARTNERID" = ?' + ' group by ' 
             + 'YEAR("HISTORY.CREATEDAT") order by YEAR("HISTORY.CREATEDAT")';
         
-        rs = conn.executeQuery(query, bpId);
+        rs = await conn.executeQuery(query, bpId);
 
         if (rs.length < 1) {
-            $.response.setBody("Failed to retieve data");
+            await $.response.setBody("Failed to retieve data");
             $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
         } else {
 
@@ -55,10 +55,10 @@ function getData() {
         //for distance calculation
       query = 'select NEW ST_Point(\'POINT(' + userLongitude + " " + userLatitude + ')\',4326 ).ST_Distance( NEW ST_Point(\'POINT(' + longitude + " " + latitude + ')\',4326 ),\'meter\')'+
              'AS DISTANCE  from "sap.hana.democontent.epm.spatial.models::BP_ADDRESS_DETAILS"';
-    rs = conn.executeQuery(query);
+    rs = await conn.executeQuery(query);
     }
     if(rs.length < 1){
-    	$.response.setBody("failed to retrieve data");
+    	await $.response.setBody("failed to retrieve data");
     	$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
     }
     else
@@ -66,9 +66,9 @@ function getData() {
     	output.distance=rs[0].DISTANCE;
     	}
 
-    conn.close();
+    await conn.close();
 
-    $.response.setBody(JSON.stringify(output));
+    await $.response.setBody(JSON.stringify(output));
     $.response.contentType = "application/json";
     $.response.status = $.net.http.OK;
 }
@@ -76,9 +76,10 @@ function getData() {
 var aCmd = $.request.parameters.get('cmd');
 switch (aCmd) {
     case "getData":
-        getData();
+        await getData();
         break;
     default:
         $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-        $.response.setBody('Invalid Command: ' + aCmd);
+       await $.response.setBody('Invalid Command: ' + aCmd);
 }
+export default {getData,aCmd};

@@ -48,6 +48,7 @@ WELCOME_LINK_INFO_TITLE=For more information about the keys check this link
 WELCOME_INPUT_TITLE=Provide you key here
 WELCOME_INPUT_APPID=App ID
 WELCOME_INPUT_APPCODE=App Code
+WELCOME_INPUT_APIKEY=API Key
 WELCOME_SUBMIT=Submit
 WELCOME_INVALID_KEY=Please provide valid App Code and App ID
 

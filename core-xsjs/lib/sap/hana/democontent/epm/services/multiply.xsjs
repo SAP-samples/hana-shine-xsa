@@ -1,4 +1,4 @@
-function performMultiply() {
+async function performMultiply() {
     var body = "";
     var num1 = $.request.parameters.get("num1");
     var num2 = $.request.parameters.get("num2");
@@ -8,7 +8,7 @@ function performMultiply() {
 
     body = answer.toString();
 
-    $.response.setBody(body);
+    await $.response.setBody(body);
     $.response.status = $.net.http.OK;
     
 }
@@ -16,9 +16,10 @@ function performMultiply() {
 var aCmd = $.request.parameters.get("cmd");
 switch (aCmd) {
     case "multiply":
-        performMultiply();
+        await performMultiply();
         break;
     default:
         $.response.status = $.net.http.BAD_REQUEST;
-        $.response.setBody("Invalid Command");
+        await $.response.setBody("Invalid Command");
 }
+export default {performMultiply,aCmd};

@@ -1,4 +1,4 @@
-function stringsBasic(){
+async function stringsBasic(){
 	var body = ''; 
 	var demo1 = 'SAP HANA Extended Application Services';
 	
@@ -23,8 +23,9 @@ function stringsBasic(){
 	
 	$.response.status = $.net.http.OK;
 	$.response.contentType = "text/html";
-	$.response.setBody(body);
+	await $.response.setBody(body);
 	
 }
 
-stringsBasic();
+await stringsBasic();
+export default {stringsBasic};

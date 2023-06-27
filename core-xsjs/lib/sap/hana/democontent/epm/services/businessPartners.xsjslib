@@ -1,4 +1,4 @@
-$.import("sap.hana.democontent.epm.services", "session");
+await $.import("sap.hana.democontent.epm.services", "session");
 var SESSIONINFO = $.sap.hana.democontent.epm.services.session;
 
 function validateEmail(email) {
@@ -7,13 +7,13 @@ function validateEmail(email) {
 	return re.test(email);
 }
 
-function bpCreateBusinessPartner(param, partnerRole) {
+async function bpCreateBusinessPartner(param, partnerRole) {
 
 	var afterTable = param.afterTableName;
 	//Get Input New Record Values
-	var pStmt = param.connection.prepareStatement("select * from \"" + afterTable + "\"");
-	var input = SESSIONINFO.recordSetToJSON(pStmt.executeQuery(), "Details");
-	pStmt.close();
+	var pStmt = await param.connection.prepareStatement("select * from \"" + afterTable + "\"");
+	var input = await SESSIONINFO.recordSetToJSON(await pStmt.executeQuery(), "Details");
+	await pStmt.close();
 
 	//Validate Email
 	if (!validateEmail(input.Details[0].EmailAddress)) {
@@ -24,14 +24,14 @@ function bpCreateBusinessPartner(param, partnerRole) {
 	//insert addresss
 	try {
 
-		pStmt = param.connection.prepareStatement("select \"addressSeqId\".NEXTVAL from dummy");
-		var rs = pStmt.executeQuery();
+		pStmt = await param.connection.prepareStatement("select \"addressSeqId\".NEXTVAL from dummy");
+		var rs = await pStmt.executeQuery();
 		var AddressId = "";
-		while (rs.next()) {
+		while (await rs.next()) {
 			AddressId = rs.getString(1);
 		}
-		pStmt.close();
-		pStmt = param.connection.prepareStatement("INSERT INTO \"MD.Addresses\" " +
+		await pStmt.close();
+		pStmt = await param.connection.prepareStatement("INSERT INTO \"MD.Addresses\" " +
 		                   " (ADDRESSID, ADDRESSTYPE, CITY, COUNTRY, REGION, \"VALIDITY.STARTDATE\", \"VALIDITY.ENDDATE\") "+
 		                   " VALUES( ?,?,?,?,?, TO_DATE('2000-01-01', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD') )");
 		pStmt.setString(1, AddressId.toString());
@@ -39,11 +39,8 @@ function bpCreateBusinessPartner(param, partnerRole) {
 		pStmt.setString(3, input.Details[0].City);
 		pStmt.setString(4, input.Details[0].Country);	
 		pStmt.setString(5, input.Details[0].Region);		
-
-		 
-		pStmt.execute();
-		pStmt.close();
-
+		await pStmt.execute();
+		await pStmt.close();
 	} catch (e) {
 		console.error(e);
 		throw e; 
@@ -52,15 +49,14 @@ function bpCreateBusinessPartner(param, partnerRole) {
 //Business Partner
 	try {
 
-		pStmt = param.connection.prepareStatement("select \"partnerSeqId\".NEXTVAL from DUMMY");
-		
-		rs = pStmt.executeQuery();
+		pStmt = await param.connection.prepareStatement("select \"partnerSeqId\".NEXTVAL from DUMMY");
+		rs = await pStmt.executeQuery();
 		var PartnerId = "";
-		while (rs.next()) {
+		while (await rs.next()) {
 			PartnerId = rs.getString(1);
 		}
-		pStmt.close();
-		pStmt = param.connection.prepareStatement("INSERT INTO  \"MD.BusinessPartner\" " +
+		await pStmt.close();
+		pStmt = await param.connection.prepareStatement("INSERT INTO  \"MD.BusinessPartner\" " +
 		             " (PARTNERID, PARTNERROLE, \"HISTORY.CREATEDAT\", \"HISTORY.CHANGEDAT\", \"ADDRESSES.ADDRESSID\", EMAILADDRESS, COMPANYNAME  ) " +
 		             " values(?, ?, now(), now(), ?, ?, ?)");
 		pStmt.setString(1, PartnerId.toString());	
@@ -68,10 +64,8 @@ function bpCreateBusinessPartner(param, partnerRole) {
 		pStmt.setString(3, AddressId.toString());		
 		pStmt.setString(4, input.Details[0].EmailAddress);
 		pStmt.setString(5, input.Details[0].CompanyName);
-		pStmt.execute();
-		pStmt.close();
-
-		
+		await pStmt.execute();
+		await pStmt.close();
 	}
 	catch (e) {
 		console.error(e);
@@ -80,10 +74,11 @@ function bpCreateBusinessPartner(param, partnerRole) {
 
 }
 
-function bpCreateBuyer(param) {
-	bpCreateBusinessPartner(param, "1");
+async function bpCreateBuyer(param) {
+	await bpCreateBusinessPartner(param, "1");
 }
 
-function bpCreateSupplier(param) {
-	bpCreateBusinessPartner(param, "2");
+async function bpCreateSupplier(param) {
+	await bpCreateBusinessPartner(param, "2");
 }
+export default {SESSIONINFO,validateEmail,bpCreateBusinessPartner,bpCreateBuyer,bpCreateSupplier};

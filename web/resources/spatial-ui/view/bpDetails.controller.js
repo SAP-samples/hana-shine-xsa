@@ -32,7 +32,7 @@ sap.ui.controller("shine.democontent.epm.spatial.view.bpDetails", {
 		// Instantiate (and display) a map object:
 		var map = new H.Map(
 			document.getElementById("bpDetails--splitter0_firstPane"),
-			defaultLayers.normal.map, {
+			defaultLayers.vector.normal.map, {
 				zoom: 2,
 				center: {
 					lat: 0.0,

@@ -4,4 +4,5 @@
 var myModule = $.require("../../utils/myModule");		
 $.response.status = $.net.http.OK;
 $.response.contentType = "application/json";
-$.response.setBody(myModule.helloModule());
+await $.response.setBody(myModule.helloModule());
+export default {myModule};

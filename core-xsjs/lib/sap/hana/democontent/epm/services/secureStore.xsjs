@@ -1,72 +1,55 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow:0*/
-function store(overallData) {
+async function store(overallData) {
  /* delete entry first and then store */
 	
-  var idConfig = {
-    name: overallData.appIdKey,
-    value: overallData.appId
+  var keyConfig = {
+    name: overallData.apiKeyKey,
+    value: overallData.apiKey
   };
   
-   var codeConfig = {
-    name: overallData.appCodeKey,
-    value: overallData.appCode
-  };
   
   try{
-  	 var aStore = new $.security.Store("localStore.xssecurestore");
-  	 aStore.remove(idConfig);
-  	 aStore.remove(codeConfig);
+  	 var aStore = await (new $.security.Store("localStore.xssecurestore"));
+  	 await aStore.remove(keyConfig);
   }
   catch(ex)
   {
   	$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-	$.response.setBody("Error in deleting entries from secure store");
+	  await $.response.setBody("Error in deleting entries from secure store");
   }
   try
   {
-  aStore = new $.security.Store("localStore.xssecurestore");
-  console.log("idconfig",JSON.stringify(idConfig));
-  console.log("idconfig",JSON.stringify(codeConfig));
-  aStore.store(idConfig);
-  aStore.store(codeConfig);
+  aStore = await (new $.security.Store("localStore.xssecurestore"));
+  console.log("keyConfig",JSON.stringify(keyConfig));
+  await aStore.store(keyConfig);
   console.log("Done");
    $.response.status = $.net.http.OK;
-   $.response.setBody(JSON.stringify(idConfig));
+  await $.response.setBody(JSON.stringify(keyConfig));
   }
    catch(ex) {
     console.log("error"+ex);
-     $.response.setBody(JSON.stringify(ex));
+    await $.response.setBody(JSON.stringify(ex));
   } 
 }
-function read(appIdKey,appCodeKey) {
-  var idConfig = {
-    name: appIdKey
-  };
+async function read(apiKeyKey) {
   var keyConfig = {
-    name: appCodeKey
+    name: apiKeyKey
   };
   try {
-    var store = new $.security.Store("localStore.xssecurestore");
-    var appID = store.read(idConfig);
-    var appCode = store.read(keyConfig);
-    console.log("value"+appID+" "+appCode);
-   
-    
+    var store = await (new $.security.Store("localStore.xssecurestore"));
+    var apiKey = await store.read(keyConfig);
+    console.log("value"+apiKey);
     var results = {
-    	 appID: appID,
-         appCode: appCode
+    	 apiKey: apiKey
     };
     console.log("results"+results);
     $.response.status = $.net.http.OK;
-    $.response.setBody(JSON.stringify(results));
-    
-    
-   
+    await $.response.setBody(JSON.stringify(results));
   }
   catch(ex) {
     console.log("error"+ex);
     $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-     $.response.setBody(JSON.stringify(ex));
+    await $.response.setBody(JSON.stringify(ex));
   } 
 }
 
@@ -76,16 +59,15 @@ var aCmd = $.request.parameters.get("cmd");
 switch (aCmd) {
 case "store":
 	var body = $.request.body.asString();
-    var overallData = JSON.parse(body);
-	store(overallData);
+  var overallData = JSON.parse(body);
+	await store(overallData);
 	break;
 case "read":
 	var userID = $.request.parameters.get('query');
-	userID  = userID.split("@");  
-	console.log("userID"+userID[0]+""+userID[1]);
-	read(userID[0],userID[1]);
+	await read(userID);
 	break;	
 default:
 	$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-	$.response.setBody("Invalid Command");
+	await $.response.setBody("Invalid Command");
 }
+export default {store,read,aCmd};

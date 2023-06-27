@@ -1,17 +1,17 @@
 jQuery.sap.declare("shine.democontent.epm.spatial.Component");
-jQuery.sap.registerResourcePath("mapsjscorejs", "https://js.api.here.com/v3/3.0/mapsjs-core");
+jQuery.sap.registerResourcePath("mapsjscorejs", "https://js.api.here.com/v3/3.1/mapsjs-core");
 jQuery.sap.require("mapsjscorejs");
-jQuery.sap.registerResourcePath("mapsjsservicejs", "https://js.api.here.com/v3/3.0/mapsjs-service");
+jQuery.sap.registerResourcePath("mapsjsservicejs", "https://js.api.here.com/v3/3.1/mapsjs-service");
 jQuery.sap.require("mapsjsservicejs");
-jQuery.sap.registerResourcePath("mapsjsuijs", "https://js.api.here.com/v3/3.0/mapsjs-ui");
+jQuery.sap.registerResourcePath("mapsjsuijs", "https://js.api.here.com/v3/3.1/mapsjs-ui");
 jQuery.sap.require("mapsjsuijs");
-jQuery.sap.registerResourcePath("mapsjsmapeventsjs", "https://js.api.here.com/v3/3.0/mapsjs-mapevents");
+jQuery.sap.registerResourcePath("mapsjsmapeventsjs", "https://js.api.here.com/v3/3.1/mapsjs-mapevents");
 jQuery.sap.require("mapsjsmapeventsjs");
-jQuery.sap.registerResourcePath("mapsjsdatajs", "https://js.api.here.com/v3/3.0/mapsjs-data");
+jQuery.sap.registerResourcePath("mapsjsdatajs", "https://js.api.here.com/v3/3.1/mapsjs-data");
 jQuery.sap.require("mapsjsdatajs");
-jQuery.sap.registerResourcePath("mapsjsclusteringjs", "https://js.api.here.com/v3/3.0/mapsjs-clustering");
+jQuery.sap.registerResourcePath("mapsjsclusteringjs", "https://js.api.here.com/v3/3.1/mapsjs-clustering");
 jQuery.sap.require("mapsjsclusteringjs");
-jQuery.sap.includeStyleSheet("https://js.api.here.com/v3/3.0/mapsjs-ui.css");
+jQuery.sap.includeStyleSheet("https://js.api.here.com/v3/3.1/mapsjs-ui.css");
 sap.ui.core.UIComponent.extend("shine.democontent.epm.spatial.Component",{
    metadata : {
        name : "SHINE Spatial Demo",
@@ -40,7 +40,7 @@ sap.ui.core.UIComponent.extend("shine.democontent.epm.spatial.Component",{
        
        var oRootPath = jQuery.sap.getModulePath("shine.democontent.epm.spatial");
         var sLocale = sap.ui.getCore().getConfiguration().getLanguage();
-        sap.app.i18n = jQuery.sap.resources({url : "/resources/spatial/i18n/messagebundle.hdbtextbundle", locale: sLocale});
+        sap.app.i18n = jQuery.sap.resources({url : "./i18n/messagebundle.hdbtextbundle", locale: sLocale});
        var i18nModel = new sap.ui.model.resource.ResourceModel({
            bundleUrl : [oRootPath, mConfig.resourceBundle].join("/")
        });

@@ -1,12 +1,12 @@
-var purchaseOrder = $.import("xsjs.JavaScriptBasics", "purchaseOrder");
+var purchaseOrder = await $.import("xsjs.JavaScriptBasics", "purchaseOrder");
 
-function objectsAdv(){
+async function objectsAdv(){
 	var body = '';
 	var inputPO = encodeURI($.request.parameters.get('po'));
 	inputPO = typeof inputPO !== 'undefined' ? inputPO : '300000000'; 
 	
 	body += '<b>Object Advanced</b><br>';
-	var po = new purchaseOrder.header(inputPO);
+	var po = await new purchaseOrder.header(inputPO);
 	body +=  '<b>Purchase Order: </b>' + po.PurchaseOrderId + ' <b>Gross Amount: </b>'+ po.GrossAmount 
 	      + ' <b>Discount Amount: </b>'+ po.DiscountAmount() +' <b>Company Name: </b>'+ po.Buyer.CompanyName
 	      + ' <b>Created At: </b>' + po.CreatedAt.toLocaleDateString()	      
@@ -25,7 +25,7 @@ function objectsAdv(){
 	};	
 	
 	body += '<b>Object Advanced - Inherited DiscountAmount</b><br>';
-	var po = new purchaseOrder.header(inputPO);
+	var po = await new purchaseOrder.header(inputPO);
 	body +=  '<b>Purchase Order: </b>' + po.PurchaseOrderId + ' <b>Gross Amount: </b>'+ po.GrossAmount 
 	      + ' <b>Discount Amount: </b>'+ po.DiscountAmountDeep() +' <b>Company Name: </b>'+ po.Buyer.CompanyName
 	      + ' <b>Created At: </b>' + po.CreatedAt.toLocaleDateString()	      
@@ -40,19 +40,19 @@ function objectsAdv(){
 	
 	$.response.status = $.net.http.OK;
 	$.response.contentType = "text/html";
-	$.response.setBody(body);
+	await $.response.setBody(body);
 }
 
-function getObjectsJSON(){
+async function getObjectsJSON(){
 	var inputPO = encodeURI($.request.parameters.get('po'));
 	inputPO = typeof inputPO !== 'undefined' ? inputPO : '0300000000'; 
-	var po = new purchaseOrder.header(inputPO);
+	var po = await new purchaseOrder.header(inputPO);
 	var poJson = {"purchaseOrder": po};
 	
 	var body = JSON.stringify(poJson);
 	
 	$.response.contentType = 'application/json';
-	$.response.setBody(body);
+	await $.response.setBody(body);
 	$.response.status = $.net.http.OK;
 	
 }
@@ -60,8 +60,9 @@ function getObjectsJSON(){
 var aCmd = encodeURI($.request.parameters.get('cmd'));
 switch (aCmd) {
 case "json":
-	getObjectsJSON();
+	await getObjectsJSON();
 	break;
 default:
-	objectsAdv();
+	await objectsAdv();
 }
+export default {purchaseOrder,objectsAdv,getObjectsJSON,aCmd};

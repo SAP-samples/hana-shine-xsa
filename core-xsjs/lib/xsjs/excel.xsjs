@@ -2,7 +2,7 @@
 "use strict";
 
 var excel = $.require("node-xlsx");
-var conn = $.hdb.getConnection();
+var conn = await $.hdb.getConnection();
 var query = "SELECT FROM PO.Item { " +
 	" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
 	" PURCHASEORDERITEM as \"ItemPos\", " +
@@ -15,7 +15,7 @@ var query = "SELECT FROM PO.Item { " +
 	" \"PRODUCT.PRODUCTID\" as \"ProductID\", " +
 	" GROSSAMOUNT as \"Amount\" " +
 	"FROM \"PO.Item\" ";	*/
-var rs = conn.executeQuery(query);
+var rs = await conn.executeQuery(query);
 
 var body = "";
 var out = [];
@@ -27,10 +27,11 @@ var result = excel.build([{
 	data: out
 }]);
 
-$.response.setBody(result);
+await $.response.setBody(result);
 $.response.contentType = "application/vnd.ms-excel;";
 $.response.headers.set("Content-Transfer-Encoding",
 	"binary");
 $.response.headers.set("Content-Disposition",
 	"attachment; filename=Excel.xlsx");
 $.response.status = $.net.http.OK;
+export default {excel,conn,query,rs,body,out,result};

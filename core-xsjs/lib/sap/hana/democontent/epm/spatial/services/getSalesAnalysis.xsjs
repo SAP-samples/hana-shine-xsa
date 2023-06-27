@@ -15,7 +15,7 @@ try {
     }
     polygonString += "))'))";
 
-    var conn = $.hdb.getConnection();
+    var conn = await $.hdb.getConnection();
     var query;
     var rs;
     var cond;
@@ -26,7 +26,7 @@ try {
     // make sure the polygon is complete i.e. first and last point are same
     query = 'select SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "sap.hana.democontent.epm.spatial.models::REGION_SALES_BP" group by ' + polygonString;
     console.log("query gross amount: "+query);
-    rs = conn.executeQuery(query);
+    rs = await conn.executeQuery(query);
 	}catch(e){
 		console.log("error in gross amount"+e+" message "+e.message);
 	}
@@ -47,7 +47,7 @@ try {
     // make sure the polygon is complete i.e. first and last point are same
     query = 'select PARTNERID,COMPANYNAME,LEGALFORM,LATITUDE,LONGITUDE,SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "sap.hana.democontent.epm.spatial.models::REGION_SALES_BP" group by PARTNERID,COMPANYNAME,LEGALFORM,LATITUDE,LONGITUDE,' + polygonString + ' order by SUM(GROSSAMOUNT) desc';
     console.log("query  top 5: "+query);
-    rs = conn.executeQuery(query);
+    rs = await conn.executeQuery(query);
 	}catch(e){
 		console.log("error in polygon"+e+" message "+e.message);
 	}
@@ -75,7 +75,7 @@ try {
     // make sure the polygon is complete i.e. first and last point are same
     query = 'select YEAR_OF_SALE,SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "sap.hana.democontent.epm.spatial.models::REGION_SALES_BP" group by YEAR_OF_SALE,' + polygonString + ' order by YEAR_OF_SALE';
     console.log("query  year of sale: "+query);
-    rs = conn.executeQuery(query);
+    rs = await conn.executeQuery(query);
 	}catch(e){
 		console.log("query of sale "+query);
 		console.log("error in year of sale"+e+" message "+e.message);
@@ -94,13 +94,14 @@ try {
     }
 
     $.response.contentType = 'application/json';
-    $.response.setBody(JSON.stringify(body));
+    await $.response.setBody(JSON.stringify(body));
     $.response.status = $.net.http.OK;
 
-    conn.close();
+    await conn.close();
 
 } catch (e) {
     $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-    $.response.setBody(e.message);
+    await $.response.setBody(e.message);
     console.log("error "+e+" message: "+e.message);
 }
+export default {};

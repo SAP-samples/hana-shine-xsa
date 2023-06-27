@@ -21,4 +21,5 @@ output.networkInfraces = os.networkInterfaces();
 
 $.response.status = $.net.http.OK;
 $.response.contentType = "application/json";
-$.response.setBody(JSON.stringify(output));
+await $.response.setBody(JSON.stringify(output));
+export default {os,output};

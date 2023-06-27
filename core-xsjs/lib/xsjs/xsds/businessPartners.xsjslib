@@ -1,13 +1,13 @@
 /*eslint no-console: 0, no-unused-vars: 0, dot-notation: 0, no-use-before-define: 0, new-cap: 0*/
-function bpCreateBuyer(param) {
-	bpCreateBusinessPartner(param,1);
+async function bpCreateBuyer(param) {
+	await bpCreateBusinessPartner(param,1);
 }
 
-function bpCreateSupplier(param) {
-	bpCreateBusinessPartner(param,2);
+async function bpCreateSupplier(param) {
+	await bpCreateBusinessPartner(param,2);
 }
 
-function bpCreateBusinessPartner(param,partnerRole){
+async function bpCreateBusinessPartner(param,partnerRole){
 	var XSDS = $.require("sap-cds").xsjs(param.connection);
 	XSDS.Transaction.$setAutoCommit(false);
 	
@@ -63,3 +63,4 @@ function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 } 
+export default {bpCreateBuyer,bpCreateSupplier,bpCreateBusinessPartner,validateEmail};

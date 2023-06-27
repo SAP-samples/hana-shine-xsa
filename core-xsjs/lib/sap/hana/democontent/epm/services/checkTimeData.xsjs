@@ -4,27 +4,27 @@ var output = {
 };
 
 try{
-var conn = $.db.getConnection();
+var conn = await $.db.getConnection();
 
 // get keys from MapKeys table
-var pstmt = conn.prepareStatement('SELECT * from "Core.SHINE_TIME_DIM"');
-var rs = pstmt.executeQuery();
+var pstmt = await conn.prepareStatement('SELECT * from "Core.SHINE_TIME_DIM"');
+var rs = await pstmt.executeQuery();
 var successBody = "{message:Data available}";
 var errorBody="{message:Data unavailable}";
-if(rs.next())
+if(await rs.next())
 {
 	console.log("Data available");
-	conn.commit();
+	await conn.commit();
     $.response.status = $.net.http.OK;
     $.response.contentType = 'application/json';
-    $.response.setBody(JSON.stringify(successBody));
+    await $.response.setBody(JSON.stringify(successBody));
 }
 
 else
 {
 	console.log("Data unavailable");
-	 $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-     $.response.setBody(JSON.stringify(errorBody));
+	$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
+    await $.response.setBody(JSON.stringify(errorBody));
    
 }
 
@@ -32,9 +32,10 @@ else
 } catch (e){
     $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
     console.log(e.message);
-    $.response.setBody(JSON.stringify(errorBody));
+    await $.response.setBody(JSON.stringify(errorBody));
     
 }
 
 
-conn.close();
+await conn.close();
+export default {output};

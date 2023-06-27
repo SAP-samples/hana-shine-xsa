@@ -1,4 +1,4 @@
-$.import("sap.hana.democontent.epm.services", "session");
+await $.import("sap.hana.democontent.epm.services", "session");
 var SESSIONINFO = $.sap.hana.democontent.epm.services.session;
 
 /**
@@ -7,21 +7,21 @@ var SESSIONINFO = $.sap.hana.democontent.epm.services.session;
 @param {afterTableName} String -The name of a temporary table with the single entry after the operation (CREATE and UPDATE events only)
  */
 
-function bp_create_before_exit(param) {
+async function bp_create_before_exit(param) {
 
 	var	after = param.afterTableName;
 	var pStmt;
 	try {
 
-		pStmt = param.connection.prepareStatement('select "businessPartnerId".NEXTVAL from DUMMY');
-		var rs = pStmt.executeQuery();
+		pStmt = await param.connection.prepareStatement('select "businessPartnerId".NEXTVAL from DUMMY');
+		var rs = await pStmt.executeQuery();
 		var PartnerId = '';
-		while (rs.next()) {
+		while (await rs.next()) {
 			PartnerId = rs.getString(1);
 		}
-		pStmt.close();
+		await pStmt.close();
 
-		pStmt = param.connection.prepareStatement('update "' + after
+		pStmt = await param.connection.prepareStatement('update "' + after
 				+ '" set PARTNERID = ?,' + 
 				  '  PARTNERROLE = ?, ' +
 				  '  "HISTORY.CREATEDBY.EMPLOYEEID" = ?,' +
@@ -35,8 +35,8 @@ function bp_create_before_exit(param) {
 		pStmt.setString(4, '0000000033');
 		pStmt.setString(5, 'EUR');		
 		
-		pStmt.execute();
-		pStmt.close();
+		await pStmt.execute();
+		await pStmt.close();
 
 		
 	}
@@ -46,30 +46,30 @@ function bp_create_before_exit(param) {
 
 }
 
-function address_create_before_exit(param) {
+async function address_create_before_exit(param) {
 
 	var	after = param.afterTableName;
 	
 	var pStmt;
 	try {
 		
-	pStmt = param.connection.prepareStatement('select "addressId".NEXTVAL from dummy');
-	var rs = pStmt.executeQuery();
+	pStmt = await param.connection.prepareStatement('select "addressId".NEXTVAL from dummy');
+	var rs = await pStmt.executeQuery();
 	var AddressId = '';
-	while (rs.next()) {
+	while (await rs.next()) {
 		AddressId = rs.getString(1);
 	}
-	pStmt.close();
+	await pStmt.close();
 
-	pStmt = param.connection.prepareStatement('update "' + after
+	pStmt = await param.connection.prepareStatement('update "' + after
 			+ '" set "ADDRESSID" = ?,' +
 			  'ADDRESSTYPE = ?,' +
 			  '"VALIDITY.STARTDATE" = TO_DATE(' + "'2000-01-01', 'YYYY-MM-DD'),"  +
 			  '"VALIDITY.ENDDATE" = TO_DATE(' + "'9999-12-31', 'YYYY-MM-DD')" );
 	pStmt.setString(1, AddressId);		
 	pStmt.setString(2, '02');			
-	pStmt.execute();
-	pStmt.close();
+	await pStmt.execute();
+	await pStmt.close();
 		
 	}
 	catch (e) {
@@ -85,27 +85,27 @@ function address_create_before_exit(param) {
  */
 
 
-function assocation_create_exit(param){
+async function assocation_create_exit(param){
 	var	princ = param.principalTableName;
 	var	dep = param.dependentTableName;
 
 
-	var	pStmt = param.connection.prepareStatement('select * from "' + princ + '"');
-	var Principal = SESSIONINFO.recordSetToJSON(pStmt.executeQuery(), 'Details');
-	pStmt.close();
+	var	pStmt = await param.connection.prepareStatement('select * from "' + princ + '"');
+	var Principal = await SESSIONINFO.recordSetToJSON(await pStmt.executeQuery(), 'Details');
+	await pStmt.close();
 	
-	var	pStmt = param.connection.prepareStatement('select * from "' + dep + '"');
-	var Dependent = SESSIONINFO.recordSetToJSON(pStmt.executeQuery(), 'Details');
-	pStmt.close();	
+	var	pStmt = await param.connection.prepareStatement('select * from "' + dep + '"');
+	var Dependent = await SESSIONINFO.recordSetToJSON(await pStmt.executeQuery(), 'Details');
+	await pStmt.close();	
 	
 	$.trace.debug(JSON.stringify(Principal));
 	$.trace.debug(JSON.stringify(Dependent));
-	var pStmt = param.connection.prepareStatement('update "MD.BusinessPartner" ' +
+	var pStmt = await param.connection.prepareStatement('update "MD.BusinessPartner" ' +
 			    ' SET "ADDRESSES.ADDRESSID" = ? WHERE "PARTNERID" = ? ');
 	pStmt.setString(1, Dependent.Details[0].ADDRESSID);
 	pStmt.setString(2, Principal.Details[0].PARTNERID);		
-	pStmt.execute();
-	pStmt.close();	
+	await pStmt.execute();
+	await pStmt.close();	
 			
 }
 
@@ -121,3 +121,4 @@ function metadata(param){
 //	    });
 	    return {metadata: param.metadata};
 }
+export default {SESSIONINFO,bp_create_before_exit,address_create_before_exit,assocation_create_exit,metadata};

@@ -11,4 +11,5 @@ var data = zip.generate({base64:false,compression:"DEFLATE"});
 $.response.status = $.net.http.OK;
 $.response.contentType = "application/zip";
 $.response.headers.set("Content-Disposition", "attachment; filename = \"ZipExample.zip\"");
-$.response.setBody(data);
+await $.response.setBody(data);
+export default {zip,data};

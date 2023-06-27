@@ -1,19 +1,19 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow:0*/
-function store() {
+async function store() {
   var config = {
     name: "foo",
     value: "bar"
   };
   var aStore = new $.security.Store("localStoreTest.xssecurestore");
-  aStore.store(config);
+  await aStore.store(config);
 }
-function read() {
+async function read() {
   var config = {
     name: "foo"
   };
   try {
     var store = new $.security.Store("localStoreTest.xssecurestore");
-    var value = store.read(config);
+    var value = await store.read(config);
   }
   catch(ex) {
     //do some error handling
@@ -23,12 +23,13 @@ function read() {
 var aCmd = $.request.parameters.get("cmd");
 switch (aCmd) {
 case "store":
-	store();
+	await store();
 	break;
 case "read":
-	read();
+	await read();
 	break;	
 default:
 	$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
-	$.response.setBody("Invalid Command");
+	await $.response.setBody("Invalid Command");
 }
+export default {store,read,aCmd};

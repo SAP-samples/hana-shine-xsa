@@ -1,29 +1,29 @@
 {
   "engines": {
-    "node": "12.x || 14.x"
+    "node": "16.x || 18.x"
   },
   "dependencies": {
-    "@sap/xssec": "3.2.13",
-    "@sap/xsenv": "3.1.1",
-    "@sap/hdbext": "7.6.4",
-    "@sap/textbundle": "4.0.0",
-    "@sap/logging": "6.0.3",
-    "@sap/audit-logging": "5.5.4",
-    "@sap/jobs-client": "1.6.1",
-    "express": "4.17.1",
-    "passport": "0.6.0",
-    "async": "3.2.1",
-    "ws": "8.2.2",
+    "@sap/audit-logging": "5.7.0",
+    "@sap/hdbext": "7.7.5",
+    "@sap/jobs-client": "1.7.47",
+    "@sap/logging": "6.2.0",
+    "@sap/textbundle": "4.2.0",
+    "@sap/xsenv": "3.4.0",
+    "@sap/xssec": "3.2.17",
     "accept-language-parser": "1.5.0",
-    "node-xlsx": "0.18.0",
-    "node-zip": "1.1.1",
-    "xmldoc": "1.1.2",
-    "body-parser": "1.19.0",
+    "async": "3.2.4",
+    "body-parser": "1.20.2",
     "elementtree": "0.1.7",
-    "promise": "8.1.0"
+    "express": "4.18.2",
+    "node-xlsx": "0.23.0",
+    "node-zip": "1.1.1",
+    "passport": "0.6.0",
+    "promise": "8.3.0",
+    "ws": "8.13.0",
+    "xmldoc": "1.3.0"
   },
   "devDependencies": {
-    "eslint": "7.8.1"
+    "eslint": "8.43.0"
   },
   "description": "",
   "files": [],
@@ -33,5 +33,5 @@
     "lint": "eslint -c .eslintrc --ignore-path .gitignore .",
     "start": "node server.js"
   },
-  "version": "1.9.2"
+  "version": "1.9.5"
 }

@@ -1,4 +1,4 @@
-function objectsBasic(){
+async function objectsBasic(){
 	var body = '';
 
 	body += '<b>Object Literals</b></p>';
@@ -40,26 +40,26 @@ function objectsBasic(){
 
 	body += '<b>Object Constructor</b></p>';
 //Object Constructor
-	function purchaseOrder(purchaseOrderID){
-		var conn = $.db.getConnection();
+async function purchaseOrder(purchaseOrderID){
+		var conn = await $.db.getConnection();
 		var pstmt;
 		var rs;
 		var query;
 		
 		query = 'SELECT * FROM "PO.Header" '
 			+ ' WHERE PURCHASEORDERID = ?';
-		pstmt = conn.prepareStatement(query);
+		pstmt = await conn.prepareStatement(query);
 		pstmt.setString(1, purchaseOrderID);
-		rs = pstmt.executeQuery();
+		rs = await pstmt.executeQuery();
 
 		
-		while (rs.next()) {
+		while (await rs.next()) {
 			this.purchaseOrderID = rs.getString(1);
 			this.grossAmount = rs.getDecimal(9);
 		}
 
-		rs.close();
-		pstmt.close();
+		await rs.close();
+		await pstmt.close();
 		
 		this.discount = function (){
 			return (this.grossAmount - this.grossAmount * '.10');
@@ -68,15 +68,16 @@ function objectsBasic(){
 	}
 	
 	
-	var po = new purchaseOrder('0300000000');
+	var po = await new purchaseOrder('0300000000');
 	body +=  'Purchase Order: ' + po.purchaseOrderID + ' Gross Amount: '+ po.grossAmount + ' Discount Amount: '+ po.discount() +'</p>';
 	
-	var po = new purchaseOrder('0300000001');
+	var po = await new purchaseOrder('0300000001');
 	body +=  'Purchase Order: ' + po.purchaseOrderID + ' Gross Amount: '+ po.grossAmount + ' Discount Amount: '+ po.discount() +'</p>';
 	
 	$.response.status = $.net.http.OK;
 	$.response.contentType = "text/html";
-	$.response.setBody(body);
+	await $.response.setBody(body);
 }
 
-objectsBasic();
+await objectsBasic();
+export default {objectsBasic};
