@@ -203,8 +203,8 @@ sap.ui.controller("sap.hana.democontent.epm.salesdashboard.view.overview", {
         
         //refrshing the pie chart
         var oSalesRegionModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesByRegion.xsodata", true);
-         //var oSalesRegionPie = sap.ui.getCore().byId("overview--saleRegionPie");
-         var oSalesRegionPie = this.getView().byId("saleRegionPie");
+        var oSalesRegionPie = sap.ui.getCore().byId("overview--saleRegionPie");
+        // var oSalesRegionPie = this.getView().byId("saleRegionPie");
         oSalesRegionPie.setModel(oSalesRegionModel);
     }
 

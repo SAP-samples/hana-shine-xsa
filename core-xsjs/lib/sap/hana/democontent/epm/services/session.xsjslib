@@ -3,13 +3,13 @@
 "use strict";
 
 
-function fillSessionInfo(){
+async function fillSessionInfo(){
 	var body = "";
 	body = JSON.stringify({
 		"session" : [{"UserName": $.session.getUsername(), "Language": $.session.language}] 
 	});
 	$.response.contentType = "application/json"; 
-	$.response.setBody(body);
+	await $.response.setBody(body);
 	$.response.status = $.net.http.OK;
 }
 
@@ -82,17 +82,17 @@ function calcTomorrow(){
 @function Returns either the current session id (xsUtilSession) or creates a new one
 @returns {String} Session Id
 */
-function getSessionId(){
+async function getSessionId(){
 	var sessionId = $.request.cookies.get("xsUtilSession") || null;
 	if(sessionId === null){
-		var conn = $.db.getConnection();
+		var conn = await $.db.getConnection();
 		var pstmt;
 		var rs;
 		var query = "select \"sessionId\".NEXTVAL from dummy";
-		pstmt = conn.prepareStatement(query);
-		rs = pstmt.executeQuery();
-		while (rs.next()) {
-			sessionId =  rs.getInteger(1).toString();
+		pstmt = await conn.prepareStatement(query);
+		rs = await pstmt.executeQuery();
+		while (await rs.next()) {
+			sessionId = await rs.getInteger(1).toString();
 			$.response.cookies.set("xsUtilSession", sessionId);
 		}
 	}
@@ -106,13 +106,13 @@ function getSessionId(){
 @param {optional String} delimiter - supplies the delimiter used between columns; defaults to tab (\\t)
 @returns {String} The text string with the contents of the record set
 */
-function recordSetToText(rs,bHeaders,delimiter){
+async function recordSetToText(rs,bHeaders,delimiter){
 	bHeaders = typeof bHeaders !== "undefined" ? bHeaders : true;
 	delimiter = typeof delimiter !== "undefined" ? delimiter : "\t"; //Default to Tab Delimited
 	
 	var outputString = "";
 	var value = "";
-	var meta = rs.getMetaData();
+	var meta = await rs.getMetaData();
 	var colCount = meta.getColumnCount();
 	
 	//Process Headers
@@ -122,7 +122,7 @@ function recordSetToText(rs,bHeaders,delimiter){
 		}
 		outputString += "\n";  //Add New Line
 	}
-	while (rs.next()) {
+	while (await rs.next()) {
 		for (var i=1; i<=colCount; i++) {
 		     switch(meta.getColumnType(i)) {
 		     case $.db.types.VARCHAR:
@@ -190,15 +190,15 @@ function recordSetToText(rs,bHeaders,delimiter){
 @param {optional String} rsName - name of the record set object in the JSON
 @returns {object} JSON representation of the record set data
 */
-function recordSetToJSON(rs,rsName){
+async function recordSetToJSON(rs,rsName){
 	rsName = typeof rsName !== "undefined" ? rsName : "entries";
 	
-	var meta = rs.getMetaData();
+	var meta = await rs.getMetaData();
 	var colCount = meta.getColumnCount();
 	var values=[];
 	var table=[];
 	var value="";
-	while (rs.next()) {
+	while (await rs.next()) {
 	for (var i=1; i<=colCount; i++) {
 		value = "\""+meta.getColumnLabel(i)+"\" : ";
 	     switch(meta.getColumnType(i)) {
@@ -297,19 +297,19 @@ function variableException(source, name,application,sessionId){
 @param {string} application - application name/id
 @returns {String} The NCLOB value stored in the session variable
 */
-function get_session_variable(name, application){
-	var sessionId = getSessionId();
+async function get_session_variable(name, application){
+	var sessionId = await getSessionId();
 	var output = "";
-	var connection = $.hdb.getConnection();
+	var connection = await $.hdb.getConnection();
 
-	var ServerCookiesWrapper = connection.loadProcedure( 
+	var ServerCookiesWrapper = await connection.loadProcedure( 
 		"ServerCookiesWrapper");
 
 	var results = ServerCookiesWrapper("GET_SESSION_VAR", sessionId, name, application, new Date(), null);
 	if(typeof results.SVARIABLE[0] !== "undefined"){
 		output = results.SVARIABLE[0].DATA;		
-		connection.commit();
-		connection.close();
+		await connection.commit();
+		await connection.close();
 		return output;
 	} else {	
 		throw new variableException("get_session_variable", name, application, sessionId);
@@ -321,17 +321,17 @@ function get_session_variable(name, application){
 @param {string} application - application name/id
 @returns {object} A JSON object of all values stored in the session variables for this application
 */
-function get_session_variables(application){
-	var sessionId = getSessionId();
-	var connection = $.hdb.getConnection();
-	var ServerCookiesWrapper = connection.loadProcedure( 
+async function get_session_variables(application){
+	var sessionId = await getSessionId();
+	var connection = await $.hdb.getConnection();
+	var ServerCookiesWrapper = await connection.loadProcedure( 
 		"ServerCookiesWrapper");
 
 	var results = ServerCookiesWrapper("GET_SESSION_VARS", sessionId, null, application, new Date(), null);
 	var jsonOut = results.SVARIABLES;
 
-	connection.commit();
-	connection.close();
+	await connection.commit();
+	await connection.close();
 	return jsonOut;	
 }
 
@@ -343,17 +343,17 @@ function get_session_variables(application){
 @param {optional date} expiry - expiry date/time for the variable defaults to 24 hours
 @returns {boolean} successful?
 */
-function set_session_variable(name, application, value, expiry){
-	var sessionId = getSessionId();
+async function set_session_variable(name, application, value, expiry){
+	var sessionId = await getSessionId();
 	expiry = typeof expiry !== "undefined" ? expiry : calcTomorrow();
 	
-	var connection = $.hdb.getConnection();
-	var ServerCookiesWrapper = connection.loadProcedure( 
+	var connection = await $.hdb.getConnection();
+	var ServerCookiesWrapper = await connection.loadProcedure( 
 		"ServerCookiesWrapper");
 	ServerCookiesWrapper("SET_SESSION_VAR", sessionId, name, application, expiry, value.toString());
 	
-	connection.commit();
-	connection.close();		
+	await connection.commit();
+	await connection.close();		
 }
 
 /**
@@ -362,17 +362,17 @@ function set_session_variable(name, application, value, expiry){
 @param {string} application - application name/id
 @returns {String} The NCLOB value stored in the session variable
 */
-function get_application_variable(name, application){
-	var connection = $.hdb.getConnection();
-	var ServerCookiesWrapper = connection.loadProcedure( 
+async function get_application_variable(name, application){
+	var connection = await $.hdb.getConnection();
+	var ServerCookiesWrapper = await connection.loadProcedure( 
 		"ServerCookiesWrapper");
 	var output = "";	
 	
 	var results = ServerCookiesWrapper("GET_APP_VAR", null, name, application, new Date(), null);
 	if(typeof results.SVARIABLE[0] !== "undefined"){
 		output = results.SVARIABLE[0].DATA;		
-		connection.commit();
-		connection.close();
+		await connection.commit();
+		await connection.close();
 		return output;
 	} else {	
 		throw new variableException("get_application_variable", name, application);
@@ -384,15 +384,15 @@ function get_application_variable(name, application){
 @param {string} application - application name/id
 @returns {object} A JSON object of all values stored in the session variables for this application
 */
-function get_application_variables(application){
-	var connection = $.hdb.getConnection();
-	var ServerCookiesWrapper = connection.loadProcedure( 
+async function get_application_variables(application){
+	var connection = await $.hdb.getConnection();
+	var ServerCookiesWrapper = await connection.loadProcedure( 
 		"ServerCookiesWrapper");
 	var results = ServerCookiesWrapper("GET_APP_VARS", null, null, application,  new Date(), null);
 	var jsonOut = results.SVARIABLES;
 
-	connection.commit();
-	connection.close();
+	await connection.commit();
+	await connection.close();
 	return jsonOut;
 }
 
@@ -404,14 +404,15 @@ function get_application_variables(application){
 @param {optional date} expiry - expiry date/time for the variable defaults to 24 hours
 @returns {boolean} successful?
 */
-function set_application_variable(name, application, value, expiry){
+async function set_application_variable(name, application, value, expiry){
 	expiry = typeof expiry !== "undefined" ? expiry : calcTomorrow();
 	
-	var connection = $.hdb.getConnection();
-	var ServerCookiesWrapper = connection.loadProcedure( 
+	var connection = await $.hdb.getConnection();
+	var ServerCookiesWrapper = await connection.loadProcedure( 
 		"ServerCookiesWrapper");
 	ServerCookiesWrapper("SET_APP_VAR", null, name, application, expiry, value.toString());
 	
-	connection.commit();
-	connection.close();	
+	await connection.commit();
+	await connection.close();	
 }
+export default {fillSessionInfo,escapeSpecialChars,escapeSpecialCharsText,addMinutes,calcTomorrow,getSessionId,recordSetToText,recordSetToJSON,variableException,get_session_variable,get_session_variables,set_session_variable,get_application_variable,get_application_variables,set_application_variable};

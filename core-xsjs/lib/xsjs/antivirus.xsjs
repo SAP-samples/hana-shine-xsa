@@ -3,5 +3,6 @@ try {
 	var av = new $.security.AntiVirus();
 	av.scan('$.request.body');
 } catch (e) {
-	$.response.setBody(e.toString());
+	await $.response.setBody(e.toString());
 }
+export default {};

@@ -82,7 +82,7 @@ module.exports = function() {
 				if ((error.message).includes('xscron')) {
 					util.callback(error, res, 'Invalid xscron');
 				} else {
-					util.callback(error, res, 'Error registering new job ');
+					util.callback(error, res, 'Error registering new job, Please check if a Job with the same name already exists in the Dashboard');
 				}
 				logger.error('Error occured' + error);
 			} else {

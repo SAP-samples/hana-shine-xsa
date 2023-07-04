@@ -1,15 +1,15 @@
-var purchaseOrder = $.import("xsjs.JavaScriptBasics", "purchaseOrderBasic");
+var purchaseOrder = await $.import("xsjs.JavaScriptBasics", "purchaseOrderBasic");
 
-function getObjectsJSON(){
+async function getObjectsJSON(){
 	var inputPO = encodeURI($.request.parameters.get('po'));
 	inputPO = typeof inputPO !== 'undefined' ? inputPO : '300000000'; 
-	var po = new purchaseOrder.getHeader(inputPO);
+	var po = await new purchaseOrder.getHeader(inputPO);
 	var poJson = {"purchaseOrder": po};
 	
 	var body = JSON.stringify(poJson);
 	
 	$.response.contentType = 'application/json';
-	$.response.setBody(body);
+	await $.response.setBody(body);
 	$.response.status = $.net.http.OK;
 	
 }
@@ -17,8 +17,9 @@ function getObjectsJSON(){
 var aCmd = encodeURI($.request.parameters.get('cmd'));
 switch (aCmd) {
 case "json":
-	getObjectsJSON();
+	await getObjectsJSON();
 	break;
 default:
-	getObjectsJSON();
+	await getObjectsJSON();
 }
+export default {purchaseOrder,getObjectsJSON,aCmd};

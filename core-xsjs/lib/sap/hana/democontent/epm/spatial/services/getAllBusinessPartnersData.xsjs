@@ -3,18 +3,18 @@ var output = {
     entry: []
 };
 
-var conn = $.hdb.getConnection();
+var conn = await $.hdb.getConnection();
 // get data from BP_ADDRESS_DETAILS.attributeview
 // model location : SHINE/spatial/models
 var query = 
     'select PARTNERID,EMAILADDRESS,PHONENUMBER,WEBADDRESS,COMPANYNAME,LEGALFORM,' 
     + 'BUILDING,STREET,CITY,POSTALCODE,COUNTRY,REGION,LATITUDE,LONGITUDE FROM ' 
     + '"sap.hana.democontent.epm.spatial.models::BP_ADDRESS_DETAILS"';
-var rs = conn.executeQuery(query);
+var rs = await conn.executeQuery(query);
 var bpEntry = {};
 
 if (rs.length < 1) {
-    $.response.setBody("Failed to retieve data");
+    await $.response.setBody("Failed to retieve data");
     $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
 } else {
     var row;
@@ -37,8 +37,9 @@ if (rs.length < 1) {
         output.entry.push(bpEntry);
     } 
 
-    $.response.setBody(JSON.stringify(output));
+    await $.response.setBody(JSON.stringify(output));
     $.response.status = $.net.http.OK;
 }
 
-conn.close();
+await conn.close();
+export default {output,conn,query,rs,bpEntry};

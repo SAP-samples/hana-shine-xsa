@@ -1,7 +1,7 @@
-var connection = $.hdb.getConnection();
+var connection = await $.hdb.getConnection();
 
 var query = 'SELECT CURRENT_USER FROM "DUMMY"';  
-var rs = connection.executeQuery(query);
+var rs = await connection.executeQuery(query);
 var currentUser = rs[0].CURRENT_USER;
 
 
@@ -11,4 +11,5 @@ var greeting = 'Hello Application User: ' + $.session.getUsername() +
 
 
 $.response.contentType = 'text/plain; charset=utf-8';
-$.response.setBody(greeting);
+await $.response.setBody(greeting);
+export default {connection,query,rs,currentUser,greeting};

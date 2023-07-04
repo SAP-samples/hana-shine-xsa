@@ -1,16 +1,16 @@
 {
   "engines": {
-    "node": "12.x || 14.x"
+      "node": "16.x || 18.x"
   },
   "dependencies": {
-    "@sap/xsenv": "3.1.1",
-    "@sap/xsjs": "6.6.4"
+      "@sap/xsenv": "3.4.0",
+      "@sap/async-xsjs": "1.0.6"
   },
   "files": [],
   "main": "server.js",
   "name": "shine-user-xsjs",
   "scripts": {
-    "start": "node server.js"
+      "start": "node --experimental-vm-modules server.js"
   },
-  "version": "1.9.2"
+  "version": "1.9.5"
 }

@@ -46,7 +46,7 @@ sap.ui.controller("shine.democontent.epm.spatial.view.productsHeatMap", {
 			// Instantiate (and display) a map object:
 			var map = new H.Map(
 				mapContainer,
-				defaultLayers.normal.map, {
+				defaultLayers.vector.normal.map, {
 					zoom: 2,
 					center: {
 						lat: 10.0,

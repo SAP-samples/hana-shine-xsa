@@ -30,21 +30,22 @@ shine.usercrud.User.prototype.setLastName = function(lastName){
 shine.usercrud.User.prototype.setEmail = function(email){
     this.email = email;
 };
-shine.usercrud.User.prototype.persistIntoTable = function(){
+shine.usercrud.User.prototype.persistIntoTable = async function(){
     try{
-        var connection = $.hdb.getConnection();
+        var connection = await $.hdb.getConnection();
         var query = 'select "userSeqId".NEXTVAL as "UserId" from dummy';
-        var rs = connection.executeQuery(query);
+        var rs = await connection.executeQuery(query);
         var persNo = '';
         if(rs.length > 0) {
             persNo = rs[0].UserId;
         }
         query = 'insert into "UserData.User" values(?,?,?,?,?)';
-        connection.executeUpdate(query,persNo,this.firstName,this.lastName,this.email,"");
-        connection.commit();
-        connection.close();
+        await connection.executeUpdate(query,persNo,this.firstName,this.lastName,this.email,"");
+        await connection.commit();
+        await connection.close();
         return true;
     }catch(e){
         return false;
     }
 };
+export default {shine};

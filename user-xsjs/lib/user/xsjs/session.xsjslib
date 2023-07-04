@@ -4,13 +4,13 @@
 /**  
 @function Outputs the Session user and Language as JSON in the Response body
 */
-function fillSessionInfo(){
+async function fillSessionInfo(){
 	var body = "";
 	body = JSON.stringify({
 		"session" : [{"UserName": $.session.getUsername(), "Language": $.session.language}] 
 	});
 	$.response.contentType = "application/json"; 
-	$.response.setBody(body);
+	await $.response.setBody(body);
 	$.response.status = $.net.http.OK;
 }
 
@@ -68,13 +68,13 @@ function escapeSpecialCharsText(input) {
 @param {optional String} delimiter - supplies the delimiter used between columns; defaults to tab (\\t)
 @returns {String} The text string with the contents of the record set
 */
-function recordSetToText(rs,bHeaders,delimiter){
+async function recordSetToText(rs,bHeaders,delimiter){
 	bHeaders = typeof bHeaders !== "undefined" ? bHeaders : true;
 	delimiter = typeof delimiter !== "undefined" ? delimiter : "\t"; //Default to Tab Delimited
 	
 	var outputString = "";
 	var value = "";
-	var meta = rs.getMetaData();
+	var meta = await rs.getMetaData();
 	var colCount = meta.getColumnCount();
 	
 	//Process Headers
@@ -84,7 +84,7 @@ function recordSetToText(rs,bHeaders,delimiter){
 		}
 		outputString += "\n";  //Add New Line
 	}
-	while (rs.next()) {
+	while (await rs.next()) {
 		for (var i=1; i<=colCount; i++) {
 		     switch(meta.getColumnType(i)) {
 		     case $.db.types.VARCHAR:
@@ -152,15 +152,15 @@ function recordSetToText(rs,bHeaders,delimiter){
 @param {optional String} rsName - name of the record set object in the JSON
 @returns {object} JSON representation of the record set data
 */
-function recordSetToJSON(rs,rsName){
+async function recordSetToJSON(rs,rsName){
 	rsName = typeof rsName !== "undefined" ? rsName : "entries";
 	
-	var meta = rs.getMetaData();
+	var meta = await rs.getMetaData();
 	var colCount = meta.getColumnCount();
 	var values=[];
 	var table=[];
 	var value="";
-	while (rs.next()) {
+	while (await rs.next()) {
 	for (var i=1; i<=colCount; i++) {
 		value = "\""+meta.getColumnLabel(i)+"\" : ";
 	     switch(meta.getColumnType(i)) {
@@ -232,3 +232,5 @@ function recordSetToJSON(rs,rsName){
 	return 	JSON.parse("{\""+ rsName +"\" : [" + table	+"]}");
 
 }
+
+export default {fillSessionInfo,escapeSpecialChars,escapeSpecialCharsText,recordSetToText,recordSetToJSON};

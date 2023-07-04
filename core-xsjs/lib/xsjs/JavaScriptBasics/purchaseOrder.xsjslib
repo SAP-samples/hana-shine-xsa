@@ -1,4 +1,4 @@
-var conn = $.db.getConnection();
+var conn = await $.db.getConnection();
 var pstmt;
 var rs;
 var query;
@@ -62,23 +62,23 @@ base.prototype.getValueFromRS = function(i, rs, meta){
 	};
 
 
-function header(purchaseOrderId, schema) {
+async function header(purchaseOrderId, schema) {
 	
 	//schema = typeof schema !== 'undefined' ? schema :  'SAP_HANA_EPM_NEXT'; 
 	
 	query = 'SELECT * FROM "PO.HeaderView" '
 			+ ' WHERE "PurchaseOrderId" = ?';
-	pstmt = conn.prepareStatement(query);
+	pstmt = await conn.prepareStatement(query);
 	pstmt.setString(1, purchaseOrderId);
-	rs = pstmt.executeQuery();
+	rs = await pstmt.executeQuery();
 
-	var meta = rs.getMetaData();
-	while (rs.next()) {
+	var meta = await rs.getMetaData();
+	while (await rs.next()) {
 		for (var i = 1; i <= meta.getColumnCount(); i++) {
 			this[meta.getColumnLabel(i)] = this.getValueFromRS(i, rs, meta);
 		}
 	}
-	rs.close();
+	await rs.close();
 
 
 	//Calculate Discount
@@ -87,83 +87,84 @@ function header(purchaseOrderId, schema) {
 	};
 
 	//Buyer Details
-	this.Buyer = new buyer(this.PartnerId);
+	this.Buyer = await new buyer(this.PartnerId);
 
 	//Get Items
 	this.Items = [];
 	query = 'SELECT "ItemPos" FROM "PO.ItemView" '
 		+ ' WHERE "PurchaseOrderItemId" = ?';
-	pstmt = conn.prepareStatement(query);
+	pstmt = await conn.prepareStatement(query);
 	pstmt.setString(1, purchaseOrderId);
-	var rsItems = pstmt.executeQuery();
-	while (rsItems.next()) {
-	   this.Items.push(new item(this.PurchaseOrderId,rsItems.getNString(1)));
+	var rsItems = await pstmt.executeQuery();
+	while (await rsItems.next()) {
+	   this.Items.push(await new item(this.PurchaseOrderId,rsItems.getNString(1)));
 	}
 	
-	rsItems.close();
+	await rsItems.close();
 }
 header.prototype = new base();
 
-function buyer(partnerId) {
+async function buyer(partnerId) {
 
 	query = 'SELECT * FROM "MDViews.BuyerView" '
 			+ ' WHERE "Id" = ?';
-	pstmt = conn.prepareStatement(query);
+	pstmt = await conn.prepareStatement(query);
 	pstmt.setString(1, partnerId);
-	rs = pstmt.executeQuery();
+	rs = await pstmt.executeQuery();
 
-	var meta = rs.getMetaData();
-	while (rs.next()) {
+	var meta = await rs.getMetaData();
+	while (await rs.next()) {
 		for (var i = 1; i <= meta.getColumnCount(); i++) {
 			this[meta.getColumnLabel(i)] = this.getValueFromRS(i, rs, meta);
 		}
 	}
 
-	rs.close();
+	await rs.close();
 
 
 }
 buyer.prototype = new base();
 
-function item(purchaseOrderId, itemPos){
+async function item(purchaseOrderId, itemPos){
 
 	query = 'SELECT * FROM "PO.ItemView" '
 			+ ' WHERE "PurchaseOrderItemId" = ? and "ItemPos" = ?';
-	pstmt = conn.prepareStatement(query);
+	pstmt = await conn.prepareStatement(query);
 	pstmt.setString(1, purchaseOrderId);
 	pstmt.setString(2, itemPos);	
-	var rs = pstmt.executeQuery();
+	var rs = await pstmt.executeQuery();
 
-	var meta = rs.getMetaData();
-	while (rs.next()) {
+	var meta = await rs.getMetaData();
+	while (await rs.next()) {
 		for (var i = 1; i <= meta.getColumnCount(); i++) {
 			this[meta.getColumnLabel(i)] = this.getValueFromRS(i, rs, meta);
 		}
 		//Product Details
-		this.Product = new product(this.ProductID);
+		this.Product = await new product(this.ProductID);
 	}
 
-	rs.close();
+	await rs.close();
 }
 item.prototype = new base();
 
-function product(productId) {
+async function product(productId) {
 
 	query = 'SELECT * FROM "MDViews.ProductView" '
 			+ ' WHERE "Product_Id" = ?';
-	pstmt = conn.prepareStatement(query);
+	pstmt = await conn.prepareStatement(query);
 	pstmt.setString(1, productId);
-	rs = pstmt.executeQuery();
+	rs = await pstmt.executeQuery();
 
-	var meta = rs.getMetaData();
-	while (rs.next()) {
+	var meta = await rs.getMetaData();
+	while (await rs.next()) {
 		for (var i = 1; i <= meta.getColumnCount(); i++) {
 			this[meta.getColumnLabel(i)] = this.getValueFromRS(i, rs, meta);
 		}
 	}
 
-	rs.close();
+	await rs.close();
 
 
 }
 product.prototype = new base();
+export default {conn,pstmt,rs,query,base,header,buyer,item,product};

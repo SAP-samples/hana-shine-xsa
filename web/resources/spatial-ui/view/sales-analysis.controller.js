@@ -2,7 +2,11 @@
 
  	onInit: function() {
  		var controller = this;
+		var payload = {};
+		payload.points = [];
  		controller.isPolygonDisplayed = false;
+		controller.markerPoints = payload;
+		controller.dialogOpen = true;
  	},
 
  	/**
@@ -28,7 +32,7 @@
  		// Instantiate (and display) a map object:
  		oController.map = new H.Map(
  			document.getElementById("sales-analysis--splitter1_firstPane"),
- 			defaultLayers.normal.map, {
+ 			defaultLayers.vector.normal.map, {
  				zoom: 5,
  				center: {
  					lat: 50.5,
@@ -49,8 +53,8 @@
      if(oController.polygon){
  					oController.removePolygon();
  				}
- 				polyLineStrip = new H.geo.Strip();
- 				polyLineStrip.pushPoint(polyLineGroup.getObjects()[0].getPosition());
+ 				polyLineStrip = new H.geo.LineString();
+ 				polyLineStrip.pushPoint(polyLineGroup.getObjects()[0].getGeometry());
  				polyLineStrip.pushPoint(coord);
  				polyLine = new H.map.Polyline(
  					polyLineStrip, {
@@ -81,16 +85,16 @@
 
  			if (polyLineGroup.getObjects().length === 1) {
  				polyLineMarker.addEventListener("tap", function() {
- 					polyLineStrip.pushPoint(this.getPosition());
+ 					polyLineStrip.pushPoint(this.getGeometry());
  					oController.polygon = new H.map.Polygon(polyLineStrip, {
  						style: {
  							strokeColor: '#00f',
  							lineWidth: 8
  						}
  					});
-      if(oController.polygon){
+      				if(oController.polygon){
  					   oController.removePolygon();
- 				 }
+ 				 	}
  					oController.map.addObject(oController.polygon);
  					oController.isPolygonDisplayed = true;
  					oController.bpMarkers.removeAll();
@@ -106,6 +110,7 @@
  						});
  					};
  					polyLineStrip.eachLatLngAlt(eachFn);
+					oController.markerPoints = payload;
  					oController.sendRequest(oController, payload);
 
  					polyLine.dispose();
@@ -135,7 +140,9 @@
  				oDialog1.close();
  			}
  		}));
- 		oDialog1.open();
+ 		if(oController.dialogOpen){
+			oDialog1.open();
+		}
 
  		oController.bpMarkers = new H.map.Group();
  		oController.map.addObject(oController.bpMarkers);
@@ -144,9 +151,9 @@
 
  			// exclude invalid request
  			// exclude if user has drawn a polygon
- 			if (oController.map.getViewBounds().getTopLeft().lat == oController.map.getViewBounds().getBottomRight().lat || oController.isPolygonDisplayed) {
- 				return;
- 			}
+ 			if (oController.isPolygonDisplayed) {
+				return;
+			}
 
  			// make request for sales analysis for this area
  			oController.getSalesAnalysisForArea(oController, view);
@@ -236,7 +243,7 @@
  				}
 
  				// Set the tail of the bubble to the coordinate of the marker
- 				var bubble = new H.ui.InfoBubble(marker.getPosition(), {
+ 				var bubble = new H.ui.InfoBubble(marker.getGeometry(), {
  					// read custom data
  					content: '<div>' +
  						'<h3>' + marker.getData().companyName + ' ' + marker.getData().legalForm + '</h3>' +
@@ -294,37 +301,20 @@
  	 * make sales analysis request for area
  	 */
  	getSalesAnalysisForArea: function(oController, view) {
-
- 		// construct payload
- 		var payload = {};
- 		payload.points = [];
- 		// top left
- 		payload.points.push({
- 			lat: oController.map.getViewBounds().getTopLeft().lat,
- 			long: oController.map.getViewBounds().getTopLeft().lng
- 		});
- 		// top right
- 		payload.points.push({
- 			lat: oController.map.getViewBounds().getTopLeft().lat,
- 			long: oController.map.getViewBounds().getBottomRight().lng
- 		});
- 		// bottom right
- 		payload.points.push({
- 			lat: oController.map.getViewBounds().getBottomRight().lat,
- 			long: oController.map.getViewBounds().getBottomRight().lng
- 		});
- 		// bottom left
- 		payload.points.push({
- 			lat: oController.map.getViewBounds().getBottomRight().lat,
- 			long: oController.map.getViewBounds().getTopLeft().lng
- 		});
- 		// top left
- 		payload.points.push({
- 			lat: oController.map.getViewBounds().getTopLeft().lat,
- 			long: oController.map.getViewBounds().getTopLeft().lng
- 		});
-
- 		oController.sendRequest(oController, payload);
+		var payload = {};
+		payload.points = [];
+		var length = oController.markerPoints.points.length;
+		if(length === 0){
+			return;
+		} else {
+			for(var i=0; i<length; i++){
+				payload.points.push({
+					lat: oController.markerPoints.points[i].lat,
+					long: oController.markerPoints.points[i].long
+				});
+			}
+			oController.sendRequest(oController, payload);
+		}
  	},
 
  	sendRequest: function(oController, payload) {
@@ -370,25 +360,35 @@
 
  	/** function to remove polygon **/
  	removePolygon: function() {
- 		var oController = this;
- 		if (oController.isPolygonDisplayed) {
+		var oController = this;
+		if (oController.isPolygonDisplayed) {
 
- 			// remove polygon instance from map
- 			if (oController.map) {
- 				oController.map.removeObject(oController.polygon);
- 			}
+			// remove polygon instance from map
+			if (oController.map) {
+				oController.map.removeObject(oController.polygon);
+			}
 
- 			// remove customer markers from the map
- 			if (oController.bpMarkers) {
- 				oController.bpMarkers.removeAll();
- 			}
+			// remove customer markers from the map
+			if (oController.bpMarkers) {
+				oController.bpMarkers.removeAll();
+			}
 
- 			// reset flag
- 			oController.isPolygonDisplayed = false;
+			// reset flag
+			oController.isPolygonDisplayed = false;
 
- 			// make request for sales analysis for this area
- 			oController.getSalesAnalysisForArea(oController, oController.getView());
- 		}
+			//remove points
+			var payload = {};
+			payload.points = [];
+			oController.markerPoints = payload;
+
+			// make request for sales analysis for this area
+			oController.getSalesAnalysisForArea(oController, oController.getView());
+
+			//dispose and reinstantiate the map to remove the marker
+			oController.map.dispose();
+			oController.dialogOpen = false;
+			oController.onAfterRendering();
+		}
  	}
 
  });

@@ -1,4 +1,4 @@
-function datesBasic(){
+async function datesBasic(){
 	var body = '';
 	var now = new Date();
 	var nextMonth = new Date();
@@ -25,8 +25,9 @@ function datesBasic(){
 	
 	$.response.status = $.net.http.OK;
 	$.response.contentType = "text/html";
-	$.response.setBody(body);
+	await $.response.setBody(body);
 	
 }
 
-datesBasic();
+await datesBasic();
+export default {datesBasic};

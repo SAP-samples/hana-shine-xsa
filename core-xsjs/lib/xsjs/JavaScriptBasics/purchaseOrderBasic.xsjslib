@@ -1,7 +1,7 @@
 /**
 @author i809764 
 **/
-var conn = $.db.getConnection();
+var conn = await $.db.getConnection();
 var pstmt;
 var rs;
 var query;
@@ -101,24 +101,24 @@ base.prototype.checkConnection = function(connection) {
 @param {object} [connection] - Connection Object
 @returns {object} Purchase Order Header object
 */
-function getHeader(purchaseOrderId, schema, connection) {
+async function getHeader(purchaseOrderId, schema, connection) {
 
 	schema = this.checkSchema(schema);
 	connection = this.checkConnection(connection);
 
 	query = 'SELECT * FROM "PO.Header" '
 			+ ' WHERE PURCHASEORDERID = ?';
-	pstmt = connection.prepareStatement(query);
+	pstmt = await connection.prepareStatement(query);
 	pstmt.setString(1, purchaseOrderId.toString());
-	rs = pstmt.executeQuery();
+	rs = await pstmt.executeQuery();
 
-	var meta = rs.getMetaData();
-	while (rs.next()) {
+	var meta = await rs.getMetaData();
+	while (await rs.next()) {
 		for (var i = 1; i <= meta.getColumnCount(); i++) {
 			this[meta.getColumnLabel(i)] = this.getValueFromRS(i, rs, meta);
 		}
 	}
-	rs.close();
+	await rs.close();
 
 	// Calculate Discount
 	this.DiscountAmount = function() {
@@ -137,10 +137,10 @@ getHeader.prototype = new base();
 @param {string} [schema] - Input Schema
 @param {object} [connection] - Connection Object
 */
-function putHeader(purchaseOrderId, header, schema, connection ) {
+async function putHeader(purchaseOrderId, header, schema, connection ) {
 	schema = this.checkSchema(schema); 
 	connection = this.checkConnection(connection);
-	purchaseOrderId = typeof purchaseOrderId !== 'undefined' ? purchaseOrderId : getNextPoId(connection);
+	purchaseOrderId = typeof purchaseOrderId !== 'undefined' ? purchaseOrderId : await getNextPoId(connection);
 	
 	query = 'INSERT INTO ' 
 	+ ' "PO.Header" ' 
@@ -148,7 +148,7 @@ function putHeader(purchaseOrderId, header, schema, connection ) {
 	+ ' "PARTNER.PARTNERID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT, LIFECYCLESTATUS, APPROVALSTATUS, CONFIRMSTATUS, ORDERINGSTATUS, INVOICINGSTATUS )'
 	+ 'VALUES (?,?, now(), ?, now(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	
-	pstmt = connection.prepareStatement(query);
+	pstmt = await connection.prepareStatement(query);
 	pstmt.setString(1, purchaseOrderId.toString());
 	pstmt.setString(2,'0000000033');  //Created By
 	pstmt.setString(3,'0000000033');  //Changed By	
@@ -168,8 +168,8 @@ function putHeader(purchaseOrderId, header, schema, connection ) {
 	pstmt.setString(12, 'I');  //Ordering - Initial
 	pstmt.setString(13, 'I');  //Invoicing - Initial	
 	
-	rs = pstmt.execute();
-	connection.commit();
+	rs = await pstmt.execute();
+	await connection.commit();
 	
 }
 putHeader.prototype = new base();
@@ -179,15 +179,16 @@ putHeader.prototype = new base();
 @param {object} connection - Connection Object
 @returns {string} Purchase Order Id
 */
-function getNextPoId(connection) {
+async function getNextPoId(connection) {
 	connection = checkConnection(connection);
-	var pStmt = connection.prepareStatement('select "purchaseOrderId".NEXTVAL from DUMMY');
-	var rs = pStmt.executeQuery();
+	var pStmt = await connection.prepareStatement('select "purchaseOrderId".NEXTVAL from DUMMY');
+	var rs = await pStmt.executeQuery();
 	var purchaseOrderId = '';
-	while (rs.next()) {
+	while (await rs.next()) {
 		purchaseOrderId = rs.getString(1);
 	}
-	pStmt.close();
+	await pStmt.close();
 	return purchaseOrderId;
 }
 getNextPoId.prototype = new base();
+export default {conn,pstmt,rs,query,base,getHeader,putHeader,getNextPoId};

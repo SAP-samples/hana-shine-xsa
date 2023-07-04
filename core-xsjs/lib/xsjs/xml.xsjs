@@ -20,4 +20,5 @@ note.eachChild(function(item){
 
 $.response.status = $.net.http.OK; 
 $.response.contentType = "text/html";
-$.response.setBody(body); 
+await $.response.setBody(body); 
+export default {xmlDocument,xml,body,note};
