@@ -1,4 +1,4 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS07
+SHINE for XS Advanced SAP HANA 2.0 SPS07 FR1
 ===============
 
 This release of the application consists of the following packages:
