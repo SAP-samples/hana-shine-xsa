@@ -1,11 +1,11 @@
 {
   "engines": {
-    "node": "16.x || 18.x"
+    "node": "18.x || 20.x"
   },
   "name": "shine-site-web",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "dependencies": {
-    "@sap/site-entry": "1.9.44"
+    "@sap/site-entry": "1.9.48"
   },
   "scripts": {
     "start": "node --harmony node_modules/@sap/site-entry/server.js"
