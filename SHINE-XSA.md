@@ -1,4 +1,4 @@
-SHINE for XS Advanced SAP HANA 2.0 SPS08
+SHINE for XS Advanced SAP HANA 2.0 SPS07 FR1
 ===============
 
 This release of the application consists of the following packages:
@@ -121,7 +121,7 @@ After doing the above steps,
 
     `xs deploy com.sap.refapps.shine_1.9.x.mtar`
 
-   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/0a1c5d829a074a8a889acd2ace444042.html)
+   For more information on cloning, building, deploying etc. for XSA applications, see [SAP Web IDE for SAP HANA - Installation and  Upgrade Guide. ](https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.05/en-US/0a1c5d829a074a8a889acd2ace444042.html)
 
 ## Useful Tips
 
@@ -147,7 +147,7 @@ You can also check the compatible versions of the libraries by right-clicking on
 ## Support
 For any question/clarification or report an issue in SHINE please [create issue](https://github.com/sap/hana-shine-xsa/issues/new/)
 
-[SHINE XSA for HANA 2.0 SPS 08 Documentation ](https://help.sap.com/viewer/shine-xsa/2.0.06/en-US)
+[SHINE XSA for HANA 2.0 SPS 07 Documentation ](https://help.sap.com/viewer/shine-xsa/2.0.06/en-US)
 
 ## License
 [SAP SAMPLE CODE LICENSE AGREEMENT](LICENSE)
