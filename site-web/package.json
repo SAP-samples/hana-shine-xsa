@@ -1,9 +1,9 @@
 {
   "engines": {
-    "node": "18.x || 20.x"
+    "node": "20.x || 22.x"
   },
   "name": "shine-site-web",
-  "version": "1.9.6",
+  "version": "1.9.8",
   "dependencies": {
     "@sap/site-entry": "1.9.48"
   },
