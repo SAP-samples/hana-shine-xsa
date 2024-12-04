@@ -1,7 +1,7 @@
 {
   "name": "shine-user-db",
   "description": "SHINE User Database Container Artifacts",
-  "version": "1.9.7",
+  "version": "1.9.8",
   "dependencies": {
     "@sap/hdi-deploy": "5.3.2",
     "@sap/hana-client": "2.22.32"

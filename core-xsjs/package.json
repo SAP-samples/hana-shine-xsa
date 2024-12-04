@@ -15,5 +15,5 @@
     "engines": {
         "node": "20.x || 22.x"
     },
-    "version": "1.9.7"
+    "version": "1.9.8"
   }

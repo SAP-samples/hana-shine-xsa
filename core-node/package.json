@@ -33,5 +33,5 @@
     "lint": "eslint -c .eslintrc --ignore-path .gitignore .",
     "start": "node server.js"
   },
-  "version": "1.9.7"
+  "version": "1.9.8"
 }
