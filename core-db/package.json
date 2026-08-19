@@ -3,13 +3,13 @@
   "description": "SHINE Core Database Container Artifacts",
   "version": "1.9.8",
   "dependencies": {
-    "@sap/hdi-deploy": "5.3.2",
-    "@sap/hana-client": "2.22.32"
+    "@sap/hdi-deploy": "5.7.0",
+    "@sap/hana-client": "2.29.25"
   },
   "scripts": {
     "start": "node node_modules/@sap/hdi-deploy/deploy.js"
   },
   "engines": {
-    "node": "20.x || 22.x"
+    "node": "22.x || 24.x"
   }
 }

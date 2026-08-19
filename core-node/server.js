@@ -11,7 +11,7 @@ global.__base = __dirname + '/';
 
 //Initialize Express App for XSA UAA and HDBEXT Middleware
 var passport = require('passport');
-var xssec = require('@sap/xssec').v3;
+var { XssecPassportStrategy, XsaService } = require('@sap/xssec');
 var xsHDBConn = require('@sap/hdbext');
 var express = require('express');
 
@@ -22,11 +22,10 @@ var appContext = logging.createAppContext();
 //Initialize Express App for XS UAA and HDBEXT Middleware
 var app = express();
 
-passport.use('JWT', new xssec.JWTStrategy(xsenv.getServices({
-	uaa: {
-		tag: 'xsuaa'
-	}
-}).uaa));
+var uaaCredentials = xsenv.getServices({ uaa: { tag: 'xsuaa' } }).uaa;
+var authService = new XsaService(uaaCredentials);
+passport.use(new XssecPassportStrategy(authService));
+
 app.use(logging.middleware({ appContext: appContext, logNetwork: true }));
 app.use(passport.initialize());
 var hanaOptions = xsenv.filterCFServices({
