@@ -10,7 +10,7 @@ module.exports = function() {
 	var bodyParser = require('body-parser');
 	var jsonParser = bodyParser.json();
 	var logger;
-    var xssec = require('@sap/xssec');
+        var { createSecurityContext, XsaService } = require('@sap/xssec');
 	var xsenv = require('@sap/xsenv');
 	var uaaService = xsenv.getServices({
 		uaa: {
@@ -24,9 +24,10 @@ module.exports = function() {
 		return;
 	}
 	var SCOPE = xsuaaCredentials.xsappname + '.JOBSCHEDULER';
+        var xsaService = new XsaService(xsuaaCredentials);
 
 	// method will insert Job Data into Job table
-	app.post('/create',jsonParser,function(req, res) {
+	app.post('/create',jsonParser,async function(req, res) {
 			logger = req.loggingContext.getLogger('/jobactivity/create');
 			var jname = req.body.jobname;
 			var jobid;
@@ -35,14 +36,15 @@ module.exports = function() {
 			
 			if (req.headers.authorization) {
 				accessToken = req.headers.authorization.split(' ')[1];
-				// console.log("AccessToken++++++++ " +accessToken);
 			}else {
 				logger.error('Authorization header not found');
 				res.status(401).json({message: 'Authorization header not found'});
 				return;
 			}
-			xssec.createSecurityContext(accessToken, xsuaaCredentials, function(error, securityContext) {
-			if (error) {
+			var securityContext;
+			try {
+				securityContext = await createSecurityContext(xsaService, { jwt: accessToken });
+			} catch (error) {
 				console.log(error);
 				logger.error('Invalid access token');
 				res.status(401).json({message: 'Invalid access token'});
@@ -125,7 +127,6 @@ module.exports = function() {
 				res.status(401).json({message: 'Unauthorized, Scope required is missing'});
 				return;
 			}
-		});
 	});
 	return app;
 };
