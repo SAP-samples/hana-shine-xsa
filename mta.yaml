@@ -249,7 +249,7 @@ resources:
 
   - name: uaa 
     properties: 
-      url: "https://xst.xsmig.c.eu-de-2.cloud.sap:30032/uaa-security"
+      url: "https://<host>:3##32/uaa-security"
 
   - name: ui5Service
     type: configuration
@@ -259,4 +259,4 @@ resources:
 
   - name: controller
     properties:
-      url: 'https://xst.xsmig.c.eu-de-2.cloud.sap:30030'
+      url: 'https://<host>:3##30'
