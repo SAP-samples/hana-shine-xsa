@@ -1,10 +1,10 @@
 {
   "name": "shine-core-db",
   "description": "SHINE Core Database Container Artifacts",
-  "version": "1.9.8",
+  "version": "1.9.9",
   "dependencies": {
     "@sap/hdi-deploy": "5.7.0",
-    "@sap/hana-client": "2.29.25"
+    "@sap/hana-client": "2.29.27"
   },
   "scripts": {
     "start": "node node_modules/@sap/hdi-deploy/deploy.js"

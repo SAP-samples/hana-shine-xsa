@@ -23,7 +23,7 @@
     "xmldoc": "3.0.0"
   },
   "devDependencies": {
-    "eslint": "10.8.1"
+    "eslint": "10.9.1"
   },
   "description": "",
   "files": [],
@@ -33,5 +33,5 @@
     "lint": "eslint -c .eslintrc --ignore-path .gitignore .",
     "start": "node server.js"
   },
-  "version": "1.9.8"
+  "version": "1.9.9"
 }
