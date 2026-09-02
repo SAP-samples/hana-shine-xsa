@@ -54,8 +54,7 @@ function upsertVariant(req, res) {
 
 module.exports = function() {
 	var app = express.Router();
-	var bodyParser = require('body-parser');
-	app.use(bodyParser.json());
+	app.use(express.json());
 
 	app.get('/', (req, res) => {
 		res.type('text/html').status(200).send('');
@@ -151,7 +150,7 @@ module.exports = function() {
 		upsertVariant(req, res);
 	});
 
-	app.get('/flex/data/:app?', (req, res) => {
+	app.get('/flex/data{/:app}', (req, res) => {
 		var outer = {
 			'changes': [],
 			'settings': {

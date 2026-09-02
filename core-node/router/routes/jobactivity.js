@@ -7,8 +7,7 @@ var express = require('express');
 module.exports = function() {
 	var app = express.Router();
 	var util = require(global.__base + 'utils/util');
-	var bodyParser = require('body-parser');
-	var jsonParser = bodyParser.json();
+	var jsonParser = express.json();
 	var logger;
         var { createSecurityContext, XsaService } = require('@sap/xssec');
 	var xsenv = require('@sap/xsenv');
