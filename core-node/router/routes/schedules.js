@@ -6,11 +6,10 @@ var express = require('express');
 //var JobSchedulerDB = require('./JobSchedulerDBPromises');
 
 module.exports = function() {
-	var bodyParser = require('body-parser');
 	var app = express.Router();
 	var util = require(global.__base + 'utils/util');
 	var jobsc = require('@sap/jobs-client');
-	var jsonParser = bodyParser.json();
+	var jsonParser = express.json();
 	var logger;
 
 	app.post('/createJobSchedule', jsonParser, function(req, res) {
