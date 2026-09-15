@@ -104,7 +104,7 @@ module.exports = function() {
 	});
 
 	//Database Call Stored Procedure With Inputs
-	app.get('/example4/:partnerRole?', (req, res) => {
+	app.get('/example4{/:partnerRole}', (req, res) => {
 		var client = req.db;
 		var hdbext = require('@sap/hdbext');
 		var partnerRole = req.params.partnerRole;

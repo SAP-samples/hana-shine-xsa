@@ -5,8 +5,7 @@ module.exports = function() {
 	var express = require('express');
 	var util = require('./util');
 	var logger;
-	var bodyParser = require('body-parser');
-	var jsonParser = bodyParser.json();
+	var jsonParser = express.json();
 	var xsenv = require('@sap/xsenv');
 	xsenv.loadEnv();
 	var credentials = xsenv.getServices({

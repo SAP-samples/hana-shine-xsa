@@ -6,9 +6,7 @@ const express = require("express");
 module.exports = () => {
 	const app = express.Router();
 
-	const bodyParser = require("body-parser");
-	//app.use(bodyParser.json());
-	app.use(bodyParser.raw({
+	app.use(express.raw({
 		type: "text/plain"
 	})); //Process request Body and return a Buffer
 
@@ -33,7 +31,7 @@ module.exports = () => {
 
 
 	//Secure Store Insert
-	app.post("/:key?", async(req, res) => {
+	app.post("{/:key}", async(req, res) => {
 		const hdbext = require("@sap/hdbext");
 		const key = req.params.key;
 		let inputParams = "";
@@ -68,7 +66,7 @@ module.exports = () => {
 	});
 
 	//Secure Store Retrieve
-	app.get("/:key?", async(req, res) => {
+	app.get("{/:key}", async(req, res) => {
 		const hdbext = require("@sap/hdbext");
 		const key = req.params.key;
 		let inputParams = "";
@@ -107,7 +105,7 @@ module.exports = () => {
 	});
 
 	//Secure Store Delete
-	app.delete("/:key?", async(req, res) => {
+	app.delete("{/:key}", async(req, res) => {
 		const hdbext = require("@sap/hdbext");
 		const key = req.params.key;
 		let inputParams = "";

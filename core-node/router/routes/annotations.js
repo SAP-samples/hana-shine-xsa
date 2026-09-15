@@ -346,8 +346,7 @@ function buildAnnotationXML(res, results, target, req) {
 
 module.exports = function() {
 	var app = express.Router();
-	var bodyParser = require("body-parser");
-	app.use(bodyParser.json());
+	app.use(express.json());
 
 	app.get("/:target/:artifact", function(req, res) {
 		var target = req.params.target;
